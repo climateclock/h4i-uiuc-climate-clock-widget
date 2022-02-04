@@ -51,10 +51,10 @@
     ]
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "app/**/*.{ts,tsx}": [
       "eslint --ext .tsx --ext .ts src/ --fix"
     ],
-    "./src/**": [
+    "./app/**": [
       "prettier --write ."
     ]
   },
