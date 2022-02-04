@@ -7,8 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "cd .. && husky install"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "eslint-config-airbnb": "^19.0.4",
@@ -51,10 +50,10 @@
     ]
   },
   "lint-staged": {
-    "./**/*.{ts,tsx}": [
+    "app/**/*.{ts,tsx}": [
       "eslint --ext .tsx --ext .ts src/ --fix"
     ],
-    "./**": [
+    "app/**": [
       "prettier --write ."
     ]
   },
