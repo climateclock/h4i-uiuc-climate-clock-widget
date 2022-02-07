@@ -1,67 +1,32 @@
 {
   "name": "climate-clock",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
-  },
   "dependencies": {
-    "@types/react": "^17",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "install": "^0.13.0",
+    "eslint-plugin-react": "^7.28.0",
     "lint-staged": "^12.3.3",
-    "react": "17.0.2",
-    "react-native": "0.66.4",
-    "styled-components": "^5.3.3"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "@types/jest": "^26.0.23",
-    "@types/react-native": "^0.66.4",
-    "@types/react-test-renderer": "^17.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.14.0",
-    "husky": "4.3.8",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.66.2",
-    "react-test-renderer": "17.0.2",
-    "typescript": "^4.4.4"
-  },
-  "resolutions": {
-    "@types/react": "^17"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "mrm": "2",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "typescript": "^4.5.5",
+    "typescript-eslint": "^0.0.1-alpha.0"
   },
   "lint-staged": {
-    "./**/*.{js, jsx, ts,tsx}": [
-      "eslint --fix"
-    ],
-    "./**": [
+    "*.{js,css,scss,json,md,jsx}": [
       "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix"
     ]
+  },
+  "devDependencies": {
+    "husky": "^7.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
