@@ -32,7 +32,7 @@ This application is built with React, TypeScript, Sass, and tested with Cypress 
 
 <table align="center">
   <tr>
-    <td align="center"><a href=""><img src="./photos/Daniel_Moon.jpg" width="75px;" alt="Daniel Moon"/><br /><b>Daniel Moon</b></a><br /><sub>Technical Lead</sub></td>
+    <td align="center"><a href=""><img src="./photos/daniel-moon.jpg" width="75px;" alt="Daniel Moon"/><br /><b>Daniel Moon</b></a><br /><sub>Technical Lead</sub></td>
   </tr>
 </table>
 
