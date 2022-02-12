@@ -33,6 +33,15 @@ This application is built with React, TypeScript, Sass, and tested with Cypress 
 <table align="center">
   <tr>
     <td align="center"><a href="https://www.linkedin.com/in/daniel-moon1"><img src="./photos/daniel-moon.jpeg" width="75px;" alt="Daniel Moon"/><br /><b>Daniel Moon</b></a><br /><sub>Technical Lead</sub></td>
+    <td align="center"><a href=""><img src="./photos/archna-sobti.png" width="75px;" alt="Archna Sobti"/><br /><b>Archna Sobti</b></a><br /><sub>Product Manager</sub></td>
+    <td align="center"><a href=""><img src="./photos/nikhil-gargeya.png" width="75px;" alt="Nikhil Gargeya"/><br /><b>Nikhil Gargeya</b></a><br /><sub>Product Designer/sub></td>
+  </tr>
+  <tr>
+    <td align="center"><a href=""><img src="./photos/aaron-alexander.png" width="75px;" alt="Aaron Alexander"/><br /><b>Aaron Alexander</b></a><br /><sub>Software Developer</sub></td>
+     <td align="center"><a href=""><img src="./photos/eesha-barua.jpg" width="75px;" alt="Eesha Barua"/><br /><b>Eesha Barua</b></a><br /><sub>Software Developer</sub></td>
+     <td align="center"><a href=""><img src="./photos/riya-jain.jpeg" width="75px;" alt="Riya Jain"/><br /><b>Riya Jain</b></a><br /><sub>Software Developer</sub></td>
+    <td align="center"><a href=""><img src="./photos/riya-jain.jpeg" width="75px;" alt="Riya Jain"/><br /><b>Riya Jain</b></a><br /><sub>Software Developer</sub></td>
+    <td align="center"><a href=""><img src="./photos/sahil-kamboj.jpeg" width="75px;" alt="Sahil Kamboj"/><br /><b>Sahil Kamboj</b></a><br /><sub>Software Developer</sub></td>
   </tr>
 </table>
 
