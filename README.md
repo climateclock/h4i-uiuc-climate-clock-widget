@@ -41,7 +41,7 @@ This application is built with React, TypeScript, Sass, and tested with Cypress 
      <td align="center"><a href=""><img src="./photos/eesha-barua.jpg" width="75px;" alt="Eesha Barua"/><br /><b>Eesha Barua</b></a><br /><sub>Software Developer</sub></td>
      <td align="center"><a href=""><img src="./photos/riya-jain.jpeg" width="75px;" alt="Riya Jain"/><br /><b>Riya Jain</b></a><br /><sub>Software Developer</sub></td>
     <td align="center"><a href=""><img src="./photos/riya-jain.jpeg" width="75px;" alt="Riya Jain"/><br /><b>Riya Jain</b></a><br /><sub>Software Developer</sub></td>
-    <td align="center"><a href=""><img src="./photos/sahil-kamboj.jpeg" width="75px;" alt="Sahil Kamboj"/><br /><b>Sahil Kamboj</b></a><br /><sub>Software Developer</sub></td>
+    <td align="center"><a href=""><img src="./photos/sahil-kamboj.png" width="75px;" alt="Sahil Kamboj"/><br /><b>Sahil Kamboj</b></a><br /><sub>Software Developer</sub></td>
   </tr>
 </table>
 
