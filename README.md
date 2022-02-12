@@ -24,12 +24,6 @@
 
 The Climate Clock melds art, science, technology, and grassroots organizing to get the world to act in time by counting down the time left to curb our emissions to stay under an increase of 1.5°C
 
-## Usage
-
-The latest version of this application can be found at [brinkapp.co](https://brinkapp.co).
-
-To install and set up locally, follow the instructions in the [`/client`](https://github.com/hack4impact-uiuc/mern_template/tree/main/client) and [`/api`](https://github.com/hack4impact-uiuc/mern_template/tree/main/api) directories.
-
 ## Technologies
 
 This application is built with React, TypeScript, Sass, and tested with Cypress and Jest. Vercel is used for automatic deployment.
