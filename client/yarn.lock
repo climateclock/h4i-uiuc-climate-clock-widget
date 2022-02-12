@@ -1178,6 +1178,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/oxygen-mono@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/oxygen-mono/-/oxygen-mono-4.5.2.tgz#71f537acd9e5542e4bb1d4cda9aec12119bcd3f1"
+  integrity sha512-7F5/Bahy8Zdz53Dov4mMbviCdtizJvhL7piVoUzARJzlHJ98IhcNWBPlaumjKokGLYJ8oCG6lhaOuOuxdQ2KXw==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.3.tgz#f2564c744b387775b436418491f15fce6601f63e"

@@ -6,7 +6,7 @@ interface ExampleProps {
 }
 
 const StyledDiv = styled.div`
-  background: blue;
+  background: $(({theme}) => theme.background);
 `
 
 // Comment describing component
