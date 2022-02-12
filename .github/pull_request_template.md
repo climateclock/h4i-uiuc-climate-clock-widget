@@ -27,7 +27,7 @@ Fixes #<number>
 -->
 
 ## Deadline (from the issue)
-  - 
+
 ## Screenshots
 
 <!--
