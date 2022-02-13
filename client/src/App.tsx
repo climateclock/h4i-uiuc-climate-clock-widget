@@ -1,9 +1,11 @@
 import React from 'react'
+import Clock from './pages/Clock'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <Clock></Clock>
+      <Clock></Clock>
     </div>
   )
 }
