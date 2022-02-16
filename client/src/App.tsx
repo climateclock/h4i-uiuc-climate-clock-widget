@@ -11,6 +11,12 @@ function App() {
         value="1,800,800"
         unit="B"
       />
+      <Lifeline
+        title="WORLD'S ENERGY FROM RENEWABLES"
+        module_type="LIFELINE"
+        value="1,800,800"
+        unit="B"
+      />
     </div>
   )
 }

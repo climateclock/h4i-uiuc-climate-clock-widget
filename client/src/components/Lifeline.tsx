@@ -3,6 +3,9 @@ import {
   InlineStyle,
   TitleInlineStyle,
   ModuleInlineStyle,
+  ValueInlineStyle,
+  ContentInlineStyle,
+  UnitInlineStyle,
 } from './styles'
 
 interface LifelinePropsInterface {
@@ -14,18 +17,16 @@ interface LifelinePropsInterface {
 
 function Lifeline(props: LifelinePropsInterface) {
   return (
-    <>
-      <StyledDiv>
-        <InlineStyle>
-          <ModuleInlineStyle> {props.module_type}</ModuleInlineStyle>
-          <TitleInlineStyle> {props.title}</TitleInlineStyle>
-        </InlineStyle>
-        <InlineStyle>
-          <p> {props.value}</p>
-          <p> {props.unit}</p>
-        </InlineStyle>
-      </StyledDiv>
-    </>
+    <StyledDiv>
+      <InlineStyle>
+        <ModuleInlineStyle> {props.module_type}</ModuleInlineStyle>
+        <TitleInlineStyle>{props.title}</TitleInlineStyle>
+      </InlineStyle>
+      <ContentInlineStyle>
+        <ValueInlineStyle> {props.value}</ValueInlineStyle>
+        <UnitInlineStyle> {props.unit}</UnitInlineStyle>
+      </ContentInlineStyle>
+    </StyledDiv>
   )
 }
 
