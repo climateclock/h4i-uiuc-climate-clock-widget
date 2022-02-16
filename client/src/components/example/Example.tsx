@@ -20,7 +20,8 @@ const StyledDiv = styled.div`
 export const Example: FC<ExampleProps> = ({ exampleProp }): ReactElement => {
   const [exampleData, setExampleData] = useState<any | null>(null)
   async function exampleFunc() {
-    get('/', 'clock').then((out) => setExampleData(out))
+    const output = await get('/', 'clock')
+    setExampleData(output)
   }
   const exampleApi = exampleFunc()
   return (
