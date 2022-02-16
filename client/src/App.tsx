@@ -1,6 +1,22 @@
 import Lifeline from './components/Lifeline'
+import Newsfeed from './components/Newsfeed'
+import { ArticleInterface, NewsfeedPropsInterface } from './interfaces'
 
 function App() {
+  let articles: ArticleInterface[] = [
+    {
+      headline: 'US EPA will regulate methane for the first time',
+    },
+    {
+      headline:
+        'Ghana youth climate defenders present Climate Clock to President Akufo-Addo at COP26',
+    },
+    {
+      headline:
+        'World leaders at COP26 sign declaration to end deforestation by 2030',
+    },
+  ]
+
   return (
     <div className="App">
       <header className="App-header"></header>
@@ -16,6 +32,7 @@ function App() {
         value="1,800,800"
         unit="B"
       />
+      <Newsfeed articles={articles} />
     </div>
   )
 }

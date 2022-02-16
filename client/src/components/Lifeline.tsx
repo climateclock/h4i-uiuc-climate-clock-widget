@@ -1,11 +1,5 @@
 import { Div, LabelDiv, Title, Module, Value, Content, Unit } from './styles'
-
-interface LifelinePropsInterface {
-  title: string
-  module_type: string
-  value: string
-  unit: string
-}
+import { LifelinePropsInterface } from '../interfaces'
 
 function Lifeline(props: LifelinePropsInterface) {
   return (
