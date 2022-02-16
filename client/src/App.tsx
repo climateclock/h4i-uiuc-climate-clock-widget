@@ -1,4 +1,3 @@
-import React from 'react'
 import Lifeline from './components/Lifeline'
 
 function App() {

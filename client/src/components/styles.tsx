@@ -2,11 +2,10 @@ import styled from 'styled-components'
 
 const TEAL: string = '#4aa1cc'
 const BLACK: string = '#000000'
-const LR_PADDING: number = 2
-const TB_PADDING: number = 2
+const PADDING: number = 2
 const VALUE_UNIT_MARGIN: number = 0.5
 
-export const StyledDiv = styled.div`
+export const Div = styled.div`
   & {
     font: ${({ theme }) => theme.fonts};
     font-weight: bold;
@@ -16,36 +15,36 @@ export const StyledDiv = styled.div`
   }
 `
 
-export const InlineStyle = styled.div`
+export const LabelDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   font-size: max(1rem, min(2rem, 3vw));
 `
 
-export const TitleInlineStyle = styled.div`
+export const Title = styled.div`
   width: 80%;
   background: ${BLACK};
   color: ${TEAL};
-  padding: 0 ${LR_PADDING}%;
+  padding: 0 ${PADDING}%;
 `
 
-export const ModuleInlineStyle = styled.div`
+export const Module = styled.div`
   width: 20%;
-  padding: 0 ${LR_PADDING}%;
+  padding: 0 ${PADDING}%;
 `
 
-export const ContentInlineStyle = styled(InlineStyle)`
+export const Content = styled(LabelDiv)`
   width: 100%;
-  padding: ${TB_PADDING}% ${LR_PADDING}%;
+  padding: ${PADDING}% ${PADDING}%;
 `
 
-export const ValueInlineStyle = styled.div`
+export const Value = styled.div`
   font-size: 2em;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
 `
 
-export const UnitInlineStyle = styled.div`
+export const Unit = styled.div`
   font-size: 1em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
 `
