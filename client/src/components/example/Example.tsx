@@ -23,6 +23,7 @@ export const Example: FC<ExampleProps> = ({ exampleProp }): ReactElement => {
     const output = await get('/', 'clock')
     setExampleData(output)
   }
+
   const exampleApi = exampleFunc()
   return (
     <StyledDiv className="example-wrapper">
