@@ -3,8 +3,8 @@ import { ArticleInterface, NewsfeedPropsInterface } from '../interfaces'
 const Newsfeed = ({ articles }: NewsfeedPropsInterface) => {
   return (
     <>
-      {articles.map((article: ArticleInterface) => (
-        <p>{article.headline}</p>
+      {articles.map((article: ArticleInterface, i: number) => (
+        <p key={article.headline}>{article.headline}</p>
       ))}
     </>
   )
