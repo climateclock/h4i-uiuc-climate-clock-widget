@@ -6,8 +6,8 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <Lifeline
-        title="cool title"
-        module_type="lifeline"
+        title="WORLD'S ENERGY FROM RENEWABLES"
+        module_type="LIFELINE"
         value="1,800,800"
         unit="B"
       />

@@ -17,8 +17,8 @@ function Lifeline(props: LifelinePropsInterface) {
     <>
       <StyledDiv>
         <InlineStyle>
-          <TitleInlineStyle> {props.title}</TitleInlineStyle>
           <ModuleInlineStyle> {props.module_type}</ModuleInlineStyle>
+          <TitleInlineStyle> {props.title}</TitleInlineStyle>
         </InlineStyle>
         <InlineStyle>
           <p> {props.value}</p>

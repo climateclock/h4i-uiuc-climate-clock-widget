@@ -7,11 +7,17 @@ export const StyledDiv = styled.div`
 `
 
 export const InlineStyle = styled.div`
-  display: flex;
+  && {
+    display: flex;
+    justify-content: flex-start;
+    font-size: max(1rem, min(2rem, 3vw));
+  }
 `
 
 export const TitleInlineStyle = styled.div`
   width: 20%;
+  background: #000000;
+  color: #4aa1cc;
 `
 
 export const ModuleInlineStyle = styled.div`
