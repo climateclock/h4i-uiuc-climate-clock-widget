@@ -1,12 +1,44 @@
 import styled from 'styled-components';
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import data from '../components/mockdata.json';
 
-function Clock() {
-    const date = new Date();
+const IntervalExample = () => {
+    const [seconds, setSeconds] = useState(0);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }, []);
+}
+
+ function Clock() {
+    let date = new Date();
+    let calendar = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    let today = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    let final = calendar + " " + today;
+    let value = new Date(data.data.modules.carbon_deadline_1.timestamp).valueOf() - new Date(final).valueOf();
+
+    var years = Math.floor(value / 3.154e10);
+    var days = Math.floor((value - (years * 3.154e10)) / 8.64e7);
+    var hours = Math.floor((value - (years * 3.154e10) - (days * 8.64e7)) / 3.6e6);
+    var minutes = Math.floor((value - (years * 3.154e10) - (days * 8.64e7) - (hours * 3.6e6)) / 60000);
+    //var seconds = Math.floor((value - (years * 3.154e10) - (days * 8.64e7) - (hours * 3.6e6) - (minutes * 60000)) / 1000);
+
+    const [seconds, setSeconds] = useState(0);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setSeconds(Math.floor((value - (years * 3.154e10) - (days * 8.64e7) - (hours * 3.6e6) - (minutes * 60000)) / 1000));
+      }, 1000);
+      return () => clearInterval(interval);
+    }, []);
+
     return (
         <ClockSection>
-            {date.toLocaleTimeString()}
+        {console.log(new Date(data.data.modules.carbon_deadline_1.timestamp))}
+        {years} YEARS {days} DAYS <br/>{hours}:{minutes}:{seconds}
+        {/* {data.data.modules.carbon_deadline_1.timestamp} */}
       </ClockSection>
     );
 }

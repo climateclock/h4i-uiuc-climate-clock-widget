@@ -1,0 +1,172 @@
+{
+  "data": {
+    "api_version": "v1.0",
+    "config": {
+      "device": "generic",
+      "display": {
+        "deadline": {
+          "color_primary": "#eb1c23",
+          "color_secondary": "#eb1c23"
+        },
+        "lifeline": {
+          "color_primary": "#4aa1cc",
+          "color_secondary": "#4aa1cc"
+        },
+        "neutral": {
+          "color_primary": "#ffffff",
+          "color_secondary": "#ffffff"
+        }
+      },
+      "modules": ["carbon_deadline_1", "renewables_1", "newsfeed_1"]
+    },
+    "modules": {
+      "carbon_deadline_1": {
+        "description": "Time to act before we reach irreversible 1.5°C global temperature rise",
+        "flavor": "deadline",
+        "labels": [
+          "TIME LEFT TO LIMIT GLOBAL WARMING TO 1.5°C",
+          "TIME LEFT BEFORE 1.5°C GLOBAL WARMING",
+          "TIME TO ACT"
+        ],
+        "timestamp": "2029-07-23T00:46:03+00:00",
+        "type": "timer",
+        "update_interval_seconds": 604800
+      },
+      "green_climate_fund_1": {
+        "description": "USD in the Green Climate Fund",
+        "flavor": "lifeline",
+        "growth": "linear",
+        "initial": 9.52,
+        "labels": ["GREEN CLIMATE FUND", "CLIMATE FUND", "GCF"],
+        "lang": "en",
+        "rate": 0,
+        "resolution": 0.01,
+        "timestamp": "2021-09-20T00:00:00+00:00",
+        "type": "value",
+        "unit_labels": ["$B"],
+        "update_interval_seconds": 86400
+      },
+      "indigenous_land_1": {
+        "description": "Despite threats and lack of recognition, indigenous people are protecting this much land.",
+        "flavor": "lifeline",
+        "growth": "linear",
+        "initial": 43.5,
+        "labels": [
+          "LAND PROTECTED BY INDIGENOUS PEOPLE",
+          "INDIGENOUS PROTECTED LAND",
+          "INDIGENOUS PROTECTED"
+        ],
+        "lang": "en",
+        "rate": 0,
+        "resolution": 0.1,
+        "timestamp": "2021-10-01T00:00:00+00:00",
+        "type": "value",
+        "unit_labels": ["M KM²"],
+        "update_interval_seconds": 86400
+      },
+      "newsfeed_1": {
+        "description": "A newsfeed of hope: good news about climate change.",
+        "flavor": "lifeline",
+        "lang": "en",
+        "newsfeed": [
+          {
+            "date": "2021-11-02T15:48:23+00:00",
+            "headline": "US EPA will regulate methane for the first time",
+            "headline_original": "In a first, the EPA will regulate methane from existing oil and gas wells ",
+            "link": "https://grist.org/regulation/in-a-first-the-epa-will-regulate-methane-from-existing-oil-and-gas-wells/?utm_medium=social&utm_source=linktree&utm_campaign=in+a+first%2C+the+epa+will+regulate+methane+from+existing+oil+and+gas+wells ",
+            "source": "Grist"
+          },
+          {
+            "date": "2021-11-02T15:48:23+00:00",
+            "headline": "Ghana youth climate defenders present Climate Clock to President Akufo-Addo at COP26",
+            "headline_original": "Ghana youth climate defenders present “Climate Clock” and key demands to scale up clean energy to president Akufo-Addo at COP26 ",
+            "link": "https://panafricanvisions.com/2021/11/ghana-youth-climate-defenders-present-climate-clock-and-key-demands-to-scale-up-clean-energy-to-president-akufo-addo-at-cop26/",
+            "source": "Pan African Visions",
+            "summary": ""
+          },
+          {
+            "date": "2021-11-01T15:48:23+00:00",
+            "headline": "World leaders at COP26 sign declaration to end deforestation by 2030",
+            "headline_original": "COP26: world leaders agree deal to end deforestation",
+            "link": "https://panafricanvisions.com/2021/11/ghana-youth-climate-defenders-present-climate-clock-and-key-demands-to-scale-up-clean-energy-to-president-akufo-addo-at-cop26/",
+            "source": "The Guardian"
+          },
+          {
+            "date": "2021-11-01T15:48:23+00:00",
+            "headline": "Indigenous Peoples to get $1.7bn in recognition of their key role in protecting land and forests",
+            "headline_original": "Indigenous peoples to get $1.7bn in recognition of role in protecting forests.",
+            "link": "https://www.theguardian.com/environment/2021/nov/01/biden-bolsonaro-and-xi-among-leaders-agreeing-to-end-deforestation-aoe?CMP=Share_iOSApp_Other",
+            "source": "The Guardian"
+          },
+          {
+            "date": "2021-10-18T14:48:23+00:00",
+            "headline": "UK’s Treasury to demand companies to disclose their environmental impact ",
+            "headline_original": "UK firms will have to disclose climate impact",
+            "link": "https://www.bbc.com/news/business-58954978 ",
+            "source": "BBC"
+          },
+          {
+            "date": "2021-10-14T14:48:23+00:00",
+            "headline": "Uruguay leads renewable energy charge in Latin America with nearly 100% renewables",
+            "headline_original": "Uruguay leads green energy charge in Latin America ",
+            "link": "https://www.dw.com/en/uruguay-leads-green-energy-charge-in-latin-america/a-59492982",
+            "source": "DW"
+          },
+          {
+            "date": "2021-10-12T14:48:23+00:00",
+            "headline": "Cement industry pledges to reach net zero by 2050 without offsets",
+            "headline_original": "Cement makers across world pledge large cut in emissions by 2030 ",
+            "link": "https://www.theguardian.com/business/2021/oct/12/cement-makers-across-world-pledge-large-cut-in-emissions-by-2030-co2-net-zero-2050 ",
+            "source": "The Guardian"
+          },
+          {
+            "date": "2021-09-23T14:48:23+00:00",
+            "headline": "South Africa strengthens national climate targets after pressure from activists",
+            "headline_original": "South Africa adopts more ambitious emissions target before climate summit ",
+            "link": "https://www.reuters.com/world/africa/south-africa-adopts-more-ambitious-emissions-target-before-climate-summit-2021-09-22/",
+            "source": "Reuters",
+            "summary": ""
+          },
+          {
+            "date": "2021-09-23T14:48:23+00:00",
+            "headline": "The U.S. commits to slash 85% of HFC super-pollutants over next 15 years",
+            "headline_original": "The White House is set to announce new limits on HFCs, a powerful driver of climate change",
+            "link": "https://www.nytimes.com/2021/09/23/us/politics/epa-hfcs-climate-change.html?",
+            "source": "The New York Times",
+            "summary": ""
+          },
+          {
+            "date": "2021-09-22T14:48:23+00:00",
+            "headline": "China to stop funding coal-fired power projects abroad in lead up to COP26 ",
+            "headline_original": "Game-changer’: China to stop funding overseas coal projects",
+            "link": "https://www.aljazeera.com/news/2021/9/22/xi-tells-un-china-will-not-build-coal-fired-power-plants-overseas",
+            "source": "Al Jazeera",
+            "summary": ""
+          }
+        ],
+        "type": "newsfeed",
+        "update_interval_seconds": 3600
+      },
+      "renewables_1": {
+        "description": "The percentage share of global energy consumption currently generated by renewable resources (solar, wind, hydroelectricity, wave and tidal, and bioenergy).",
+        "flavor": "lifeline",
+        "growth": "linear",
+        "initial": 11.4,
+        "labels": [
+          "WORLD'S ENERGY FROM RENEWABLES",
+          "GLOBAL RENEWABLE ENERGY",
+          "RENEWABLES"
+        ],
+        "lang": "en",
+        "rate": 2.0428359571070087e-8,
+        "resolution": 1e-9,
+        "timestamp": "2020-01-01T00:00:00+00:00",
+        "type": "value",
+        "unit_labels": ["%"],
+        "update_interval_seconds": 86400
+      }
+    },
+    "retrieval_timestamp": "2022-02-16T01:15:21+00:00"
+  },
+  "status": "success"
+}

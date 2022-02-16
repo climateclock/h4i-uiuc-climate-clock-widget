@@ -1,23 +1,22 @@
-import styled from 'styled-components';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import Clock from '../pages/Clock';
 
-function ClockTime() {
-    useEffect(() => {
-        ClockTime();
-    }, []);
-    const getTime = () => {
-        axios.get(`https://api.climateclock.world/v1/clock`)
-        .then((response) => {
-            const time = response.data.modules.carbon_deadline_1.timestamp;
-        })
-    }
+export default function ClockTime() {
+    
 }
-const ClockSection = styled.div`
-color: black;
-height: 50vh;
-font-size: 20vh;
-text-align: center;
-background-color: red;
-`
-export default ClockTime;
+
+// function ClockTime() {
+//     useEffect(() => {
+//         ClockTime();
+//     }, []);
+//     const getTime = () => {
+//         axios.get(`https://api.climateclock.world/v1/clock`)
+//         .then((response) => {
+//             const time = response.data.modules.carbon_deadline_1.timestamp;
+//         })
+//         .catch(error => console.error(`Error: ${error}`));
+//     }
+// }
+
+// export default ClockTime;
