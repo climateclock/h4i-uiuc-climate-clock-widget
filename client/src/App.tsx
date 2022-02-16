@@ -1,6 +1,8 @@
+import { Example } from './components/example/Example'
 import Lifeline from './components/Lifeline'
 import Newsfeed from './components/Newsfeed'
-import { ArticleInterface, NewsfeedPropsInterface } from './interfaces'
+import { ArticleInterface } from './interfaces'
+// import { Example } from '../src/components/example/Example'
 
 function App() {
   let articles: ArticleInterface[] = [
@@ -33,6 +35,7 @@ function App() {
         unit="B"
       />
       <Newsfeed articles={articles} />
+      {/* <Example exampleProp="test"></Example> */}
     </div>
   )
 }
