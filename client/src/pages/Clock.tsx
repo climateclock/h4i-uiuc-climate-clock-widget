@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-import data from '../components/mockdata.json'
+import data from '../components/clock/mockdata.json'
 
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};

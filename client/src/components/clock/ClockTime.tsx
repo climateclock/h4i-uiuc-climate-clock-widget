@@ -1,10 +1,8 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import Clock from '../pages/Clock';
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import Clock from '../../pages/Clock'
 
-export default function ClockTime() {
-    
-}
+export default function ClockTime() {}
 
 // function ClockTime() {
 //     useEffect(() => {
