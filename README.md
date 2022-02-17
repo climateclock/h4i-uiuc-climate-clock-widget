@@ -26,7 +26,7 @@ The Climate Clock melds art, science, technology, and grassroots organizing to g
 
 ## Technologies
 
-This application is built with React, TypeScript, Sass, and tested with Cypress and Jest. Vercel is used for automatic deployment.
+This application is built with React, TypeScript, and tested with Cypress and Jest. Vercel is used for automatic deployment.
 
 ## Team
 
