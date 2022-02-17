@@ -14,6 +14,7 @@ interface ApiOutput {
 
 const StyledDiv = styled.div`
   background: ${({ theme }) => theme.background};
+  font-family: ${({ theme }) => theme.fonts};
 `
 
 // Comment describing component
