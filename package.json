@@ -16,10 +16,10 @@
     "typescript-eslint": "^0.0.1-alpha.0"
   },
   "lint-staged": {
-    "*.{js,css,scss,json,md,jsx}": [
+    "*.{js,css,scss,json,md,jsx,ts,tsx}": [
       "prettier --write"
     ],
-    "*.{js,jsx}": [
+    "*.{js,jsx, ts, tsx}": [
       "eslint --fix"
     ]
   },
