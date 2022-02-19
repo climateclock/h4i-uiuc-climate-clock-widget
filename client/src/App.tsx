@@ -7,6 +7,7 @@ import React from 'react'
 import { Example } from '../src/components/example/Example'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import { WindowSize } from '@reach/window-size'
 
 function App() {
   const [modules, setModules] = useState<ModuleResInterface[]>([])
@@ -59,6 +60,9 @@ function App() {
         {/* <Example exampleProp="test"></Example> */}
         {/* <Newsfeed articles={articles} /> */}
       </div>
+      <WindowSize>
+        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+      </WindowSize>
     </ThemeProvider>
   )
 }
