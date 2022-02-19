@@ -1,7 +1,5 @@
 import '@fontsource/oxygen-mono/400.css'
 
-import { createGlobalStyle } from 'styled-components'
-
 /**
  * @constant {number}
  * Max width in pixels for which the mobile layout should be displayed
