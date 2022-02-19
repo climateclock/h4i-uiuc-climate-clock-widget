@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/oxygen-mono": "^4.5.2",
+    "@reach/window-size": "^0.16.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -14,6 +15,7 @@
     "axios": "^0.25.0",
     "cypress": "^9.4.1",
     "jest": "^27.5.1",
+    "reach": "^1.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",

@@ -8,6 +8,35 @@ import { createGlobalStyle } from 'styled-components'
  */
 const MOBILE_MAX_WIDTH = 767
 
+interface ThemeType {
+  device: {
+    mobile: string
+    desktop: string
+  }
+  fonts: string
+  text: string
+  secondaryText: string
+  tertiaryText: string
+  headerText: string
+  background: string
+  secondaryBackground: string
+  navBackground: string
+  shadow: string
+  orange: string
+  transparentOrange: string
+  transparentBlue: string
+  transparentPink: string
+  blue: string
+  green: string
+  red: string
+  invalid: string
+  tag: {
+    access: string
+    verified: string
+    unverified: string
+  }
+}
+
 const theme = {
   // media queries for mobile and desktop
   device: {
@@ -16,7 +45,7 @@ const theme = {
   },
   fonts: '"Oxygen Mono", sans-serif',
   // text colors
-  text: '#9b9b9b',
+  text: '#000000',
   secondaryText: '#5a5a5a',
   tertiaryText: '#979797',
   headerText: '#333333',
@@ -30,9 +59,9 @@ const theme = {
   transparentOrange: '#ffedd1',
   transparentBlue: '#d9e6f3',
   transparentPink: '#fbe2fb',
-  blue: '#4183c4',
+  blue: '#619fc8',
   green: '#73cd7c',
-  red: '#ff8188',
+  red: '#ff3115',
   invalid: '#ff2633',
   // tag colors
   tag: {
@@ -61,17 +90,7 @@ const zIndex = {
   modal: 30,
 }
 
-const GlobalStyle = createGlobalStyle`
-  :root {
-    font-size: 14px;
-    --toastify-icon-color-success: ${({ theme }) => theme.green};
-    --toastify-font-family: ${({ theme }) => theme.fonts};
-    --toastify-text-color-success:  ${({ theme }) => theme.green};
-    --toastify-color-progress-success:  ${({ theme }) => theme.green};
-    --toastify-color-progress-error: ${({ theme }) => theme.invalid};
-    --toastify-text-color-error: ${({ theme }) => theme.invalid};
-    --toastify-text-color-light: ${({ theme }) => theme.secondaryText};
-  }
+const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   body {
