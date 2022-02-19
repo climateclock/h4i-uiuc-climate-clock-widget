@@ -10,7 +10,6 @@ function App() {
       <div className="App">
         <header className="App-header"></header>
         <Clock></Clock>
-        <Example exampleProp="test"></Example>
       </div>
     </ThemeProvider>
   )
