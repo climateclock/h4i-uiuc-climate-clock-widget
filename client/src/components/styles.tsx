@@ -3,12 +3,12 @@ import styled from 'styled-components'
 const TEAL: string = '#4aa1cc'
 const BLACK: string = '#000000'
 const PADDING: number = 1
-const VALUE_UNIT_MARGIN: number = 0
+const VALUE_UNIT_MARGIN: number = 1
 
 export const Div = styled.div`
   & {
     font: ${({ theme }) => theme.fonts};
-    font-weight: 800;
+    font-weight: 900;
     background: ${TEAL};
     height: 100%;
     width: 100vw;
@@ -23,7 +23,7 @@ export const LabelDiv = styled.div`
 `
 
 export const Title = styled.div`
-  width: 80%;
+  width: 100%;
   background: ${BLACK};
   color: ${TEAL};
   padding: 0 2%;
@@ -36,12 +36,12 @@ export const Module = styled.div`
 
 export const Content = styled(LabelDiv)`
   width: 100%;
-  // padding: 0% ${PADDING}%;
 `
 
 export const Value = styled.div`
   font-size: 3em;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
+  margin-left: ${VALUE_UNIT_MARGIN}vw;
 `
 
 export const Unit = styled.div`
