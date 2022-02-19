@@ -17,3 +17,18 @@ export interface LifelinePropsInterface {
 export interface NewsfeedPropsInterface {
   articles: ArticleInterface[]
 }
+
+export interface ModuleResInterface {
+  description?: string
+  flavor?: string
+  growth?: string
+  initial?: number
+  labels?: string[]
+  lang?: string
+  rate?: number
+  resolution?: number
+  timestamp?: string // double check
+  type?: string
+  unit_labels?: string[]
+  update_interval_seconds?: number
+}
