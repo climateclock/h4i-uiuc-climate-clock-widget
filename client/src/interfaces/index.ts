@@ -10,7 +10,7 @@ export interface ArticleInterface {
 export interface LifelinePropsInterface {
   title: string
   module_type: string
-  value: string
+  value: number | undefined
   unit: string
 }
 
@@ -18,12 +18,12 @@ export interface NewsfeedPropsInterface {
   articles: ArticleInterface[]
 }
 
-export interface ModuleResInterface {
+export class ModuleResInterface {
   description?: string
   flavor?: string
   growth?: string
   initial?: number
-  labels?: string[]
+  labels?: string[] | undefined
   lang?: string
   rate?: number
   resolution?: number

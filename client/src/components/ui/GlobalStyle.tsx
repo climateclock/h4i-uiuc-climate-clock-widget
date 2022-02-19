@@ -1,5 +1,4 @@
 import '@fontsource/oxygen-mono/400.css'
-import '@fontsource/oxygen-mono/700.css'
 
 import { createGlobalStyle } from 'styled-components'
 
