@@ -2,7 +2,7 @@ import React from 'react'
 import Clock from './pages/Clock'
 import { Example } from '../src/components/example/Example'
 import { ThemeProvider } from 'styled-components'
-import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import { theme } from './components/ui/GlobalStyle'
 
 function App() {
   return (
