@@ -6,8 +6,37 @@ const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
   height: 50vh;
   font-size: 20vh;
+  font-family: ${({ theme }) => theme.fonts};
   text-align: center;
   background: ${({ theme }) => theme.red};
+  h3 {
+    font-size: 0.9em;
+    display: inline-block;
+  }
+  p {
+    display: inline-block;
+    font-size: 0.5em;
+    margin-left: -3%;
+  }
+  .topRow {
+    line-height: 0.1em;
+    margin: -3%;
+  }
+  .bottomRow {
+    margin-top: -0.8em;
+  }
+  @media screen and (max-width: 800px) {
+    h3 {
+      font-size: 0.4em;
+    }
+    p {
+      margin-left: -8%;
+      font-size: 0.2em;
+    }
+    .bottomRow {
+      margin-top: -0.4em;
+    }
+  }
 `
 function Clock() {
   let date = new Date()
@@ -36,7 +65,7 @@ function Clock() {
     (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
   )
   var formattedMinutes
-  if (minutes + 1 < 10) {
+  if (minutes + 1 <= 10) {
     formattedMinutes = ('0' + minutes).slice(-2)
   } else {
     formattedMinutes = Math.floor(
@@ -44,7 +73,7 @@ function Clock() {
     )
   }
   var formattedMinutes
-  if (minutes + 1 < 10) {
+  if (minutes + 1 <= 10) {
     formattedMinutes = ('0' + minutes).slice(-2)
   } else {
     formattedMinutes = Math.floor(
@@ -60,7 +89,7 @@ function Clock() {
       1000,
   )
   var formattedSeconds
-  if (seconds + 1 < 10) {
+  if (seconds + 1 <= 10) {
     formattedSeconds = ('0' + seconds).slice(-2)
   } else {
     formattedSeconds = Math.floor(
@@ -91,8 +120,14 @@ function Clock() {
   return (
     <ClockSection>
       {console.log(new Date(data.data.modules.carbon_deadline_1.timestamp))}
-      {years} YEARS {days} DAYS <br />
-      {formattedHour}:{formattedMinutes}:{formattedSeconds}
+      <div className="topRow">
+        <h3>{years}</h3> <p>YEARS</p> <h3>{days}</h3> <p>DAYS</p>
+        <br />
+        <div className="bottomRow"></div>
+        <h3>
+          {formattedHour}:{formattedMinutes}:{formattedSeconds}
+        </h3>
+      </div>
       {/* {data.data.modules.carbon_deadline_1.timestamp} */}
     </ClockSection>
   )
