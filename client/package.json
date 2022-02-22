@@ -15,6 +15,7 @@
     "axios": "^0.25.0",
     "cypress": "^9.4.1",
     "jest": "^27.5.1",
+    "prettier": "^2.5.1",
     "reach": "^1.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -28,7 +29,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "yarn lint:check --fix",
+    "lint:check": "eslint src --ext js,jsx,ts,tsx",
+    "format": "yarn format:output --write",
+    "format:check": "yarn format:output --check",
+    "format:output": "prettier \"./**/*.{js,jsx,ts,tsx,css,scss,json,md}\""
   },
   "eslintConfig": {
     "extends": [
