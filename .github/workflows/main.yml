@@ -10,9 +10,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      
-      - name: change directory
-        run: cd client
 
       - name: Set up Node
         uses: actions/setup-node@v1
@@ -27,20 +24,17 @@ jobs:
 
       - name: Install dependencies
         working-directory: .
-        run: yarn
+        run: cd client && yarn
 
       - name: Check formatting
         working-directory: .
-        run: yarn format:check
+        run: cd client && yarn format:check
 
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      
-      - name: change directory
-        run: cd client
 
       - name: Set up Node
         uses: actions/setup-node@v1
@@ -55,11 +49,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: .
-        run: yarn
+        run: cd client && yarn
 
       - name: Run linter
         working-directory: .
-        run: yarn lint
+        run: cd client && yarn lint
 
   build:
     runs-on: ubuntu-latest
@@ -67,9 +61,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       
-      - name: change directory
-        run: cd client
-
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
@@ -82,10 +73,10 @@ jobs:
           key: ${{ runner.os }}-cache
 
       - name: Install dependencies
-        working-directory: /client
-        run: yarn
+        working-directory: .
+        run: cd client && yarn
 
       - name: Build application
         working-directory: .
-        run: yarn build
+        run: cd client && yarn build
 
