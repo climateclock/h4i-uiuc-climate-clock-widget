@@ -23,11 +23,11 @@ jobs:
           key: ${{ runner.os }}-cache
 
       - name: Install dependencies
-        working-directory: .
+        working-directory: /client
         run: yarn
 
       - name: Check formatting
-        working-directory: .
+        working-directory: /client
         run: yarn format:check
 
   lint:
@@ -48,11 +48,11 @@ jobs:
           key: ${{ runner.os }}-cache
 
       - name: Install dependencies
-        working-directory: .
+        working-directory: /client
         run: yarn
 
       - name: Run linter
-        working-directory: .
+        working-directory: /client
         run: yarn lint
 
   build:
@@ -73,9 +73,10 @@ jobs:
           key: ${{ runner.os }}-cache
 
       - name: Install dependencies
-        working-directory: .
+        working-directory: /client
         run: yarn
 
       - name: Build application
-        working-directory: .
+        working-directory: /client
         run: yarn build
+
