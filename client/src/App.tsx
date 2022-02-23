@@ -41,7 +41,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {console.log(modules)}
       <div className="App">
         <header className="App-header"></header>
         {modules.map(
@@ -53,6 +52,7 @@ function App() {
                 module_type={toUpperCase(module['flavor'])}
                 value={module['initial']}
                 unit={returnFirstString(module['unit_labels'])}
+                rate={module['rate']}
               />
             ),
         )}

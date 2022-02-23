@@ -12,6 +12,7 @@ export interface LifelinePropsInterface {
   module_type: string
   value: number | undefined
   unit: string
+  rate?: number
 }
 
 export interface NewsfeedPropsInterface {
