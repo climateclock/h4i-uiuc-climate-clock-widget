@@ -2,7 +2,8 @@ import React from 'react'
 import Clock from './pages/Clock'
 import { Example } from '../src/components/example/Example'
 import { ThemeProvider } from 'styled-components'
-import { theme } from './components/ui/GlobalStyle'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import { WindowSize } from '@reach/window-size'
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
         <header className="App-header"></header>
         <Clock></Clock>
       </div>
+      <WindowSize>
+        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+      </WindowSize>
     </ThemeProvider>
   )
 }

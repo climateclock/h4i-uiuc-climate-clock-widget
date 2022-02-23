@@ -2,14 +2,9 @@ import React, { FC, ReactElement, useState } from 'react'
 import styled from 'styled-components'
 import { useEffect } from 'react'
 import { get } from '../../api/config'
-import { ApiRequestUrl } from '../../api/constants'
 
 interface ExampleProps {
   exampleProp: string
-}
-
-interface ApiOutput {
-  status: string
 }
 
 const StyledDiv = styled.div`
