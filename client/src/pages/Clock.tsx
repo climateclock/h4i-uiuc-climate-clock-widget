@@ -16,16 +16,14 @@ const ClockSection = styled.div`
   h3 {
     display: flex;
     flex-wrap: nowrap;
-    font-size: 0.9em;
+    font-size: 8.125rem;
     display: inline-block;
-    margin: 0;
   }
   p {
     display: flex;
     flex-wrap: nowrap;
     display: inline-block;
-    font-size: 0.5em;
-    margin-left: -3%;
+    font-size: 4.063rem;
   }
   @media screen and (max-width: 800px) {
     display: flex;
