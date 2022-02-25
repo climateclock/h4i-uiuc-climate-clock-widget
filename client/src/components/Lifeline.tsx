@@ -3,9 +3,18 @@ import { LifelinePropsInterface } from '../interfaces'
 import { useState, useEffect } from 'react'
 
 function Lifeline(props: LifelinePropsInterface) {
-  const [value, setValue] = useState<number>(!props.value ? 0 : props.value) //TODO: add checs
+  const seconds = 0.75
+  const decimalPlaces = 12
+  const rate = !props.rate ? 0 : props.rate
+  const isMoneyVal = !props.unit || props.unit.charAt(0) !== '$' ? false : true
+  const [value, setValue] = useState<number>(
+    !props.value ? rate : props.value + rate,
+  ) //TODO: add checks
+
+  // have check for $ unit
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  /*
   useEffect(() => {
     let rate: number = !props.rate ? 0 : props.rate
     let intervalID = setInterval(() => {
@@ -16,17 +25,32 @@ function Lifeline(props: LifelinePropsInterface) {
     //   clearInterval(intervalID)
     // }
   }, [])
+  */
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      if (rate !== 0) {
+        setValue((value) => value + rate)
+      }
+    }, seconds * 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  })
 
   return (
     <Div>
       <LabelDiv>
-        <Module> {props.module_type}</Module>
+        <Module>{props.module_type}</Module>
         <Title>{props.title}</Title>
       </LabelDiv>
       <Content>
-        {console.log(value)}
-        <Value> {value && value}</Value> {/* TODO: double check this code*/}
-        <Unit> {props.unit}</Unit>
+        <Value>
+          {isMoneyVal && '$'}
+          {rate === 0 ? value : value.toFixed(decimalPlaces)}
+        </Value>
+        <Unit> {!isMoneyVal ? props.unit : props.unit.substring(1)}</Unit>
       </Content>
     </Div>
   )

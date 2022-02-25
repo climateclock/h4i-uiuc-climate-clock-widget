@@ -1,12 +1,13 @@
 import Lifeline from './components/Lifeline'
-import Newsfeed from './components/Newsfeed'
-import { ArticleInterface, ModuleResInterface } from './interfaces'
+import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
-import React, { useState, useEffect } from 'react'
-import { Example } from '../src/components/example/Example'
+import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
+// import Newsfeed from './components/Newsfeed'
+// import { ArticleInterface} from './interfaces'
+// import { Example } from '../src/components/example/Example'
 
 function App() {
   const [modules, setModules] = useState<ModuleResInterface[]>([])
@@ -45,7 +46,8 @@ function App() {
         <header className="App-header"></header>
         {modules.map(
           (module) =>
-            module['type'] !== 'newsfeed' && (
+            module['type'] !== 'newsfeed' &&
+            module['flavor'] === 'lifeline' && (
               <Lifeline
                 key={module['description']}
                 title={returnFirstString(module['labels'])}
