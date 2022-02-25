@@ -11,19 +11,25 @@ const ClockSection = styled.div`
   background: ${({ theme }) => theme.red};
   position: relative;
   line-height: 0.5em;
-  //display: flex;
-  //flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
   h3 {
+    display: flex;
+    flex-wrap: nowrap;
     font-size: 0.9em;
     display: inline-block;
     margin: 0;
   }
   p {
+    display: flex;
+    flex-wrap: nowrap;
     display: inline-block;
     font-size: 0.5em;
     margin-left: -3%;
   }
   @media screen and (max-width: 800px) {
+    display: flex;
+    flex-wrap: wrap;
     h3 {
       font-size: 0.4em;
     }
@@ -115,7 +121,6 @@ function Clock(props: ModuleResInterface) {
       <ClockSection>
         {console.log(new Date(props.timestamp!))}
         <h3>{years}</h3> <p>YEARS</p> <h3>{days}</h3> <p>DAYS</p>
-        <br />
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
         </h3>
