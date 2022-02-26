@@ -11,22 +11,6 @@ function Lifeline(props: LifelinePropsInterface) {
     !props.value ? rate : props.value + rate,
   ) //TODO: add checks
 
-  // have check for $ unit
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  /*
-  useEffect(() => {
-    let rate: number = !props.rate ? 0 : props.rate
-    let intervalID = setInterval(() => {
-      let valuePrecise = value + rate * 100000
-      setValue(value + rate)
-    }, 5)
-    // return () => {
-    //   clearInterval(intervalID)
-    // }
-  }, [])
-  */
-
   useEffect(() => {
     let interval = setInterval(() => {
       if (rate !== 0) {
