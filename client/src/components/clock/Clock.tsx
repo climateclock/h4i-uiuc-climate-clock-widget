@@ -10,30 +10,60 @@ const ClockSection = styled.div`
   text-align: center;
   background: ${({ theme }) => theme.red};
   position: relative;
-  line-height: 0.5em;
   justify-content: center;
   align-items: center;
+  line-height: 0;
+  font-weight: bold;
   h3 {
     display: flex;
     flex-wrap: nowrap;
     font-size: 8.125rem;
     display: inline-block;
+    //margin-top: 3%;
+    margin-top: calc(-1rem + 4vh);
   }
-  p {
+  h2 {
     display: flex;
     flex-wrap: nowrap;
     display: inline-block;
     font-size: 4.063rem;
+    padding: 0 5px 0 5px;
+    margin-top: 9%;
+  }
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
+    h3 {
+      display: flex;
+      flex-wrap: nowrap;
+      font-size: 8.125rem;
+      display: inline-block;
+      margin-top: 9%;
+    }
+    h2 {
+      display: flex;
+      flex-wrap: nowrap;
+      display: inline-block;
+      font-size: 4.063rem;
+      padding: 0 5px 0 5px;
+      margin-top: 5%;
+    }
   }
   @media screen and (max-width: 800px) {
     display: flex;
     flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
     h3 {
       font-size: 0.4em;
+      margin-top: 11%;
     }
-    p {
-      margin-left: -8%;
+    h2 {
       font-size: 0.2em;
+      padding: 0 5px 0 5px;
+      margin-top: 8%;
     }
   }
 `
@@ -44,11 +74,31 @@ function Clock(props: ModuleResInterface) {
   let today =
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
   let final = calendar + ' ' + today
+
+  var years
+  var days
+  var hours
+  var minutes
+  var seconds
+  if (props.timestamp === undefined) {
+    years = 0
+    days = 0
+    hours = 0
+    minutes = 0
+    seconds = 0
+  }
   let value = new Date(props.timestamp!).valueOf() - new Date(final).valueOf()
 
-  var years = Math.floor(value / 3.154e10)
-  var days = Math.floor((value - years * 3.154e10) / 8.64e7)
-  var hours = Math.floor((value - years * 3.154e10 - days * 8.64e7) / 3.6e6)
+  if (years != 0) {
+    years = Math.floor(value / 3.154e10)
+  }
+  if (days != 0) {
+    days = Math.floor((value - years * 3.154e10) / 8.64e7)
+  }
+  if (hours != 0) {
+    hours = Math.floor((value - years * 3.154e10 - days * 8.64e7) / 3.6e6)
+  }
+
   var formattedHour
   if (hours + 1 < 10) {
     formattedHour = ('0' + hours).slice(-2)
@@ -58,9 +108,12 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  var minutes = Math.floor(
-    (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
-  )
+  if (minutes != 0) {
+    minutes = Math.floor(
+      (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
+    )
+  }
+
   var formattedMinutes
   if (minutes + 1 <= 10) {
     formattedMinutes = ('0' + minutes).slice(-2)
@@ -77,14 +130,17 @@ function Clock(props: ModuleResInterface) {
       (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
     )
   }
-  var seconds = Math.floor(
-    (value -
-      years * 3.154e10 -
-      days * 8.64e7 -
-      hours * 3.6e6 -
-      minutes * 60000) /
-      1000,
-  )
+  if (seconds != 0) {
+    seconds = Math.floor(
+      (value -
+        years * 3.154e10 -
+        days * 8.64e7 -
+        hours * 3.6e6 -
+        minutes * 60000) /
+        1000,
+    )
+  }
+
   var formattedSeconds
   if (seconds + 1 <= 10) {
     formattedSeconds = ('0' + seconds).slice(-2)
@@ -118,7 +174,7 @@ function Clock(props: ModuleResInterface) {
     <div className="container">
       <ClockSection>
         {/*console.log(new Date(props.timestamp!))*/}
-        <h3>{years}</h3> <p>YEARS</p> <h3>{days}</h3> <p>DAYS</p>
+        <h3>{years}</h3> <h2>YRS</h2> <h3>{days}</h3> <h2>DAYS</h2>
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
         </h3>
