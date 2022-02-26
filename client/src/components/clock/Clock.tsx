@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 // import data from '../components/clock/mockdata.json'
-import { ModuleResInterface } from '../interfaces'
+import { ModuleResInterface } from '../../interfaces'
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
   height: 50vh;
@@ -117,7 +117,7 @@ function Clock(props: ModuleResInterface) {
   return (
     <div className="container">
       <ClockSection>
-        {console.log(new Date(props.timestamp!))}
+        {/*console.log(new Date(props.timestamp!))*/}
         <h3>{years}</h3> <p>YEARS</p> <h3>{days}</h3> <p>DAYS</p>
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}

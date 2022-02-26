@@ -3,7 +3,7 @@ import { Example } from '../src/components/example/Example'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
-import Clock from './pages/Clock'
+import Clock from './components/clock/Clock'
 import { get } from './api/config'
 import { ModuleResInterface } from './interfaces'
 
@@ -27,8 +27,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <header className="App-header"></header>
-        <Clock timestamp={module['timestamp']}></Clock>
+        <header className="App-rheader"></header>
+        {
+          <Clock
+            timestamp={modules && modules[0] && modules[0].timestamp}
+          ></Clock>
+        }
         <Example exampleProp="test"></Example>
       </div>
       <WindowSize>
