@@ -25,12 +25,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <header className="App-header"></header>
-        <Example exampleProp="test"></Example>
+        {/* <Example exampleProp="test"></Example> */}
+        <Newsfeed headlines={headlines2} />
       </div>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
       </WindowSize>
-      <Newsfeed headlines={headlines2} />
     </ThemeProvider>
   )
 }
