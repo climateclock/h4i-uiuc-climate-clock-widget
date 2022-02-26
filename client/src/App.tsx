@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
-// import Newsfeed from './components/Newsfeed'
 // import { ArticleInterface} from './interfaces'
 // import { Example } from '../src/components/example/Example'
 
@@ -59,7 +58,6 @@ function App() {
             ),
         )}
         {/* <Example exampleProp="test"></Example> */}
-        {/* <Newsfeed articles={articles} /> */}
       </div>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
