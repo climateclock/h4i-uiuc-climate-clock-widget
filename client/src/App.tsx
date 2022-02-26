@@ -1,4 +1,3 @@
-import React from 'react'
 import { Example } from '../src/components/example/Example'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
