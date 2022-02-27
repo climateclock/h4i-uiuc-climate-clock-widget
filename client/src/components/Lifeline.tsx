@@ -3,15 +3,16 @@ import { LifelinePropsInterface } from '../interfaces'
 import { useState, useEffect } from 'react'
 
 function Lifeline(props: LifelinePropsInterface) {
-  const seconds = 0.75
-  const decimalPlaces = 12
-  const rate = !props.rate ? 0 : props.rate
-  const isMoneyVal = !props.unit || props.unit.charAt(0) !== '$' ? false : true
+  const seconds = 1 // running every every seconds * 1000
+  const decimalPlaces = !props.resolution ? 0 : Math.log10(1 / props.resolution) // set the precision of value
+  const rate = !props.rate ? 0 : props.rate // store rate at which to update value
+  const isMoneyVal = !props.unit || props.unit.charAt(0) !== '$' ? false : true // used to fix monetary units passed in (ie. $)
   const [value, setValue] = useState<number>(
     !props.value ? rate : props.value + rate,
-  ) //TODO: add checks
+  )
 
   useEffect(() => {
+    // update value within interval
     let interval = setInterval(() => {
       if (rate !== 0) {
         setValue((value) => value + rate)

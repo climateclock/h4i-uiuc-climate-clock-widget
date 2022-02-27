@@ -2,19 +2,16 @@ import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import { useState, useEffect } from 'react'
-import { Example } from '../src/components/example/Example'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
-// import { ArticleInterface} from './interfaces'
-// import { Example } from '../src/components/example/Example'
 
 function App() {
   const [modules, setModules] = useState<ModuleResInterface[]>([])
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
-    let ERROR_MSG: string = 'Error message'
+    let ERROR_MSG: string = 'Error getting module data'
     const getData = async (url: string, error: string) => {
       let res = await get(url, error)
       let content: ModuleResInterface[] = Object.values(
@@ -55,10 +52,10 @@ function App() {
                 value={module['initial']}
                 unit={returnFirstString(module['unit_labels'])}
                 rate={module['rate']}
+                resolution={module['resolution']}
               />
             ),
         )}
-        {/* <Example exampleProp="test"></Example> */}
       </div>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
