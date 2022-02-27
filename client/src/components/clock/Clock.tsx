@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-// import data from '../components/clock/mockdata.json'
 import { ModuleResInterface } from '../../interfaces'
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
@@ -19,7 +18,6 @@ const ClockSection = styled.div`
     flex-wrap: nowrap;
     font-size: 8.125rem;
     display: inline-block;
-    //margin-top: 3%;
     margin-top: calc(-1rem + 4vh);
   }
   h2 {
@@ -75,11 +73,11 @@ function Clock(props: ModuleResInterface) {
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
   let final = calendar + ' ' + today
 
-  var years
-  var days
-  var hours
-  var minutes
-  var seconds
+  let years
+  let days
+  let hours
+  let minutes
+  let seconds
   if (props.timestamp === undefined) {
     years = 0
     days = 0
@@ -101,7 +99,7 @@ function Clock(props: ModuleResInterface) {
 
   var formattedHour
   if (hours + 1 < 10) {
-    formattedHour = ('0' + hours).slice(-2)
+    formattedHour = ('0' + hours)
   } else {
     formattedHour = Math.floor(
       (value - years * 3.154e10 - days * 8.64e7) / 3.6e6,
@@ -116,7 +114,7 @@ function Clock(props: ModuleResInterface) {
 
   var formattedMinutes
   if (minutes + 1 <= 10) {
-    formattedMinutes = ('0' + minutes).slice(-2)
+    formattedMinutes = ('0' + minutes)
   } else {
     formattedMinutes = Math.floor(
       (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
@@ -124,7 +122,7 @@ function Clock(props: ModuleResInterface) {
   }
   var formattedMinutes
   if (minutes + 1 <= 10) {
-    formattedMinutes = ('0' + minutes).slice(-2)
+    formattedMinutes = ('0' + minutes)
   } else {
     formattedMinutes = Math.floor(
       (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
@@ -143,7 +141,7 @@ function Clock(props: ModuleResInterface) {
 
   var formattedSeconds
   if (seconds + 1 <= 10) {
-    formattedSeconds = ('0' + seconds).slice(-2)
+    formattedSeconds = ('0' + seconds)
   } else {
     formattedSeconds = Math.floor(
       (value -
@@ -161,11 +159,11 @@ function Clock(props: ModuleResInterface) {
   const [sec, setSec] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
-      setYear((years) => years + 1)
-      setDay((days) => days + 1)
-      setHour((formattedHour) => formattedHour + 1)
-      setMinute((formattedMinutes) => formattedMinutes + 1)
-      setSec((formattedSeconds) => formattedSeconds + 1)
+      setYear((years) => ++years)
+      setDay((days) => ++days)
+      setHour((formattedHour) => ++formattedHour)
+      setMinute((formattedMinutes) => ++formattedMinutes)
+      setSec((formattedSeconds) => ++formattedSeconds)
     }, 1000)
     return () => clearInterval(interval)
   }, [])
