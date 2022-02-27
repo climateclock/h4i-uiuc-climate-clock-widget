@@ -173,12 +173,10 @@ function Clock(props: ModuleResInterface) {
   return (
     <div className="container">
       <ClockSection>
-        {/*console.log(new Date(props.timestamp!))*/}
         <h3>{years}</h3> <h2>YRS</h2> <h3>{days}</h3> <h2>DAYS</h2>
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
         </h3>
-        {/* {data.data.modules.carbon_deadline_1.timestamp} */}
       </ClockSection>
     </div>
   )

@@ -28,17 +28,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <header className="App-rheader"></header>
-        {console.log(modules)}
         {
           <Clock
             timestamp={modules && modules[0] && modules[0].timestamp}
           ></Clock>
         }
-        <Example exampleProp="test"></Example>
       </div>
-      <WindowSize>
-        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-      </WindowSize>
     </ThemeProvider>
   )
 }
