@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Example } from '../src/components/example/Example'
+import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
-import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import { WindowSize } from '@reach/window-size'
+import { theme } from './components/ui/GlobalStyle'
 import Clock from './components/clock/Clock'
 import { get } from './api/config'
 import { ModuleResInterface } from './interfaces'
@@ -26,8 +24,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-rheader"></header>
+      <div>
         {
           <Clock
             timestamp={modules && modules[0] && modules[0].timestamp}
