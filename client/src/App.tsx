@@ -43,7 +43,7 @@ function App() {
         <header className="App-header"></header>
         {modules.map(
           (module) =>
-            module['type'] !== 'newsfeed' &&
+            module['type'] === 'value' &&
             module['flavor'] === 'lifeline' && (
               <Lifeline
                 key={module['description']}
