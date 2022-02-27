@@ -87,26 +87,26 @@ function Clock(props: ModuleResInterface) {
   }
   let value = new Date(props.timestamp!).valueOf() - new Date(final).valueOf()
 
-  if (years != 0) {
+  if (years !== 0) {
     years = Math.floor(value / 3.154e10)
   }
-  if (days != 0) {
+  if (days !== 0) {
     days = Math.floor((value - years * 3.154e10) / 8.64e7)
   }
-  if (hours != 0) {
+  if (hours !== 0) {
     hours = Math.floor((value - years * 3.154e10 - days * 8.64e7) / 3.6e6)
   }
 
   var formattedHour
   if (hours + 1 < 10) {
-    formattedHour = ('0' + hours)
+    formattedHour = '0' + hours
   } else {
     formattedHour = Math.floor(
       (value - years * 3.154e10 - days * 8.64e7) / 3.6e6,
     )
   }
 
-  if (minutes != 0) {
+  if (minutes !== 0) {
     minutes = Math.floor(
       (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
     )
@@ -114,21 +114,14 @@ function Clock(props: ModuleResInterface) {
 
   var formattedMinutes
   if (minutes + 1 <= 10) {
-    formattedMinutes = ('0' + minutes)
+    formattedMinutes = '0' + minutes
   } else {
     formattedMinutes = Math.floor(
       (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
     )
   }
-  var formattedMinutes
-  if (minutes + 1 <= 10) {
-    formattedMinutes = ('0' + minutes)
-  } else {
-    formattedMinutes = Math.floor(
-      (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
-    )
-  }
-  if (seconds != 0) {
+
+  if (seconds !== 0) {
     seconds = Math.floor(
       (value -
         years * 3.154e10 -
@@ -141,7 +134,7 @@ function Clock(props: ModuleResInterface) {
 
   var formattedSeconds
   if (seconds + 1 <= 10) {
-    formattedSeconds = ('0' + seconds)
+    formattedSeconds = '0' + seconds
   } else {
     formattedSeconds = Math.floor(
       (value -
@@ -152,10 +145,16 @@ function Clock(props: ModuleResInterface) {
         1000,
     )
   }
+
+  // eslint-disable-next-line
   const [year, setYear] = useState(0)
+  // eslint-disable-next-line
   const [day, setDay] = useState(0)
+  // eslint-disable-next-line
   const [hour, setHour] = useState(0)
+  // eslint-disable-next-line
   const [minute, setMinute] = useState(0)
+  // eslint-disable-next-line
   const [sec, setSec] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
