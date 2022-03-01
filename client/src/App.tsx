@@ -7,7 +7,7 @@ import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
 
 function App() {
-  const [modules, setModules] = useState<ModuleResInterface[]>([])
+  const [, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
@@ -23,8 +23,9 @@ function App() {
       )
       let resLifelineModules = resModules.filter((module) => {
         if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-          return module
+          return true
         }
+        return false
       })
       setModules(resModules)
       setLifelineModules(resLifelineModules)
