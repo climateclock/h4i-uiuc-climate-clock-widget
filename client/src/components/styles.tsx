@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
+/* TODO: change these to theme colors */
 const TEAL: string = '#4aa1cc'
 const BLACK: string = '#000000'
 const PADDING: number = 1
 const VALUE_UNIT_MARGIN: number = 1
 
-export const Div = styled.div`
+export const Container = styled.div`
   & {
     font: ${({ theme }) => theme.fonts};
     font-weight: 900;
@@ -15,7 +16,7 @@ export const Div = styled.div`
   }
 `
 
-export const LabelDiv = styled.div`
+export const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -34,7 +35,7 @@ export const Module = styled.div`
   text-align: center;
 `
 
-export const Content = styled(LabelDiv)`
+export const ContentContainer = styled(LabelContainer)`
   width: 100%;
 `
 
