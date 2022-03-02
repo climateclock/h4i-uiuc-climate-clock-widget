@@ -11,13 +11,23 @@ function App() {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
+  const [errorFlag, setErrorFlag] = useState<boolean>(false)
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
     let ERROR_MSG: string = 'Error retrieving module data from API...'
 
     const getData = async (url: string, error: string) => {
-      let res = await get(url, error)
+      let res: any = await get(url, error)
+
+      /* errorWrapper returned in res */
+      if ('error' in res) {
+        setErrorFlag(true)
+        setModules([])
+        setLifelineModules([])
+        return
+      }
+
       let resModules: ModuleResInterface[] = Object.values(
         res['data']['data']['modules'],
       )
@@ -64,17 +74,21 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <header className="App-header"></header>
-        {lifelineModules.map((module) => (
-          <Lifeline
-            key={module['description']}
-            title={returnFirstString(module['labels'])}
-            module_type={toUpperCase(module['flavor'])}
-            value={module['initial']}
-            unit={returnFirstString(module['unit_labels'])}
-            rate={module['rate']}
-            resolution={module['resolution']}
-          />
-        ))}
+        {!errorFlag ? (
+          lifelineModules.map((module) => (
+            <Lifeline
+              key={module['description']}
+              title={returnFirstString(module['labels'])}
+              module_type={toUpperCase(module['flavor'])}
+              value={module['initial']}
+              unit={returnFirstString(module['unit_labels'])}
+              rate={module['rate']}
+              resolution={module['resolution']}
+            />
+          ))
+        ) : (
+          <h1>Error loadding from API</h1>
+        )}
       </div>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
