@@ -1,8 +1,4 @@
 import { createContext } from 'react'
-
-interface LanguageContextInterface {
-  defaultLanguage?: string
-  setDefaultLanguage?: React.Dispatch<React.SetStateAction<string>>
-}
+import { LanguageContextInterface } from '../interfaces'
 
 export const LanguageContext = createContext<LanguageContextInterface>({})
