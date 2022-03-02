@@ -71,7 +71,7 @@ function Clock(props: ModuleResInterface) {
     date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   let today =
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-  let final = calendar + ' ' + today
+  let current = calendar + ' ' + today
 
   let years
   let days
@@ -85,7 +85,7 @@ function Clock(props: ModuleResInterface) {
     minutes = 0
     seconds = 0
   }
-  let value = new Date(props.timestamp!).valueOf() - new Date(final).valueOf()
+  let value = new Date(props.timestamp!).valueOf() - new Date(current).valueOf()
 
   if (years !== 0) {
     years = Math.floor(value / 3.154e10)
