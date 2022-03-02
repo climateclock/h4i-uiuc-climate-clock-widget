@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
-    let ERROR_MSG: string = 'Error getting module data'
+    let ERROR_MSG: string = 'Error retrieving module data from API...'
 
     const getData = async (url: string, error: string) => {
       let res = await get(url, error)
