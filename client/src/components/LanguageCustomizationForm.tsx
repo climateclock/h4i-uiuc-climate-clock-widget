@@ -1,5 +1,4 @@
 const LanguageCustomization = () => {
-  /* TODO: fix type of 'e' */
   const formSubmit = (e: any) => {
     e.preventDefault()
   }
