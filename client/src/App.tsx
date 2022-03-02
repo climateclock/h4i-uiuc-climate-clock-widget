@@ -4,6 +4,7 @@ import { theme } from './components/ui/GlobalStyle'
 import Clock from './components/clock/Clock'
 import { get } from './api/config'
 import { ModuleResInterface } from './interfaces'
+import Toggle from './components/buttons/Toggle'
 
 function App() {
   const [modules, setModules] = useState<ModuleResInterface[]>([])
@@ -29,6 +30,7 @@ function App() {
           <Clock
             timestamp={modules && modules[0] && modules[0].timestamp}
           ></Clock>
+          // <Toggle></Toggle>
         }
       </div>
     </ThemeProvider>
