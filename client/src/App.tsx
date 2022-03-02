@@ -12,10 +12,10 @@ function App() {
     [],
   )
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const ERROR_MSG: string = 'Error retrieving module data from API...'
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
-    let ERROR_MSG: string = 'Error retrieving module data from API...'
 
     const getData = async (url: string, error: string) => {
       let res: any = await get(url, error)
@@ -87,7 +87,7 @@ function App() {
             />
           ))
         ) : (
-          <h1>Error loadding from API</h1>
+          <h1>{ERROR_MSG}</h1>
         )}
       </div>
       <WindowSize>
