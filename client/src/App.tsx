@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
+import LifelineForm from './components/LlifelineCreationForm'
 
 function App() {
   const [, setModules] = useState<ModuleResInterface[]>([])
