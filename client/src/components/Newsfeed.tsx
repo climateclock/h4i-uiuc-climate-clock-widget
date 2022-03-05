@@ -11,7 +11,7 @@ const Newsfeed = (props: NewsfeedPropsInterface) => {
   }
   // return <Ticker>{() => <Headlines headlines={props.headlines} />}</Ticker>
   // return <Ticker>{({ index }) => <p>{props.headlines[index]}</p>}</Ticker>
-  return <Marquee>{concatenatedHeadlines}</Marquee>
+  return <Marquee gradient={false}>{concatenatedHeadlines}</Marquee>
 }
 
 export default Newsfeed
