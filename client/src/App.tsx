@@ -24,7 +24,7 @@ function App() {
   ]
   return (
     <>
-      <Marquee>testtesttesttesttesttesttesttesttesttesttesttesttest</Marquee>
+      <Newsfeed headlines={headlines} />
       <ThemeProvider theme={theme}>
         <div className="App">
           <header className="App-header"></header>
