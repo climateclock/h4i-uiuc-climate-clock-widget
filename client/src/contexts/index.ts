@@ -1,4 +1,4 @@
 import { createContext } from 'react'
-import { LanguageContextInterface } from '../interfaces'
+import { ThemeContextInterface } from '../interfaces'
 
-export const LanguageContext = createContext<LanguageContextInterface>({})
+export const ThemeContext = createContext<ThemeContextInterface>({})

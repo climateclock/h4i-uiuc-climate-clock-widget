@@ -8,7 +8,7 @@ import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/LanguageCustomizationForm'
-import { LanguageContext } from './contexts'
+import { ThemeContext } from './contexts'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -78,7 +78,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <LanguageContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
+      <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
         <div className="App">
           {/*<header className="App-header"></header>*/}
           {/*<Example exampleProp="test"></Example>*/}
@@ -104,7 +104,7 @@ function App() {
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
-      </LanguageContext.Provider>
+      </ThemeContext.Provider>
     </ThemeProvider>
   )
 }

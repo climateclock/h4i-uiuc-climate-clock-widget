@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react'
-import { LanguageContext } from '../contexts'
+import { ThemeContext } from '../contexts'
 
 const LanguageCustomization = () => {
-  const { setDefaultLanguage } = useContext(LanguageContext)
+  const { setDefaultLanguage } = useContext(ThemeContext)
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
 
   const formSubmit = (e: any) => {
