@@ -4,8 +4,6 @@ import { get } from './api/config'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
-import Clock from './components/clock/Clock'
-import Toggle from './components/buttons/Toggle'
 
 function App() {
   const [, setModules] = useState<ModuleResInterface[]>([])
