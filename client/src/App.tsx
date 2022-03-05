@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
 import Clock from './components/clock/Clock'
+import Settings from './pages/Settings'
 import { get } from './api/config'
 import { ModuleResInterface } from './interfaces'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 function App() {
   const [modules, setModules] = useState<ModuleResInterface[]>([])
 
@@ -24,13 +25,20 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        {
-          <Clock
-            timestamp={modules && modules[0] && modules[0].timestamp}
-          ></Clock>
-        }
-      </div>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Clock
+                timestamp={modules && modules[0] && modules[0].timestamp}
+              ></Clock>
+            }
+          />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Router>
+      <div>{}</div>
     </ThemeProvider>
   )
 }
