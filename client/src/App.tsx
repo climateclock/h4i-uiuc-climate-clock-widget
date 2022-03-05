@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
 import Newsfeed from './components/Newsfeed'
+import Marquee from 'react-fast-marquee'
 
 function App() {
   const headlines: string[] = [
@@ -22,16 +23,19 @@ function App() {
     'Ghana youth climate defenders present Climate Clock to President Akufo-Addo at COP26 | ',
   ]
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-header"></header>
-        {/* <Example exampleProp="test"></Example> */}
-        <Newsfeed headlines={headlines2} />
-      </div>
-      <WindowSize>
-        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-      </WindowSize>
-    </ThemeProvider>
+    <>
+      <Marquee>testtesttesttesttesttesttesttesttesttesttesttesttest</Marquee>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <header className="App-header"></header>
+          <Example exampleProp="test"></Example>
+          {/* <Newsfeed headlines={headlines} /> */}
+        </div>
+        <WindowSize>
+          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+        </WindowSize>
+      </ThemeProvider>
+    </>
   )
 }
 
