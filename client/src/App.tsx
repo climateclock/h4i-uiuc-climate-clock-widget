@@ -82,7 +82,8 @@ function App() {
         <div className="App">
           {/*<header className="App-header"></header>*/}
           {/*<Example exampleProp="test"></Example>*/}
-          {/* <LanguageCustomization /> */}
+          <LanguageCustomization />
+          <h1>{defaultLanguage}</h1>
         </div>
         <header className="App-header"></header>
         {!errorFlag ? (
@@ -103,7 +104,6 @@ function App() {
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
-        {/* <h1>{defaultLanguage}</h1> */}
       </LanguageContext.Provider>
     </ThemeProvider>
   )
