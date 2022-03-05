@@ -11,7 +11,7 @@ function App() {
   const ERROR_MSG: string = 'Error retrieving module data from API...'
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
-    
+
     const getData = async (url: string, error: string) => {
       let res: any = await get(url, error)
       /* errorWrapper returned in res */
@@ -32,11 +32,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {
+        {!errorFlag ? (
           <Clock
             timestamp={modules && modules[0] && modules[0].timestamp}
           ></Clock>
-        }
+        ) : (
+          <h1>{ERROR_MSG}</h1>
+        )}
       </div>
     </ThemeProvider>
   )
