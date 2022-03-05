@@ -30,8 +30,8 @@ function App() {
           <Clock
             timestamp={modules && modules[0] && modules[0].timestamp}
           ></Clock>
-          // <Toggle></Toggle>
         }
+        <Toggle />
       </div>
     </ThemeProvider>
   )
