@@ -5,8 +5,6 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
 import Clock from './components/clock/Clock'
-import { get } from './api/config'
-import { ModuleResInterface } from './interfaces'
 import Toggle from './components/buttons/Toggle'
 
 function App() {
