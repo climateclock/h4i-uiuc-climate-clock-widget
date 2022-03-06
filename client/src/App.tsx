@@ -4,6 +4,7 @@ import { get } from './api/config'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
+import Fullscreen from './components/buttons/Fullscreen'
 
 function App() {
   const [, setModules] = useState<ModuleResInterface[]>([])
@@ -71,24 +72,27 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-header"></header>
-        {!errorFlag ? (
-          lifelineModules.map((module) => (
-            <Lifeline
-              key={module['description']}
-              title={returnFirstString(module['labels'])}
-              module_type={toUpperCase(module['flavor'])}
-              value={module['initial']}
-              unit={returnFirstString(module['unit_labels'])}
-              rate={module['rate']}
-              resolution={module['resolution']}
-            />
-          ))
-        ) : (
-          <h1>{ERROR_MSG}</h1>
-        )}
-      </div>
+      {
+        <div className="App">
+          <header className="App-header"></header>
+          {!errorFlag ? (
+            lifelineModules.map((module) => (
+              <Lifeline
+                key={module['description']}
+                title={returnFirstString(module['labels'])}
+                module_type={toUpperCase(module['flavor'])}
+                value={module['initial']}
+                unit={returnFirstString(module['unit_labels'])}
+                rate={module['rate']}
+                resolution={module['resolution']}
+              />
+            ))
+          ) : (
+            <h1>{ERROR_MSG}</h1>
+          )}
+        </div>
+      }
+      <Fullscreen />
     </ThemeProvider>
   )
 }
