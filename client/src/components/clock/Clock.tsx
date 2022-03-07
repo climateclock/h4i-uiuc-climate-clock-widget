@@ -73,15 +73,14 @@ function Clock(props: ModuleResInterface) {
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
   let current = calendar + ' ' + today
 
-
   let years: any, days: any, hours: any, minutes: any, seconds: any
 
-  if (!props.timestamp) {
-    years = 0;
-    days = 0;
-    hours = 0;
-    minutes = 0;
-    seconds = 0; 
+  if (props.timestamp === undefined) {
+    years = 0
+    days = 0
+    hours = 0
+    minutes = 0
+    seconds = 0
   }
   let value = new Date(props.timestamp!).valueOf() - new Date(current).valueOf()
   let ms_per_year = 3.154e10 // number of milliseconds per year
@@ -102,7 +101,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  let formattedHour
+  var formattedHour
   if (hours + 1 < 10) {
     formattedHour = '0' + hours
   } else {
@@ -139,7 +138,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  let formattedSeconds
+  var formattedSeconds
   if (seconds + 1 <= 10) {
     formattedSeconds = '0' + seconds
   } else {
