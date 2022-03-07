@@ -74,7 +74,7 @@ function Clock(props: ModuleResInterface) {
   let current = calendar + ' ' + today
 
 
-  let years, days, hours, minutes, seconds
+  let years: any, days: any, hours: any, minutes: any, seconds: any
 
   if (!props.timestamp) {
     years = 0;
