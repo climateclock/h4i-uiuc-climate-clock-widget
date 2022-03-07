@@ -31,3 +31,4 @@
     },
     { "src": "/(.*)", "dest": "client/index.html" }
   ]
+}
