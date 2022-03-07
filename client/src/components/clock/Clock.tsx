@@ -73,17 +73,15 @@ function Clock(props: ModuleResInterface) {
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
   let current = calendar + ' ' + today
 
-  let years
-  let days
-  let hours
-  let minutes
-  let seconds
-  if (props.timestamp === undefined) {
-    years = 0
-    days = 0
-    hours = 0
-    minutes = 0
-    seconds = 0
+
+  let years, days, hours, minutes, seconds
+
+  if (!props.timestamp) {
+    years = 0;
+    days = 0;
+    hours = 0;
+    minutes = 0;
+    seconds = 0; 
   }
   let value = new Date(props.timestamp!).valueOf() - new Date(current).valueOf()
   let ms_per_year = 3.154e10 // number of milliseconds per year
@@ -104,7 +102,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  var formattedHour
+  let formattedHour
   if (hours + 1 < 10) {
     formattedHour = '0' + hours
   } else {
@@ -141,7 +139,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  var formattedSeconds
+  let formattedSeconds
   if (seconds + 1 <= 10) {
     formattedSeconds = '0' + seconds
   } else {
@@ -155,16 +153,11 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  // eslint-disable-next-line
-  const [year, setYear] = useState(0)
-  // eslint-disable-next-line
-  const [day, setDay] = useState(0)
-  // eslint-disable-next-line
-  const [hour, setHour] = useState(0)
-  // eslint-disable-next-line
-  const [minute, setMinute] = useState(0)
-  // eslint-disable-next-line
-  const [sec, setSec] = useState(0)
+  const [, setYear] = useState(0)
+  const [, setDay] = useState(0)
+  const [, setHour] = useState(0)
+  const [, setMinute] = useState(0)
+  const [, setSec] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
       setYear((years) => ++years)
