@@ -8,6 +8,7 @@ import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
+import LifelineCreationForm from './components/LlifelineCreationForm'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -77,9 +78,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
+      <ThemeContext.Provider
+        value={{
+          defaultLanguage,
+          setDefaultLanguage,
+          lifelineModules,
+          setLifelineModules,
+        }}
+      >
         <div className="App">
           <LanguageCustomization />
+          <LifelineCreationForm />
           <h1>{defaultLanguage}</h1>
         </div>
         <header className="App-header"></header>
