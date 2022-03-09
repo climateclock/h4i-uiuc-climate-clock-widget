@@ -1,12 +1,16 @@
+import { useState, useEffect } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { WindowSize } from '@reach/window-size'
+
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
-import { useState, useEffect } from 'react'
-import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import { WindowSize } from '@reach/window-size'
+import LanguageCustomization from './components/LanguageCustomizationForm'
+import { ThemeContext } from './contexts'
 
 function App() {
+  const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
   const [, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
@@ -16,6 +20,7 @@ function App() {
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
+    // let URL: string = `https://api.climateclock.world/v1/clock?lang=${defaultLanguage}`
 
     const getData = async (url: string, error: string) => {
       let res: any = await get(url, error)
@@ -42,7 +47,7 @@ function App() {
     }
 
     getData(URL, ERROR_MSG)
-  }, [])
+  }, [defaultLanguage])
 
   /* returnFirstString
    *
@@ -72,7 +77,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
+        <div className="App">
+          <LanguageCustomization />
+          <h1>{defaultLanguage}</h1>
+        </div>
         <header className="App-header"></header>
         {!errorFlag ? (
           lifelineModules.map((module) => (
@@ -89,10 +98,10 @@ function App() {
         ) : (
           <h1>{ERROR_MSG}</h1>
         )}
-      </div>
-      <WindowSize>
-        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-      </WindowSize>
+        <WindowSize>
+          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+        </WindowSize>
+      </ThemeContext.Provider>
     </ThemeProvider>
   )
 }
