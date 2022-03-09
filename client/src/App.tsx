@@ -4,6 +4,8 @@ import { get } from './api/config'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
+import Fullscreen from './components/buttons/Fullscreen'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 function App() {
   const [, setModules] = useState<ModuleResInterface[]>([])
@@ -69,27 +71,35 @@ function App() {
     return str.toUpperCase()
   }
 
+  const handle = useFullScreenHandle()
+
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-header"></header>
-        {!errorFlag ? (
-          lifelineModules.map((module) => (
-            <Lifeline
-              key={module['description']}
-              title={returnFirstString(module['labels'])}
-              module_type={toUpperCase(module['flavor'])}
-              value={module['initial']}
-              unit={returnFirstString(module['unit_labels'])}
-              rate={module['rate']}
-              resolution={module['resolution']}
-            />
-          ))
-        ) : (
-          <h1>{ERROR_MSG}</h1>
-        )}
-      </div>
-    </ThemeProvider>
+    <>
+      <FullScreen handle={handle}>
+        <ThemeProvider theme={theme}>
+          <div className="App">
+            <header className="App-header"></header>
+            {!errorFlag ? (
+              lifelineModules.map((module) => (
+                <Lifeline
+                  key={module['description']}
+                  title={returnFirstString(module['labels'])}
+                  module_type={toUpperCase(module['flavor'])}
+                  value={module['initial']}
+                  unit={returnFirstString(module['unit_labels'])}
+                  rate={module['rate']}
+                  resolution={module['resolution']}
+                />
+              ))
+            ) : (
+              <h1>{ERROR_MSG}</h1>
+            )}
+          </div>
+        </ThemeProvider>
+        <button onClick={handle.exit}>Exit fullscreen</button>
+      </FullScreen>
+      <button onClick={handle.enter}>Enter fullscreen</button>
+    </>
   )
 }
 
