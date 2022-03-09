@@ -1,5 +1,14 @@
 export interface NewsfeedPropsInterface {
-  headlines: string[]
+  news: NewsInterface[]
+}
+
+export interface NewsInterface {
+  data?: string
+  headline?: string
+  headline_original?: string
+  link?: string
+  source?: string
+  summary?: string
 }
 
 export interface LifelinePropsInterface {

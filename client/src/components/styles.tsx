@@ -49,3 +49,11 @@ export const Unit = styled.div`
   font-size: 2em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
 `
+
+export const MarqueeContainer = styled.div`
+  background: ${BLACK};
+  color: ${TEAL};
+  padding: 0 2%;
+  font-size: max(2rem, min(4rem, 6vw));
+  font-weight: bold;
+`

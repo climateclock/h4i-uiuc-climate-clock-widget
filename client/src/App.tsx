@@ -1,12 +1,11 @@
 import Lifeline from './components/Lifeline'
-import { ModuleResInterface } from './interfaces'
+import { ModuleResInterface, NewsfeedPropsInterface } from './interfaces'
 import { get } from './api/config'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { WindowSize } from '@reach/window-size'
 import Newsfeed from './components/Newsfeed'
-import Marquee from 'react-fast-marquee'
 
 function App() {
   const headlines: string[] = [
@@ -29,6 +28,10 @@ function App() {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
+  // set a useState to store newsfeed modules
+  const [newsfeedModules, setNewsfeedModules] = useState<
+    NewsfeedPropsInterface[]
+  >([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const ERROR_MSG: string = 'Error retrieving module data from API...'
 
@@ -43,6 +46,7 @@ function App() {
         setErrorFlag(true)
         setModules([])
         setLifelineModules([])
+        setNewsfeedModules([])
         return
       }
 
@@ -51,12 +55,17 @@ function App() {
       )
       let resLifelineModules = resModules.filter((module) => {
         if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
+          console.log(module)
           return true
         }
         return false
       })
+      let resNewsfeedModules: NewsfeedPropsInterface[] = Object.values(
+        res['data']['data']['modules']['newsfeed_1']['newsfeed'],
+      )
       setModules(resModules)
       setLifelineModules(resLifelineModules)
+      setNewsfeedModules(resNewsfeedModules)
     }
 
     getData(URL, ERROR_MSG)
@@ -107,7 +116,13 @@ function App() {
         ) : (
           <h1>{ERROR_MSG}</h1>
         )}
-        <Newsfeed headlines={headlines}></Newsfeed>
+        {!errorFlag ? (
+          newsfeedModules.map((module) => (
+            <Newsfeed headline={module['headline']}></Newsfeed>
+          ))
+        ) : (
+          <h1>{ERROR_MSG}</h1>
+        )}
       </div>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
