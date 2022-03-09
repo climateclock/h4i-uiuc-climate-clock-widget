@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
 
-// import { Example } from '../src/components/example/Example'
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
@@ -80,8 +79,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
         <div className="App">
-          {/*<header className="App-header"></header>*/}
-          {/*<Example exampleProp="test"></Example>*/}
           <LanguageCustomization />
           <h1>{defaultLanguage}</h1>
         </div>
