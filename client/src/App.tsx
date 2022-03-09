@@ -96,9 +96,13 @@ function App() {
             )}
           </div>
         </ThemeProvider>
-        <button onClick={handle.exit}>Exit fullscreen</button>
+        <button onClick={handle.exit}>
+          <Fullscreen />
+        </button>
       </FullScreen>
-      <button onClick={handle.enter}>Enter fullscreen</button>
+      <button onClick={handle.enter}>
+        <Fullscreen />
+      </button>
     </>
   )
 }
