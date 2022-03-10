@@ -8,7 +8,7 @@ import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
-import LifelineCreationForm from './components/LlifelineCreationForm'
+import LifelineCreationForm from './components/LifelineCreationForm'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -75,6 +75,7 @@ function App() {
     }
     return str.toUpperCase()
   }
+  // {/*key={module['description']}*/}
 
   return (
     <ThemeProvider theme={theme}>
@@ -95,11 +96,11 @@ function App() {
         {!errorFlag ? (
           lifelineModules.map((module) => (
             <Lifeline
-              key={module['description']}
-              title={returnFirstString(module['labels'])}
+              key={returnFirstString(module['labels'])}
+              title={toUpperCase(returnFirstString(module['labels']))}
               module_type={toUpperCase(module['flavor'])}
               value={module['initial']}
-              unit={returnFirstString(module['unit_labels'])}
+              unit={toUpperCase(returnFirstString(module['unit_labels']))}
               rate={module['rate']}
               resolution={module['resolution']}
             />
