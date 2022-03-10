@@ -75,7 +75,6 @@ function App() {
     }
     return str.toUpperCase()
   }
-  // {/*key={module['description']}*/}
 
   return (
     <ThemeProvider theme={theme}>

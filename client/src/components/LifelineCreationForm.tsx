@@ -3,6 +3,7 @@ import { ThemeContext } from '../contexts'
 import { ModuleResInterface } from '../interfaces'
 
 const LifelineCreationForm = () => {
+  /* Lifeline module properties */
   const flavor = 'Lifeline'
   const [title, setTitle] = useState<string>('')
   const [unit, setUnit] = useState<string>('')
@@ -11,6 +12,10 @@ const LifelineCreationForm = () => {
   const [resolution, setResolution] = useState<number>(0)
   const { lifelineModules, setLifelineModules } = useContext(ThemeContext)
 
+  /* formSubmit
+   *
+   * Description: Used to append a Lifeline module to current list of modules.
+   */
   const formSubmit = (e: any) => {
     e.preventDefault()
     const llModule: ModuleResInterface = {
@@ -21,9 +26,10 @@ const LifelineCreationForm = () => {
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
     }
-    /* ensure not undefined */
+    /* ensure lifelineModules and setLifelineModules are not undefined */
     if (lifelineModules && setLifelineModules) {
       lifelineModules.push(llModule)
+      /* create new instance of lifelineModules array to re-render page */
       setLifelineModules([...lifelineModules])
     }
   }
@@ -32,6 +38,7 @@ const LifelineCreationForm = () => {
     <>
       <h1>{flavor} form</h1>
       <form onSubmit={formSubmit}>
+        {/* title input */}
         <label>Title</label>
         <input
           type={'text'}
@@ -39,6 +46,8 @@ const LifelineCreationForm = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <br />
+
+        {/* unit input */}
         <label>Unit</label>
         <input
           type={'text'}
@@ -46,6 +55,8 @@ const LifelineCreationForm = () => {
           onChange={(e) => setUnit(e.target.value)}
         />
         <br />
+
+        {/* value input */}
         <label>Value</label>
         <input
           type={'number'}
@@ -55,6 +66,8 @@ const LifelineCreationForm = () => {
           }
         />
         <br />
+
+        {/* rate input */}
         <label>Rate</label>
         <input
           type={'number'}
@@ -64,6 +77,8 @@ const LifelineCreationForm = () => {
           }
         />
         <br />
+
+        {/* resolution input */}
         <label>Resolution</label>
         <input
           type={'number'}
@@ -75,6 +90,7 @@ const LifelineCreationForm = () => {
           }
         />
         <br />
+
         <button type="submit">Create</button>
       </form>
     </>
