@@ -9,7 +9,7 @@ const LifelineCreationForm = () => {
   const [unit, setUnit] = useState<string>('')
   const [value, setValue] = useState<number>(0)
   const [rate, setRate] = useState<number>(0)
-  const [resolution, setResolution] = useState<number>(0)
+  const [resolution, setResolution] = useState<number>(2)
   const { lifelineModules, setLifelineModules } = useContext(ThemeContext)
 
   /* formSubmit
@@ -41,7 +41,8 @@ const LifelineCreationForm = () => {
         {/* title input */}
         <label>Title</label>
         <input
-          type={'text'}
+          required={true}
+          placeholder={'Title...'}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -50,6 +51,8 @@ const LifelineCreationForm = () => {
         {/* unit input */}
         <label>Unit</label>
         <input
+          required={true}
+          placeholder={'Unit...'}
           type={'text'}
           value={unit}
           onChange={(e) => setUnit(e.target.value)}
@@ -59,11 +62,11 @@ const LifelineCreationForm = () => {
         {/* value input */}
         <label>Value</label>
         <input
+          required={true}
+          placeholder={'Value...'}
           type={'number'}
           value={value}
-          onChange={(e) =>
-            setValue(e.target.value !== '' ? parseFloat(e.target.value) : 0)
-          }
+          onChange={(e) => setValue(parseFloat(e.target.value))}
         />
         <br />
 
@@ -71,10 +74,9 @@ const LifelineCreationForm = () => {
         <label>Rate</label>
         <input
           type={'number'}
+          placeholder={'Rate...'}
           value={rate}
-          onChange={(e) =>
-            setRate(e.target.value !== '' ? parseFloat(e.target.value) : 0)
-          }
+          onChange={(e) => setRate(parseFloat(e.target.value))}
         />
         <br />
 
@@ -82,12 +84,9 @@ const LifelineCreationForm = () => {
         <label>Resolution</label>
         <input
           type={'number'}
+          placeholder={'Resolution...'}
           value={resolution}
-          onChange={(e) =>
-            setResolution(
-              parseInt(e.target.value) >= 0 ? parseFloat(e.target.value) : 0,
-            )
-          }
+          onChange={(e) => setResolution(parseInt(e.target.value))}
         />
         <br />
 
