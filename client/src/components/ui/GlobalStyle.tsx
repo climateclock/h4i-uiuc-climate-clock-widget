@@ -1,5 +1,3 @@
-import '@fontsource/oxygen-mono/400.css'
-
 import { createGlobalStyle } from 'styled-components'
 
 /**
@@ -43,7 +41,7 @@ const theme = {
     mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
     desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
   },
-  fonts: '"Oxygen Mono", sans-serif',
+  fonts: 'KatwijkMono, sans-serif',
   // text colors
   text: '#000000',
   secondaryText: '#5a5a5a',

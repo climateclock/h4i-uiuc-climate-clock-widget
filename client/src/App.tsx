@@ -3,7 +3,8 @@ import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { theme } from './components/ui/GlobalStyle'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import { WindowSize } from '@reach/window-size'
 import Clock from './components/clock/Clock'
 import Toggle from './components/buttons/Toggle'
 
@@ -73,8 +74,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <header className="App-header"></header>
       <div className="App">
-        <header className="App-header"></header>
         {!errorFlag ? (
           lifelineModules.map((module) => (
             <Lifeline
@@ -91,6 +92,9 @@ function App() {
           <h1>{ERROR_MSG}</h1>
         )}
       </div>
+      <WindowSize>
+        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+      </WindowSize>
     </ThemeProvider>
   )
 }
