@@ -19,10 +19,10 @@ const LifelineCreationForm = () => {
   const formSubmit = (e: any) => {
     e.preventDefault()
     const llModule: ModuleResInterface = {
-      labels: [title] /* stored as array in API */,
+      labels: [title] /* stored as array in API response */,
       flavor,
       initial: value,
-      unit_labels: [unit] /* stored as array in API */,
+      unit_labels: [unit] /* stored as array in API response */,
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
     }
@@ -83,6 +83,7 @@ const LifelineCreationForm = () => {
         {/* resolution input */}
         <label>Resolution</label>
         <input
+          min={0} /* enforces resolution is positive */
           type={'number'}
           placeholder={'Resolution...'}
           value={resolution}
