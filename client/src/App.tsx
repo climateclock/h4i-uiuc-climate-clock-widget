@@ -6,9 +6,7 @@ import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
-import LifelineCreationForm from './components/LifelineCreationForm'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -86,11 +84,7 @@ function App() {
           setLifelineModules,
         }}
       >
-        <div className="App">
-          <LanguageCustomization />
-          <LifelineCreationForm />
-          <h1>{defaultLanguage}</h1>
-        </div>
+        {/*<div className="App"></div>*/}
         <header className="App-header"></header>
         {!errorFlag ? (
           lifelineModules.map((module) => (
