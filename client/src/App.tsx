@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
-
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
@@ -77,27 +76,29 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <header className="App-header"></header>
       <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
         <div className="App">
           <LanguageCustomization />
           <h1>{defaultLanguage}</h1>
+
+          <header className="App-header"></header>
+          {!errorFlag ? (
+            lifelineModules.map((module) => (
+              <Lifeline
+                key={module['description']}
+                title={returnFirstString(module['labels'])}
+                module_type={toUpperCase(module['flavor'])}
+                value={module['initial']}
+                unit={returnFirstString(module['unit_labels'])}
+                rate={module['rate']}
+                resolution={module['resolution']}
+              />
+            ))
+          ) : (
+            <h1>{ERROR_MSG}</h1>
+          )}
         </div>
-        <header className="App-header"></header>
-        {!errorFlag ? (
-          lifelineModules.map((module) => (
-            <Lifeline
-              key={module['description']}
-              title={returnFirstString(module['labels'])}
-              module_type={toUpperCase(module['flavor'])}
-              value={module['initial']}
-              unit={returnFirstString(module['unit_labels'])}
-              rate={module['rate']}
-              resolution={module['resolution']}
-            />
-          ))
-        ) : (
-          <h1>{ERROR_MSG}</h1>
-        )}
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
