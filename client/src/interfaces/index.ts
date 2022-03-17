@@ -1,3 +1,8 @@
+export interface ThemeContextInterface {
+  defaultLanguage?: string
+  setDefaultLanguage?: React.Dispatch<React.SetStateAction<string>>
+}
+
 export interface LifelinePropsInterface {
   title: string
   module_type: string
