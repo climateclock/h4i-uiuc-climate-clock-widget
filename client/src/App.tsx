@@ -11,7 +11,7 @@ import Clock from './components/clock/Clock'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
-  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [modules, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
@@ -85,6 +85,11 @@ function App() {
 
           <header className="App-header"></header>
           {!errorFlag ? (
+            <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
+          ) : (
+            <h1>{ERROR_MSG}</h1>
+          )}
+          {!errorFlag ? (
             lifelineModules.map((module) => (
               <Lifeline
                 key={module['description']}
@@ -95,9 +100,6 @@ function App() {
                 rate={module['rate']}
                 resolution={module['resolution']}
               />
-              <Clock
-                timestamp={modules && modules[0] && modules[0].timestamp}
-              ></Clock>
             ))
           ) : (
             <h1>{ERROR_MSG}</h1>
