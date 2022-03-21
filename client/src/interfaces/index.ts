@@ -14,6 +14,7 @@ export interface LifelinePropsInterface {
 
 // made properties optional since some properties may be within
 // a module returned from the API
+
 export class ModuleResInterface {
   description?: string
   flavor?: string

@@ -7,10 +7,11 @@ import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
+import Clock from './components/clock/Clock'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
-  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [modules, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
@@ -83,6 +84,11 @@ function App() {
           <h1>{defaultLanguage}</h1>
 
           <header className="App-header"></header>
+          {!errorFlag ? (
+            <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
+          ) : (
+            <h1>{ERROR_MSG}</h1>
+          )}
           {!errorFlag ? (
             lifelineModules.map((module) => (
               <Lifeline
