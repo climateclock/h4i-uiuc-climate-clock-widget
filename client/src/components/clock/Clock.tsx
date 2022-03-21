@@ -71,6 +71,7 @@ function Clock(props: ModuleResInterface) {
     date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   let today =
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+
   let current = calendar + ' ' + today
 
   let years: any, days: any, hours: any, minutes: any, seconds: any
@@ -82,6 +83,7 @@ function Clock(props: ModuleResInterface) {
     minutes = 0
     seconds = 0
   }
+
   let value = new Date(props.timestamp!).valueOf() - new Date(current).valueOf()
   let ms_per_year = 3.154e10 // number of milliseconds per year
   let ms_per_day = 8.64e7
