@@ -1,4 +1,3 @@
-
 export interface ThemeContextInterface {
   defaultLanguage?: string
   setDefaultLanguage?: React.Dispatch<React.SetStateAction<string>>
