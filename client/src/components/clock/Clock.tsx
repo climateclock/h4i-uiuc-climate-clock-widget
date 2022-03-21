@@ -101,7 +101,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  var formattedHour
+  let formattedHour
   if (hours + 1 < 10) {
     formattedHour = '0' + hours
   } else {
@@ -117,7 +117,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  var formattedMinutes
+  let formattedMinutes
   if (minutes + 1 <= 10) {
     formattedMinutes = '0' + minutes
   } else {
@@ -138,7 +138,7 @@ function Clock(props: ModuleResInterface) {
     )
   }
 
-  var formattedSeconds
+  let formattedSeconds
   if (seconds + 1 <= 10) {
     formattedSeconds = '0' + seconds
   } else {
