@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
 import Clock from './components/clock/Clock'
 import Settings from './pages/Settings'
+import Lifelines from './pages/Lifelines'
 import { get } from './api/config'
 import { ModuleResInterface } from './interfaces'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -36,6 +37,7 @@ function App() {
             }
           />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/lifelines" element={<Lifelines />} />
         </Routes>
       </Router>
       <div>{}</div>
