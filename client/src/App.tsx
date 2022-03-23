@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
@@ -85,29 +87,36 @@ function App() {
           setLifelineModules,
         }}
       >
-        <LanguageCustomization />
-        <h1>{defaultLanguage}</h1>
-        {!errorFlag ? (
-          <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
-        ) : (
-          <h1>{ERROR_MSG}</h1>
-        )}
-        {!errorFlag ? (
-          lifelineModules.map((module) => (
-            <Lifeline
-              key={returnFirstString(module['labels'])}
-              title={toUpperCase(returnFirstString(module['labels']))}
-              module_type={toUpperCase(module['flavor'])}
-              value={module['initial']}
-              unit={toUpperCase(returnFirstString(module['unit_labels']))}
-              rate={module['rate']}
-              resolution={module['resolution']}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Clock
+                    timestamp={modules && modules[0] && modules[0].timestamp}
+                  />
+                  {!errorFlag ? (
+                    lifelineModules.map((module) => (
+                      <Lifeline
+                        key={module['description']}
+                        title={returnFirstString(module['labels'])}
+                        module_type={toUpperCase(module['flavor'])}
+                        value={module['initial']}
+                        unit={returnFirstString(module['unit_labels'])}
+                        rate={module['rate']}
+                        resolution={module['resolution']}
+                      />
+                    ))
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                </>
+              }
             />
-          ))
-        ) : (
-          <h1>{ERROR_MSG}</h1>
-        )}
-
+          </Routes>
+        </BrowserRouter>
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
