@@ -1,6 +1,6 @@
 import Select from 'react-select'
 import styled from 'styled-components'
-import { ClipboardTextLtr } from '@styled-icons/fluentui-system-regular'
+
 const Input = styled.input`
   font-size: 12px;
   line-height: 25px;
@@ -10,9 +10,6 @@ const Input = styled.input`
   left: 9px;
 `
 
-const Clipboard = styled(ClipboardTextLtr)`
-  height: 10px;
-`
 const options = [
   { value: 'english', label: 'English' },
   { value: 'spanish', label: 'Spanish' },
@@ -20,10 +17,6 @@ const options = [
   { value: 'mandarin', label: 'Mandarin' },
 ]
 const SettingsSection = styled.div`
-  left: 2.29%;
-  right: 22.01%;
-  top: 5%;
-  bottom: 80.47%;
   h1 {
     color: ${({ theme }) => theme.headerText};
     font-size: 30px;
@@ -59,7 +52,7 @@ const customStyles = {
     width: '255px',
     height: '31px',
   }),
-  container: (base, state) => ({
+  container: (base) => ({
     ...base,
     width: '255px',
     height: '31px',
@@ -87,7 +80,6 @@ function Settings() {
       <Input
         type="text"
         placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
-        rightIcons={<Clipboard />}
       />
     </SettingsSection>
   )
