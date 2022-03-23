@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
@@ -77,34 +79,37 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <header className="App-header"></header>
       <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
-        <div className="App">
-          <LanguageCustomization />
-          <h1>{defaultLanguage}</h1>
-
-          <header className="App-header"></header>
-          {!errorFlag ? (
-            <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
-          ) : (
-            <h1>{ERROR_MSG}</h1>
-          )}
-          {!errorFlag ? (
-            lifelineModules.map((module) => (
-              <Lifeline
-                key={module['description']}
-                title={returnFirstString(module['labels'])}
-                module_type={toUpperCase(module['flavor'])}
-                value={module['initial']}
-                unit={returnFirstString(module['unit_labels'])}
-                rate={module['rate']}
-                resolution={module['resolution']}
-              />
-            ))
-          ) : (
-            <h1>{ERROR_MSG}</h1>
-          )}
-        </div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Clock
+                    timestamp={modules && modules[0] && modules[0].timestamp}
+                  />
+                  {!errorFlag ? (
+                    lifelineModules.map((module) => (
+                      <Lifeline
+                        key={module['description']}
+                        title={returnFirstString(module['labels'])}
+                        module_type={toUpperCase(module['flavor'])}
+                        value={module['initial']}
+                        unit={returnFirstString(module['unit_labels'])}
+                        rate={module['rate']}
+                        resolution={module['resolution']}
+                      />
+                    ))
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                </>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
