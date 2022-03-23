@@ -71,13 +71,11 @@ function Clock(props: ModuleResInterface) {
     date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   let today =
     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-  let final = calendar + ' ' + today
 
-  let years
-  let days
-  let hours
-  let minutes
-  let seconds
+  let current = calendar + ' ' + today
+
+  let years: any, days: any, hours: any, minutes: any, seconds: any
+
   if (props.timestamp === undefined) {
     years = 0
     days = 0
@@ -85,77 +83,82 @@ function Clock(props: ModuleResInterface) {
     minutes = 0
     seconds = 0
   }
-  let value = new Date(props.timestamp!).valueOf() - new Date(final).valueOf()
+
+  let value = new Date(props.timestamp!).valueOf() - new Date(current).valueOf()
+  let ms_per_year = 3.154e10 // number of milliseconds per year
+  let ms_per_day = 8.64e7
+  let ms_per_hour = 3.6e6
+  let ms_per_minute = 60000
+  let ms_per_second = 1000
 
   if (years !== 0) {
-    years = Math.floor(value / 3.154e10)
+    years = Math.floor(value / ms_per_year)
   }
   if (days !== 0) {
-    days = Math.floor((value - years * 3.154e10) / 8.64e7)
+    days = Math.floor((value - years * ms_per_year) / ms_per_day)
   }
   if (hours !== 0) {
-    hours = Math.floor((value - years * 3.154e10 - days * 8.64e7) / 3.6e6)
+    hours = Math.floor(
+      (value - years * ms_per_year - days * ms_per_day) / ms_per_hour,
+    )
   }
 
-  var formattedHour
+  let formattedHour
   if (hours + 1 < 10) {
     formattedHour = '0' + hours
   } else {
     formattedHour = Math.floor(
-      (value - years * 3.154e10 - days * 8.64e7) / 3.6e6,
+      (value - years * ms_per_year - days * ms_per_day) / ms_per_hour,
     )
   }
 
   if (minutes !== 0) {
     minutes = Math.floor(
-      (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
+      (value - years * ms_per_year - days * ms_per_day - hours * ms_per_hour) /
+        ms_per_minute,
     )
   }
 
-  var formattedMinutes
+  let formattedMinutes
   if (minutes + 1 <= 10) {
     formattedMinutes = '0' + minutes
   } else {
     formattedMinutes = Math.floor(
-      (value - years * 3.154e10 - days * 8.64e7 - hours * 3.6e6) / 60000,
+      (value - years * ms_per_year - days * ms_per_day - hours * ms_per_hour) /
+        ms_per_minute,
     )
   }
 
   if (seconds !== 0) {
     seconds = Math.floor(
       (value -
-        years * 3.154e10 -
-        days * 8.64e7 -
-        hours * 3.6e6 -
-        minutes * 60000) /
-        1000,
+        years * ms_per_year -
+        days * ms_per_day -
+        hours * ms_per_hour -
+        minutes * ms_per_minute) /
+        ms_per_second,
     )
   }
 
-  var formattedSeconds
+  let formattedSeconds
   if (seconds + 1 <= 10) {
     formattedSeconds = '0' + seconds
   } else {
     formattedSeconds = Math.floor(
       (value -
-        years * 3.154e10 -
-        days * 8.64e7 -
-        hours * 3.6e6 -
-        minutes * 60000) /
-        1000,
+        years * ms_per_year -
+        days * ms_per_day -
+        hours * ms_per_hour -
+        minutes * ms_per_minute) /
+        ms_per_second,
     )
   }
 
-  // eslint-disable-next-line
-  const [year, setYear] = useState(0)
-  // eslint-disable-next-line
-  const [day, setDay] = useState(0)
-  // eslint-disable-next-line
-  const [hour, setHour] = useState(0)
-  // eslint-disable-next-line
-  const [minute, setMinute] = useState(0)
-  // eslint-disable-next-line
-  const [sec, setSec] = useState(0)
+  const [, setYear] = useState(0)
+  const [, setDay] = useState(0)
+  const [, setHour] = useState(0)
+  const [, setMinute] = useState(0)
+  const [, setSec] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
       setYear((years) => ++years)
