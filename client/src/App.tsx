@@ -9,10 +9,11 @@ import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
+import Clock from './components/clock/Clock'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
-  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [modules, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
@@ -79,28 +80,32 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
-        <h1>{defaultLanguage}</h1>
         <BrowserRouter>
           <Routes>
             <Route path="/langForm" element={<LanguageCustomization />} />
             <Route
               path="/"
               element={
-                !errorFlag ? (
-                  lifelineModules.map((module) => (
-                    <Lifeline
-                      key={module['description']}
-                      title={returnFirstString(module['labels'])}
-                      module_type={toUpperCase(module['flavor'])}
-                      value={module['initial']}
-                      unit={returnFirstString(module['unit_labels'])}
-                      rate={module['rate']}
-                      resolution={module['resolution']}
-                    />
-                  ))
-                ) : (
-                  <h1>{ERROR_MSG}</h1>
-                )
+                <>
+                  <Clock
+                    timestamp={modules && modules[0] && modules[0].timestamp}
+                  />
+                  {!errorFlag ? (
+                    lifelineModules.map((module) => (
+                      <Lifeline
+                        key={module['description']}
+                        title={returnFirstString(module['labels'])}
+                        module_type={toUpperCase(module['flavor'])}
+                        value={module['initial']}
+                        unit={returnFirstString(module['unit_labels'])}
+                        rate={module['rate']}
+                        resolution={module['resolution']}
+                      />
+                    ))
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                </>
               }
             />
           </Routes>
