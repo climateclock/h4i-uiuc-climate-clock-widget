@@ -1,2 +1,2 @@
-export const LANGUAGE_LOCAL_STORAGE_KEY = 'defaultLanguage'
-export const LIFELINES_LOCAL_STORAGE_KEY = 'lifelines'
+export let LANGUAGE_LOCAL_STORAGE_KEY = 'defaultLanguage'
+export let LIFELINES_LOCAL_STORAGE_KEY = 'lifelines'

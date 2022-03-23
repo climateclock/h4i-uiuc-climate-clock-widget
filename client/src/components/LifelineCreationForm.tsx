@@ -1,17 +1,8 @@
-import { useEffect, useState, useContext } from 'react'
+import { useState } from 'react'
 import { LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
-import { ThemeContext } from '../contexts'
 import { ModuleResInterface } from '../interfaces'
 
 const LifelineCreationForm = () => {
-  useEffect(() => {
-    const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-    if (ll) {
-      let modules = JSON.parse(ll)
-      console.log(modules)
-    }
-  }, [])
-
   /* Lifeline module properties */
   const flavor = 'Lifeline'
   const [title, setTitle] = useState<string>('')
@@ -19,7 +10,6 @@ const LifelineCreationForm = () => {
   const [value, setValue] = useState<number>(0)
   const [rate, setRate] = useState<number>(0)
   const [resolution, setResolution] = useState<number>(2)
-  const { lifelineModules, setLifelineModules } = useContext(ThemeContext)
 
   /* formSubmit
    *
@@ -35,11 +25,12 @@ const LifelineCreationForm = () => {
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
     }
+    const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
     /* ensure lifelineModules and setLifelineModules are not undefined */
-    if (lifelineModules && setLifelineModules) {
-      lifelineModules.push(llModule)
-      /* create new instance of lifelineModules array to re-render page */
-      setLifelineModules([...lifelineModules])
+    if (ll) {
+      let modules = JSON.parse(ll)
+      modules.push(llModule)
+      localStorage.setItem(LIFELINES_LOCAL_STORAGE_KEY, JSON.stringify(modules))
     }
   }
 
