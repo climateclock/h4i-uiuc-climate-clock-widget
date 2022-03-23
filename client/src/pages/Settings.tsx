@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Select from 'react-select'
 import styled from 'styled-components'
 
@@ -56,6 +56,11 @@ const customStyles = {
     width: '255px',
     height: '31px',
   }),
+  container: (base, state) => ({
+    ...base,
+    width: '255px',
+    height: '31px',
+  }),
 }
 
 function Settings() {
@@ -68,7 +73,7 @@ function Settings() {
         options={options}
         theme={(theme) => ({
           ...theme,
-          borderRadius: 0,
+          border: '1px solid #A3A3A3',
           colors: {
             ...theme.colors,
             primary25: 'neutral0',
