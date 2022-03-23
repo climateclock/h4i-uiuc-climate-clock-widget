@@ -11,6 +11,10 @@ import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
+import {
+  LANGUAGE_LOCAL_STORAGE_KEY,
+  LIFELINES_LOCAL_STORAGE_KEY,
+} from './util/constants'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -21,6 +25,7 @@ function App() {
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const ERROR_MSG: string = 'Error retrieving module data from API...'
 
+  /* Sets the lifeline modules upon load and every defaultLanguage change */
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
     // let URL: string = `https://api.climateclock.world/v1/clock?lang=${defaultLanguage}`
@@ -47,10 +52,23 @@ function App() {
       })
       setModules(resModules)
       setLifelineModules(resLifelineModules)
+
+      /* stores lifeline modules in local storage */
+      if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY))
+        localStorage.setItem(
+          LIFELINES_LOCAL_STORAGE_KEY,
+          JSON.stringify(resLifelineModules),
+        )
     }
 
     getData(URL, ERROR_MSG)
   }, [defaultLanguage])
+
+  /* sets the defaultLanguage in local storage if doesn't exist */
+  useEffect(() => {
+    if (!localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY))
+      localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, defaultLanguage)
+  }, [])
 
   /* returnFirstString
    *

@@ -1,8 +1,17 @@
-import { useState, useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
 import { ThemeContext } from '../contexts'
 import { ModuleResInterface } from '../interfaces'
 
 const LifelineCreationForm = () => {
+  useEffect(() => {
+    const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
+    if (ll) {
+      let modules = JSON.parse(ll)
+      console.log(modules)
+    }
+  }, [])
+
   /* Lifeline module properties */
   const flavor = 'Lifeline'
   const [title, setTitle] = useState<string>('')

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import { ThemeContext } from '../contexts'
+import { LANGUAGE_LOCAL_STORAGE_KEY } from '../util/constants'
 
 const LanguageCustomization = () => {
   const { setDefaultLanguage } = useContext(ThemeContext)
@@ -8,7 +9,7 @@ const LanguageCustomization = () => {
   const formSubmit = (e: any) => {
     e.preventDefault()
     if (setDefaultLanguage) {
-      setDefaultLanguage(selectedLanguage)
+      localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, selectedLanguage)
     }
   }
 
