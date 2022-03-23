@@ -87,8 +87,6 @@ function App() {
       >
         <LanguageCustomization />
         <h1>{defaultLanguage}</h1>
-        {/*<div className="App"></div>*/}
-        <header className="App-header"></header>
         {!errorFlag ? (
           <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
         ) : (
