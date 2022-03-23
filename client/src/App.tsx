@@ -10,6 +10,7 @@ import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
+import LifelineCreation from './pages/lifelineCreation'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -90,6 +91,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route path="/moduleForm" element={<LifelineCreation />} />
             <Route
               path="/"
               element={
