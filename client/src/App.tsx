@@ -14,6 +14,7 @@ function App() {
   )
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const ERROR_MSG: string = 'Error retrieving module data from API...'
+  const [showFullscreenButton, setFullscreenButton] = useState(false)
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
@@ -96,6 +97,13 @@ function App() {
             )}
           </div>
         </ThemeProvider>
+        {!showFullscreenButton ? (
+          <button onClick={handle.exit}></button>
+        ) : (
+          <FullScreen handle={handle}>
+            <button onClick={handle.enter}></button>
+          </FullScreen>
+        )}
         <button onClick={handle.exit}>
           <Fullscreen />
         </button>
