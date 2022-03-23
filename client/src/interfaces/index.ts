@@ -1,5 +1,5 @@
-export interface NewsfeedPropsInterface {
-  news: NewsInterface[]
+export interface HeadlinesInterface {
+  headline: string
 }
 
 export interface NewsInterface {

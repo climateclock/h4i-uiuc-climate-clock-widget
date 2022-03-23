@@ -1,11 +1,9 @@
 // import Ticker from 'react-ticker'
 import Marquee from 'react-fast-marquee'
-import { NewsInterface, NewsfeedPropsInterface } from '../interfaces'
+import { HeadlinesInterface } from '../interfaces'
 import { MarqueeContainer } from './styles'
-import { useState } from 'react'
-import { forEach } from 'cypress/types/lodash'
 
-const Newsfeed = (props: NewsInterface) => {
+const Newsfeed = (props: HeadlinesInterface) => {
   // let concatenatedHeadlines = ''
   // props.news.forEach(
   //   (article) => (concatenatedHeadlines += article.headline?.toUpperCase),
