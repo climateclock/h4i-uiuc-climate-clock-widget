@@ -5,13 +5,10 @@
   "private": true,
   "dependencies": {
     "@fontsource/oxygen-mono": "^4.5.2",
-    "@reach/combobox": "^0.16.5",
     "@reach/window-size": "^0.16.0",
-    "@styled-icons/fluentui-system-regular": "^10.35.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@thumbtack/thumbprint-react": "^14.6.0",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.24",
     "@types/react": "^17.0.39",
