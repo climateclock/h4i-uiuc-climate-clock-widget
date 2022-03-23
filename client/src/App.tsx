@@ -7,7 +7,7 @@ import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Clock from './components/clock/Clock'
 import Settings from './pages/Settings'
 import Lifelines from './pages/Lifelines'
@@ -79,53 +79,43 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Routes>
-          <header className="App-header"></header>
-          <ThemeContext.Provider
-            value={{ defaultLanguage, setDefaultLanguage }}
-          >
-            <div className="App">
-              <LanguageCustomization />
-              <h1>{defaultLanguage}</h1>
-
-              <header className="App-header"></header>
-              {!errorFlag ? (
-                <Route
-                  path="/"
-                  element={
-                    <Clock
-                      timestamp={modules && modules[0] && modules[0].timestamp}
-                    ></Clock>
-                  }
-                />
-              ) : (
-                <h1>{ERROR_MSG}</h1>
-              )}
-              {!errorFlag ? (
-                lifelineModules.map((module) => (
-                  <Lifeline
-                    key={module['description']}
-                    title={returnFirstString(module['labels'])}
-                    module_type={toUpperCase(module['flavor'])}
-                    value={module['initial']}
-                    unit={returnFirstString(module['unit_labels'])}
-                    rate={module['rate']}
-                    resolution={module['resolution']}
+      <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Clock
+                    timestamp={modules && modules[0] && modules[0].timestamp}
                   />
-                ))
-              ) : (
-                <h1>{ERROR_MSG}</h1>
-              )}
-            </div>
-            <WindowSize>
-              {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-            </WindowSize>
-          </ThemeContext.Provider>
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/lifelines" element={<Lifelines />} />
-        </Routes>
-      </Router>
+                  {!errorFlag ? (
+                    lifelineModules.map((module) => (
+                      <Lifeline
+                        key={module['description']}
+                        title={returnFirstString(module['labels'])}
+                        module_type={toUpperCase(module['flavor'])}
+                        value={module['initial']}
+                        unit={returnFirstString(module['unit_labels'])}
+                        rate={module['rate']}
+                        resolution={module['resolution']}
+                      />
+                    ))
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                </>
+              }
+            />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/lifelines" element={<Lifelines />} />
+          </Routes>
+        </BrowserRouter>
+        <WindowSize>
+          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+        </WindowSize>
+      </ThemeContext.Provider>
     </ThemeProvider>
   )
 }
