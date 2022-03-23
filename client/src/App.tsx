@@ -7,9 +7,10 @@ import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
+import LanguageCustomization from './components/LanguageCustomizationForm'
+import LifelineCreation from './pages/lifelineCreation'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -79,10 +80,18 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
+      <ThemeContext.Provider
+        value={{
+          defaultLanguage,
+          setDefaultLanguage,
+          lifelineModules,
+          setLifelineModules,
+        }}
+      >
         <BrowserRouter>
           <Routes>
             <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route path="/moduleForm" element={<LifelineCreation />} />
             <Route
               path="/"
               element={
