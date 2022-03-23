@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
-
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { ThemeContext } from './contexts'
+import Clock from './components/clock/Clock'
+import LanguageCustomization from './components/LanguageCustomizationForm'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
-  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [modules, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
@@ -84,8 +85,15 @@ function App() {
           setLifelineModules,
         }}
       >
+        <LanguageCustomization />
+        <h1>{defaultLanguage}</h1>
         {/*<div className="App"></div>*/}
         <header className="App-header"></header>
+        {!errorFlag ? (
+          <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
+        ) : (
+          <h1>{ERROR_MSG}</h1>
+        )}
         {!errorFlag ? (
           lifelineModules.map((module) => (
             <Lifeline
@@ -101,6 +109,7 @@ function App() {
         ) : (
           <h1>{ERROR_MSG}</h1>
         )}
+
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>

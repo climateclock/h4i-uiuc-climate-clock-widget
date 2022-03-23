@@ -18,8 +18,8 @@ export interface LifelinePropsInterface {
   resolution?: number
 }
 
-/* Properties optional since some may
- * not be returned from the API
+/* Properties optional since some may not be
+ * returned from the API
  */
 export class ModuleResInterface {
   description?: string
