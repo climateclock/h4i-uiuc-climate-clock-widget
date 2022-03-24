@@ -1,21 +1,7 @@
 import Select from 'react-select'
 import styled from 'styled-components'
+import Input from '../components/Input'
 
-const Input = styled.input`
-  font-size: 12px;
-  line-height: 25px;
-  width: 350px;
-  height: 31px;
-  top: 3px;
-  left: 9px;
-`
-
-const options = [
-  { value: 'english', label: 'English' },
-  { value: 'spanish', label: 'Spanish' },
-  { value: 'hindi', label: 'Hindi' },
-  { value: 'mandarin', label: 'Mandarin' },
-]
 const SettingsSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};
@@ -41,6 +27,12 @@ const SettingsSection = styled.div`
     line-height: 24px;
   }
 `
+const options = [
+  { value: 'english', label: 'English' },
+  { value: 'spanish', label: 'Spanish' },
+  { value: 'hindi', label: 'Hindi' },
+  { value: 'mandarin', label: 'Mandarin' },
+]
 
 const customStyles = {
   control: (base, state) => ({
@@ -80,6 +72,10 @@ function Settings() {
       <Input
         type="text"
         placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
+        font-size="12px"
+        line-height="25px"
+        width="350px"
+        height="31px"
       />
     </SettingsSection>
   )

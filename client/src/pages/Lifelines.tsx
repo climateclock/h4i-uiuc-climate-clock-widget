@@ -1,11 +1,6 @@
 import styled from 'styled-components'
+import Input from '../components/Input'
 
-const Input = styled.input`
-  font-size: 12px;
-  line-height: 25px;
-  width: 305px;
-  height: 31px;
-`
 const LifelinesSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};
@@ -57,9 +52,23 @@ function Lifelines() {
       <h1>Lifelines</h1>
       <h4>Add a custom lifeline</h4>
       <p>Title</p>
-      <Input type="text" placeholder="Ex: World’s Energy From Renewables" />
+      <Input
+        type="text"
+        placeholder="Ex: World’s Energy From Renewables"
+        font-size="12px"
+        line-height="25px"
+        width="305px"
+        height="31px"
+      />
       <p>Statistic</p>
-      <Input type="text" placeholder="Ex: 12.77155930 %" />
+      <Input
+        type="text"
+        placeholder="Ex: 12.77155930 %"
+        font-size="12px"
+        line-height="25px"
+        width="305px"
+        height="31px"
+      />
     </LifelinesSection>
   )
 }
