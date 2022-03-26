@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
-import * as ReactDOM from 'react-dom'
-import clock from './images/clock.png'
+import clock from '../../images/clock.png'
+import toggle from '../../images/toggle.png'
 // import { Link } from 'react-router-dom'
 
 interface ExampleText {
@@ -9,18 +8,18 @@ interface ExampleText {
 }
 
 const StyledDiv = styled.div`
-  background: ${({ theme }) => theme.background};
+  background: ${({ theme }) => theme.navBackground};
   font-family: ${({ theme }) => theme.fonts};
 `
 
 const TopNav = styled.div`
-  background-color: ${({ theme }) => theme.headerText};
+  background-color: ${({ theme }) => theme.navBackground};
   overflow: hidden;
 `
 
 const Link = styled.div`
   float: right;
-  color: ${({ theme }) => theme.navBackground};
+  color: ${({ theme }) => theme.navText};
   text-align: center;
   padding: 2vw 3vw;
   text-decoration: none;
@@ -34,12 +33,16 @@ const ActiveLink = styled.div`
   padding: 2vw 3vw;
   text-decoration: none;
   font-size: 17px;
-  background-color: ${({ theme }) => theme.headerText};
+  background-color: ${({ theme }) => theme.navBackground};
   color: white;
 `
 
 const Button = styled.div`
-  display: flex;
+  display: inline-flex;
+`
+
+const Image = styled.div`
+  scale(0.25, 0.25);
 `
 
 function NavBar(props: ExampleText) {
@@ -50,11 +53,19 @@ function NavBar(props: ExampleText) {
         <ActiveLink href="#Home">
           <Button>
             <p>Climate Clock</p>
-            <img src="./images/clock.png" alt="cclock" />
+            {/* image import not working */}
+            <Image>
+              <img src={clock} alt="cclock" />
+            </Image>
           </Button>
         </ActiveLink>
-        <Link href="#Lifelines">Lifelines </Link>
+        {/* <Link href="#Toggle">
+          <Image>
+            <img src={toggle} alt="toggle" />
+          </Image>
+        </Link> */}
         <Link href="#Settings">Settings </Link>
+        <Link href="#Lifelines">Lifelines </Link>
       </TopNav>
     </StyledDiv>
   )

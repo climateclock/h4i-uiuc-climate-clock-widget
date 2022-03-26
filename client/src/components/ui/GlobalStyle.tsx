@@ -49,10 +49,11 @@ const theme = {
   secondaryText: '#5a5a5a',
   tertiaryText: '#979797',
   headerText: '#333333',
+  navText: '#f2f2f2',
   // background
   background: '#ffffff',
   secondaryBackground: '#e0e1e2',
-  navBackground: '#f2f2f2',
+  navBackground: '#000000',
   shadow: 'rgba(0, 0, 0, 0.12)',
   // palette
   orange: '#ffa41b',
