@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ERROR_MSG, LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
+import { URL, ERROR_MSG, LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
 import { ModuleResInterface } from '../interfaces'
-import { get } from '../api/config'
+import { getData } from '../util/util'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
@@ -13,49 +13,20 @@ const LifelineCreationForm = () => {
   const [resolution, setResolution] = useState<number>(2)
   const [, setModules] = useState<ModuleResInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const [, setDefaultLanguage] = useState<string>('')
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
 
   useEffect(() => {
-    let URL: string = 'https://api.climateclock.world/v1/clock'
-    const getData = async (url: string, error: string) => {
-      let res: any = await get(url, error)
-
-      /* errorWrapper returned in res */
-      if ('error' in res) {
-        setErrorFlag(true)
-        setModules([])
-        setLifelineModules([])
-        return
-      }
-
-      let resModules: ModuleResInterface[] = Object.values(
-        res['data']['data']['modules'],
-      )
-      setModules(resModules)
-
-      if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-        let resLifelineModules = resModules.filter((module) => {
-          if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-            return true
-          }
-          return false
-        })
-        setLifelineModules(resLifelineModules)
-
-        /* stores lifeline modules in local storage */
-        localStorage.setItem(
-          LIFELINES_LOCAL_STORAGE_KEY,
-          JSON.stringify(resLifelineModules),
-        )
-      } else {
-        const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-        if (ll) setLifelineModules(JSON.parse(ll))
-      }
-    }
-
-    getData(URL, ERROR_MSG)
+    getData(
+      URL,
+      ERROR_MSG,
+      setErrorFlag,
+      setDefaultLanguage,
+      setModules,
+      setLifelineModules,
+    )
   }, [])
 
   /* clearProperties

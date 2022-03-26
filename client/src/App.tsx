@@ -6,16 +6,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
-import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
-import {
-  LANGUAGE_LOCAL_STORAGE_KEY,
-  LIFELINES_LOCAL_STORAGE_KEY,
-  ERROR_MSG,
-} from './util/constants'
+import { ERROR_MSG, URL } from './util/constants'
+import { getData } from './util/util'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -27,52 +23,14 @@ function App() {
 
   /* Sets the lifeline modules upon load and every defaultLanguage change */
   useEffect(() => {
-    let URL: string = 'https://api.climateclock.world/v1/clock'
-    // let URL: string = `https://api.climateclock.world/v1/clock?lang=${defaultLanguage}`
-
-    const getData = async (url: string, error: string) => {
-      let res: any = await get(url, error)
-
-      /* errorWrapper returned in res */
-      if ('error' in res) {
-        setErrorFlag(true)
-        setModules([])
-        setLifelineModules([])
-        return
-      }
-
-      let resModules: ModuleResInterface[] = Object.values(
-        res['data']['data']['modules'],
-      )
-      setModules(resModules)
-
-      if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-        let resLifelineModules = resModules.filter((module) => {
-          if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-            return true
-          }
-          return false
-        })
-        setLifelineModules(resLifelineModules)
-
-        /* stores lifeline modules in local storage */
-        localStorage.setItem(
-          LIFELINES_LOCAL_STORAGE_KEY,
-          JSON.stringify(resLifelineModules),
-        )
-      } else {
-        const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-        if (ll) setLifelineModules(JSON.parse(ll))
-      }
-
-      /* set the default langauge if in localstorage, else default to 'eng' */
-      const lang = localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY)
-      if (!lang)
-        localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, defaultLanguage)
-      else setDefaultLanguage(lang)
-    }
-
-    getData(URL, ERROR_MSG)
+    getData(
+      URL,
+      ERROR_MSG,
+      setErrorFlag,
+      setDefaultLanguage,
+      setModules,
+      setLifelineModules,
+    )
   }, [defaultLanguage])
 
   /* returnFirstString
