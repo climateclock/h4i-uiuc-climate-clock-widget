@@ -15,7 +15,7 @@ function App() {
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
       </WindowSize>
     </ThemeProvider>
-  )
+  ) 
 }
 
 export default App
