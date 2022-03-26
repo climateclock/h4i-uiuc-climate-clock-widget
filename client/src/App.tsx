@@ -4,9 +4,7 @@ import { get } from './api/config'
 import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
-import Fullscreen from './components/buttons/Fullscreen'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import styled from 'styled-components'
 import { FullscreenEnter, FullscreenExit } from '@styled-icons/open-iconic'
 
 function App() {
