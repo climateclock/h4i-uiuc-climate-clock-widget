@@ -6,6 +6,8 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from './components/ui/GlobalStyle'
 import Fullscreen from './components/buttons/Fullscreen'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import styled from 'styled-components'
+import { FullscreenEnter, FullscreenExit } from '@styled-icons/open-iconic'
 
 function App() {
   const [, setModules] = useState<ModuleResInterface[]>([])
@@ -75,43 +77,36 @@ function App() {
   const handle = useFullScreenHandle()
 
   return (
-    <>
-      <FullScreen handle={handle}>
-        <ThemeProvider theme={theme}>
-          <div className="App">
-            <header className="App-header"></header>
-            {!errorFlag ? (
-              lifelineModules.map((module) => (
-                <Lifeline
-                  key={module['description']}
-                  title={returnFirstString(module['labels'])}
-                  module_type={toUpperCase(module['flavor'])}
-                  value={module['initial']}
-                  unit={returnFirstString(module['unit_labels'])}
-                  rate={module['rate']}
-                  resolution={module['resolution']}
-                />
-              ))
-            ) : (
-              <h1>{ERROR_MSG}</h1>
-            )}
-          </div>
-        </ThemeProvider>
-        {!showFullscreenButton ? (
-          <button onClick={handle.exit}></button>
-        ) : (
-          <FullScreen handle={handle}>
-            <button onClick={handle.enter}></button>
-          </FullScreen>
-        )}
-        <button onClick={handle.exit}>
-          <Fullscreen />
-        </button>
-      </FullScreen>
-      <button onClick={handle.enter}>
-        <Fullscreen />
-      </button>
-    </>
+    <FullScreen
+      handle={handle}
+      onChange={() => setFullscreenButton(!showFullscreenButton)}
+    >
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <header className="App-header"></header>
+          {!errorFlag ? (
+            lifelineModules.map((module) => (
+              <Lifeline
+                key={module['description']}
+                title={returnFirstString(module['labels'])}
+                module_type={toUpperCase(module['flavor'])}
+                value={module['initial']}
+                unit={returnFirstString(module['unit_labels'])}
+                rate={module['rate']}
+                resolution={module['resolution']}
+              />
+            ))
+          ) : (
+            <h1>{ERROR_MSG}</h1>
+          )}
+        </div>
+      </ThemeProvider>
+      {showFullscreenButton ? (
+        <FullscreenEnter size="2%" onClick={handle.enter} />
+      ) : (
+        <FullscreenExit size="3%" color="white" onClick={handle.exit} />
+      )}
+    </FullScreen>
   )
 }
 
