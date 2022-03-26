@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
+import { useEffect, useState } from 'react'
+import { ERROR_MSG, LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
 import { ModuleResInterface } from '../interfaces'
+import { get } from '../api/config'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
@@ -10,6 +11,64 @@ const LifelineCreationForm = () => {
   const [value, setValue] = useState<number>(0)
   const [rate, setRate] = useState<number>(0)
   const [resolution, setResolution] = useState<number>(2)
+  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
+    [],
+  )
+
+  useEffect(() => {
+    let URL: string = 'https://api.climateclock.world/v1/clock'
+    const getData = async (url: string, error: string) => {
+      let res: any = await get(url, error)
+
+      /* errorWrapper returned in res */
+      if ('error' in res) {
+        setErrorFlag(true)
+        setModules([])
+        setLifelineModules([])
+        return
+      }
+
+      let resModules: ModuleResInterface[] = Object.values(
+        res['data']['data']['modules'],
+      )
+      setModules(resModules)
+
+      if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
+        let resLifelineModules = resModules.filter((module) => {
+          if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
+            return true
+          }
+          return false
+        })
+        setLifelineModules(resLifelineModules)
+
+        /* stores lifeline modules in local storage */
+        localStorage.setItem(
+          LIFELINES_LOCAL_STORAGE_KEY,
+          JSON.stringify(resLifelineModules),
+        )
+      } else {
+        const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
+        if (ll) setLifelineModules(JSON.parse(ll))
+      }
+    }
+
+    getData(URL, ERROR_MSG)
+  }, [])
+
+  /* clearProperties
+   *
+   * Description: Clear form fields for creation form
+   */
+  const clearProperties = () => {
+    setTitle('')
+    setUnit('')
+    setValue(0)
+    setRate(0)
+    setResolution(0)
+  }
 
   /* formSubmit
    *
@@ -25,17 +84,24 @@ const LifelineCreationForm = () => {
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
     }
-    const ll = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-    /* ensure lifelineModules and setLifelineModules are not undefined */
-    if (ll) {
-      let modules = JSON.parse(ll)
-      modules.push(llModule)
-      localStorage.setItem(LIFELINES_LOCAL_STORAGE_KEY, JSON.stringify(modules))
-    }
+    lifelineModules.push(llModule)
+    setLifelineModules([...lifelineModules])
+    localStorage.setItem(
+      LIFELINES_LOCAL_STORAGE_KEY,
+      JSON.stringify(lifelineModules),
+    )
+    clearProperties()
   }
 
   return (
     <>
+      {!errorFlag ? (
+        lifelineModules.map((module) => (
+          <h1>{module['labels'] ? module['labels'][0] : ''}</h1>
+        ))
+      ) : (
+        <h1>{ERROR_MSG}</h1>
+      )}
       <h1>{flavor} form</h1>
       <form onSubmit={formSubmit}>
         {/* title input */}

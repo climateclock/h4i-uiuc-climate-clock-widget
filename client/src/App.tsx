@@ -14,6 +14,7 @@ import LifelineCreation from './pages/lifelineCreation'
 import {
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
+  ERROR_MSG,
 } from './util/constants'
 
 function App() {
@@ -23,7 +24,6 @@ function App() {
     [],
   )
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
-  const ERROR_MSG: string = 'Error retrieving module data from API...'
 
   /* Sets the lifeline modules upon load and every defaultLanguage change */
   useEffect(() => {
@@ -74,9 +74,6 @@ function App() {
 
     getData(URL, ERROR_MSG)
   }, [defaultLanguage])
-
-  /* sets the defaultLanguage in local storage if doesn't exist */
-  useEffect(() => {}, [])
 
   /* returnFirstString
    *
