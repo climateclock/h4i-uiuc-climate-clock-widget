@@ -102,9 +102,7 @@ function App() {
                     <h1>{ERROR_MSG}</h1>
                   )}
                   {!errorFlag ? (
-                    <Newsfeed
-                      headline={getHeadlines(newsfeedModules)}
-                    ></Newsfeed>
+                    <Newsfeed headline={getHeadlines(newsfeedModules)} />
                   ) : (
                     <h1>{ERROR_MSG}</h1>
                   )}
