@@ -1,4 +1,3 @@
-// import Ticker from 'react-ticker'
 import Marquee from 'react-fast-marquee'
 import { HeadlinesInterface } from '../interfaces'
 import { MarqueeContainer } from './styles'

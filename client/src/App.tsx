@@ -11,7 +11,7 @@ import Newsfeed from './components/Newsfeed'
 import {
   returnFirstString,
   toUpperCase,
-  concatHeadline,
+  getHeadlines,
 } from './components/utils/utils'
 import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
@@ -24,7 +24,6 @@ function App() {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
-  // set a useState to store newsfeed modules
   const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const ERROR_MSG: string = 'Error retrieving module data from API...'
@@ -50,7 +49,6 @@ function App() {
       )
       let resLifelineModules = resModules.filter((module) => {
         if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-          console.log(module)
           return true
         }
         return false
@@ -59,7 +57,6 @@ function App() {
         res['data']['data']['modules']['newsfeed_1']['newsfeed'],
       )
 
-      console.log(resNewsfeedModules)
       setModules(resModules)
       setLifelineModules(resLifelineModules)
       setNewsfeedModules(resNewsfeedModules)
@@ -106,7 +103,7 @@ function App() {
                   )}
                   {!errorFlag ? (
                     <Newsfeed
-                      headline={concatHeadline(newsfeedModules)}
+                      headline={getHeadlines(newsfeedModules)}
                     ></Newsfeed>
                   ) : (
                     <h1>{ERROR_MSG}</h1>

@@ -51,8 +51,8 @@ export const Unit = styled.div`
 `
 
 export const MarqueeContainer = styled.div`
-  background: ${BLACK};
-  color: ${TEAL};
+  background: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.blue};
   padding: 0 2%;
   font-size: max(2rem, min(4rem, 6vw));
   font-weight: bold;

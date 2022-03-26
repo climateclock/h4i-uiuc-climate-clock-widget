@@ -31,7 +31,7 @@ export const toUpperCase = (str: string | undefined) => {
  * Description: Used to concatenate all nested headlines within the newsfeed_1 object
  *         array into a string, returns the string
  */
-export const concatHeadline = (newsfeedModules: NewsInterface[]) => {
+export const getHeadlines = (newsfeedModules: NewsInterface[]) => {
   let concatenatedHeadlines = ''
   console.log(newsfeedModules)
   newsfeedModules.map((module) => (concatenatedHeadlines += module['headline']))
