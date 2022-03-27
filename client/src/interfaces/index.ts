@@ -1,7 +1,3 @@
-export interface HeadlinesInterface {
-  headline: string
-}
-
 export interface NewsInterface {
   data?: string
   headline?: string
