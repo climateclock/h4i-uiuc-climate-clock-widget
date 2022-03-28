@@ -4,9 +4,15 @@ import { WindowSize } from '@reach/window-size'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Lifeline from './components/Lifeline'
-import { ModuleResInterface } from './interfaces'
+import { ModuleResInterface, NewsInterface } from './interfaces'
 import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import Newsfeed from './components/Newsfeed'
+import {
+  returnFirstString,
+  toUpperCase,
+  getHeadlines,
+} from './components/utils/utils'
 import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
@@ -18,6 +24,7 @@ function App() {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
+  const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const ERROR_MSG: string = 'Error retrieving module data from API...'
 
@@ -33,6 +40,7 @@ function App() {
         setErrorFlag(true)
         setModules([])
         setLifelineModules([])
+        setNewsfeedModules([])
         return
       }
 
@@ -45,38 +53,17 @@ function App() {
         }
         return false
       })
+      let resNewsfeedModules: NewsInterface[] = Object.values(
+        res['data']['data']['modules']['newsfeed_1']['newsfeed'],
+      )
+
       setModules(resModules)
       setLifelineModules(resLifelineModules)
+      setNewsfeedModules(resNewsfeedModules)
     }
 
     getData(URL, ERROR_MSG)
   }, [defaultLanguage])
-
-  /* returnFirstString
-   *
-   * Description: Used to return first element in an array
-   *                ie. API returns unit_labels as an array so we need to return first element if unit_labels
-   *                    sent in API response, else return empty string
-   */
-  const returnFirstString = (array: string[] | undefined) => {
-    if (array === undefined || !array.length) {
-      return ''
-    }
-    return array[0]
-  }
-
-  /* toUpperCase
-   *
-   * Description: Used to capitalize element if not undefined, else return empty string
-   *                ie. API returns flavor which needs to be captialized if unit_labels
-   *                    sent in API response, else return empty string
-   */
-  const toUpperCase = (str: string | undefined) => {
-    if (str === undefined) {
-      return ''
-    }
-    return str.toUpperCase()
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -111,6 +98,11 @@ function App() {
                         resolution={module['resolution']}
                       />
                     ))
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                  {!errorFlag ? (
+                    <Newsfeed headline={getHeadlines(newsfeedModules)} />
                   ) : (
                     <h1>{ERROR_MSG}</h1>
                   )}
