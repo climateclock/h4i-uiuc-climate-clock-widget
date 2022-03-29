@@ -1,5 +1,5 @@
 import { get } from '../api/config'
-import { ModuleResInterface } from '../interfaces'
+import { ModuleResInterface, NewsInterface } from '../interfaces'
 import {
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
@@ -14,6 +14,7 @@ export const getData = async (
   setLifelineModules: React.Dispatch<
     React.SetStateAction<ModuleResInterface[]>
   >,
+  setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
   let res: any = await get(url, error)
 
@@ -22,14 +23,25 @@ export const getData = async (
     setErrorFlag(true)
     setModules([])
     setLifelineModules([])
+    if (setNewsfeedModules) setNewsfeedModules([])
     return
   }
 
+  /* set modules */
   let resModules: ModuleResInterface[] = Object.values(
     res['data']['data']['modules'],
   )
   setModules(resModules)
 
+  /* set newsfeed modules */
+  if (setNewsfeedModules) {
+    let resNewsfeedModules: NewsInterface[] = Object.values(
+      res['data']['data']['modules']['newsfeed_1']['newsfeed'],
+    )
+    setNewsfeedModules(resNewsfeedModules)
+  }
+
+  /* set lifelines */
   if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
     let resLifelineModules = resModules.filter((module) => {
       if (module['type'] === 'value' && module['flavor'] === 'lifeline') {

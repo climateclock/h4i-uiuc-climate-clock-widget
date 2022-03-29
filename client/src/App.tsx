@@ -5,8 +5,8 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Lifeline from './components/Lifeline'
-import { ModuleResInterface } from './interfaces'
-import { get } from './api/config'
+import { ModuleResInterface, NewsInterface } from './interfaces'
+// import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Newsfeed from './components/Newsfeed'
 import {
@@ -14,7 +14,7 @@ import {
   toUpperCase,
   getHeadlines,
 } from './components/utils/utils'
-import { ThemeContext } from './contexts'
+// import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
@@ -39,6 +39,7 @@ function App() {
       setDefaultLanguage,
       setModules,
       setLifelineModules,
+      setNewsfeedModules,
     )
   }, [defaultLanguage])
 
