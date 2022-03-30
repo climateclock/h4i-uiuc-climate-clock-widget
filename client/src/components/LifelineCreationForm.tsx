@@ -55,6 +55,7 @@ const LifelineCreationForm = () => {
       unit_labels: [unit] /* stored as array in API response */,
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
+      customizable: true,
     }
     lifelineModules.push(llModule)
     setLifelineModules([...lifelineModules])
