@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -8,21 +8,39 @@ import {
   NotDraggingStyle,
 } from 'react-beautiful-dnd'
 import { ModuleResInterface } from '../interfaces'
-import { LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
+import {
+  LIFELINES_LOCAL_STORAGE_KEY,
+  NUM_LIFELINES_DISPLAYED,
+} from '../util/constants'
 import LifelineCard from './LifelineCard'
-import { reorderElement } from './utils/utils'
+import { deleteElement, reorderElement } from './utils/utils'
 
 interface DraggableLifelinesInterface {
-  lifelines: ModuleResInterface[]
+  lifelinesProp: ModuleResInterface[]
 }
 
-const DraggableLifelines = ({ lifelines }: DraggableLifelinesInterface) => {
+const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 8
+  const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
+
+  /* did this to solve weird bug of lifelines being set to empty array */
+  useEffect(() => {
+    setLifelines(lifelinesProp)
+  }, [lifelinesProp])
+
+  const deleteLifeline = (index: number) => {
+    const modifiedLifelines: ModuleResInterface[] = deleteElement(
+      lifelines,
+      index,
+    )
+    setLifelines([...modifiedLifelines])
+    localStorage.setItem(LIFELINES_LOCAL_STORAGE_KEY, JSON.stringify(lifelines))
+  }
 
   const getDraggableItemStyle = (
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined,
   ): CSSProperties => ({
-    height: '10vh',
+    height: '12.5%',
     backgroundColor: 'darkgrey',
     padding: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
@@ -31,11 +49,12 @@ const DraggableLifelines = ({ lifelines }: DraggableLifelinesInterface) => {
 
   const getDroppableStyle = () => ({
     padding: BASE_PADDING,
-    backgroundColor: 'lightgrey',
-    border: 'black 2px solid',
+    // backgroundColor: 'lightgrey',
+    // border: 'black 2px solid',
     margin: '0 auto',
     width: '95vw',
-    height: '75vh',
+    // height: '75vh',
+    // overflow: 'scroll',
   })
 
   const onDragEnd = (result: DropResult) => {
@@ -69,7 +88,12 @@ const DraggableLifelines = ({ lifelines }: DraggableLifelinesInterface) => {
                     {...provided.dragHandleProps}
                     style={getDraggableItemStyle(provided.draggableProps.style)}
                   >
-                    <LifelineCard {...lifeline} />
+                    <LifelineCard
+                      lifeline={lifeline}
+                      index={index}
+                      deleteLifeline={deleteLifeline}
+                      isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                    />
                   </div>
                 )}
               </Draggable>

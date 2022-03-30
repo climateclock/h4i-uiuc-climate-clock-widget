@@ -125,7 +125,7 @@ const LifelineCreationForm = () => {
 
         <button type="submit">Create</button>
       </form>
-      <DraggableLifelines lifelines={lifelineModules} />
+      <DraggableLifelines lifelinesProp={lifelineModules} />
     </>
   )
 }

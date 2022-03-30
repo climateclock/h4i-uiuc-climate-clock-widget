@@ -52,3 +52,12 @@ export const reorderElement = (
   list.splice(destinationIndex, 0, item)
   return list
 }
+
+/* delete
+ *
+ * Description: Delete a element at an index
+ */
+export const deleteElement = (list: Array<any>, index: number) => {
+  list.splice(index, 1)
+  return list
+}

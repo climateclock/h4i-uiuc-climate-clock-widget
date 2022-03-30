@@ -18,7 +18,7 @@ import {
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
-import { ERROR_MSG, URL } from './util/constants'
+import { NUM_LIFELINES_DISPLAYED, ERROR_MSG, URL } from './util/constants'
 import { getData } from './util/util'
 
 function App() {
@@ -57,17 +57,19 @@ function App() {
                   timestamp={modules && modules[0] && modules[0].timestamp}
                 />
                 {!errorFlag ? (
-                  lifelineModules.map((module) => (
-                    <Lifeline
-                      key={module['description']}
-                      title={returnFirstString(module['labels'])}
-                      module_type={toUpperCase(module['flavor'])}
-                      value={module['initial']}
-                      unit={returnFirstString(module['unit_labels'])}
-                      rate={module['rate']}
-                      resolution={module['resolution']}
-                    />
-                  ))
+                  lifelineModules
+                    .slice(0, NUM_LIFELINES_DISPLAYED)
+                    .map((module) => (
+                      <Lifeline
+                        key={module['description']}
+                        title={returnFirstString(module['labels'])}
+                        module_type={toUpperCase(module['flavor'])}
+                        value={module['initial']}
+                        unit={returnFirstString(module['unit_labels'])}
+                        rate={module['rate']}
+                        resolution={module['resolution']}
+                      />
+                    ))
                 ) : (
                   <h1>{ERROR_MSG}</h1>
                 )}
