@@ -17,7 +17,7 @@ const TopNav = styled.div`
   overflow: hidden;
 `
 
-const RightLink = styled.div`
+const PageLink = styled.div`
   float: right;
   color: ${({ theme }) => theme.navText};
   text-align: center;
@@ -26,7 +26,7 @@ const RightLink = styled.div`
   font-size: 17px;
 `
 
-const ActiveLink = styled.div`
+const HomeLink = styled.div`
   float: left;
   color: ${({ theme }) => theme.navBackground};
   text-align: center;
@@ -49,23 +49,22 @@ function NavBar(props: ExampleText) {
   return (
     <StyledDiv>
       <TopNav>
-        <ActiveLink href="#Home">
-          <Button>
-            <p>Climate Clock</p>
-            <Image>
-              <img src={clock} alt="cclock" />
-            </Image>
-          </Button>
-        </ActiveLink>
-        {/* <RightLink href="#Toggle">
-          <Image>
-            <img src={toggle} alt="toggle" />
-          </Image>
-        </RightLink> */}
-        {/* <RightLink href="#Settings">Settings </RightLink>
-        <RightLink href="#Lifelines">Lifelines </RightLink> */}
-        <Link to="/settings">Settings</Link>
-        <Link to="/lifelines">Lifelines</Link>
+        <Link to="/">
+          <HomeLink>
+            <Button>
+              Climate Clock
+              <Image>
+                <img src={clock} alt="cclock" />
+              </Image>
+            </Button>
+          </HomeLink>
+        </Link>
+        <Link to="/settings">
+          <PageLink>Settings</PageLink>
+        </Link>
+        <Link to="/lifelines">
+          <PageLink>Lifelines</PageLink>
+        </Link>
       </TopNav>
     </StyledDiv>
   )
