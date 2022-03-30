@@ -9,7 +9,7 @@ import LanguageCustomization from './components/LanguageCustomizationForm'
 import { ThemeContext } from './contexts'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Clock from './components/clock/Clock'
-import Settings from './pages/Settings'
+import Settings from './pages/settings'
 import Lifelines from './pages/Lifelines'
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')

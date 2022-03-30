@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Input from '../components/Input'
+import Input from '../components/ui/Input'
 
 const LifelinesSection = styled.div`
   h1 {
