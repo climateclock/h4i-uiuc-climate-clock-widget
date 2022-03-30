@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import clock from '../../images/clock.png'
 import toggle from '../../images/toggle.png'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 interface ExampleText {
   text: string
@@ -17,7 +17,7 @@ const TopNav = styled.div`
   overflow: hidden;
 `
 
-const Link = styled.div`
+const RightLink = styled.div`
   float: right;
   color: ${({ theme }) => theme.navText};
   text-align: center;
@@ -49,23 +49,23 @@ function NavBar(props: ExampleText) {
   return (
     <StyledDiv>
       <TopNav>
-        {/* <Link to="/"> Home</Link> */}
         <ActiveLink href="#Home">
           <Button>
             <p>Climate Clock</p>
-            {/* image import not working */}
             <Image>
               <img src={clock} alt="cclock" />
             </Image>
           </Button>
         </ActiveLink>
-        {/* <Link href="#Toggle">
+        {/* <RightLink href="#Toggle">
           <Image>
             <img src={toggle} alt="toggle" />
           </Image>
-        </Link> */}
-        <Link href="#Settings">Settings </Link>
-        <Link href="#Lifelines">Lifelines </Link>
+        </RightLink> */}
+        {/* <RightLink href="#Settings">Settings </RightLink>
+        <RightLink href="#Lifelines">Lifelines </RightLink> */}
+        <Link to="/settings">Settings</Link>
+        <Link to="/lifelines">Lifelines</Link>
       </TopNav>
     </StyledDiv>
   )
