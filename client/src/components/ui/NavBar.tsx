@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import clock from '../../images/clock.png'
-import toggle from '../../images/toggle.png'
 import { Link } from 'react-router-dom'
 
 interface ExampleText {
