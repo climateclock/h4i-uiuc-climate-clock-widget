@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from 'react'
+import React, { CSSProperties, useEffect, useRef, useState } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -6,6 +6,7 @@ import {
   DropResult,
   DraggingStyle,
   NotDraggingStyle,
+  DragUpdate,
 } from 'react-beautiful-dnd'
 import ReactDOM from 'react-dom'
 import { ModuleResInterface } from '../interfaces'
@@ -23,6 +24,14 @@ interface DraggableLifelinesInterface {
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 8
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
+  const [droppableHeight, setDroppableHeight] = useState<number>(0)
+
+  useEffect(() => {
+    let droppableEl = document.getElementById('droppable')
+    setDroppableHeight(
+      droppableEl ? droppableEl.getBoundingClientRect().height : 0,
+    )
+  }, [document.getElementById('droppable')?.getBoundingClientRect().height])
 
   /* did this to solve weird bug of lifelines being set to empty array */
   useEffect(() => {
@@ -67,42 +76,46 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppableId">
-        {(provided, _) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            style={getDroppableStyle()}
-          >
-            {lifelines.map((lifeline, index) => (
-              <Draggable
-                key={index}
-                draggableId={index.toString()}
-                index={index}
-              >
-                {(provided, _) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={getDraggableItemStyle(
-                      provided.draggableProps.style,
-                      index < NUM_LIFELINES_DISPLAYED,
-                    )}
+      <div id="droppable">
+        <Droppable droppableId="droppableId">
+          {(provided, _) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              style={getDroppableStyle()}
+            >
+              {lifelines.map((lifeline, index) => (
+                <div id={'draggable' + index.toString()}>
+                  <Draggable
+                    key={index}
+                    draggableId={index.toString()}
+                    index={index}
                   >
-                    <LifelineCard
-                      lifeline={lifeline}
-                      index={index}
-                      deleteLifeline={deleteLifeline}
-                      isDisplayed={index < NUM_LIFELINES_DISPLAYED}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
-          </div>
-        )}
-      </Droppable>
+                    {(provided, _) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getDraggableItemStyle(
+                          provided.draggableProps.style,
+                          index < NUM_LIFELINES_DISPLAYED,
+                        )}
+                      >
+                        <LifelineCard
+                          lifeline={lifeline}
+                          index={index}
+                          deleteLifeline={deleteLifeline}
+                          isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                </div>
+              ))}
+            </div>
+          )}
+        </Droppable>
+      </div>
     </DragDropContext>
   )
 }
