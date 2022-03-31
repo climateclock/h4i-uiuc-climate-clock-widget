@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react'
+import React, { CSSProperties, useEffect, useState } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -7,6 +7,7 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from 'react-beautiful-dnd'
+import ReactDOM from 'react-dom'
 import { ModuleResInterface } from '../interfaces'
 import {
   LIFELINES_LOCAL_STORAGE_KEY,
@@ -39,9 +40,10 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   const getDraggableItemStyle = (
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined,
+    isDisplayed: boolean,
   ): CSSProperties => ({
     height: '12.5%',
-    backgroundColor: 'darkgrey',
+    backgroundColor: isDisplayed ? 'lightgreen' : 'darkgrey',
     padding: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
     ...draggableStyle,
@@ -49,12 +51,9 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   const getDroppableStyle = () => ({
     padding: BASE_PADDING,
-    // backgroundColor: 'lightgrey',
-    // border: 'black 2px solid',
     margin: '0 auto',
     width: '95vw',
-    // height: '75vh',
-    // overflow: 'scroll',
+    border: '2px black solid',
   })
 
   const onDragEnd = (result: DropResult) => {
@@ -71,9 +70,9 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
       <Droppable droppableId="droppableId">
         {(provided, _) => (
           <div
-            style={getDroppableStyle()}
-            {...provided.droppableProps}
             ref={provided.innerRef}
+            {...provided.droppableProps}
+            style={getDroppableStyle()}
           >
             {lifelines.map((lifeline, index) => (
               <Draggable
@@ -86,7 +85,10 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    style={getDraggableItemStyle(provided.draggableProps.style)}
+                    style={getDraggableItemStyle(
+                      provided.draggableProps.style,
+                      index < NUM_LIFELINES_DISPLAYED,
+                    )}
                   >
                     <LifelineCard
                       lifeline={lifeline}

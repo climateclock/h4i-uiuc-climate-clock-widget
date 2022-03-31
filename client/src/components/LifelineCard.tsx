@@ -12,12 +12,16 @@ const LifelineCard = ({
   lifeline: { labels, customizable },
   index,
   deleteLifeline,
-  isDisplayed,
-}: LifelineCardInterface) => {
+}: // isDisplayed,
+LifelineCardInterface) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+      }}
+    >
       <p>{returnFirstString(labels)}</p>
-      {isDisplayed && <p>Displayed</p>}
       {customizable && (
         <button onClick={() => deleteLifeline(index)}>Delete</button>
       )}
