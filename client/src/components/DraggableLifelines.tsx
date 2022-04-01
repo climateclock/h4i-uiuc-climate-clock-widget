@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -6,9 +6,7 @@ import {
   DropResult,
   DraggingStyle,
   NotDraggingStyle,
-  DragUpdate,
 } from 'react-beautiful-dnd'
-import ReactDOM from 'react-dom'
 import { ModuleResInterface } from '../interfaces'
 import {
   LIFELINES_LOCAL_STORAGE_KEY,
@@ -24,14 +22,6 @@ interface DraggableLifelinesInterface {
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 8
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
-  const [droppableHeight, setDroppableHeight] = useState<number>(0)
-
-  useEffect(() => {
-    let droppableEl = document.getElementById('droppable')
-    setDroppableHeight(
-      droppableEl ? droppableEl.getBoundingClientRect().height : 0,
-    )
-  }, [document.getElementById('droppable')?.getBoundingClientRect().height])
 
   /* did this to solve weird bug of lifelines being set to empty array */
   useEffect(() => {
@@ -51,10 +41,11 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined,
     isDisplayed: boolean,
   ): CSSProperties => ({
-    height: '12.5%',
-    backgroundColor: isDisplayed ? 'lightgreen' : 'darkgrey',
     padding: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
+    background: isDisplayed ? 'lightgreen' : 'grey',
+
+    // styles we need to apply on draggables
     ...draggableStyle,
   })
 
@@ -63,6 +54,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
     margin: '0 auto',
     width: '95vw',
     border: '2px black solid',
+    overflow: 'scroll',
   })
 
   const onDragEnd = (result: DropResult) => {
@@ -76,9 +68,10 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      {console.log(lifelines.length)}
       <div id="droppable">
         <Droppable droppableId="droppableId">
-          {(provided, _) => (
+          {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
@@ -112,6 +105,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                   </Draggable>
                 </div>
               ))}
+              {provided.placeholder}
             </div>
           )}
         </Droppable>
