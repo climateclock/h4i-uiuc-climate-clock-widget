@@ -6,6 +6,7 @@
   "dependencies": {
     "@fontsource/oxygen-mono": "^4.5.2",
     "@reach/window-size": "^0.16.0",
+    "@styled-icons/boxicons-solid": "^10.38.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -13,6 +14,7 @@
     "@types/node": "^16.11.24",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
+    "add": "^2.0.6",
     "axios": "^0.25.0",
     "cypress": "^9.4.1",
     "jest": "^27.5.1",
@@ -26,7 +28,8 @@
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
     "typescript": "^4.5.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.18"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,5 +1,6 @@
 import { ModuleResInterface } from '../interfaces'
 import { returnFirstString } from './utils/utils'
+import { TrashAlt } from '@styled-icons/boxicons-solid'
 
 interface LifelineCardInterface {
   lifeline: ModuleResInterface
@@ -12,19 +13,19 @@ const LifelineCard = ({
   lifeline: { labels, customizable },
   index,
   deleteLifeline,
-}: // isDisplayed,
-LifelineCardInterface) => {
+}: LifelineCardInterface) => {
+  // const TRASH_ICON_SIZE = '25'
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-    >
+    <div style={{ width: '90vw' }}>
       <p>{returnFirstString(labels)}</p>
+      {/*
       {customizable && (
-        <button onClick={() => deleteLifeline(index)}>Delete</button>
+        <TrashAlt
+          size={TRASH_ICON_SIZE}
+          onClick={() => deleteLifeline(index)}
+        />
       )}
+        */}
     </div>
   )
 }

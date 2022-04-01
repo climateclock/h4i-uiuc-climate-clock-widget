@@ -1,3 +1,4 @@
+import { TrashAlt } from '@styled-icons/boxicons-solid'
 import { CSSProperties, useEffect, useState } from 'react'
 import {
   DragDropContext,
@@ -43,7 +44,12 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   ): CSSProperties => ({
     padding: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
-    background: isDisplayed ? 'lightgreen' : 'grey',
+
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // background: 'lightgrey',
+    // borderRadius: '10px',
 
     // styles we need to apply on draggables
     ...draggableStyle,
@@ -94,12 +100,25 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                           index < NUM_LIFELINES_DISPLAYED,
                         )}
                       >
-                        <LifelineCard
-                          lifeline={lifeline}
-                          index={index}
-                          deleteLifeline={deleteLifeline}
-                          isDisplayed={index < NUM_LIFELINES_DISPLAYED}
-                        />
+                        <div
+                          style={{
+                            background: 'lightgrey',
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <LifelineCard
+                            lifeline={lifeline}
+                            index={index}
+                            deleteLifeline={deleteLifeline}
+                            isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                          />
+                        </div>
+                        {lifeline.customizable && (
+                          <TrashAlt
+                            size={'25'}
+                            onClick={() => deleteLifeline(index)}
+                          />
+                        )}
                       </div>
                     )}
                   </Draggable>
