@@ -40,16 +40,12 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   const getDraggableItemStyle = (
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined,
-    isDisplayed: boolean,
   ): CSSProperties => ({
     padding: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
-
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // background: 'lightgrey',
-    // borderRadius: '10px',
 
     // styles we need to apply on draggables
     ...draggableStyle,
@@ -97,25 +93,24 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                         {...provided.dragHandleProps}
                         style={getDraggableItemStyle(
                           provided.draggableProps.style,
-                          index < NUM_LIFELINES_DISPLAYED,
                         )}
                       >
                         <div
                           style={{
                             background: 'lightgrey',
                             borderRadius: '10px',
+                            width: '92.5%',
+                            padding: '0 2%',
                           }}
                         >
                           <LifelineCard
                             lifeline={lifeline}
-                            index={index}
-                            deleteLifeline={deleteLifeline}
                             isDisplayed={index < NUM_LIFELINES_DISPLAYED}
                           />
                         </div>
                         {lifeline.customizable && (
                           <TrashAlt
-                            size={'25'}
+                            size={'1.75em'}
                             onClick={() => deleteLifeline(index)}
                           />
                         )}
