@@ -11,7 +11,7 @@ export const Container = styled.div`
     font: ${({ theme }) => theme.fonts};
     font-weight: 900;
     background: ${TEAL};
-    height: 100%;
+    height: 25vh;
     width: 100vw;
   }
 `

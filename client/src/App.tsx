@@ -1,23 +1,35 @@
+import { useState, useEffect } from 'react'
+import { ThemeProvider } from 'styled-components'
+import { WindowSize } from '@reach/window-size'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
-import { useState, useEffect } from 'react'
-import { ThemeProvider } from 'styled-components'
-import { theme } from './components/ui/GlobalStyle'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { FullscreenEnter, FullscreenExit } from '@styled-icons/open-iconic'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import { ThemeContext } from './contexts'
+import Clock from './components/clock/Clock'
+import LanguageCustomization from './components/LanguageCustomizationForm'
+import LifelineCreation from './pages/lifelineCreation'
+import EnterFullscreen from './components/buttons/EnterFullscreen'
+import ExitFullscreen from './components/buttons/ExitFullscreen'
 
 function App() {
-  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
+  const [modules, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const ERROR_MSG: string = 'Error retrieving module data from API...'
+
+  const handle = useFullScreenHandle()
   const [showFullscreenButton, setFullscreenButton] = useState(false)
 
   useEffect(() => {
     let URL: string = 'https://api.climateclock.world/v1/clock'
+    // let URL: string = `https://api.climateclock.world/v1/clock?lang=${defaultLanguage}`
 
     const getData = async (url: string, error: string) => {
       let res: any = await get(url, error)
@@ -44,7 +56,7 @@ function App() {
     }
 
     getData(URL, ERROR_MSG)
-  }, [])
+  }, [defaultLanguage])
 
   /* returnFirstString
    *
@@ -72,39 +84,64 @@ function App() {
     return str.toUpperCase()
   }
 
-  const handle = useFullScreenHandle()
-
   return (
-    <FullScreen
-      handle={handle}
-      onChange={() => setFullscreenButton(!showFullscreenButton)}
-    >
-      <ThemeProvider theme={theme}>
-        <div className="App">
-          <header className="App-header"></header>
-          {!errorFlag ? (
-            lifelineModules.map((module) => (
-              <Lifeline
-                key={module['description']}
-                title={returnFirstString(module['labels'])}
-                module_type={toUpperCase(module['flavor'])}
-                value={module['initial']}
-                unit={returnFirstString(module['unit_labels'])}
-                rate={module['rate']}
-                resolution={module['resolution']}
+    <ThemeProvider theme={theme}>
+      <FullScreen
+        handle={handle}
+        onChange={() => setFullscreenButton(!showFullscreenButton)}
+      >
+        <ThemeContext.Provider
+          value={{
+            defaultLanguage,
+            setDefaultLanguage,
+            lifelineModules,
+            setLifelineModules,
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/langForm" element={<LanguageCustomization />} />
+              <Route path="/moduleForm" element={<LifelineCreation />} />
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Clock
+                      timestamp={modules && modules[0] && modules[0].timestamp}
+                    />
+                    <div>
+                      {!errorFlag ? (
+                        lifelineModules.map((module) => (
+                          <Lifeline
+                            key={module['description']}
+                            title={returnFirstString(module['labels'])}
+                            module_type={toUpperCase(module['flavor'])}
+                            value={module['initial']}
+                            unit={returnFirstString(module['unit_labels'])}
+                            rate={module['rate']}
+                            resolution={module['resolution']}
+                          />
+                        ))
+                      ) : (
+                        <h1>{ERROR_MSG}</h1>
+                      )}
+                    </div>
+                  </>
+                }
               />
-            ))
+            </Routes>
+          </BrowserRouter>
+          <WindowSize>
+            {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+          </WindowSize>
+          {showFullscreenButton ? (
+            <EnterFullscreen handle={handle.enter} />
           ) : (
-            <h1>{ERROR_MSG}</h1>
+            <ExitFullscreen handle={handle.exit} />
           )}
-        </div>
-      </ThemeProvider>
-      {showFullscreenButton ? (
-        <FullscreenEnter size="2%" onClick={handle.enter} />
-      ) : (
-        <FullscreenExit size="3%" color="white" onClick={handle.exit} />
-      )}
-    </FullScreen>
+        </ThemeContext.Provider>
+      </FullScreen>
+    </ThemeProvider>
   )
 }
 
