@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import { LZString } from 'lz-string'
 import Lifeline from './components/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
@@ -78,6 +78,15 @@ function App() {
     return str.toUpperCase()
   }
 
+  let settings = {
+    language: { defaultLanguage },
+    lifeline: { lifelineModules },
+    // TODO: add for whether ticker will show up
+  }
+  const settingsJSON = JSON.stringify(settings)
+  let compressed = LZString.compressToUTF16(settingsJSON)
+  let decompressed = LZString.decompress(compressed)
+
   return (
     <ThemeProvider theme={theme}>
       <ThemeContext.Provider
@@ -117,6 +126,10 @@ function App() {
                 </>
               }
             />
+            <Route path="/:compressed" element = {
+              
+
+            } />
           </Routes>
         </BrowserRouter>
         <WindowSize>
@@ -124,7 +137,7 @@ function App() {
         </WindowSize>
       </ThemeContext.Provider>
     </ThemeProvider>
-  ) 
+  )
 }
 
 export default App
