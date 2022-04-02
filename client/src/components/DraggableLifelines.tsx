@@ -103,7 +103,10 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                             padding: '0 2%',
                           }}
                         >
-                          <LifelineCard lifeline={lifeline} />
+                          <LifelineCard
+                            lifeline={lifeline}
+                            isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                          />
                         </div>
                         {lifeline.customizable && (
                           <TrashAlt
