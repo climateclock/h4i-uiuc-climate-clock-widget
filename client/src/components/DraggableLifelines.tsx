@@ -103,15 +103,13 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                             padding: '0 2%',
                           }}
                         >
-                          <LifelineCard
-                            lifeline={lifeline}
-                            isDisplayed={index < NUM_LIFELINES_DISPLAYED}
-                          />
+                          <LifelineCard lifeline={lifeline} />
                         </div>
                         {lifeline.customizable && (
                           <TrashAlt
                             size={'1.75em'}
                             onClick={() => deleteLifeline(index)}
+                            style={{ cursor: 'pointer' }}
                           />
                         )}
                       </div>
