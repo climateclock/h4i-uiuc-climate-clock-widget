@@ -97,7 +97,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                       >
                         <div
                           style={{
-                            background: 'lightgrey',
+                            background: '#dcdcdc',
                             borderRadius: '10px',
                             width: '92.5%',
                             padding: '0 2%',
