@@ -1,3 +1,12 @@
+export interface NewsInterface {
+  data?: string
+  headline?: string
+  headline_original?: string
+  link?: string
+  source?: string
+  summary?: string
+}
+
 /* Interface for ThemeContext in App.tsx */
 export interface ThemeContextInterface {
   defaultLanguage?: string
