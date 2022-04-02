@@ -8,7 +8,7 @@ interface ExampleText {
 
 const StyledDiv = styled.div`
   background: ${({ theme }) => theme.navBackground};
-  font-family: ${({ theme }) => theme.fonts};
+  font-family: ${({ theme }) => theme.secondaryFonts};
 `
 
 const TopNav = styled.div`
