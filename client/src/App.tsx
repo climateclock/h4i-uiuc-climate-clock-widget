@@ -4,10 +4,8 @@ import { ThemeProvider } from 'styled-components'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Lifeline from './components/Lifeline'
-import { get } from './api/config'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { ModuleResInterface, NewsInterface } from './interfaces'
-// import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Newsfeed from './components/Newsfeed'
 import {
@@ -53,46 +51,51 @@ function App() {
         handle={handle}
         onChange={() => setFullscreenButton(!showFullscreenButton)}
       >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/langForm" element={<LanguageCustomization />} />
-          <Route path="/moduleForm" element={<LifelineCreation />} />
-          <Route
-            path="/"
-            element={
-              <>
-                <Clock
-                  timestamp={modules && modules[0] && modules[0].timestamp}
-                />
-                {!errorFlag ? (
-                  lifelineModules.map((module) => (
-                    <Lifeline
-                      key={module['description']}
-                      title={returnFirstString(module['labels'])}
-                      module_type={toUpperCase(module['flavor'])}
-                      value={module['initial']}
-                      unit={returnFirstString(module['unit_labels'])}
-                      rate={module['rate']}
-                      resolution={module['resolution']}
-                    />
-                  ))
-                ) : (
-                  <h1>{ERROR_MSG}</h1>
-                )}
-                {!errorFlag ? (
-                  <Newsfeed headline={getHeadlines(newsfeedModules)} />
-                ) : (
-                  <h1>{ERROR_MSG}</h1>
-                )}
-              </>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-      <WindowSize>
-        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-      </WindowSize>
-          </FullScreen>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route path="/moduleForm" element={<LifelineCreation />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Clock
+                    timestamp={modules && modules[0] && modules[0].timestamp}
+                  />
+                  {!errorFlag ? (
+                    lifelineModules.map((module) => (
+                      <Lifeline
+                        key={module['description']}
+                        title={returnFirstString(module['labels'])}
+                        module_type={toUpperCase(module['flavor'])}
+                        value={module['initial']}
+                        unit={returnFirstString(module['unit_labels'])}
+                        rate={module['rate']}
+                        resolution={module['resolution']}
+                      />
+                    ))
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                  {!errorFlag ? (
+                    <Newsfeed headline={getHeadlines(newsfeedModules)} />
+                  ) : (
+                    <h1>{ERROR_MSG}</h1>
+                  )}
+                </>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+        <WindowSize>
+          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+        </WindowSize>
+        {showFullscreenButton ? (
+          <EnterFullscreen handle={handle.enter} />
+        ) : (
+          <ExitFullscreen handle={handle.exit} />
+        )}
+      </FullScreen>
     </ThemeProvider>
   )
 }
