@@ -1,3 +1,4 @@
+import { PencilFill } from '@styled-icons/bootstrap'
 import { ModuleResInterface } from '../interfaces'
 import { returnFirstString } from './utils/utils'
 
@@ -7,30 +8,42 @@ interface LifelineCardInterface {
 }
 
 const LifelineCard = ({
-  lifeline: { labels },
+  lifeline: { labels, customizable },
   isDisplayed,
 }: LifelineCardInterface) => {
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        display: 'grid',
+        gridTemplateColumns: '15fr 1fr 1fr',
+        gridGap: '5px',
       }}
     >
-      <h1>{returnFirstString(labels)}</h1>
-      {isDisplayed && (
-        <p
+      <h1 style={{ gridColumn: 1 }}>{returnFirstString(labels)}</h1>
+      <p
+        style={{
+          fontSize: '0.8em',
+          border: '1px black solid',
+          padding: '5px 7.5px',
+          borderRadius: '5px',
+          backgroundColor: 'white',
+          textAlign: 'center',
+          alignSelf: 'center',
+          gridColumn: 2,
+        }}
+      >
+        {isDisplayed ? 'Hide' : 'Show'}
+      </p>
+      {customizable && (
+        <PencilFill
+          size={'1.5em'}
           style={{
-            fontSize: '0.8em',
-            border: '1px black solid',
-            padding: '5px 7.5px',
-            borderRadius: '5px',
-            backgroundColor: 'white',
+            justifySelf: 'center',
+            cursor: 'pointer',
+            alignSelf: 'center',
+            gridColumn: 3,
           }}
-        >
-          Shown
-        </p>
+        />
       )}
     </div>
   )

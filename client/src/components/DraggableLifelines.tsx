@@ -21,10 +21,10 @@ interface DraggableLifelinesInterface {
 }
 
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
-  const BASE_PADDING = 8
+  const BASE_PADDING = 4
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
 
-  /* did this to solve weird bug of lifelines being set to empty array */
+  /* fill lifelines with passed in props for rendering */
   useEffect(() => {
     setLifelines(lifelinesProp)
   }, [lifelinesProp])
@@ -43,9 +43,9 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   ): CSSProperties => ({
     padding: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
-    display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    display: 'grid',
+    gridTemplateColumns: '2.5fr 95fr 2.5fr',
 
     // styles we need to apply on draggables
     ...draggableStyle,
@@ -92,12 +92,22 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                     {...provided.dragHandleProps}
                     style={getDraggableItemStyle(provided.draggableProps.style)}
                   >
+                    {index < NUM_LIFELINES_DISPLAYED && (
+                      <p
+                        style={{
+                          gridColumn: 1,
+                        }}
+                      >
+                        {index + 1}
+                      </p>
+                    )}
                     <div
                       style={{
-                        background: '#dcdcdc',
+                        background: '#f1f1f1',
                         borderRadius: '10px',
                         width: '92.5%',
                         padding: '0 2%',
+                        gridColumn: 2,
                       }}
                     >
                       <LifelineCard
@@ -108,9 +118,12 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                     {/* render delete button */}
                     {lifeline.customizable && (
                       <TrashAlt
-                        size={'1.75em'}
+                        size={'1.5em'}
                         onClick={() => deleteLifeline(index)}
-                        style={{ cursor: 'pointer' }}
+                        style={{
+                          gridColumn: 3,
+                          cursor: 'pointer',
+                        }}
                       />
                     )}
                   </div>
