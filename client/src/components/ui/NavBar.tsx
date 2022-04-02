@@ -23,6 +23,9 @@ const PageLink = styled.div`
   padding: 2vw 3vw;
   text-decoration: none;
   font-size: 17px;
+  &:hover {
+    color: ${({ theme }) => theme.blue};
+  }
 `
 
 const HomeLink = styled.div`
@@ -34,6 +37,9 @@ const HomeLink = styled.div`
   font-size: 17px;
   background-color: ${({ theme }) => theme.navBackground};
   color: white;
+  &:hover {
+    color: ${({ theme }) => theme.blue};
+  }
 `
 
 const Button = styled.div`
