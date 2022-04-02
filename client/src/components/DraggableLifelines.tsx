@@ -70,61 +70,57 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {console.log(lifelines.length)}
-      <div id="droppable">
-        <Droppable droppableId="droppableId">
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              style={getDroppableStyle()}
-            >
-              {lifelines.map((lifeline, index) => (
-                <div id={'draggable' + index.toString()}>
-                  <Draggable
-                    key={index}
-                    draggableId={index.toString()}
-                    index={index}
+      {/* create draggable area within page */}
+      <Droppable droppableId="droppableId">
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            style={getDroppableStyle()}
+          >
+            {/* create draggable LifelineCard for each lifeline */}
+            {lifelines.map((lifeline, index) => (
+              <Draggable
+                key={index}
+                draggableId={index.toString()}
+                index={index}
+              >
+                {(provided, _) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    style={getDraggableItemStyle(provided.draggableProps.style)}
                   >
-                    {(provided, _) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getDraggableItemStyle(
-                          provided.draggableProps.style,
-                        )}
-                      >
-                        <div
-                          style={{
-                            background: '#dcdcdc',
-                            borderRadius: '10px',
-                            width: '92.5%',
-                            padding: '0 2%',
-                          }}
-                        >
-                          <LifelineCard
-                            lifeline={lifeline}
-                            isDisplayed={index < NUM_LIFELINES_DISPLAYED}
-                          />
-                        </div>
-                        {lifeline.customizable && (
-                          <TrashAlt
-                            size={'1.75em'}
-                            onClick={() => deleteLifeline(index)}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        )}
-                      </div>
+                    <div
+                      style={{
+                        background: '#dcdcdc',
+                        borderRadius: '10px',
+                        width: '92.5%',
+                        padding: '0 2%',
+                      }}
+                    >
+                      <LifelineCard
+                        lifeline={lifeline}
+                        isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                      />
+                    </div>
+                    {/* render delete button */}
+                    {lifeline.customizable && (
+                      <TrashAlt
+                        size={'1.75em'}
+                        onClick={() => deleteLifeline(index)}
+                        style={{ cursor: 'pointer' }}
+                      />
                     )}
-                  </Draggable>
-                </div>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </div>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </DragDropContext>
   )
 }
