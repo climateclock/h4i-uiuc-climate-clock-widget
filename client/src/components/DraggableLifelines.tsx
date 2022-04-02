@@ -95,7 +95,11 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                     {index < NUM_LIFELINES_DISPLAYED && (
                       <p
                         style={{
+                          border: 'black 2px solid',
+                          borderRadius: '5px',
                           gridColumn: 1,
+                          justifySelf: 'center',
+                          padding: '2.5px',
                         }}
                       >
                         {index + 1}
