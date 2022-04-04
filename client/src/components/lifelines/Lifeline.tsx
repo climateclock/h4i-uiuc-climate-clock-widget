@@ -1,10 +1,7 @@
-import { LifelinePropsInterface } from '../interfaces'
+import { LifelinePropsInterface } from '../../interfaces'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
-/* TODO: change these to theme colors */
-const TEAL: string = '#4aa1cc'
-const BLACK: string = '#000000'
 const PADDING: number = 1
 const VALUE_UNIT_MARGIN: number = 1
 
@@ -12,23 +9,24 @@ export const Container = styled.div`
   & {
     font: ${({ theme }) => theme.fonts};
     font-weight: 900;
-    background: ${TEAL};
-    height: 100%;
+    background: ${({ theme }) => theme.blue};
+    height: 16.5vh;
     width: 100vw;
   }
 `
-
 export const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   font-size: max(1rem, min(2rem, 3vw));
+  height: 3vh;
+  margin-bottom: 20px;
 `
 
 export const Title = styled.div`
   width: 100%;
-  background: ${BLACK};
-  color: ${TEAL};
+  background: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.blue};
   padding: 0 2%;
 `
 
@@ -45,6 +43,7 @@ export const Value = styled.div`
   font-size: 3em;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
+  margin-top: 25px;
 `
 
 export const Unit = styled.div`

@@ -60,6 +60,7 @@ const theme = {
   blue: '#619fc8',
   green: '#73cd7c',
   red: '#ff3115',
+  black: '#000000',
   invalid: '#ff2633',
   // tag colors
   tag: {
@@ -96,6 +97,7 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
+    overflow: hidden;
     @media ${({ theme }) => theme.device.mobile} {
       // Disable overscrolling on iOS
       overflow: hidden;
@@ -103,6 +105,7 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
       height: 100%;
       width: 100%;
     }
+
   }
 
   #root {

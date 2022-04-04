@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Lifeline from './components/Lifeline'
+import Lifeline from './components/lifelines/Lifeline'
 import { ModuleResInterface } from './interfaces'
 import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
@@ -90,6 +90,7 @@ function App() {
                   <Clock
                     timestamp={modules && modules[0] && modules[0].timestamp}
                   />
+
                   {!errorFlag ? (
                     lifelineModules.map((module) => (
                       <Lifeline
