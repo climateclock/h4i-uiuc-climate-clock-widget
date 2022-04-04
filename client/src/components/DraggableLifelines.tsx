@@ -52,11 +52,9 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   })
 
   const getDroppableStyle = () => ({
-    padding: BASE_PADDING,
+    padding: `${BASE_PADDING}px`,
     margin: '0 auto',
     width: '95vw',
-    border: '2px black solid',
-    overflow: 'scroll',
   })
 
   const onDragEnd = (result: DropResult) => {
@@ -98,8 +96,9 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                           border: 'black 2px solid',
                           borderRadius: '5px',
                           gridColumn: 1,
+                          fontSize: '0.65em',
                           justifySelf: 'center',
-                          padding: '2.5px',
+                          padding: '10%',
                         }}
                       >
                         {index + 1}

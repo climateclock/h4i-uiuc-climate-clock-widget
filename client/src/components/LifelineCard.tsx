@@ -26,7 +26,6 @@ const LifelineCard = ({
           border: '1px black solid',
           padding: '5px 7.5px',
           borderRadius: '5px',
-          backgroundColor: 'white',
           textAlign: 'center',
           alignSelf: 'center',
           gridColumn: 2,
