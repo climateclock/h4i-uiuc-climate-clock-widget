@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
+
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
   height: 50vh;
@@ -9,59 +10,66 @@ const ClockSection = styled.div`
   text-align: center;
   background: ${({ theme }) => theme.red};
   position: relative;
+  display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 0;
   font-weight: bold;
+  padding: 5%;
+
+  div {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
   h3 {
-    display: flex;
-    flex-wrap: nowrap;
-    font-size: 8.125rem;
+    font-size: 7.125rem;
     display: inline-block;
-    margin-top: calc(-1rem + 4vh);
+    margin: 0%;
+    padding: 0;
+
   }
+
   h2 {
-    display: flex;
-    flex-wrap: nowrap;
     display: inline-block;
-    font-size: 4.063rem;
-    padding: 0 5px 0 5px;
-    margin-top: 9%;
+    font-size: 3.063rem;
+    margin: 0%;
+    padding: 0;
+    align-self: flex-end;
+    margin-bottom: 15px;
   }
+
   @media screen and (max-width: 1000px) {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
+
     h3 {
-      display: flex;
-      flex-wrap: nowrap;
-      font-size: 8.125rem;
-      display: inline-block;
-      margin-top: 9%;
+      font-size: 3.125rem;
     }
+
     h2 {
-      display: flex;
-      flex-wrap: nowrap;
-      display: inline-block;
-      font-size: 4.063rem;
-      padding: 0 5px 0 5px;
-      margin-top: 5%;
+      font-size: 1.563rem;
+      margin-bottom: 5px;
     }
   }
-  @media screen and (max-width: 800px) {
+
+  @media screen and (max-width: 400px) {
     display: flex;
     flex-wrap: wrap;
     white-space: nowrap;
     overflow: hidden;
+
     h3 {
-      font-size: 0.4em;
-      margin-top: 11%;
+      font-size: 4.125rem;
     }
+
     h2 {
-      font-size: 0.2em;
-      padding: 0 5px 0 5px;
-      margin-top: 8%;
+      font-size: 2rem;
+      padding: 20px 0 0 0;
+      margin-bottom: 8px;
     }
   }
 `
@@ -173,7 +181,8 @@ function Clock(props: ModuleResInterface) {
   return (
     <div className="container">
       <ClockSection>
-        <h3>{years}</h3> <h2>YRS</h2> <h3>{days}</h3> <h2>DAYS</h2>
+        <div><h3>{years}</h3> <h2>YRS</h2></div>
+        <div><h3>{days}</h3> <h2>DAYS</h2></div>
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
         </h3>
