@@ -5,50 +5,68 @@ import styled from 'styled-components'
 const PADDING: number = 1
 const VALUE_UNIT_MARGIN: number = 1
 
-export const Container = styled.div`
+const Container = styled.div`
   & {
-    font: ${({ theme }) => theme.fonts};
+    font-family: ${({ theme }) => theme.fonts};
     font-weight: 900;
     background: ${({ theme }) => theme.blue};
-    height: 16.5vh;
+    height: 15.5vh;
+    @media only screen and (max-height: 700px) {
+      height: 35vh;
+    }
+
     width: 100vw;
   }
 `
-export const LabelContainer = styled.div`
+const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  /* align-items: center; */
   font-size: max(1rem, min(2rem, 3vw));
   height: 3vh;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
+
+  @media only screen and (max-height: 700px) {
+    height: 7vh;
+  }
 `
 
-export const Title = styled.div`
+const Title = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   background: ${({ theme }) => theme.black};
   color: ${({ theme }) => theme.blue};
   padding: 0 2%;
 `
 
-export const Module = styled.div`
+const Module = styled.div`
+  display: flex;
+  align-items: center;
   padding: ${PADDING}% ${PADDING}%;
   text-align: center;
 `
 
-export const ContentContainer = styled(LabelContainer)`
+const ContentContainer = styled(LabelContainer)`
   width: 100%;
 `
 
-export const Value = styled.div`
+const Value = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 3em;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
   margin-top: 25px;
 `
 
-export const Unit = styled.div`
+const Unit = styled.div`
   font-size: 2em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
+`
+const HeaderBorder = styled.div`
+  height: 4px;
+  background: ${({ theme }) => theme.black};
 `
 
 function Lifeline({
@@ -82,6 +100,7 @@ function Lifeline({
 
   return (
     <Container>
+      <HeaderBorder />
       <LabelContainer>
         <Module>{module_type}</Module>
         <Title>{title}</Title>

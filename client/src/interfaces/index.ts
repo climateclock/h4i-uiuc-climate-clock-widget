@@ -1,8 +1,23 @@
+export interface NewsInterface {
+  data?: string
+  headline?: string
+  headline_original?: string
+  link?: string
+  source?: string
+  summary?: string
+}
+
+/* Interface for ThemeContext in App.tsx */
 export interface ThemeContextInterface {
   defaultLanguage?: string
   setDefaultLanguage?: React.Dispatch<React.SetStateAction<string>>
+  lifelineModules?: ModuleResInterface[]
+  setLifelineModules?: React.Dispatch<
+    React.SetStateAction<ModuleResInterface[]>
+  >
 }
 
+/* Interface for props for Lifeline component in Lifeline.tsx */
 export interface LifelinePropsInterface {
   title: string
   module_type: string
@@ -12,9 +27,9 @@ export interface LifelinePropsInterface {
   resolution?: number
 }
 
-// made properties optional since some properties may be within
-// a module returned from the API
-
+/* Properties optional since some may not be
+ * returned from the API
+ */
 export class ModuleResInterface {
   description?: string
   flavor?: string

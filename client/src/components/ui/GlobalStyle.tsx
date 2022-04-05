@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-
+import '@fontsource/lato'
 /**
  * @constant {number}
  * Max width in pixels for which the mobile layout should be displayed
@@ -41,7 +41,7 @@ const theme = {
     mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
     desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
   },
-  fonts: 'KatwijkMono, sans-serif',
+  fonts: 'KatwijkMono, "Lato", sans-serif',
   // text colors
   text: '#000000',
   secondaryText: '#5a5a5a',
@@ -58,9 +58,9 @@ const theme = {
   transparentBlue: '#d9e6f3',
   transparentPink: '#fbe2fb',
   blue: '#619fc8',
+  black: '#000000',
   green: '#73cd7c',
   red: '#ff3115',
-  black: '#000000',
   invalid: '#ff2633',
   // tag colors
   tag: {

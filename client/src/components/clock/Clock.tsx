@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
-  height: 50vh;
+  height: 45vh;
   font-size: 20vh;
   font-family: ${({ theme }) => theme.fonts};
   text-align: center;
@@ -50,6 +50,7 @@ const ClockSection = styled.div`
     }
   }
   @media screen and (max-width: 800px) {
+    height: 49.5vh;
     display: flex;
     flex-wrap: wrap;
     white-space: nowrap;
@@ -60,6 +61,23 @@ const ClockSection = styled.div`
     }
     h2 {
       font-size: 0.2em;
+      padding: 0 5px 0 5px;
+      margin-top: 8%;
+    }
+  }
+
+  @media only screen and (max-height: 600px) {
+    height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
+    h3 {
+      font-size: 1em;
+      margin-top: 11%;
+    }
+    h2 {
+      font-size: 0.5em;
       padding: 0 5px 0 5px;
       margin-top: 8%;
     }

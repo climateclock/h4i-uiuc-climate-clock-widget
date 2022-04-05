@@ -1,120 +1,40 @@
-import { useState, useEffect } from 'react'
-import { ThemeProvider } from 'styled-components'
+import { useState } from 'react'
 import { WindowSize } from '@reach/window-size'
+import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import Lifeline from './components/lifelines/Lifeline'
-import { ModuleResInterface } from './interfaces'
-import { get } from './api/config'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import LanguageCustomization from './components/LanguageCustomizationForm'
-import { ThemeContext } from './contexts'
-import Clock from './components/clock/Clock'
+import LanguageCustomization from './components/settings/LanguageCustomizationForm'
+import LifelineCreation from './pages/lifelineCreation'
+import Home from './pages/Home'
 
 function App() {
-  const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
-  const [modules, setModules] = useState<ModuleResInterface[]>([])
-  const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
-    [],
-  )
-  const [errorFlag, setErrorFlag] = useState<boolean>(false)
-  const ERROR_MSG: string = 'Error retrieving module data from API...'
-
-  useEffect(() => {
-    let URL: string = 'https://api.climateclock.world/v1/clock'
-    // let URL: string = `https://api.climateclock.world/v1/clock?lang=${defaultLanguage}`
-
-    const getData = async (url: string, error: string) => {
-      let res: any = await get(url, error)
-
-      /* errorWrapper returned in res */
-      if ('error' in res) {
-        setErrorFlag(true)
-        setModules([])
-        setLifelineModules([])
-        return
-      }
-
-      let resModules: ModuleResInterface[] = Object.values(
-        res['data']['data']['modules'],
-      )
-      let resLifelineModules = resModules.filter((module) => {
-        if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-          return true
-        }
-        return false
-      })
-      setModules(resModules)
-      setLifelineModules(resLifelineModules)
-    }
-
-    getData(URL, ERROR_MSG)
-  }, [defaultLanguage])
-
-  /* returnFirstString
-   *
-   * Description: Used to return first element in an array
-   *                ie. API returns unit_labels as an array so we need to return first element if unit_labels
-   *                    sent in API response, else return empty string
-   */
-  const returnFirstString = (array: string[] | undefined) => {
-    if (array === undefined || !array.length) {
-      return ''
-    }
-    return array[0]
-  }
-
-  /* toUpperCase
-   *
-   * Description: Used to capitalize element if not undefined, else return empty string
-   *                ie. API returns flavor which needs to be captialized if unit_labels
-   *                    sent in API response, else return empty string
-   */
-  const toUpperCase = (str: string | undefined) => {
-    if (str === undefined) {
-      return ''
-    }
-    return str.toUpperCase()
-  }
-
+  const [showFullscreenButton, setFullscreenButton] = useState(false)
+  /* Sets the lifeline modules upon load and every defaultLanguage change */
+  const handle = useFullScreenHandle()
   return (
     <ThemeProvider theme={theme}>
-      <ThemeContext.Provider value={{ defaultLanguage, setDefaultLanguage }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/langForm" element={<LanguageCustomization />} />
-            <Route
-              path="/"
-              element={
-                <>
-                  <Clock
-                    timestamp={modules && modules[0] && modules[0].timestamp}
-                  />
+      {/* <FullScreen
+        handle={handle}
+        onChange={() => setFullscreenButton(!showFullscreenButton)}
+      > */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/langForm" element={<LanguageCustomization />} />
+          <Route path="/moduleForm" element={<LifelineCreation />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
 
-                  {!errorFlag ? (
-                    lifelineModules.map((module) => (
-                      <Lifeline
-                        key={module['description']}
-                        title={returnFirstString(module['labels'])}
-                        module_type={toUpperCase(module['flavor'])}
-                        value={module['initial']}
-                        unit={returnFirstString(module['unit_labels'])}
-                        rate={module['rate']}
-                        resolution={module['resolution']}
-                      />
-                    ))
-                  ) : (
-                    <h1>{ERROR_MSG}</h1>
-                  )}
-                </>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-        <WindowSize>
-          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-        </WindowSize>
-      </ThemeContext.Provider>
+      {/* {showFullscreenButton ? (
+        <EnterFullscreen handle={handle.enter} />
+      ) : (
+        <ExitFullscreen handle={handle.exit} />
+      )} */}
+      {/* </FullScreen> */}
+      <WindowSize>
+        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+      </WindowSize>
     </ThemeProvider>
   )
 }
