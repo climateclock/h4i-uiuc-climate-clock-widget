@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 import clock from '../../images/clock.png'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-interface ExampleText {
-  text: string
-}
+import EnterFullscreen from '../../components/buttons/EnterFullscreen'
+import {
+  FullScreen,
+  FullScreenHandle,
+  useFullScreenHandle,
+} from 'react-full-screen'
+import ExitFullscreen from '../../components/buttons/ExitFullscreen'
 
 const StyledDiv = styled.div`
   background: ${({ theme }) => theme.navBackground};
@@ -23,6 +28,15 @@ const PageLink = styled.div`
   padding: 2vw 3vw;
   text-decoration: none;
   font-size: 17px;
+  &:hover {
+    color: ${({ theme }) => theme.blue};
+  }
+`
+
+const FullScreenButton = styled.div`
+  float: right;
+  color: ${({ theme }) => theme.navText};
+  padding: 2vw 3vw;
   &:hover {
     color: ${({ theme }) => theme.blue};
   }
@@ -50,7 +64,8 @@ const Image = styled.div`
   scale(0.25, 0.25);
 `
 
-function NavBar(props: ExampleText) {
+function NavBar({ handle }: { handle: FullScreenHandle }) {
+  const [showFullscreenButton, setFullscreenButton] = useState(false)
   return (
     <StyledDiv>
       <TopNav>
@@ -64,6 +79,9 @@ function NavBar(props: ExampleText) {
             </Button>
           </HomeLink>
         </Link>
+        <FullScreenButton>
+          <EnterFullscreen handle={handle.enter} />
+        </FullScreenButton>
         <Link to="/settings">
           <PageLink>Settings</PageLink>
         </Link>

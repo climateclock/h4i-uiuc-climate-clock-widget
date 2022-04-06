@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { WindowSize } from '@reach/window-size'
 import { ThemeProvider } from 'styled-components'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Lifeline from './components/Lifeline'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
@@ -60,7 +59,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <NavBar text="test"></NavBar>
+                  <NavBar handle={handle}></NavBar>
                   <Clock
                     timestamp={modules && modules[0] && modules[0].timestamp}
                   />
@@ -92,11 +91,11 @@ function App() {
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
-        {showFullscreenButton ? (
+        {/* {showFullscreenButton ? (
           <EnterFullscreen handle={handle.enter} />
         ) : (
           <ExitFullscreen handle={handle.exit} />
-        )}
+        )} */}
       </FullScreen>
     </ThemeProvider>
   )
