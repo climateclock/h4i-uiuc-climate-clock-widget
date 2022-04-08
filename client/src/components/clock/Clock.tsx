@@ -21,42 +21,56 @@ const ClockSection = styled.div`
     flex-wrap: nowrap;
     justify-content: center;
     align-items: flex-end;
+    margin: 20px;
   }
 
   h3 {
-    font-size: 13vmin;
+    font-size: 15vmin;
     display: inline-block;
     margin: 0%;
   }
 
   h2 {
     display: inline-block;
-    font-size: 4vmin;
+    font-size: 5vmin;
     margin: 0%;
+    margin-left: 15px;
     align-self: flex-end;
-    margin-bottom: 15px;
+    margin-bottom: 17px;
   }
 
-  @media screen and (max-width: 1000px) {
-    display: flex;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    overflow: hidden;
-
+  @media screen and (max-width: 1400px) {
     h3 {
-      font-size: 14vmin;
+      font-size: 11vmin;
     }
 
     h2 {
-      font-size: 6vmin;
+      font-size: 4vmin;
     }
   }
 
-  @media screen and (max-width: 1000px) and (min-height: 500px) {
+  // For iPads
+  @media screen and (max-width: 1050px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
+    // white-space: nowrap;
+    // overflow: hidden;
+    flex-direction: column;
+
+    h3 {
+      font-size: 12vmin;
+    }
+
+    h2 {
+      font-size: 4vmin;
+    }
+  }
+  
+  @media screen and (max-width: 800px) and (min-height: 500px) {
+    display: flex;
+    flex-wrap: wrap;
+    // white-space: nowrap;
+    // overflow: hidden;
     flex-direction: column;
 
     h3 {
@@ -72,17 +86,23 @@ const ClockSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    white-space: nowrap;
-    overflow: hidden;
+    /* white-space: nowrap;
+    overflow: hidden; */
 
-    h3 {
-      font-size: 14vmin;
+    div {
+      margin: 0px;
       margin-bottom: 20px;
     }
 
+    h3 {
+      font-size: 15vmin;
+      margin: 0;
+    }
+
     h2 {
-      font-size: 6vmin;
-      margin-bottom: 28px;
+      font-size: 7vmin;
+      margin: 0;
+      margin-bottom: 5px;
     }
   }
 `
