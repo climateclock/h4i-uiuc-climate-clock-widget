@@ -53,8 +53,6 @@ const ClockSection = styled.div`
   @media screen and (max-width: 1050px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
-    // white-space: nowrap;
-    // overflow: hidden;
     flex-direction: column;
 
     h3 {
@@ -69,8 +67,6 @@ const ClockSection = styled.div`
   @media screen and (max-width: 800px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
-    // white-space: nowrap;
-    // overflow: hidden;
     flex-direction: column;
 
     h3 {
@@ -86,8 +82,6 @@ const ClockSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    /* white-space: nowrap;
-    overflow: hidden; */
 
     div {
       margin: 0px;
