@@ -24,18 +24,15 @@ const ClockSection = styled.div`
   }
 
   h3 {
-    font-size: 7.125rem;
+    font-size: 13vmin;
     display: inline-block;
     margin: 0%;
-    padding: 0;
-
   }
 
   h2 {
     display: inline-block;
-    font-size: 3.063rem;
+    font-size: 4vmin;
     margin: 0%;
-    padding: 0;
     align-self: flex-end;
     margin-bottom: 15px;
   }
@@ -47,29 +44,45 @@ const ClockSection = styled.div`
     overflow: hidden;
 
     h3 {
-      font-size: 3.125rem;
+      font-size: 14vmin;
     }
 
     h2 {
-      font-size: 1.563rem;
-      margin-bottom: 5px;
+      font-size: 6vmin;
     }
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 1000px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
     white-space: nowrap;
     overflow: hidden;
+    flex-direction: column;
 
     h3 {
-      font-size: 4.125rem;
+      font-size: 14vmin;
     }
 
     h2 {
-      font-size: 2rem;
-      padding: 20px 0 0 0;
-      margin-bottom: 8px;
+      font-size: 6vmin;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    white-space: nowrap;
+    overflow: hidden;
+
+    h3 {
+      font-size: 14vmin;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 6vmin;
+      margin-bottom: 28px;
     }
   }
 `
