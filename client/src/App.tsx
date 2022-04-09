@@ -22,17 +22,17 @@ function App() {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/langForm" element={<LanguageCustomization />} />
-            <Route path="/moduleForm" element={<LifelineCreation />} />
+            <Route path="/settings" element={<LanguageCustomization />} />
+            <Route path="/lifelines" element={<LifelineCreation />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </BrowserRouter>
 
-        {/* {showFullscreenButton ? (
+        {showFullscreenButton ? (
           <EnterFullScreen handle={handle.enter} />
         ) : (
           <ExitFullScreen handle={handle.exit} />
-        )} */}
+        )}
       </FullScreen>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}

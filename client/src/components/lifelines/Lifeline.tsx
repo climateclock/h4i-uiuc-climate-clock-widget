@@ -10,7 +10,7 @@ const Container = styled.div`
     font-family: ${({ theme }) => theme.fonts};
     font-weight: bold;
     background: ${({ theme }) => theme.blue};
-    height: 15.5vh;
+    height: 14.666666667vh;
     @media only screen and (max-height: 700px) {
       height: 35vh;
     }
