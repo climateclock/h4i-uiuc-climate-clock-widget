@@ -33,7 +33,31 @@ export const toUpperCase = (str: string | undefined) => {
  */
 export const getHeadlines = (newsfeedModules: NewsInterface[]) => {
   let concatenatedHeadlines = ''
-  console.log(newsfeedModules)
   newsfeedModules.map((module) => (concatenatedHeadlines += module['headline']))
   return concatenatedHeadlines
+}
+
+/* reorder
+ *
+ * Description: Reorder a element at a source index to the postion of destination
+ *          index
+ */
+export const reorderElement = (
+  list: Array<any>,
+  sourceIndex: number,
+  destinationIndex: number,
+) => {
+  let item = list[sourceIndex]
+  list.splice(sourceIndex, 1)
+  list.splice(destinationIndex, 0, item)
+  return list
+}
+
+/* delete
+ *
+ * Description: Delete a element at an index
+ */
+export const deleteElement = (list: Array<any>, index: number) => {
+  list.splice(index, 1)
+  return list
 }
