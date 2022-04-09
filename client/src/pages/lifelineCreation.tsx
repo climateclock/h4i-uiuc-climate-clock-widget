@@ -1,4 +1,4 @@
-import LifelineCreationForm from '../components/LifelineCreationForm'
+import LifelineCreationForm from '../components/settings/LifelineCreationForm'
 
 function LifelineCreation() {
   return <LifelineCreationForm />

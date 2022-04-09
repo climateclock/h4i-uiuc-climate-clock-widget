@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LANGUAGE_LOCAL_STORAGE_KEY } from '../util/constants'
+import { LANGUAGE_LOCAL_STORAGE_KEY } from '../../utils/constants'
 
 const LanguageCustomization = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')

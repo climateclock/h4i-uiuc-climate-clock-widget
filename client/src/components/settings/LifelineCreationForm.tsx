@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
-import { URL, ERROR_MSG, LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
-import { ModuleResInterface } from '../interfaces'
-import { getData } from '../util/util'
-import DraggableLifelines from './DraggableLifelines'
+import {
+  URL,
+  ERROR_MSG,
+  LIFELINES_LOCAL_STORAGE_KEY,
+} from '../../utils/constants'
+import { ModuleResInterface } from '../../interfaces'
+import { getData } from '../../utils/utils'
+import DraggableLifelines from '../DraggableLifelines'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
