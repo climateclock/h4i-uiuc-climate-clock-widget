@@ -56,7 +56,7 @@ function Lifeline({
   rate,
   unit,
 }: LifelinePropsInterface) {
-  const seconds = 1 // running every every seconds * 1000
+  const seconds = 0.1 // running every every seconds * 1000
   const decimalPlaces = !resolution ? 0 : Math.log10(1 / resolution) // set the precision of value (ie. props.resolution = 1e-9 => 9)
   const cleanedRate = !rate ? 0 : rate // store rate at which to update value
   const isMoneyVal = !unit || unit.charAt(0) !== '$' ? false : true // used to fix monetary units passed in (ie. $)

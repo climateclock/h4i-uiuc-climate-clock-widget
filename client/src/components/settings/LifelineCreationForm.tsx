@@ -4,8 +4,9 @@ import {
   ERROR_MSG,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from '../../utils/constants'
-import { ModuleResInterface } from '../../interfaces/index'
+import { ModuleResInterface } from '../../interfaces'
 import { getData } from '../../utils/utils'
+import DraggableLifelines from '../DraggableLifelines'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
@@ -16,7 +17,7 @@ const LifelineCreationForm = () => {
   const [rate, setRate] = useState<number>(0)
   const [resolution, setResolution] = useState<number>(2)
   const [, setModules] = useState<ModuleResInterface[]>([])
-  const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const [, setErrorFlag] = useState<boolean>(false)
   const [, setDefaultLanguage] = useState<string>('')
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
@@ -58,6 +59,7 @@ const LifelineCreationForm = () => {
       unit_labels: [unit] /* stored as array in API response */,
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
+      customizable: true,
     }
     lifelineModules.push(llModule)
     setLifelineModules([...lifelineModules])
@@ -70,13 +72,6 @@ const LifelineCreationForm = () => {
 
   return (
     <>
-      {!errorFlag ? (
-        lifelineModules.map((module) => (
-          <h1>{module['labels'] ? module['labels'][0] : ''}</h1>
-        ))
-      ) : (
-        <h1>{ERROR_MSG}</h1>
-      )}
       <h1>{flavor} form</h1>
       <form onSubmit={formSubmit}>
         {/* title input */}
@@ -134,6 +129,7 @@ const LifelineCreationForm = () => {
 
         <button type="submit">Create</button>
       </form>
+      <DraggableLifelines lifelinesProp={lifelineModules} />
     </>
   )
 }

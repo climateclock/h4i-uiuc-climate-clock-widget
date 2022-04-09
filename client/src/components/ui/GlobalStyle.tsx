@@ -49,7 +49,7 @@ const theme = {
   headerText: '#333333',
   // background
   background: '#ffffff',
-  secondaryBackground: '#e0e1e2',
+  secondaryBackground: '#f1f1f1',
   navBackground: '#f2f2f2',
   shadow: 'rgba(0, 0, 0, 0.12)',
   // palette
