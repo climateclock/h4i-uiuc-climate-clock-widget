@@ -1,6 +1,7 @@
-import { useState, useContext } from 'react'
-import { ThemeContext } from '../contexts'
+import { useEffect, useState } from 'react'
+import { URL, ERROR_MSG, LIFELINES_LOCAL_STORAGE_KEY } from '../util/constants'
 import { ModuleResInterface } from '../interfaces'
+import { getData } from '../util/util'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
@@ -10,7 +11,35 @@ const LifelineCreationForm = () => {
   const [value, setValue] = useState<number>(0)
   const [rate, setRate] = useState<number>(0)
   const [resolution, setResolution] = useState<number>(2)
-  const { lifelineModules, setLifelineModules } = useContext(ThemeContext)
+  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const [, setDefaultLanguage] = useState<string>('')
+  const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
+    [],
+  )
+
+  useEffect(() => {
+    getData(
+      URL,
+      ERROR_MSG,
+      setErrorFlag,
+      setDefaultLanguage,
+      setModules,
+      setLifelineModules,
+    )
+  }, [])
+
+  /* clearProperties
+   *
+   * Description: Clear form fields for creation form
+   */
+  const clearProperties = () => {
+    setTitle('')
+    setUnit('')
+    setValue(0)
+    setRate(0)
+    setResolution(0)
+  }
 
   /* formSubmit
    *
@@ -26,16 +55,24 @@ const LifelineCreationForm = () => {
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
     }
-    /* ensure lifelineModules and setLifelineModules are not undefined */
-    if (lifelineModules && setLifelineModules) {
-      lifelineModules.push(llModule)
-      /* create new instance of lifelineModules array to re-render page */
-      setLifelineModules([...lifelineModules])
-    }
+    lifelineModules.push(llModule)
+    setLifelineModules([...lifelineModules])
+    localStorage.setItem(
+      LIFELINES_LOCAL_STORAGE_KEY,
+      JSON.stringify(lifelineModules),
+    )
+    clearProperties()
   }
 
   return (
     <>
+      {!errorFlag ? (
+        lifelineModules.map((module) => (
+          <h1>{module['labels'] ? module['labels'][0] : ''}</h1>
+        ))
+      ) : (
+        <h1>{ERROR_MSG}</h1>
+      )}
       <h1>{flavor} form</h1>
       <form onSubmit={formSubmit}>
         {/* title input */}

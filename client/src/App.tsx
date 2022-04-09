@@ -1,16 +1,31 @@
 import { useState, useEffect } from 'react'
-import { ThemeProvider } from 'styled-components'
 import { WindowSize } from '@reach/window-size'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { LZString } from 'lz-string'
+import { ThemeProvider } from 'styled-components'
+import {
+  LANGUAGE_LOCAL_STORAGE_KEY,
+  LIFELINES_LOCAL_STORAGE_KEY,
+} from './util/constants'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import {
+  decompressFromEncodedURIComponent,
+  compressToEncodedURIComponent,
+} from 'lz-string'
 import Lifeline from './components/Lifeline'
-import { ModuleResInterface } from './interfaces'
-import { get } from './api/config'
+import { ModuleResInterface, NewsInterface } from './interfaces'
+// import { get } from './api/config'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import { ThemeContext } from './contexts'
+import Newsfeed from './components/Newsfeed'
+import {
+  returnFirstString,
+  toUpperCase,
+  getHeadlines,
+} from './components/utils/utils'
+// import { ThemeContext } from './contexts'
 import Clock from './components/clock/Clock'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
+import { ERROR_MSG, URL } from './util/constants'
+import { getData } from './util/util'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -18,65 +33,21 @@ function App() {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
+  const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
-  const ERROR_MSG: string = 'Error retrieving module data from API...'
 
+  /* Sets the lifeline modules upon load and every defaultLanguage change */
   useEffect(() => {
-    let URL: string = 'https://api.climateclock.world/v1/clock'
-    // let URL: string = `https://api.climateclock.world/v1/clock?lang=${defaultLanguage}`
-
-    const getData = async (url: string, error: string) => {
-      let res: any = await get(url, error)
-
-      /* errorWrapper returned in res */
-      if ('error' in res) {
-        setErrorFlag(true)
-        setModules([])
-        setLifelineModules([])
-        return
-      }
-
-      let resModules: ModuleResInterface[] = Object.values(
-        res['data']['data']['modules'],
-      )
-      let resLifelineModules = resModules.filter((module) => {
-        if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-          return true
-        }
-        return false
-      })
-      setModules(resModules)
-      setLifelineModules(resLifelineModules)
-    }
-
-    getData(URL, ERROR_MSG)
+    getData(
+      URL,
+      ERROR_MSG,
+      setErrorFlag,
+      setDefaultLanguage,
+      setModules,
+      setLifelineModules,
+      setNewsfeedModules,
+    )
   }, [defaultLanguage])
-
-  /* returnFirstString
-   *
-   * Description: Used to return first element in an array
-   *                ie. API returns unit_labels as an array so we need to return first element if unit_labels
-   *                    sent in API response, else return empty string
-   */
-  const returnFirstString = (array: string[] | undefined) => {
-    if (array === undefined || !array.length) {
-      return ''
-    }
-    return array[0]
-  }
-
-  /* toUpperCase
-   *
-   * Description: Used to capitalize element if not undefined, else return empty string
-   *                ie. API returns flavor which needs to be captialized if unit_labels
-   *                    sent in API response, else return empty string
-   */
-  const toUpperCase = (str: string | undefined) => {
-    if (str === undefined) {
-      return ''
-    }
-    return str.toUpperCase()
-  }
 
   let settings = {
     language: { defaultLanguage },
@@ -84,58 +55,62 @@ function App() {
     // TODO: add for whether ticker will show up
   }
   const settingsJSON = JSON.stringify(settings)
-  let compressed = LZString.compressToUTF16(settingsJSON)
-  let decompressed = LZString.decompress(compressed)
-
+  let compressed = compressToEncodedURIComponent(settingsJSON)
+  let decompressed = JSON.parse(decompressFromEncodedURIComponent(compressed))
+  console.log(decompressed)
   return (
     <ThemeProvider theme={theme}>
-      <ThemeContext.Provider
-        value={{
-          defaultLanguage,
-          setDefaultLanguage,
-          lifelineModules,
-          setLifelineModules,
-        }}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/langForm" element={<LanguageCustomization />} />
-            <Route path="/moduleForm" element={<LifelineCreation />} />
-            <Route
-              path="/"
-              element={
-                <>
-                  <Clock
-                    timestamp={modules && modules[0] && modules[0].timestamp}
-                  />
-                  {!errorFlag ? (
-                    lifelineModules.map((module) => (
-                      <Lifeline
-                        key={module['description']}
-                        title={returnFirstString(module['labels'])}
-                        module_type={toUpperCase(module['flavor'])}
-                        value={module['initial']}
-                        unit={returnFirstString(module['unit_labels'])}
-                        rate={module['rate']}
-                        resolution={module['resolution']}
-                      />
-                    ))
-                  ) : (
-                    <h1>{ERROR_MSG}</h1>
-                  )}
-                </>
-              }
-            />
-            <Route path="/:compressed" element = {
-              
-
-            } />
-          </Routes>
-        </BrowserRouter>
-        <WindowSize>
-          {(windowSize) => <GlobalStyle windowSize={windowSize} />}
-        </WindowSize>
-      </ThemeContext.Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/langForm" element={<LanguageCustomization />} />
+          <Route path="/moduleForm" element={<LifelineCreation />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Clock
+                  timestamp={modules && modules[0] && modules[0].timestamp}
+                />
+                {!errorFlag ? (
+                  lifelineModules.map((module) => (
+                    <Lifeline
+                      key={module['description']}
+                      title={returnFirstString(module['labels'])}
+                      module_type={toUpperCase(module['flavor'])}
+                      value={module['initial']}
+                      unit={returnFirstString(module['unit_labels'])}
+                      rate={module['rate']}
+                      resolution={module['resolution']}
+                    />
+                  ))
+                ) : (
+                  <h1>{ERROR_MSG}</h1>
+                )}
+                {!errorFlag ? (
+                  <Newsfeed headline={getHeadlines(newsfeedModules)} />
+                ) : (
+                  <h1>{ERROR_MSG}</h1>
+                )}
+              </>
+            }
+          />
+          <Route path="/" element={<Navigate to="/compressed" replace />} /> {/*TODO: Fix path*/}
+          <Route
+            path="/compressed"
+            {...(localStorage.setItem(
+              LANGUAGE_LOCAL_STORAGE_KEY,
+              decompressed.language.defaultLanguage,
+            ),
+            localStorage.setItem(
+              LIFELINES_LOCAL_STORAGE_KEY,
+              decompressed.lifeline.lifelineModules,
+            ))}
+          />
+        </Routes>
+      </BrowserRouter>
+      <WindowSize>
+        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+      </WindowSize>
     </ThemeProvider>
   )
 }
