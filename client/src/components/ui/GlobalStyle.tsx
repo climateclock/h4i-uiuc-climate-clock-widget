@@ -94,6 +94,7 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
   -moz-osx-font-smoothing: grayscale;
   body {
     font-family: ${({ theme }) => theme.fonts};
+    font-weight: 100;
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;

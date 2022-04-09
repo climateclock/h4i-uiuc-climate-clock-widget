@@ -1,14 +1,14 @@
 import { LifelinePropsInterface } from '../../interfaces'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Header from '../ui/Header'
 
-const PADDING: number = 1
 const VALUE_UNIT_MARGIN: number = 1
 
 const Container = styled.div`
   & {
     font-family: ${({ theme }) => theme.fonts};
-    font-weight: 900;
+    font-weight: bold;
     background: ${({ theme }) => theme.blue};
     height: 15.5vh;
     @media only screen and (max-height: 700px) {
@@ -21,30 +21,13 @@ const Container = styled.div`
 const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  /* align-items: center; */
-  font-size: max(1rem, min(2rem, 3vw));
+  font-size: max(1rem, min(1.5rem, 3vw));
   height: 3vh;
   margin-bottom: 32px;
 
   @media only screen and (max-height: 700px) {
     height: 7vh;
   }
-`
-
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background: ${({ theme }) => theme.black};
-  color: ${({ theme }) => theme.blue};
-  padding: 0 2%;
-`
-
-const Module = styled.div`
-  display: flex;
-  align-items: center;
-  padding: ${PADDING}% ${PADDING}%;
-  text-align: center;
 `
 
 const ContentContainer = styled(LabelContainer)`
@@ -63,10 +46,6 @@ const Value = styled.div`
 const Unit = styled.div`
   font-size: 2em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
-`
-const HeaderBorder = styled.div`
-  height: 4px;
-  background: ${({ theme }) => theme.black};
 `
 
 function Lifeline({
@@ -100,11 +79,11 @@ function Lifeline({
 
   return (
     <Container>
-      <HeaderBorder />
-      <LabelContainer>
-        <Module>{module_type}</Module>
-        <Title>{title}</Title>
-      </LabelContainer>
+      <Header
+        moduleType={module_type}
+        title={title}
+        themeColor={({ theme }) => theme.blue}
+      />
       <ContentContainer>
         <Value>
           {isMoneyVal && '$'}

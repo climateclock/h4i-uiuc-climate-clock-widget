@@ -4,15 +4,27 @@ import styled from 'styled-components'
 const MarqueeContainer = styled.div`
   background: ${({ theme }) => theme.black};
   color: ${({ theme }) => theme.blue};
-  padding: 0 2%;
-  font-size: max(2rem, min(4rem, 6vw));
+  font-size: min(3vh, 4vw);
+  display: flex;
+  align-items: center
   font-weight: bold;
+  height: 4vh;
+
+
+  @media only screen and (min-height: 800) {
+      height: 10vh;
+  }
 `
 
 const Newsfeed = ({ headline }: { headline: string }) => {
   return (
     <MarqueeContainer>
-      <Marquee gradient={false} speed={200}>
+      <Marquee
+        style={{ fontWeight: 'bold' }}
+        gradient={false}
+        gradientWidth={10}
+        speed={200}
+      >
         {headline}
       </Marquee>
     </MarqueeContainer>

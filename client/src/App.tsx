@@ -6,6 +6,8 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/settings/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
+import EnterFullScreen from './components/buttons/EnterFullscreen'
+import ExitFullScreen from './components/buttons/ExitFullscreen'
 import Home from './pages/Home'
 
 function App() {
@@ -14,24 +16,24 @@ function App() {
   const handle = useFullScreenHandle()
   return (
     <ThemeProvider theme={theme}>
-      {/* <FullScreen
+      <FullScreen
         handle={handle}
         onChange={() => setFullscreenButton(!showFullscreenButton)}
-      > */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/langForm" element={<LanguageCustomization />} />
-          <Route path="/moduleForm" element={<LifelineCreation />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route path="/langForm" element={<LanguageCustomization />} />
+            <Route path="/moduleForm" element={<LifelineCreation />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
 
-      {/* {showFullscreenButton ? (
-        <EnterFullscreen handle={handle.enter} />
-      ) : (
-        <ExitFullscreen handle={handle.exit} />
-      )} */}
-      {/* </FullScreen> */}
+        {/* {showFullscreenButton ? (
+          <EnterFullScreen handle={handle.enter} />
+        ) : (
+          <ExitFullScreen handle={handle.exit} />
+        )} */}
+      </FullScreen>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
       </WindowSize>

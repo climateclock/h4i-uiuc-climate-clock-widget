@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
+import Header from '../ui/Header'
+import { toUpperCase } from '../../utils/utils'
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
   height: 45vh;
@@ -49,7 +51,7 @@ const ClockSection = styled.div`
       margin-top: 5%;
     }
   }
-  @media screen and (max-width: 800px) {
+  @media only screen and (max-width: 800px) {
     height: 49.5vh;
     display: flex;
     flex-wrap: wrap;
@@ -84,6 +86,8 @@ const ClockSection = styled.div`
   }
 `
 function Clock(props: ModuleResInterface) {
+  console.log(props)
+
   let date = new Date()
   let calendar =
     date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
@@ -187,10 +191,16 @@ function Clock(props: ModuleResInterface) {
     }, 1000)
     return () => clearInterval(interval)
   }, [])
+  console.log(props)
 
   return (
     <div className="container">
       <ClockSection>
+        <Header
+          moduleType={props.flavor ? toUpperCase(props.flavor) : ' '}
+          title={props.labels ? (props.labels[0] ? props.labels[0] : '') : ''}
+          themeColor={({ theme }) => theme.red}
+        />
         <h3>{years}</h3> <h2>YRS</h2> <h3>{days}</h3> <h2>DAYS</h2>
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}

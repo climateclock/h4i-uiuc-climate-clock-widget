@@ -27,21 +27,22 @@ export default function Home() {
       setNewsfeedModules,
     )
   }, [defaultLanguage])
+
+  //   console.log(modules)
   return (
     <>
-      <Clock timestamp={modules && modules[0] && modules[0].timestamp} />
       {!errorFlag ? (
         <div>
-          <Lifelines
-            key={lifelineModules}
-            lifeLineData={lifelineModules}
-            displayNum={3}
+          <Clock
+            timestamp={modules && modules[0] && modules[0].timestamp}
+            labels={modules && modules[0] && modules[0].labels}
+            flavor={modules && modules[0] && modules[0].flavor}
           />
+          <Lifelines lifeLineData={lifelineModules} displayNum={3} />
           <Newsfeed headline={getHeadlines(newsfeedModules)} />
         </div>
       ) : (
-        // <h1>{ERROR_MSG}</h1>
-        <div></div>
+        <h1>{ERROR_MSG}</h1>
       )}
     </>
   )

@@ -101,7 +101,8 @@ export const toUpperCase = (str: string | undefined) => {
  */
 export const getHeadlines = (newsfeedModules: NewsInterface[]) => {
   let concatenatedHeadlines = ''
-  console.log(newsfeedModules)
-  newsfeedModules.map((module) => (concatenatedHeadlines += module['headline']))
+  newsfeedModules.map(
+    (module) => (concatenatedHeadlines += ' | ' + module['headline']),
+  )
   return concatenatedHeadlines
 }
