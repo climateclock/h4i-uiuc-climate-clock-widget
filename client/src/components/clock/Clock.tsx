@@ -201,7 +201,6 @@ function Clock(props: ModuleResInterface) {
     }, 1000)
     return () => clearInterval(interval)
   }, [])
-  console.log(props)
 
   return (
     <ClockContainer>
