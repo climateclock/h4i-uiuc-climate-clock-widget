@@ -96,8 +96,6 @@ const ClockContainer = styled.div`
 `
 
 function Clock(props: ModuleResInterface) {
-  console.log(props)
-
   let date = new Date()
   let calendar =
     date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()

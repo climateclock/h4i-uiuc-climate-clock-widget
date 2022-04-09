@@ -28,7 +28,6 @@ export default function Home() {
     )
   }, [defaultLanguage])
 
-  //   console.log(modules)
   return (
     <>
       {!errorFlag ? (
