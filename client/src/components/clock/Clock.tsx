@@ -26,12 +26,10 @@ const ClockSection = styled.div`
 
   h3 {
     font-size: 15vmin;
-    display: inline-block;
     margin: 0%;
   }
 
   h2 {
-    display: inline-block;
     font-size: 5vmin;
     margin: 0%;
     margin-left: 15px;
@@ -65,9 +63,6 @@ const ClockSection = styled.div`
   }
   
   @media screen and (max-width: 800px) and (min-height: 500px) {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
 
     h3 {
       font-size: 14vmin;
@@ -79,9 +74,6 @@ const ClockSection = styled.div`
   }
 
   @media screen and (max-width: 500px) {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
 
     div {
       margin: 0px;
@@ -98,8 +90,10 @@ const ClockSection = styled.div`
       margin: 0;
       margin-bottom: 5px;
     }
+
   }
 `
+
 function Clock(props: ModuleResInterface) {
   let date = new Date()
   let calendar =
