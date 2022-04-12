@@ -67,7 +67,7 @@ const ClockSection = styled.div`
     }
   }
   
-  @media screen and (max-width: 800px) and (min-height: 500px) {
+  @media screen and (max-width: 820px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
