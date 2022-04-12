@@ -2,13 +2,13 @@ import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
 
+import Header from '../ui/Header'
+import { toUpperCase } from '../../utils/utils'
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
-  height: 50vh;
   font-size: 20vh;
   font-family: ${({ theme }) => theme.fonts};
   text-align: center;
-  background: ${({ theme }) => theme.red};
   position: relative;
   display: flex;
   justify-content: center;
@@ -24,12 +24,12 @@ const ClockSection = styled.div`
     margin: 20px;
   }
 
-  h3 {
+  h2, h5 {
     font-size: 15vmin;
     margin: 0%;
   }
 
-  h2 {
+  h3 {
     font-size: 5vmin;
     margin: 0%;
     margin-left: 15px;
@@ -38,38 +38,56 @@ const ClockSection = styled.div`
   }
 
   @media screen and (max-width: 1400px) {
-    h3 {
-      font-size: 11vmin;
-    }
-
-    h2 {
-      font-size: 4vmin;
-    }
-  }
-
-  // For iPads
-  @media screen and (max-width: 1050px) and (min-height: 500px) {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-
-    h3 {
+    h2, h5 {
       font-size: 12vmin;
     }
 
-    h2 {
+    h3 {
       font-size: 4vmin;
+      margin-bottom: 12px;
+    }
+  }
+
+// For iPads
+  @media screen and (max-width: 1000px) {
+    margin: 0px;
+
+    h2 {
+      font-size: 11vmin;
+    }
+
+    h3 {
+      font-size: 4vmin; // potentially can get rid of this and just keep the margin styling since that is the only difference between this and the one above
+      margin-bottom: 18px;
+    }
+
+    h5 {
+      font-size: 10vmin;
+      margin: 10px;
     }
   }
   
   @media screen and (max-width: 800px) and (min-height: 500px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0px;
 
-    h3 {
-      font-size: 14vmin;
+    div {
+      margin: 10px;
+    }
+   
+    h2 {
+      font-size: 9vmin;
     }
 
-    h2 {
-      font-size: 6vmin;
+    h3 {
+      font-size: 4.5vmin;
+      margin-bottom: 9px
+    }
+
+    h5 {
+      font-size: 8vmin;
     }
   }
 
@@ -80,18 +98,52 @@ const ClockSection = styled.div`
       margin-bottom: 20px;
     }
 
-    h3 {
-      font-size: 15vmin;
+    h2 {
+      font-size: 11vmin;
       margin: 0;
     }
 
-    h2 {
-      font-size: 7vmin;
+    h3 {
+      font-size: 5.5vmin;
       margin: 0;
       margin-bottom: 5px;
+      margin-left: 10%;
+    }
+
+    h5 {
+      font-size: 8vmin;
     }
 
   }
+
+  /* @media only screen and (max-height: 600px) {
+    height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
+    h2 {
+      font-size: 1em;
+      margin-top: 11%;
+    }
+    h3 {
+      font-size: 0.5em;
+      padding: 0 5px 0 5px;
+      margin-top: 8%;
+    }
+  } */
+`
+
+const ClockContainer = styled.div`
+  font-family: ${({ theme }) => theme.fonts};
+  font-weight: bold;
+  background: ${({ theme }) => theme.red};
+  height: 44vh;
+  @media only screen and (max-height: 700px) {
+    height: 65vh;
+  }
+
+  width: 100vw;
 `
 
 function Clock(props: ModuleResInterface) {
@@ -200,15 +252,20 @@ function Clock(props: ModuleResInterface) {
   }, [])
 
   return (
-    <div className="container">
+    <ClockContainer>
+      <Header
+        moduleType={props.flavor ? toUpperCase(props.flavor) : ' '}
+        title={props.labels ? (props.labels[0] ? props.labels[0] : '') : ''}
+        themeColor={({ theme }) => theme.red}
+      />
       <ClockSection>
-        <div><h3>{years}</h3> <h2>YRS</h2></div>
-        <div><h3>{days}</h3> <h2>DAYS</h2></div>
-        <h3>
+        <div><h2>{years}</h2> <h3>YRS</h3></div>
+        <div><h2>{days}</h2> <h3>DAYS</h3></div>
+        <h5>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
-        </h3>
+        </h5>
       </ClockSection>
-    </div>
+    </ClockContainer>
   )
 }
 

@@ -1,53 +1,49 @@
-import { LifelinePropsInterface } from '../interfaces'
+import { LifelinePropsInterface } from '../../interfaces'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Header from '../ui/Header'
 
-/* TODO: change these to theme colors */
-const TEAL: string = '#4aa1cc'
-const BLACK: string = '#000000'
-const PADDING: number = 1
 const VALUE_UNIT_MARGIN: number = 1
 
-export const Container = styled.div`
+const Container = styled.div`
   & {
-    font: ${({ theme }) => theme.fonts};
-    font-weight: 900;
-    background: ${TEAL};
-    height: 100%;
+    font-family: ${({ theme }) => theme.fonts};
+    font-weight: bold;
+    background: ${({ theme }) => theme.blue};
+    height: 14.666666667vh;
+    @media only screen and (max-height: 700px) {
+      height: 35vh;
+    }
+
     width: 100vw;
   }
 `
-
-export const LabelContainer = styled.div`
+const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  font-size: max(1rem, min(1.5rem, 3vw));
+  height: 3vh;
+  margin-bottom: 32px;
+
+  @media only screen and (max-height: 700px) {
+    height: 7vh;
+  }
+`
+
+const ContentContainer = styled(LabelContainer)`
+  width: 100%;
+`
+
+const Value = styled.div`
+  display: flex;
   align-items: center;
-  font-size: max(1rem, min(2rem, 3vw));
-`
-
-export const Title = styled.div`
-  width: 100%;
-  background: ${BLACK};
-  color: ${TEAL};
-  padding: 0 2%;
-`
-
-export const Module = styled.div`
-  padding: ${PADDING}% ${PADDING}%;
-  text-align: center;
-`
-
-export const ContentContainer = styled(LabelContainer)`
-  width: 100%;
-`
-
-export const Value = styled.div`
   font-size: 3em;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
+  margin-top: 25px;
 `
 
-export const Unit = styled.div`
+const Unit = styled.div`
   font-size: 2em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
 `
@@ -60,7 +56,7 @@ function Lifeline({
   rate,
   unit,
 }: LifelinePropsInterface) {
-  const seconds = 1 // running every every seconds * 1000
+  const seconds = 0.1 // running every every seconds * 1000
   const decimalPlaces = !resolution ? 0 : Math.log10(1 / resolution) // set the precision of value (ie. props.resolution = 1e-9 => 9)
   const cleanedRate = !rate ? 0 : rate // store rate at which to update value
   const isMoneyVal = !unit || unit.charAt(0) !== '$' ? false : true // used to fix monetary units passed in (ie. $)
@@ -83,10 +79,11 @@ function Lifeline({
 
   return (
     <Container>
-      <LabelContainer>
-        <Module>{module_type}</Module>
-        <Title>{title}</Title>
-      </LabelContainer>
+      <Header
+        moduleType={module_type}
+        title={title}
+        themeColor={({ theme }) => theme.blue}
+      />
       <ContentContainer>
         <Value>
           {isMoneyVal && '$'}
