@@ -9,6 +9,7 @@ import LifelineCreation from './pages/lifelineCreation'
 import EnterFullScreen from './components/buttons/EnterFullscreen'
 import ExitFullScreen from './components/buttons/ExitFullscreen'
 import Home from './pages/Home'
+import PageEmbed from './components/embed/PageEmbed'
 
 function App() {
   const [showFullscreenButton, setFullscreenButton] = useState(false)
@@ -25,6 +26,7 @@ function App() {
             <Route path="/settings" element={<LanguageCustomization />} />
             <Route path="/lifelines" element={<LifelineCreation />} />
             <Route path="/" element={<Home />} />
+            <Route path="/embed" element={<PageEmbed />} />
           </Routes>
         </BrowserRouter>
 
