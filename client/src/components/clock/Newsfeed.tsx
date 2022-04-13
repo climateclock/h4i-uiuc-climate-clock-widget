@@ -14,12 +14,6 @@ const MarqueeContainer = styled.div`
   @media only screen and (min-height: 800) {
       height: 10vh;
   }
-
-  @media only screen and (max-height: 700px) {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 100%;
-  }
 `
 
 const Newsfeed = ({ headline }: { headline: string }) => {

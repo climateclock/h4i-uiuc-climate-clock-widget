@@ -7,7 +7,6 @@
  *
  */
 
-// import Lifeline from '../lifelines/Lifeline'
 import Lifeline from './LifelineEmbed'
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
