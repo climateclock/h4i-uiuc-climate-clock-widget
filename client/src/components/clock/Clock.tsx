@@ -91,7 +91,6 @@ const ClockContainer = styled.div`
   @media only screen and (max-height: 700px) {
     height: 65vh;
   }
-
   width: 100vw;
 `
 
