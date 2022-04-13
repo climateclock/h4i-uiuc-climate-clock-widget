@@ -12,7 +12,8 @@ const Container = styled.div`
     background: ${({ theme }) => theme.blue};
     height: 14.666666667vh;
     @media only screen and (max-height: 700px) {
-      height: 35vh;
+      // height: 35vh;
+      height: auto;
     }
 
     width: 100vw;
@@ -32,6 +33,7 @@ const LabelContainer = styled.div`
 
 const ContentContainer = styled(LabelContainer)`
   width: 100%;
+  border: 2px red solid;
 `
 
 const Value = styled.div`

@@ -81,6 +81,29 @@ const ClockSection = styled.div`
       margin-top: 8%;
     }
   }
+
+  @media screen and (max-height: 400px) {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin: 0px;
+    padding: 0px;
+
+    div {
+      margin: 0px;
+    }
+
+    h3 {
+      font-size: 6vw;
+      margin: 0px;
+    }
+
+    h2 {
+      font-size: 2vw;
+      margin: 0px;
+      margin-bottom: 15px;
+    }
+  }
 `
 
 const ClockContainer = styled.div`

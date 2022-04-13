@@ -11,7 +11,6 @@
 import Lifeline from './LifelineEmbed'
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
-import useWindowDimensions from '../../hooks/useWindowdimensions'
 import { useEffect, useState } from 'react'
 
 interface LifelinePropsInterface {
@@ -23,10 +22,9 @@ export default function LifelinesEmbed({
   lifeLineData,
   displayNum,
 }: LifelinePropsInterface) {
-  const dimensions = useWindowDimensions()
-  let lifelineDisplayNum = dimensions.height > 700 ? displayNum : 1
+  let lifelineDisplayNum = displayNum
   const [lifelineIndex, setLifelineIndex] = useState<number>(0)
-  const LIFELINE_DURATION = 5 // seconds displayed per lifeline
+  const LIFELINE_DURATION = 2 // seconds displayed per lifeline
   const [lifelineSavedValues, setLifelineSavedValues] = useState<
     (number | undefined)[]
   >(Array(lifelineDisplayNum)) // saved lifeline values after set time duration
@@ -55,6 +53,7 @@ export default function LifelinesEmbed({
     let newLifelineSavedValues = lifelineSavedValues
     newLifelineSavedValues[index] = value
     setLifelineSavedValues(newLifelineSavedValues)
+    console.log(newLifelineSavedValues)
   }
 
   return (
@@ -67,7 +66,6 @@ export default function LifelinesEmbed({
             lifelineIndex={lifelineIndex}
             title={returnFirstString(module['labels'])}
             module_type={toUpperCase(module['flavor'])}
-            // value={module['initial']}
             value={lifelineSavedValues[lifelineIndex]}
             unit={returnFirstString(module['unit_labels'])}
             rate={module['rate']}
