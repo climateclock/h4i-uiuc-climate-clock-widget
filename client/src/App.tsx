@@ -5,7 +5,7 @@ import {
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from './util/constants'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import {
   decompressFromEncodedURIComponent,
   compressToEncodedURIComponent,
@@ -94,9 +94,8 @@ function App() {
               </>
             }
           />
-          <Route path="/" element={<Navigate to="/compressed" replace />} /> {/*TODO: Fix path*/}
           <Route
-            path="/compressed"
+            path={`${compressed}`}
             {...(localStorage.setItem(
               LANGUAGE_LOCAL_STORAGE_KEY,
               decompressed.language.defaultLanguage,
