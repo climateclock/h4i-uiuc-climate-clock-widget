@@ -1,42 +1,38 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { WindowSize } from '@reach/window-size'
 import { ThemeProvider } from 'styled-components'
 import {
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
-} from './util/constants'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+} from './utils/constants'
 import {
   decompressFromEncodedURIComponent,
   compressToEncodedURIComponent,
 } from 'lz-string'
-import Lifeline from './components/Lifeline'
 import { ModuleResInterface, NewsInterface } from './interfaces'
 // import { get } from './api/config'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import Newsfeed from './components/Newsfeed'
-import {
-  returnFirstString,
-  toUpperCase,
-  getHeadlines,
-} from './components/utils/utils'
-// import { ThemeContext } from './contexts'
-import Clock from './components/clock/Clock'
-import LanguageCustomization from './components/LanguageCustomizationForm'
+import LanguageCustomization from './components/settings/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
-import { ERROR_MSG, URL } from './util/constants'
-import { getData } from './util/util'
+import EnterFullScreen from './components/buttons/EnterFullscreen'
+import ExitFullScreen from './components/buttons/ExitFullscreen'
+import Home from './pages/Home'
+import { getData } from './utils/utils'
+import { URL, ERROR_MSG } from './utils/constants'
 
 function App() {
+  const [showFullscreenButton, setFullscreenButton] = useState(false)
+  /* Sets the lifeline modules upon load and every defaultLanguage change */
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
-  const [modules, setModules] = useState<ModuleResInterface[]>([])
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
-  const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
-  const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const [, setModules] = useState<ModuleResInterface[]>([])
+  const [, setErrorFlag] = useState<boolean>(false)
+  const [, setNewsfeedModules] = useState<NewsInterface[]>([])
 
-  /* Sets the lifeline modules upon load and every defaultLanguage change */
   useEffect(() => {
     getData(
       URL,
@@ -54,59 +50,51 @@ function App() {
     lifeline: { lifelineModules },
     // TODO: add for whether ticker will show up
   }
+  const handle = useFullScreenHandle()
   const settingsJSON = JSON.stringify(settings)
   let compressed = compressToEncodedURIComponent(settingsJSON)
   let decompressed = JSON.parse(decompressFromEncodedURIComponent(compressed))
   console.log(decompressed)
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/langForm" element={<LanguageCustomization />} />
-          <Route path="/moduleForm" element={<LifelineCreation />} />
-          <Route
-            path="/"
-            element={
-              <>
-                <Clock
-                  timestamp={modules && modules[0] && modules[0].timestamp}
-                />
-                {!errorFlag ? (
-                  lifelineModules.map((module) => (
-                    <Lifeline
-                      key={module['description']}
-                      title={returnFirstString(module['labels'])}
-                      module_type={toUpperCase(module['flavor'])}
-                      value={module['initial']}
-                      unit={returnFirstString(module['unit_labels'])}
-                      rate={module['rate']}
-                      resolution={module['resolution']}
-                    />
-                  ))
-                ) : (
-                  <h1>{ERROR_MSG}</h1>
-                )}
-                {!errorFlag ? (
-                  <Newsfeed headline={getHeadlines(newsfeedModules)} />
-                ) : (
-                  <h1>{ERROR_MSG}</h1>
-                )}
-              </>
-            }
-          />
-          <Route
-            path={`${compressed}`}
-            {...(localStorage.setItem(
-              LANGUAGE_LOCAL_STORAGE_KEY,
-              decompressed.language.defaultLanguage,
-            ),
-            localStorage.setItem(
-              LIFELINES_LOCAL_STORAGE_KEY,
-              decompressed.lifeline.lifelineModules,
-            ))}
-          />
-        </Routes>
-      </BrowserRouter>
+      <FullScreen
+        handle={handle}
+        onChange={() => setFullscreenButton(!showFullscreenButton)}
+      >
+        {' '}
+        {console.log(defaultLanguage)}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/langForm" element={<LanguageCustomization />} />
+            {console.log(localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY))}
+            <Route path="/moduleForm" element={<LifelineCreation />} />
+
+            <Route
+              path={`${compressed}`}
+              {...(localStorage.setItem(
+                LANGUAGE_LOCAL_STORAGE_KEY,
+                decompressed.language.defaultLanguage,
+              ),
+              localStorage.setItem(
+                LIFELINES_LOCAL_STORAGE_KEY,
+                decompressed.lifeline.lifelineModules,
+              ))}
+            />
+
+            <Route path="/settings" element={<LanguageCustomization />} />
+            <Route path="/lifelines" element={<LifelineCreation />} />
+            <Route path="/" element={<Home />} />
+
+            {console.log(defaultLanguage)}
+            {console.log(decompressed.language.defaultLanguage)}
+          </Routes>
+        </BrowserRouter>
+        {showFullscreenButton ? (
+          <EnterFullScreen handle={handle.enter} />
+        ) : (
+          <ExitFullScreen handle={handle.exit} />
+        )}
+      </FullScreen>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
       </WindowSize>
