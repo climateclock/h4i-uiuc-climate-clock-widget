@@ -22,6 +22,8 @@ const Container = styled.div`
 const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  align-self: center;
   font-size: max(1rem, min(1.5rem, 3vw));
   height: 3vh;
   margin-bottom: 32px;
@@ -33,7 +35,6 @@ const LabelContainer = styled.div`
 
 const ContentContainer = styled(LabelContainer)`
   width: 100%;
-  border: 2px red solid;
 `
 
 const Value = styled.div`

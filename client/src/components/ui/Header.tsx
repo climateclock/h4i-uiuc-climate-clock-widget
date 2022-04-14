@@ -14,14 +14,8 @@ const LabelContainer = styled.div`
   font-size: max(1rem, min(2rem, 3vw));
   height: 3vh;
   margin-bottom: 32px;
-  border: 2px green solid;
-
   @media only screen and (max-height: 700px) {
     height: 7vh;
-  }
-
-  @media only screen and (max-height: 400px) {
-    font-size: 110%;
   }
 `
 
