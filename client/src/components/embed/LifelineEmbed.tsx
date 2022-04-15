@@ -8,33 +8,29 @@ const VALUE_UNIT_MARGIN: number = 1
 const Container = styled.div`
   & {
     font-family: ${({ theme }) => theme.fonts};
-    font-weight: bold;
     background: ${({ theme }) => theme.blue};
+    font-weight: bold;
     height: 14.666666667vh;
     @media only screen and (max-height: 700px) {
-      // height: 35vh;
       height: auto;
     }
 
     width: 100vw;
   }
 `
-const LabelContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  align-self: center;
+  align-items: flex-end;
   font-size: max(1rem, min(1.5rem, 3vw));
-  height: 3vh;
   margin-bottom: 32px;
+  width: 100%;
 
   @media only screen and (max-height: 700px) {
-    height: 7vh;
+    height: 70%;
+    margin-bottom: 0px;
+    font-size: max(5vh, min(1.5rem, 6vw));
   }
-`
-
-const ContentContainer = styled(LabelContainer)`
-  width: 100%;
 `
 
 const Value = styled.div`
@@ -44,11 +40,21 @@ const Value = styled.div`
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
   margin-top: 25px;
+
+  @media only screen and (max-height: 700px) {
+    // font-size: max(5vh, min(2rem, 6vw));
+    font-size: max(5vh, min(2rem, 10vw));
+    margin-top: 0px;
+  }
 `
 
 const Unit = styled.div`
-  font-size: 2em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
+  margin-right: ${VALUE_UNIT_MARGIN}vw;
+  @media only screen and (max-height: 700px) {
+    // font-size: 2em;
+    font-size: max(5vh, min(2rem, 7.5vw));
+  }
 `
 
 interface LifelifeEmbedPropsInterface extends LifelinePropsInterface {

@@ -1,6 +1,8 @@
-import Newsfeed from '../../components/clock/Newsfeed'
+// import Newsfeed from '../../components/clock/Newsfeed'
+import Newsfeed from './NewsfeedEmbed'
 import { getHeadlines } from '../../utils/utils'
-import Clock from '../../components/clock/Clock'
+// import Clock from '../../components/clock/Clock'
+import Clock from './ClockEmbed'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
@@ -29,6 +31,14 @@ export default function Home() {
     )
   }, [defaultLanguage])
 
+  const Container = styled.div`
+    @media screen and (max-height: 400px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  `
+
   const PageEmbedContainer = styled.div`
     @media screen and (max-height: 400px) {
       display: flex;
@@ -38,20 +48,17 @@ export default function Home() {
   return (
     <>
       {!errorFlag ? (
-        <>
+        <Container>
           <PageEmbedContainer>
             <Clock
               timestamp={modules && modules[0] && modules[0].timestamp}
               labels={modules && modules[0] && modules[0].labels}
               flavor={modules && modules[0] && modules[0].flavor}
             />
-            <Lifelines
-              lifeLineData={lifelineModules}
-              displayNum={NUM_LIFELINES_DISPLAYED}
-            />
+            <Lifelines lifeLineData={lifelineModules} displayNum={1} />
           </PageEmbedContainer>
           <Newsfeed headline={getHeadlines(newsfeedModules)} />
-        </>
+        </Container>
       ) : (
         <h1>{ERROR_MSG}</h1>
       )}
