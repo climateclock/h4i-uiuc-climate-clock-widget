@@ -56,7 +56,6 @@ export default function LifelinesEmbed({
 
   return (
     <>
-      {console.log(lifeLineData)}
       {lifeLineData.slice(lifelineIndex, lifelineIndex + 1).map((module) => {
         return (
           <Lifeline
