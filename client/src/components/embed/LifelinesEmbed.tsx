@@ -52,11 +52,11 @@ export default function LifelinesEmbed({
     let newLifelineSavedValues = lifelineSavedValues
     newLifelineSavedValues[index] = value
     setLifelineSavedValues(newLifelineSavedValues)
-    console.log(newLifelineSavedValues)
   }
 
   return (
     <>
+      {console.log(lifeLineData)}
       {lifeLineData.slice(lifelineIndex, lifelineIndex + 1).map((module) => {
         return (
           <Lifeline

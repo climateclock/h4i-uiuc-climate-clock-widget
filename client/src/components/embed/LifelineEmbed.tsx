@@ -31,6 +31,7 @@ const ContentContainer = styled.div`
     height: 70%;
     margin-bottom: 0px;
     font-size: max(5vh, min(1.5rem, 6vw));
+    // font-size: min(2.5vh, 5vw);
   }
 `
 
@@ -81,10 +82,17 @@ function Lifeline({
     !value ? cleanedRate : value + cleanedRate,
   )
 
+  useEffect(() => {
+    console.log(value, cleanedRate, llVal)
+    if ((value !== 0 || cleanedRate !== 0) && llVal === 0) {
+      setLLVal(!value ? cleanedRate : value + cleanedRate)
+    }
+  }, [llVal])
+
   /* update lifeline value within interval */
   useEffect(() => {
     let interval = setInterval(() => {
-      if (rate !== 0) {
+      if (cleanedRate !== 0) {
         setLLVal((llVal) => llVal + cleanedRate)
       }
     }, seconds * 1000)
@@ -96,12 +104,6 @@ function Lifeline({
 
   useEffect(() => {
     return () => {
-      console.log(
-        'calling update on ' +
-          lifelineIndex.toString() +
-          ' ' +
-          llVal.toString(),
-      )
       updateSavedValue(lifelineIndex, llVal)
     }
   }, [llVal]) // check this
