@@ -17,10 +17,9 @@ import Clock from './components/clock/Clock'
 import NavBar from './components/ui/NavBar'
 import LanguageCustomization from './components/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
-import EnterFullscreen from './components/buttons/EnterFullscreen'
-import ExitFullscreen from './components/buttons/ExitFullscreen'
 import { ERROR_MSG, URL } from './util/constants'
 import { getData } from './util/util'
+import MouseTrack from './components/MouseTrack'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -59,7 +58,11 @@ function App() {
               path="/"
               element={
                 <>
-                  <NavBar handle={handle}></NavBar>
+                  <NavBar
+                    handle={handle}
+                    isFullScreen={showFullscreenButton}
+                  ></NavBar>
+                  {/* <MouseTrack /> */}
                   <Clock
                     timestamp={modules && modules[0] && modules[0].timestamp}
                   />
@@ -91,11 +94,6 @@ function App() {
         <WindowSize>
           {(windowSize) => <GlobalStyle windowSize={windowSize} />}
         </WindowSize>
-        {/* {showFullscreenButton ? (
-          <EnterFullscreen handle={handle.enter} />
-        ) : (
-          <ExitFullscreen handle={handle.exit} />
-        )} */}
       </FullScreen>
     </ThemeProvider>
   )
