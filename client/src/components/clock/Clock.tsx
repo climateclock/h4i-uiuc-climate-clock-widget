@@ -25,7 +25,8 @@ const ClockSection = styled.div`
     margin: 20px;
   }
 
-  h2, h5 {
+  h2,
+  h5 {
     font-size: 15vmin;
     margin: 0%;
   }
@@ -39,7 +40,8 @@ const ClockSection = styled.div`
   }
 
   @media screen and (max-width: 1500px) {
-    h2, h5 {
+    h2,
+    h5 {
       font-size: 12vmin;
     }
 
@@ -50,7 +52,8 @@ const ClockSection = styled.div`
   }
 
   @media screen and (max-width: 1300px) {
-    h2, h5 {
+    h2,
+    h5 {
       font-size: 11vmin;
     }
 
@@ -78,7 +81,7 @@ const ClockSection = styled.div`
       margin: 10px;
     }
   }
-  
+
   @media screen and (max-width: 900px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
@@ -88,14 +91,14 @@ const ClockSection = styled.div`
     div {
       margin: 10px;
     }
-   
+
     h2 {
       font-size: 9vmin;
     }
 
     h3 {
       font-size: 4.5vmin;
-      margin-bottom: 9px
+      margin-bottom: 9px;
     }
 
     h5 {
@@ -104,7 +107,6 @@ const ClockSection = styled.div`
   }
 
   @media screen and (max-width: 700px) {
-
     div {
       margin: 0px;
       margin-bottom: 15px;
@@ -125,11 +127,9 @@ const ClockSection = styled.div`
     h5 {
       font-size: 8vmin;
     }
-
   }
 
   @media screen and (max-width: 500px) {
-
     div {
       margin: 0px;
       margin-bottom: 20px;
@@ -150,7 +150,6 @@ const ClockSection = styled.div`
     h5 {
       font-size: 10vmin;
     }
-
   }
 `
 
@@ -279,8 +278,12 @@ function Clock(props: ModuleResInterface) {
         themeColor={({ theme }) => theme.red}
       />
       <ClockSection>
-        <div><h2>{years}</h2> <h3>YRS</h3></div>
-        <div><h2>{days}</h2> <h3>DAYS</h3></div>
+        <div>
+          <h2>{years}</h2> <h3>YRS</h3>
+        </div>
+        <div>
+          <h2>{days}</h2> <h3>DAYS</h3>
+        </div>
         <h5>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
         </h5>
