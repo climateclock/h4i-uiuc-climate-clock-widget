@@ -17,25 +17,19 @@ function App() {
   const handle = useFullScreenHandle()
   return (
     <ThemeProvider theme={theme}>
-      <FullScreen
+      {/* <FullScreen
         handle={handle}
         onChange={() => setFullscreenButton(!showFullscreenButton)}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/settings" element={<LanguageCustomization />} />
-            <Route path="/lifelines" element={<LifelineCreation />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/embed" element={<PageEmbed />} />
-          </Routes>
-        </BrowserRouter>
-
-        {showFullscreenButton ? (
-          <EnterFullScreen handle={handle.enter} />
-        ) : (
-          <ExitFullScreen handle={handle.exit} />
-        )}
-      </FullScreen>
+      > */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/settings" element={<LanguageCustomization />} />
+          <Route path="/lifelines" element={<LifelineCreation />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/embed" element={<PageEmbed />} />
+        </Routes>
+      </BrowserRouter>
+      {/* </FullScreen> */}
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
       </WindowSize>

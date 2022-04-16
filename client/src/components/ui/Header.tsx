@@ -19,7 +19,7 @@ const LabelContainer = styled.div`
     // height: 7vh;
     margin-bottom: 0px;
     height: 15%;
-    font-size: max(1rem, min(1.25rem, 5vh));
+    font-size: max(min(1rem, 1.5vw), min(1.25rem, 5vh));
   }
 `
 

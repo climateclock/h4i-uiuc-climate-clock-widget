@@ -13,6 +13,7 @@ const Container = styled.div`
     height: 14.666666667vh;
     @media only screen and (max-height: 700px) {
       height: auto;
+      width: 50%;
     }
 
     width: 100vw;

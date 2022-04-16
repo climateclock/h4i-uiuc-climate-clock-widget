@@ -22,11 +22,12 @@ const ClockContainer = styled.div`
   font-family: ${({ theme }) => theme.fonts};
   background: ${({ theme }) => theme.red};
   font-weight: bold;
+  width: 100vw;
   height: 44vh;
   @media only screen and (max-height: 700px) {
     height: auto;
+    width: 50%;
   }
-  width: 100vw;
 `
 
 const Value = styled.div`
@@ -156,10 +157,12 @@ function Clock(props: ModuleResInterface) {
       />
       <ClockSection>
         <>
-          <Value>{years}</Value> <Unit>YRS</Unit>
+          <Value>{years}</Value>
+          <Unit>YRS</Unit>
         </>
         <>
-          <Value>{days}</Value> <Unit>DAYS</Unit>
+          <Value>{days}</Value>
+          <Unit>DAYS</Unit>
         </>
         <Value>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
