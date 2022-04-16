@@ -21,6 +21,8 @@ import EnterFullscreen from './components/buttons/EnterFullscreen'
 import ExitFullscreen from './components/buttons/ExitFullscreen'
 import { ERROR_MSG, URL } from './util/constants'
 import { getData } from './util/util'
+import MobileNavbar from './components/buttons/MobileNavbar'
+import { Menu } from '@styled-icons/boxicons-regular'
 
 function App() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -32,6 +34,8 @@ function App() {
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const handle = useFullScreenHandle()
   const [showFullscreenButton, setFullscreenButton] = useState(false)
+  const [navHeight, setNavHeight] = useState('0%')
+  const [showMobileNavbar, setMobileNavbar] = useState(false)
   /* Sets the lifeline modules upon load and every defaultLanguage change */
   useEffect(() => {
     getData(
@@ -44,6 +48,11 @@ function App() {
       setNewsfeedModules,
     )
   }, [defaultLanguage])
+
+  const closeNavbar = () => {
+    setNavHeight('0%')
+    setMobileNavbar(!showMobileNavbar)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,6 +105,16 @@ function App() {
           <ExitFullscreen handle={handle.exit} />
         )}
       </FullScreen>
+      <Menu
+        size="8%"
+        onClick={() => {
+          setNavHeight('100%')
+          setMobileNavbar(!showMobileNavbar)
+        }}
+      />
+      {showMobileNavbar && (
+        <MobileNavbar height={navHeight} closeNav={closeNavbar} />
+      )}
     </ThemeProvider>
   )
 }
