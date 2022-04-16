@@ -55,7 +55,10 @@ export default function Home() {
               labels={modules && modules[0] && modules[0].labels}
               flavor={modules && modules[0] && modules[0].flavor}
             />
-            <Lifelines lifeLineData={lifelineModules} displayNum={1} />
+            <Lifelines
+              lifeLineData={lifelineModules}
+              displayNum={NUM_LIFELINES_DISPLAYED}
+            />
           </PageEmbedContainer>
           <Newsfeed headline={getHeadlines(newsfeedModules)} />
         </Container>
