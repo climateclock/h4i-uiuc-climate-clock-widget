@@ -6,35 +6,24 @@ import { useState, useEffect } from 'react'
 import EnterFullscreen from '../../components/buttons/EnterFullscreen'
 import { FullScreenHandle } from 'react-full-screen'
 import ExitFullscreen from '../../components/buttons/ExitFullscreen'
-import { theme } from './GlobalStyle'
 
 const NavBox = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
-  overflow: hidden;
+  ${(props) =>
+    props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
+  width: 100%;
+  z-index: 4;
+  background-color: ${({ theme }) => theme.navBackground};
 
-  background-color: ${(props) =>
-    props.isFullScreen ? props.fullscreenColor : theme.navBackground};
+  margin-top: ${(props) =>
+    props.isFullScreen && !props.inBounds ? '-100px' : '0px'};
 
-  background-color: ${(props) =>
-    props.isFullScreen && props.inBounds
-      ? props.inBoundsColor
-      : props.fullscreenColor};
+  transform: ${(props) =>
+    props.isFullScreen && !props.inBounds
+      ? 'translateY(-200px)'
+      : 'translateY(0px)'};
+  transition: 0.3s ease-out;
 `
-
-// const AnimationContainer = styled.div`
-//   transform: translate(0%);
-//   transition: 0.3s ease-out;
-
-//   ${(props) =>
-//     props.animated &&
-//     css`
-//       &:hover {
-//         position: fixed;
-//         transform: translate(0%, -30%);
-//         transition: 0.3s ease-out;
-//       }
-//     `}
-// `
 
 const PageLink = styled.div`
   float: right;
@@ -101,12 +90,7 @@ function NavBar({
     return y && y <= 100 ? true : false
   }
   return (
-    <NavBox
-      fullscreenColor="red"
-      isFullScreen={!isFullScreen}
-      inBounds={MouseTrack()}
-      inBoundsColor="blue"
-    >
+    <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
       <Link to="/">
         <HomeLink>
           <Button>
