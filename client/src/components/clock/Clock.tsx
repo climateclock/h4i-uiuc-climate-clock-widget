@@ -11,6 +11,7 @@ const ClockSection = styled.div`
   text-align: center;
   position: relative;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   font-weight: bold;
@@ -30,25 +31,36 @@ const ClockSection = styled.div`
   }
 
   h3 {
-    font-size: 5vmin;
+    font-size: 7.5vmin;
     margin: 0%;
     margin-left: 15px;
     align-self: flex-end;
     margin-bottom: 17px;
   }
 
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1500px) {
     h2, h5 {
       font-size: 12vmin;
     }
 
     h3 {
-      font-size: 4vmin;
+      font-size: 6vmin;
       margin-bottom: 12px;
     }
   }
 
-// For iPads
+  @media screen and (max-width: 1300px) {
+    h2, h5 {
+      font-size: 11vmin;
+    }
+
+    h3 {
+      font-size: 5.5vmin;
+      margin-bottom: 12px;
+    }
+  }
+
+  // For iPads
   @media screen and (max-width: 1000px) {
     margin: 0px;
 
@@ -57,7 +69,7 @@ const ClockSection = styled.div`
     }
 
     h3 {
-      font-size: 4vmin; // potentially can get rid of this and just keep the margin styling since that is the only difference between this and the one above
+      font-size: 4vmin;
       margin-bottom: 18px;
     }
 
@@ -67,7 +79,7 @@ const ClockSection = styled.div`
     }
   }
   
-  @media screen and (max-width: 820px) and (min-height: 500px) {
+  @media screen and (max-width: 900px) and (min-height: 500px) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -91,20 +103,20 @@ const ClockSection = styled.div`
     }
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 700px) {
 
     div {
       margin: 0px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     h2 {
-      font-size: 11vmin;
+      font-size: 12vmin;
       margin: 0;
     }
 
     h3 {
-      font-size: 5.5vmin;
+      font-size: 6vmin;
       margin: 0;
       margin-bottom: 5px;
       margin-left: 10%;
@@ -116,22 +128,30 @@ const ClockSection = styled.div`
 
   }
 
-  /* @media only screen and (max-height: 600px) {
-    height: 50vh;
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
+  @media screen and (max-width: 500px) {
+
+    div {
+      margin: 0px;
+      margin-bottom: 20px;
+    }
+
     h2 {
-      font-size: 1em;
-      margin-top: 11%;
+      font-size: 16vmin;
+      margin: 0;
     }
+
     h3 {
-      font-size: 0.5em;
-      padding: 0 5px 0 5px;
-      margin-top: 8%;
+      font-size: 8vmin;
+      margin: 0;
+      margin-bottom: 10px;
+      margin-left: 10%;
     }
-  } */
+
+    h5 {
+      font-size: 10vmin;
+    }
+
+  }
 `
 
 const ClockContainer = styled.div`
