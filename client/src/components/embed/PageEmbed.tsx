@@ -41,6 +41,7 @@ export default function Home() {
 
   const PageEmbedContainer = styled.div`
     @media screen and (max-height: 400px) {
+      height: 85%;
       display: flex;
     }
   `

@@ -12,7 +12,9 @@ const Container = styled.div`
     font-weight: bold;
     height: 14.666666667vh;
     @media only screen and (max-height: 700px) {
+      // border: 2px red solid;
       height: auto;
+      // height: 10vh;
       width: 50%;
     }
 
@@ -22,13 +24,16 @@ const Container = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
+  // align-items: flex-end;
+  align-items: center;
   font-size: max(1rem, min(1.5rem, 3vw));
   margin-bottom: 32px;
   width: 100%;
 
   @media only screen and (max-height: 700px) {
-    height: 70%;
+    // height: 70%;
+    // border: 5px green solid;
+    height: 82.35%; // 85% of 85
     margin-bottom: 0px;
     font-size: max(5vh, min(1.5rem, 6vw));
     // font-size: min(2.5vh, 5vw);

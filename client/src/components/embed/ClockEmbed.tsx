@@ -11,9 +11,11 @@ const ClockSection = styled.div`
   @media only screen and (max-height: 700px) {
     display: flex;
     flex-wrap: nowrap;
-    align-items: flex-end;
+    // align-items: flex-end;
+    align-items: center;
     justify-content: flex-start;
-    height: 70%;
+    // height: 70%;
+    height: 82.35%; // 85% of 85
     gap: 1vw;
   }
 `
