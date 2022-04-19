@@ -3,3 +3,4 @@ export const NUM_LIFELINES_DISPLAYED = 3
 export const LIFELINES_LOCAL_STORAGE_KEY: string = 'lifelines'
 export const ERROR_MSG: string = 'Error retrieving module data from API...'
 export const URL: string = 'https://api.climateclock.world/v1/clock'
+export const COMPRESSED_KEY: string = ''
