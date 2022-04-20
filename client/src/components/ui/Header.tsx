@@ -22,7 +22,8 @@ const LabelContainer = styled.div`
     // height: 15%;
     height: 17.65%; // 15% of 85
     // font-size: max(min(1rem, 1.5vw), min(1.25rem, 5vh));
-    font-size: min(5vh, 2vw);
+    // font-size: max(1vh, 1.5vw);
+    font-size: min(15vh, 1.5vw);
   }
 `
 

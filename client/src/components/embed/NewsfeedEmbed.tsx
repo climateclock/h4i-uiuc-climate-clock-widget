@@ -16,10 +16,11 @@ const MarqueeContainer = styled.div`
   }
 
   @media only screen and (max-height: 700px) {
-    // font-size: max(1rem, min(2rem, 5vh));
-    // font-size: max(min(1rem, 1.5vw), min(1.25rem, 5vh));
-    font-size: min(5vh, 2.5vw);
+    font-size: min(15vh, 1.5vw);
     height: 15%;
+
+    // code for stacking
+    // height: 10vh;
   }
 `
 

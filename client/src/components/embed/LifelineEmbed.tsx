@@ -12,10 +12,12 @@ const Container = styled.div`
     font-weight: bold;
     height: 14.666666667vh;
     @media only screen and (max-height: 700px) {
-      // border: 2px red solid;
       height: auto;
-      // height: 10vh;
       width: 50%;
+
+      // code for stacking
+      // height: 45vh;
+      // width: 100%;
     }
 
     width: 100vw;

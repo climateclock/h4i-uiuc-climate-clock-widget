@@ -29,6 +29,10 @@ const ClockContainer = styled.div`
   @media only screen and (max-height: 700px) {
     height: auto;
     width: 50%;
+
+    // code for stacking
+    // height: 45vh;
+    // width: 100%;
   }
 `
 

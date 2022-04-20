@@ -1,4 +1,5 @@
 // import Newsfeed from '../../components/clock/Newsfeed'
+import { WindowSize } from '@reach/window-size'
 import Newsfeed from './NewsfeedEmbed'
 import { getHeadlines } from '../../utils/utils'
 // import Clock from '../../components/clock/Clock'
@@ -9,6 +10,7 @@ import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
 import { getData } from '../../utils/utils'
 import Lifelines from './LifelinesEmbed'
 import { ModuleResInterface, NewsInterface } from '../../interfaces/index'
+import GlobalStyle from '../ui/GlobalStyle'
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -32,6 +34,7 @@ export default function Home() {
   }, [defaultLanguage])
 
   const Container = styled.div`
+    height: 100vh;
     @media screen and (max-height: 400px) {
       display: flex;
       flex-direction: column;
@@ -43,6 +46,9 @@ export default function Home() {
     @media screen and (max-height: 400px) {
       height: 85%;
       display: flex;
+
+      // code for stacking
+      // flex-direction: column;
     }
   `
 
@@ -66,6 +72,9 @@ export default function Home() {
       ) : (
         <h1>{ERROR_MSG}</h1>
       )}
+      <WindowSize>
+        {(windowSize) => <GlobalStyle windowSize={windowSize} />}
+      </WindowSize>
     </>
   )
 }
