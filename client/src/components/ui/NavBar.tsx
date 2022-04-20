@@ -65,6 +65,7 @@ const Button = styled.div`
 `
 
 const Image = styled.div`
+  padding-left: 0.75vw;
   scale(0.25, 0.25);
 `
 
