@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-
+import '@fontsource/lato'
 /**
  * @constant {number}
  * Max width in pixels for which the mobile layout should be displayed
@@ -51,8 +51,8 @@ const theme = {
   navText: '#f2f2f2',
   // background
   background: '#ffffff',
-  secondaryBackground: '#e0e1e2',
-  navBackground: '#000000',
+  secondaryBackground: '#f1f1f1',
+  navBackground: '#f2f2f2',
   shadow: 'rgba(0, 0, 0, 0.12)',
   // palette
   orange: '#ffa41b',
@@ -96,9 +96,11 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
   -moz-osx-font-smoothing: grayscale;
   body {
     font-family: ${({ theme }) => theme.fonts};
+    font-weight: 100;
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
+    overflow: hidden;
     @media ${({ theme }) => theme.device.mobile} {
       // Disable overscrolling on iOS
       overflow: hidden;
@@ -106,6 +108,7 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
       height: 100%;
       width: 100%;
     }
+
   }
 
   #root {

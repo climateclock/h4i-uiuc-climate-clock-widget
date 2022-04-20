@@ -1,4 +1,4 @@
-import LanguageCustomization from '../components/LanguageCustomizationForm'
+import LanguageCustomization from '../components/settings/LanguageCustomizationForm'
 
 function Settings() {
   return <LanguageCustomization />

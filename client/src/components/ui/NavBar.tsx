@@ -12,8 +12,9 @@ const NavBox = styled.div`
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
+  height: 8vh;
   z-index: 4;
-  background-color: ${({ theme }) => theme.navBackground};
+  background-color: ${({ theme }) => theme.black};
 
   margin-top: ${(props) =>
     props.isFullScreen && !props.inBounds ? '-100px' : '0px'};
@@ -48,7 +49,7 @@ const FullScreenButton = styled.div`
 
 const HomeLink = styled.div`
   float: left;
-  color: ${({ theme }) => theme.navBackground};
+  color: ${({ theme }) => theme.black};
   text-align: center;
   padding: 2vw 3vw;
   text-decoration: none;

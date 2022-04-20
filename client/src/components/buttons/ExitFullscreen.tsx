@@ -4,7 +4,7 @@ const ExitButton = styled.div`
   color: white;
 `
 
-function ExitFullscreen({ handle }: { handle: any }) {
+function ExitFullScreen({ handle }: { handle: any }) {
   return (
     <ExitButton>
       <FullscreenExit onClick={handle} width="20px" />
@@ -12,4 +12,4 @@ function ExitFullscreen({ handle }: { handle: any }) {
   )
 }
 
-export default ExitFullscreen
+export default ExitFullScreen
