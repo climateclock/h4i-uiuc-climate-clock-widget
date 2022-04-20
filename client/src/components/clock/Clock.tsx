@@ -15,31 +15,218 @@ const ClockSection = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  padding: 5%;
+  padding: 3%;
 
-  div {
+    /* @media screen and (orientation: landscape) {
+    div {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 20px;
+    }
+
+    h2,
+    h5 {
+      font-size: 15vmin;
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: 7.5vmin;
+      margin: 0%;
+      margin-left: 15px;
+      align-self: flex-end;
+      margin-bottom: 17px;
+    }
+  } */
+
+  @media screen and (orientation: landscape) {
+    padding: 4%;
+
+    div {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 20px;
+    }
+
+    h2,
+    h5 {
+      font-size: 14vmin;
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: 7vmin;
+      margin: 0%;
+      margin-left: 15px;
+      align-self: flex-end;
+      margin-bottom: 17px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 1200px) {
+    padding: 6%;
+
+    h2,
+    h5 {
+      font-size: 10vmin;
+    }
+
+    h3 {
+      font-size: 5vmin;
+      margin-bottom: 5px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 850px) {
+    padding: 5%;
+
+    h2,
+    h5 {
+      font-size: 9.5vmin;
+    }
+
+    h3 {
+      font-size: 4.75vmin;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 700px) {
+    
+    h2,
+    h5 {
+      font-size: 14vmin;
+    }
+
+    h3 {
+      font-size: 7vmin;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    
+    h2,
+    h5 {
+      font-size: 12vmin;
+    }
+
+    h3 {
+      font-size: 6vmin;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 300px) {
+    padding: 2%;
+
+    h2,
+    h5 {
+      font-size: 14vmin;
+    }
+
+    h3 {
+      font-size: 7vmin;
+    }
+  }
+
+  @media screen and (orientation: portrait) {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: flex-end;
-    margin: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 2%;
+    margin: 0px;
+
+    div {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 10%;
+    }
+
+    h2 {
+      font-size: 20vmin;
+      margin: 0px;
+    }
+
+    h3 {
+      font-size: 10vmin;
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      margin: 0px;
+      font-size: 12vmin;
+    }
   }
 
-  h2,
-  h5 {
-    font-size: 15vmin;
-    margin: 0%;
+  @media screen and (orientation: portrait) and (min-width: 300px) {
+    div {
+      margin-bottom: 7%;
+    }
+
+    h2 {
+      font-size: 15vmin;
+      margin: 0px;
+    }
+
+    h3 {
+      font-size: 7.5vmin;
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      margin: 0px;
+      font-size: 10vmin;
+    }
   }
 
-  h3 {
-    font-size: 7.5vmin;
-    margin: 0%;
-    margin-left: 15px;
-    align-self: flex-end;
-    margin-bottom: 17px;
+  @media screen and (orientation: portrait) and (min-width: 500px) {
+    div {
+      margin-bottom: 3%;
+    }
+
+    h2 {
+      font-size: 10vmin;
+      margin: 0px;
+    }
+
+    h3 {
+      font-size: 5vmin;
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      margin: 0px;
+      font-size: 7vmin;
+    }
   }
 
-  @media screen and (max-width: 1500px) {
+  @media screen and (orientation: portrait) and (min-width: 700px) {
+    div {
+      margin-bottom: 4%;
+    }
+
+    h2 {
+      font-size: 9vmin;
+      margin: 0px;
+    }
+
+    h3 {
+      font-size: 4.5vmin;
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      margin: 0px;
+      font-size: 7vmin;
+    }
+  }
+
+
+  /* @media screen and (max-height: 500px)
     h2,
     h5 {
       font-size: 12vmin;
@@ -51,34 +238,43 @@ const ClockSection = styled.div`
     }
   }
 
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 1600px) and (min-height: 500px) {
+    padding: 5%;
+
     h2,
     h5 {
-      font-size: 11vmin;
+      font-size: 12vmin;
     }
 
     h3 {
-      font-size: 5.5vmin;
+      font-size: 6vmin;
       margin-bottom: 12px;
     }
   }
 
-  // For iPads
-  @media screen and (max-width: 1000px) {
-    margin: 0px;
-
-    h2 {
-      font-size: 11vmin;
+  @media screen and (max-width: 1300px) and (min-height: 500px) {
+    padding: 7%;
+    h2,
+    h5 {
+      font-size: 10vmin;
     }
 
     h3 {
-      font-size: 4vmin;
-      margin-bottom: 18px;
+      font-size: 5vmin;
+      margin-bottom: 12px;
+    }
+  }
+
+  @media screen and (max-width: 1100px) and (min-height: 500px) {
+    margin: 0px;
+
+    h2, h5 {
+      font-size: 9vmin;
     }
 
-    h5 {
-      font-size: 10vmin;
-      margin: 10px;
+    h3 {
+      font-size: 4.5vmin;
+      margin-bottom: 7px;
     }
   }
 
@@ -86,10 +282,11 @@ const ClockSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: 0px;
+    padding: 0;
 
     div {
       margin: 10px;
+      margin-bottom: 25px;
     }
 
     h2 {
@@ -106,10 +303,23 @@ const ClockSection = styled.div`
     }
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 900px) and (min-height: 500px) {
+    h2, h5 {
+      font-size: 11vmin;
+    }
+
+    h3 {
+      font-size: 5.5vmin;
+      margin-bottom: 9px;
+    }
+  }
+
+  @media screen and (max-width: 700px) and (min-height: 500px) {
+    padding-top: 5%;
+
     div {
       margin: 0px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     h2 {
@@ -120,7 +330,7 @@ const ClockSection = styled.div`
     h3 {
       font-size: 6vmin;
       margin: 0;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       margin-left: 10%;
     }
 
@@ -129,10 +339,21 @@ const ClockSection = styled.div`
     }
   }
 
+  /* @media screen and (max-width: 700px) and (min-height: 500px) and (orientation: portrait) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 2%;
+    
+    div {
+      margin-bottom: 35px;
+    }
+  } */
+/* 
   @media screen and (max-width: 500px) {
     div {
       margin: 0px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     h2 {
@@ -150,7 +371,7 @@ const ClockSection = styled.div`
     h5 {
       font-size: 10vmin;
     }
-  }
+  } */
 `
 
 const ClockContainer = styled.div`
