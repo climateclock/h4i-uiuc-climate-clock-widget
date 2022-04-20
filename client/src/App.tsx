@@ -6,8 +6,6 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import LanguageCustomization from './components/settings/LanguageCustomizationForm'
 import LifelineCreation from './pages/lifelineCreation'
-import EnterFullScreen from './components/buttons/EnterFullscreen'
-import ExitFullScreen from './components/buttons/ExitFullscreen'
 import Home from './pages/Home'
 
 function App() {
