@@ -12,9 +12,9 @@ import { ModuleResInterface } from '../interfaces'
 import {
   LIFELINES_LOCAL_STORAGE_KEY,
   NUM_LIFELINES_DISPLAYED,
-} from '../util/constants'
+} from '../utils/constants'
 import LifelineCard from './LifelineCard'
-import { deleteElement, reorderElement } from './utils/utils'
+import { deleteElement, reorderElement } from '../utils/utils'
 
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
