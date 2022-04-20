@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
-    background-color: #619FC8;
+    background-color: #1D5479;
     border: none;
     cursor: pointer;
     text-align: center;
@@ -32,7 +32,7 @@ const HideButton = styled(StyledButton)`
     font-size: 12px;
     padding: 6.5px 20px;
     font-weight: 500;
-//    font-family: <Lato></Lato>;
+    font-family: "Lato"
     &:hover {
        background-color: #F1F1F1;
     }
