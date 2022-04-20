@@ -66,7 +66,7 @@ export default function Header({ moduleType, title, themeColor }: HeaderProps) {
       <HeaderBorder />
       <LabelContainer>
         <Module>{moduleType}</Module>
-        <Title color={themeColor}>{title}</Title>
+        <Title>{title}</Title>
       </LabelContainer>
     </>
   )
