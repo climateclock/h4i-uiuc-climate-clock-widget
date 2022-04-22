@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { WindowSize } from '@reach/window-size'
 import { ThemeProvider } from 'styled-components'
-import { UpdateURL } from './routing/UpdateURL'
 // import { get } from './api/config'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
@@ -23,11 +22,11 @@ function App() {
         {' '}
         <BrowserRouter>
           <Routes>
-            <Route path="/langForm" element={<LanguageCustomization />} />
-            <Route path="/moduleForm" element={<LifelineCreation />} />
-            <Route path="/settings" element={<LanguageCustomization />} />
-            <Route path="/lifelines" element={<LifelineCreation />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/langForm/*" element={<LanguageCustomization />} />
+            <Route path="/moduleForm/*" element={<LifelineCreation />} />
+            <Route path="/settings/*" element={<LanguageCustomization />} />
+            <Route path="/lifelines/*" element={<LifelineCreation />} />
+            <Route path="/*" element={<Home />} />
           </Routes>
         </BrowserRouter>
         {showFullscreenButton ? (
