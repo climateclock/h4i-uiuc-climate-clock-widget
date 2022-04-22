@@ -5,7 +5,7 @@ import { ModuleResInterface } from '../../interfaces'
 import Header from '../ui/Header'
 import { toUpperCase } from '../../utils/utils'
 const ClockSection = styled.div`
-  color: ${({ theme }) => theme.text};
+color: ${({ theme }) => theme.text};
   font-size: 20vh;
   font-family: ${({ theme }) => theme.fonts};
   text-align: center;
@@ -15,363 +15,141 @@ const ClockSection = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  padding: 3%;
+  padding: 5%;
 
-    /* @media screen and (orientation: landscape) {
-    div {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-end;
-      margin: 20px;
-    }
-
-    h2,
-    h5 {
-      font-size: 15vmin;
-      margin: 0%;
-    }
-
-    h3 {
-      font-size: 7.5vmin;
-      margin: 0%;
-      margin-left: 15px;
-      align-self: flex-end;
-      margin-bottom: 17px;
-    }
-  } */
-
-  @media screen and (orientation: landscape) {
-    padding: 4%;
-
-    div {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-end;
-      margin: 20px;
-    }
-
-    h2,
-    h5 {
-      font-size: 14vmin;
-      margin: 0%;
-    }
-
-    h3 {
-      font-size: 7vmin;
-      margin: 0%;
-      margin-left: 15px;
-      align-self: flex-end;
-      margin-bottom: 17px;
-    }
+  div {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 20px;
   }
 
-  @media screen and (orientation: landscape) and (max-width: 1200px) {
-    padding: 6%;
+  h2,
+  h5 {
+    font-size: max(5.5rem, min(6.5rem,8vw));
+    margin: 0%;
+  }
 
-    h2,
+  h3 {
+    font-size: max(2.75rem,min(3.25rem, 4vw));
+    margin: 0%;
+    margin-left: 15px;
+    align-self: flex-end;
+    margin-bottom: 17px;
+  }
+
+  // For iPads
+  @media screen and (max-width: 1000px) and (min-height: 500px) {
+    margin: 0px;
+    h2 {
+      font-size: 11vmin;
+    }
+    h3 {
+      font-size: 4vmin;
+      margin-bottom: 18px;
+    }
     h5 {
       font-size: 10vmin;
-    }
-
-    h3 {
-      font-size: 5vmin;
-      margin-bottom: 5px;
+      margin: 10px;
     }
   }
 
-  @media screen and (orientation: landscape) and (max-width: 850px) {
-    padding: 5%;
-
-    h2,
-    h5 {
-      font-size: 9.5vmin;
-    }
-
-    h3 {
-      font-size: 4.75vmin;
-    }
-  }
-
-  @media screen and (orientation: landscape) and (max-height: 700px) {
-    
-    h2,
-    h5 {
-      font-size: 14vmin;
-    }
-
-    h3 {
-      font-size: 7vmin;
-    }
-  }
-
-  @media screen and (orientation: landscape) and (max-height: 600px) {
-    
-    h2,
-    h5 {
-      font-size: 12vmin;
-    }
-
-    h3 {
-      font-size: 6vmin;
-    }
-  }
-
-  @media screen and (orientation: landscape) and (max-height: 300px) {
-    padding: 2%;
-
-    h2,
-    h5 {
-      font-size: 14vmin;
-    }
-
-    h3 {
-      font-size: 7vmin;
-    }
-  }
-
-  @media screen and (orientation: portrait) {
+  @media screen and (max-width: 800px) and (min-height: 800px) and (orientation: portrait) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: 2%;
-    margin: 0px;
-
-    div {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-end;
-      margin-bottom: 10%;
-    }
-
-    h2 {
-      font-size: 20vmin;
-      margin: 0px;
-    }
-
-    h3 {
-      font-size: 10vmin;
-      margin-bottom: 9px;
-    }
-
-    h5 {
-      margin: 0px;
-      font-size: 12vmin;
-    }
-  }
-
-  @media screen and (orientation: portrait) and (min-width: 300px) {
-    div {
-      margin-bottom: 7%;
-    }
-
-    h2 {
-      font-size: 15vmin;
-      margin: 0px;
-    }
-
-    h3 {
-      font-size: 7.5vmin;
-      margin-bottom: 9px;
-    }
-
-    h5 {
-      margin: 0px;
-      font-size: 10vmin;
-    }
-  }
-
-  @media screen and (orientation: portrait) and (min-width: 500px) {
-    div {
-      margin-bottom: 3%;
-    }
-
-    h2 {
-      font-size: 10vmin;
-      margin: 0px;
-    }
-
-    h3 {
-      font-size: 5vmin;
-      margin-bottom: 9px;
-    }
-
-    h5 {
-      margin: 0px;
-      font-size: 7vmin;
-    }
-  }
-
-  @media screen and (orientation: portrait) and (min-width: 700px) {
-    div {
-      margin-bottom: 4%;
-    }
-
-    h2 {
-      font-size: 9vmin;
-      margin: 0px;
-    }
-
-    h3 {
-      font-size: 4.5vmin;
-      margin-bottom: 9px;
-    }
-
-    h5 {
-      margin: 0px;
-      font-size: 7vmin;
-    }
-  }
-
-
-  /* @media screen and (max-height: 500px)
-    h2,
-    h5 {
-      font-size: 12vmin;
-    }
-
-    h3 {
-      font-size: 6vmin;
-      margin-bottom: 12px;
-    }
-  }
-
-  @media screen and (max-width: 1600px) and (min-height: 500px) {
-    padding: 5%;
-
-    h2,
-    h5 {
-      font-size: 12vmin;
-    }
-
-    h3 {
-      font-size: 6vmin;
-      margin-bottom: 12px;
-    }
-  }
-
-  @media screen and (max-width: 1300px) and (min-height: 500px) {
-    padding: 7%;
-    h2,
-    h5 {
-      font-size: 10vmin;
-    }
-
-    h3 {
-      font-size: 5vmin;
-      margin-bottom: 12px;
-    }
-  }
-
-  @media screen and (max-width: 1100px) and (min-height: 500px) {
-    margin: 0px;
-
-    h2, h5 {
-      font-size: 9vmin;
-    }
-
-    h3 {
-      font-size: 4.5vmin;
-      margin-bottom: 7px;
-    }
-  }
-
-  @media screen and (max-width: 900px) and (min-height: 500px) {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding: 0;
+    padding: 0px;
 
     div {
       margin: 10px;
-      margin-bottom: 25px;
     }
 
     h2 {
-      font-size: 9vmin;
+      font-size: max(5rem, min(6rem, 7vw));
     }
 
     h3 {
-      font-size: 4.5vmin;
+      font-size: max(2.5rem, min(3rem, 3.5vw));
       margin-bottom: 9px;
     }
 
     h5 {
-      font-size: 8vmin;
+      font-size: max(3rem, min(2.75rem, 3.25vw));
     }
   }
 
-  @media screen and (max-width: 900px) and (min-height: 500px) {
-    h2, h5 {
-      font-size: 11vmin;
-    }
-
-    h3 {
-      font-size: 5.5vmin;
-      margin-bottom: 9px;
-    }
-  }
-
-  @media screen and (max-width: 700px) and (min-height: 500px) {
-    padding-top: 5%;
-
-    div {
-      margin: 0px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 12vmin;
-      margin: 0;
-    }
-
-    h3 {
-      font-size: 6vmin;
-      margin: 0;
-      margin-bottom: 8px;
-      margin-left: 10%;
-    }
-
-    h5 {
-      font-size: 8vmin;
-    }
-  }
-
-  /* @media screen and (max-width: 700px) and (min-height: 500px) and (orientation: portrait) {
+  @media screen and (max-width: 800px) and (max-height: 800px) and (orientation: portrait) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: 2%;
-    
+    padding: 0px;
     div {
-      margin-bottom: 35px;
-    }
-  } */
-/* 
-  @media screen and (max-width: 500px) {
-    div {
-      margin: 0px;
-      margin-bottom: 25px;
+      margin: 5px;
     }
 
     h2 {
-      font-size: 16vmin;
-      margin: 0;
+      font-size: max(4rem, min(5rem, 6vw));
     }
 
     h3 {
-      font-size: 8vmin;
-      margin: 0;
-      margin-bottom: 10px;
-      margin-left: 10%;
+      font-size: max(2rem, min(2.5rem, 3vw));
+      margin-bottom: 9px;
     }
 
     h5 {
-      font-size: 10vmin;
+      font-size: max(2.5rem, min(2.25rem, 2.75vw));
     }
-  } */
+  }
+
+  // Landscape style, doesn't utilize the wrap
+  @media screen and (max-width: 900px) and (max-height: 800px) {
+
+    h2, h5 {
+      font-size: max(4rem, min(5rem, 6vw));
+    }
+
+    h3 {
+      font-size: max(2rem, min(2.5rem, 3vw));
+      margin-bottom: 9px;
+    }
+  }
+
+  @media screen and (max-width: 700px) and (max-height: 800px) {
+
+    h2, h5 {
+      font-size: max(3rem, min(4rem, 5vw));
+    }
+
+    h3 {
+      font-size: max(1.5rem, min(2rem, 2.5vw));
+      margin-bottom: 9px;
+    }
+  }
+
+  // At this point the text becomes small and it is worth just wrapping
+  @media screen and (max-width: 600px) and (max-height: 800px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0px;
+    div {
+      margin: 5px;
+    }
+
+    h2 {
+      font-size: max(4rem, min(5rem, 6vw));
+    }
+
+    h3 {
+      font-size: max(2rem, min(2.5rem, 3vw));
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      font-size: max(2.5rem, min(2.25rem, 2.75vw));
+    }
+  }
 `
 
 const ClockContainer = styled.div`
