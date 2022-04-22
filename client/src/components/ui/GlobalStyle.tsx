@@ -48,7 +48,7 @@ const theme = {
   secondaryText: '#5a5a5a',
   tertiaryText: '#979797',
   headerText: '#333333',
-  navText: '#f2f2f2',
+  navBarText: '#f2f2f2',
   // background
   background: '#ffffff',
   secondaryBackground: '#f1f1f1',

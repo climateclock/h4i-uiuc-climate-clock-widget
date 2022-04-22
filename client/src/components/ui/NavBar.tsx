@@ -17,22 +17,23 @@ const NavBox = styled.div`
   background-color: ${({ theme }) => theme.black};
 
   margin-top: ${(props) =>
-    props.isFullScreen && !props.inBounds ? '-100px' : '0px'};
+    props.isFullScreen && !props.inBounds ? '-6.25em' : '0px'};
 
   transform: ${(props) =>
     props.isFullScreen && !props.inBounds
-      ? 'translateY(-200px)'
+      ? 'translateY(-12.5em)'
       : 'translateY(0px)'};
   transition: 0.3s ease-out;
 `
 
 const PageLink = styled.div`
+  align-items: center;
   float: right;
-  color: ${({ theme }) => theme.navText};
+  color: ${({ theme }) => theme.navBarText};
   text-align: center;
   padding: 2vw 3vw;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 1em;
   &:hover {
     color: ${({ theme }) => theme.blue};
   }
@@ -40,7 +41,7 @@ const PageLink = styled.div`
 
 const FullScreenButton = styled.div`
   float: right;
-  color: ${({ theme }) => theme.navText};
+  color: ${({ theme }) => theme.navBarText};
   padding: 2vw 3vw;
   &:hover {
     color: ${({ theme }) => theme.blue};
@@ -98,7 +99,7 @@ function NavBar({
           <Button>
             Climate Clock
             <Image>
-              <img src={clock} alt="cclock" />
+              <img src={clock} alt="climate_clock_logo" />
             </Image>
           </Button>
         </HomeLink>
