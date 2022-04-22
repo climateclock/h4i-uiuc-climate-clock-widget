@@ -118,6 +118,7 @@ function Clock(props: ModuleResInterface) {
   }
 
   let value = moment(props.timestamp!).valueOf() - moment(current).valueOf()
+  console.log(value)
   let ms_per_year = 3.154e10 // number of milliseconds per year
   let ms_per_day = 8.64e7
   let ms_per_hour = 3.6e6
