@@ -98,15 +98,7 @@ const ClockContainer = styled.div`
 `
 
 function Clock(props: ModuleResInterface) {
-  let date = new Date()
-
-  let calendar =
-    date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-  let today =
-    date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
-
-  let current = calendar + ' ' + today
-
+  let date = moment()
   let years: any, days: any, hours: any, minutes: any, seconds: any
 
   if (props.timestamp === undefined) {
@@ -117,8 +109,7 @@ function Clock(props: ModuleResInterface) {
     seconds = 0
   }
 
-  let value = moment(props.timestamp!).valueOf() - moment(current).valueOf()
-  console.log(value)
+  let value = moment(props.timestamp!).valueOf() - date.valueOf()
   let ms_per_year = 3.154e10 // number of milliseconds per year
   let ms_per_day = 8.64e7
   let ms_per_hour = 3.6e6
