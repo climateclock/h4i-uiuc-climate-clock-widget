@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
 import Header from '../ui/Header'
 import { toUpperCase } from '../../utils/utils'
+import moment from 'moment'
+
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
   font-size: 20vh;
@@ -97,6 +99,7 @@ const ClockContainer = styled.div`
 
 function Clock(props: ModuleResInterface) {
   let date = new Date()
+
   let calendar =
     date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   let today =
@@ -114,7 +117,7 @@ function Clock(props: ModuleResInterface) {
     seconds = 0
   }
 
-  let value = new Date(props.timestamp!).valueOf() - new Date(current).valueOf()
+  let value = moment(props.timestamp!).valueOf() - moment(current).valueOf()
   let ms_per_year = 3.154e10 // number of milliseconds per year
   let ms_per_day = 8.64e7
   let ms_per_hour = 3.6e6
