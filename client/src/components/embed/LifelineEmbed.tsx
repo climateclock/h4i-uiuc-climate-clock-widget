@@ -45,13 +45,12 @@ const ContentContainer = styled.div`
 const Value = styled.div`
   display: flex;
   align-items: center;
-  // font-size: 3em;
+  font-size: 3em;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
   margin-top: 25px;
 
   @media only screen and (max-height: 700px) {
-    //font-size: max(7.5vh, min(3rem, 15vw));
     font-size: max(7vh, min(2.75rem, 12vw));
     margin-top: 0px;
   }
@@ -61,7 +60,6 @@ const Unit = styled.div`
   margin-left: ${VALUE_UNIT_MARGIN}vw;
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   @media only screen and (max-height: 700px) {
-    // font-size: max(5vh, min(2rem, 7.5vw));
     font-size: max(3.5vh, min(1.75rem, 6.5vw));
   }
 `

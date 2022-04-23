@@ -56,7 +56,6 @@ export default function Home() {
     @media only screen and (max-width: 1024px) {
       height: 85%;
       display: flex;
-
       flex-direction: column;
     }
   `
