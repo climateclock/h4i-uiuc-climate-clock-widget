@@ -15,7 +15,7 @@ color: ${({ theme }) => theme.text};
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  padding-top: calc(10vh);
+  padding-top: calc(2% + 5vh);
 
   div {
     display: flex;
@@ -39,6 +39,11 @@ color: ${({ theme }) => theme.text};
     margin-bottom: 17px;
   }
 
+  // This style deals with padding for when there is only one lifeline
+  @media screen and (max-height: 700px) {
+    padding: calc(10vh  + 2%);
+  }
+
   // For iPads
   @media screen and (max-width: 1000px) and (min-height: 500px) {
     margin: 0px;
@@ -60,7 +65,6 @@ color: ${({ theme }) => theme.text};
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: 0%;
 
     div {
       margin: 10px;
@@ -84,7 +88,7 @@ color: ${({ theme }) => theme.text};
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: calc(1vh + 1%);
+    padding-top: 3%;
 
     div {
       margin: 5px;
@@ -102,6 +106,10 @@ color: ${({ theme }) => theme.text};
     h5 {
       font-size: max(2.5rem, min(2.25rem, 2.75vw));
     }
+  }
+
+  @media screen and (orientation: portrait) and (max-height: 700px) {
+    padding: 7vh;
   }
 
   // Landscape style, doesn't utilize the wrap
@@ -129,7 +137,7 @@ color: ${({ theme }) => theme.text};
     }
   }
 
-  // At this point the text becomes small and it is worth just wrapping
+  // The text becomes small and it is worth just wrapping, regardless of the orientation being portrait
   @media screen and (max-width: 600px) and (max-height: 800px) {
     display: flex;
     flex-wrap: wrap;
