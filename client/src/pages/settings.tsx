@@ -46,6 +46,12 @@ const EmbedText = styled.div`
 const IconContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  gap: 0.75em;
+`
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `
 
 function Settings() {
@@ -60,19 +66,19 @@ function Settings() {
         <LanguageCustomization />
         <HeadingTitle>Share Your Custom Clock</HeadingTitle>
         <SubheadingTitle>Shareable Link</SubheadingTitle>
-        <IconContainer>
+        <FormContainer>
           <form>
             <SettingsText>
               https://clock.climateclock.world/oGpVDQKb95lh
             </SettingsText>
           </form>
           <button>Copy Link</button>
-        </IconContainer>
+        </FormContainer>
         <SubheadingTitle>Embed</SubheadingTitle>
         <SettingsText>
           To add the Climate Clock widget to your site, add the following HTML:
         </SettingsText>
-        <IconContainer>
+        <FormContainer>
           <form>
             <SettingsText>
               script src = "https://climateclock.world/widget-v2.js" async
@@ -80,13 +86,13 @@ function Settings() {
             </SettingsText>
           </form>
           <button>Copy Link</button>
-        </IconContainer>
+        </FormContainer>
         <EmbedText>Copy Embed Code</EmbedText>
         <SubheadingTitle>Social Media</SubheadingTitle>
         <IconContainer>
           <img src={facebook} alt="facebook" />
-          <img src={instagram} alt="instagram" />
           <img src={twitter} alt="twitter" />
+          <img src={instagram} alt="instagram" />
           <img src={whatsapp} alt="whatsapp" />
         </IconContainer>
       </SettingsContainer>
