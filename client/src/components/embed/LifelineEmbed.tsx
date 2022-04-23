@@ -54,6 +54,11 @@ const Value = styled.div`
     font-size: max(7vh, min(2.75rem, 12vw));
     margin-top: 0px;
   }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(5.5vh, min(2.25rem, 12.5vw));
+  }
 `
 
 const Unit = styled.div`
@@ -61,6 +66,10 @@ const Unit = styled.div`
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   @media only screen and (max-height: 700px) {
     font-size: max(3.5vh, min(1.75rem, 6.5vw));
+  }
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(4vh, min(1.5rem, 5vw));
   }
 `
 
