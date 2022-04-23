@@ -15,7 +15,7 @@ color: ${({ theme }) => theme.text};
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  padding: 5%;
+  padding-top: calc(10vh);
 
   div {
     display: flex;
@@ -42,6 +42,7 @@ color: ${({ theme }) => theme.text};
   // For iPads
   @media screen and (max-width: 1000px) and (min-height: 500px) {
     margin: 0px;
+
     h2 {
       font-size: 11vmin;
     }
@@ -59,7 +60,7 @@ color: ${({ theme }) => theme.text};
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: 0px;
+    padding: 0%;
 
     div {
       margin: 10px;
@@ -83,7 +84,8 @@ color: ${({ theme }) => theme.text};
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding: 0px;
+    padding: calc(1vh + 1%);
+
     div {
       margin: 5px;
     }
@@ -133,6 +135,8 @@ color: ${({ theme }) => theme.text};
     flex-wrap: wrap;
     flex-direction: column;
     padding: 0px;
+    padding-top: 0px;
+
     div {
       margin: 5px;
     }
