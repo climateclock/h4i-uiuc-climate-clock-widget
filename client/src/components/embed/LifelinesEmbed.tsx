@@ -38,14 +38,14 @@ export default function LifelinesEmbed({
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [lifelineDisplayNum])
 
   useEffect(() => {
     for (let i = 0; i < lifelineDisplayNum; i++) {
       if (lifeLineData[i]) lifelineSavedValues[i] = lifeLineData[i]['initial']
     }
     setLifelineSavedValues([...lifelineSavedValues])
-  }, [lifeLineData])
+  }, [lifeLineData, lifelineDisplayNum, lifelineSavedValues])
 
   /* used to update saved values to continue for next time duration */
   const updateSavedValue = (index: number, value: number) => {

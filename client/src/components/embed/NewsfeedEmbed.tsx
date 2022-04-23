@@ -15,28 +15,15 @@ const MarqueeContainer = styled.div`
       height: 10vh;
   }
 
-  // @media only screen and (max-height: 700px) {
-  //   font-size: min(15vh, 1.5vw);
-  //   height: 15%;
-
-  //   // code for stacking
-  //   // height: 10vh;
-  // }
-
   @media only screen and (min-width: 1025px) {
     font-size: min(15vh, 1.5vw);
     height: 15%;
   }
 
+  // code for stacking
   @media only screen and (max-width: 1024px) {
     font-size: min(15vh, 1.5vw);
-    // height: 15%;
-
-    // code for stacking
-    // height: 10vh;
     height: 15%;
-    // height: auto;
-    // border: 5px green solid;
   }
 `
 

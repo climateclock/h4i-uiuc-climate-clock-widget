@@ -13,7 +13,6 @@ const ClockSection = styled.div`
     flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-start;
-    // height: 70%;
     height: 82.35%; // 85% of 85
     gap: 1vw;
   }
@@ -25,14 +24,14 @@ const ClockContainer = styled.div`
   font-weight: bold;
   width: 100vw;
   height: 44vh;
-  // @media only screen and (max-height: 700px) {
+
   @media only screen and (min-width: 1025px) {
     height: auto;
     width: 50%;
   }
 
+  // code for stacking
   @media only screen and (max-width: 1024px) {
-    // code for stacking
     height: 45vh;
     width: 100%;
   }
@@ -40,15 +39,28 @@ const ClockContainer = styled.div`
 
 const Value = styled.div`
   margin-left: 1vw;
-  transform: scale(1, calc(3.5vh / 3.5vw));
-  font-size: max(5vh, min(2rem, 7.5vw));
+  // transform: scale(1, calc(3.5vh / 3.5vw));
+  @media only screen and (max-height: 700px) {
+    //font-size: max(7.5vh, min(3rem, 15vw));
+    font-size: max(7vh, min(2.75rem, 12vw));
+    // margin-top: 0px;
+  }
+  // font-size: max(5vh, min(2rem, 7.5vw));
+  // font-size: max(6vh, min(2.5rem, 12vw));
+  // font-size: max(7.5vh, min(3rem, 12.5vw));
+  // font-size: max(7vh, min(2.75rem, 12vw));
 `
 
 const Unit = styled.div`
   margin-left: 0.5vw;
-  font-size: 3.5vw;
-  transform: scale(1, calc(3.5vh / 3.5vw));
-  font-size: max(5vh, min(2rem, 7.5vw));
+  // font-size: 3.5vw;
+  // transform: scale(1, calc(3.5vh / 3.5vw));
+  @media only screen and (max-height: 700px) {
+    // font-size: max(5vh, min(2rem, 7.5vw));
+    font-size: max(3.5vh, min(1.5rem, 5vw));
+  }
+  // font-size: max(5vh, min(2rem, 7.5vw));
+  // font-size: max(3.5vh, min(1.5rem, 5vw));
 `
 
 function Clock(props: ModuleResInterface) {
