@@ -41,7 +41,7 @@ color: ${({ theme }) => theme.text};
 
   // This style deals with padding for when there is only one lifeline
   @media screen and (max-height: 700px) {
-    padding: calc(10vh  + 2%);
+    padding-top: calc(10vh  + 2%);
   }
 
   // For iPads
@@ -108,8 +108,8 @@ color: ${({ theme }) => theme.text};
     }
   }
 
-  @media screen and (orientation: portrait) and (max-height: 700px) {
-    padding: 7vh;
+  @media screen and (orientation: portrait) and (max-height: 700px) and (min-height: 400px) {
+    padding-top: 7vh;
   }
 
   // Landscape style, doesn't utilize the wrap
@@ -135,6 +135,10 @@ color: ${({ theme }) => theme.text};
       font-size: max(1.5rem, min(2rem, 2.5vw));
       margin-bottom: 9px;
     }
+  }
+
+  @media screen and (max-height: 300px) {
+    padding-top: 0px;
   }
 `
 
