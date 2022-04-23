@@ -136,32 +136,6 @@ color: ${({ theme }) => theme.text};
       margin-bottom: 9px;
     }
   }
-
-  // The text becomes small and it is worth just wrapping, regardless of the orientation being portrait
-  @media screen and (max-width: 600px) and (max-height: 800px) {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding: 0px;
-    padding-top: 0px;
-
-    div {
-      margin: 5px;
-    }
-
-    h2 {
-      font-size: max(4rem, min(5rem, 6vw));
-    }
-
-    h3 {
-      font-size: max(2rem, min(2.5rem, 3vw));
-      margin-bottom: 9px;
-    }
-
-    h5 {
-      font-size: max(2.5rem, min(2.25rem, 2.75vw));
-    }
-  }
 `
 
 const ClockContainer = styled.div`
