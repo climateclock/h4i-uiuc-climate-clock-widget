@@ -34,8 +34,21 @@ export default function Home() {
   }, [defaultLanguage])
 
   const Container = styled.div`
-    height: 100vh;
-    @media screen and (max-height: 400px) {
+    // height: 100vh;
+    // @media screen and (max-height: 400px) {
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: space-between;
+    // }
+
+    @media screen and (min-width: 1025px) {
+      height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @media screen and (max-width: 1024px) {
+      // height: 176px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -43,12 +56,22 @@ export default function Home() {
   `
 
   const PageEmbedContainer = styled.div`
-    @media screen and (max-height: 400px) {
+    // @media screen and (max-height: 400px) {
+    @media screen and (min-width: 1025px) {
       height: 85%;
       display: flex;
 
       // code for stacking
       // flex-direction: column;
+    }
+
+    @media only screen and (max-width: 1024px) {
+      height: 85%;
+      display: flex;
+
+      // code for stacking
+      flex-direction: column;
+      // justify-content: space-around;
     }
   `
 

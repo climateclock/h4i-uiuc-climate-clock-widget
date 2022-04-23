@@ -11,13 +11,19 @@ const Container = styled.div`
     background: ${({ theme }) => theme.blue};
     font-weight: bold;
     height: 14.666666667vh;
-    @media only screen and (max-height: 700px) {
+    // @media only screen and (max-height: 700px) {
+    @media only screen and (min-width: 1025px) {
       height: auto;
       width: 50%;
+    }
+
+    @media only screen and (max-width: 1024px) {
+      height: auto;
+      // width: 50%;
 
       // code for stacking
-      // height: 45vh;
-      // width: 100%;
+      height: 45vh;
+      width: 100%;
     }
 
     width: 100vw;

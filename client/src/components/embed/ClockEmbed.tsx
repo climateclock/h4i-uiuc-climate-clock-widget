@@ -11,7 +11,6 @@ const ClockSection = styled.div`
   @media only screen and (max-height: 700px) {
     display: flex;
     flex-wrap: nowrap;
-    // align-items: flex-end;
     align-items: center;
     justify-content: flex-start;
     // height: 70%;
@@ -26,13 +25,16 @@ const ClockContainer = styled.div`
   font-weight: bold;
   width: 100vw;
   height: 44vh;
-  @media only screen and (max-height: 700px) {
+  // @media only screen and (max-height: 700px) {
+  @media only screen and (min-width: 1025px) {
     height: auto;
     width: 50%;
+  }
 
+  @media only screen and (max-width: 1024px) {
     // code for stacking
-    // height: 45vh;
-    // width: 100%;
+    height: 45vh;
+    width: 100%;
   }
 `
 
