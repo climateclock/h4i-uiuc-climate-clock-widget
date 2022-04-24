@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
+import Header from '../ui/Header'
+import { toUpperCase } from '../../utils/utils'
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
-  height: 50vh;
   font-size: 20vh;
   font-family: ${({ theme }) => theme.fonts};
   text-align: center;
-  background: ${({ theme }) => theme.red};
   position: relative;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@ const ClockSection = styled.div`
   h3 {
     display: flex;
     flex-wrap: nowrap;
-    font-size: 8.125rem;
+    font-size: 5.125rem;
     display: inline-block;
     margin-top: calc(-1rem + 4vh);
   }
@@ -36,7 +36,7 @@ const ClockSection = styled.div`
     h3 {
       display: flex;
       flex-wrap: nowrap;
-      font-size: 8.125rem;
+      font-size: 5.125rem;
       display: inline-block;
       margin-top: 9%;
     }
@@ -49,7 +49,7 @@ const ClockSection = styled.div`
       margin-top: 5%;
     }
   }
-  @media screen and (max-width: 800px) {
+  @media only screen and (max-width: 800px) {
     display: flex;
     flex-wrap: wrap;
     white-space: nowrap;
@@ -64,7 +64,37 @@ const ClockSection = styled.div`
       margin-top: 8%;
     }
   }
+
+  @media only screen and (max-height: 600px) {
+    height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
+    h3 {
+      font-size: 1em;
+      margin-top: 11%;
+    }
+    h2 {
+      font-size: 0.5em;
+      padding: 0 5px 0 5px;
+      margin-top: 8%;
+    }
+  }
 `
+
+const ClockContainer = styled.div`
+  font-family: ${({ theme }) => theme.fonts};
+  font-weight: bold;
+  background: ${({ theme }) => theme.red};
+  height: 44vh;
+  @media only screen and (max-height: 700px) {
+    height: 65vh;
+  }
+
+  width: 100vw;
+`
+
 function Clock(props: ModuleResInterface) {
   let date = new Date()
   let calendar =
@@ -171,14 +201,19 @@ function Clock(props: ModuleResInterface) {
   }, [])
 
   return (
-    <div className="container">
+    <ClockContainer>
+      <Header
+        moduleType={props.flavor ? toUpperCase(props.flavor) : ' '}
+        title={props.labels ? (props.labels[0] ? props.labels[0] : '') : ''}
+        themeColor={({ theme }) => theme.red}
+      />
       <ClockSection>
         <h3>{years}</h3> <h2>YRS</h2> <h3>{days}</h3> <h2>DAYS</h2>
         <h3>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
         </h3>
       </ClockSection>
-    </div>
+    </ClockContainer>
   )
 }
 

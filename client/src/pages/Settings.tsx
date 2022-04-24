@@ -1,4 +1,4 @@
-import LanguageCustomization from '../components/LanguageCustomizationForm'
+import LanguageCustomization from '../components/settings/LanguageCustomizationForm'
 import { StyledSelect } from '../components/ui/Select'
 import styled from 'styled-components'
 import Input from '../components/ui/Input'
@@ -29,29 +29,12 @@ const SettingsSection = styled.div`
   }
 `
 
-const customStyles = {
-  control: (base, state) => ({
-    ...base,
-    boxShadow: state.isFocused ? 'grey' : 'grey',
-    borderColor: 'grey',
-    backgroundColor: 'white',
-    color: state.isFocused ? 'white' : 'white',
-    width: '255px',
-    height: '31px',
-  }),
-  container: (base) => ({
-    ...base,
-    width: '255px',
-    height: '31px',
-  }),
-}
-
 function Settings() {
   return (
     <SettingsSection>
       <h1>Settings</h1>
       <h3 id="language">Configure Language</h3>
-      <StyledSelect customStyles={customStyles} options={options} />
+      <StyledSelect options={options} />
       <h3 id="share">Share your custom clock</h3>
       <Input
         type="text"

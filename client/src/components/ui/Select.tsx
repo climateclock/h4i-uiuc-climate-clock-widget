@@ -1,6 +1,23 @@
 import Select from 'react-select'
 
-export const StyledSelect = ({ customStyles, options }) => (
+const customStyles = {
+  control: (base, state) => ({
+    ...base,
+    boxShadow: state.isFocused ? 'grey' : 'grey',
+    borderColor: 'grey',
+    backgroundColor: 'white',
+    color: state.isFocused ? 'white' : 'white',
+    width: '255px',
+    height: '31px',
+  }),
+  container: (base) => ({
+    ...base,
+    width: '255px',
+    height: '31px',
+  }),
+}
+
+export const StyledSelect = ({ options }) => (
   <Select
     styles={customStyles}
     options={options}
