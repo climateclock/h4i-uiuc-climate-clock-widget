@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import LanguageCustomization from './components/settings/LanguageCustomizationForm'
+import Settings from './pages/Settings'
 import LifelineCreation from './pages/lifelineCreation'
 import EnterFullScreen from './components/buttons/EnterFullscreen'
 import ExitFullScreen from './components/buttons/ExitFullscreen'
@@ -22,7 +22,7 @@ function App() {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/settings" element={<LanguageCustomization />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/lifelines" element={<LifelineCreation />} />
             <Route path="/" element={<Home />} />
           </Routes>
