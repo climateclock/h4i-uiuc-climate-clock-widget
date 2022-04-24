@@ -1,14 +1,15 @@
-import { useState } from 'react'
 import { WindowSize } from '@reach/window-size'
-import { ThemeProvider } from 'styled-components'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import LanguageCustomization from './components/settings/LanguageCustomizationForm'
-import LifelineCreation from './pages/lifelineCreation'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+
 import EnterFullScreen from './components/buttons/EnterFullscreen'
 import ExitFullScreen from './components/buttons/ExitFullscreen'
+import LanguageCustomization from './components/settings/LanguageCustomizationForm'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Home from './pages/Home'
+import LifelineCreation from './pages/lifelineCreation'
 
 function App() {
   const [showFullscreenButton, setFullscreenButton] = useState(false)
@@ -29,9 +30,9 @@ function App() {
         </BrowserRouter>
 
         {showFullscreenButton ? (
-          <EnterFullScreen handle={handle.enter} />
+          <EnterFullScreen handle={handle} />
         ) : (
-          <ExitFullScreen handle={handle.exit} />
+          <ExitFullScreen handle={handle} />
         )}
       </FullScreen>
       <WindowSize>

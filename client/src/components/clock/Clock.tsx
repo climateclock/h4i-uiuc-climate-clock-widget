@@ -1,9 +1,10 @@
-import styled from 'styled-components'
-import { useState, useEffect } from 'react'
-import { ModuleResInterface } from '../../interfaces'
-import Header from '../ui/Header'
-import { toUpperCase } from '../../utils/utils'
 import moment from 'moment'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+
+import { ModuleResInterface } from '../../interfaces'
+import { toUpperCase } from '../../utils/utils'
+import Header from '../ui/Header'
 
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
@@ -98,23 +99,22 @@ const ClockContainer = styled.div`
 `
 
 function Clock(props: ModuleResInterface) {
-  let date = moment()
-  let years: any, days: any, hours: any, minutes: any, seconds: any
+  let years = 0
+  let days = 0
+  let hours = 0
+  let minutes = 0
+  let seconds = 0
 
-  if (props.timestamp === undefined) {
-    years = 0
-    days = 0
-    hours = 0
-    minutes = 0
-    seconds = 0
+  let value = 0
+  if (props.timestamp) {
+    value = moment(props.timestamp).valueOf() - moment().valueOf()
   }
 
-  let value = moment(props.timestamp!).valueOf() - date.valueOf()
-  let ms_per_year = 3.154e10 // number of milliseconds per year
-  let ms_per_day = 8.64e7
-  let ms_per_hour = 3.6e6
-  let ms_per_minute = 60000
-  let ms_per_second = 1000
+  const ms_per_year = 3.154e10 // number of milliseconds per year
+  const ms_per_day = 8.64e7
+  const ms_per_hour = 3.6e6
+  const ms_per_minute = 60000
+  const ms_per_second = 1000
 
   if (years !== 0) {
     years = Math.floor(value / ms_per_year)

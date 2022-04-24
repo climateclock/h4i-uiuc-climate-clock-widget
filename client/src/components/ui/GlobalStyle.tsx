@@ -1,5 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
 import '@fontsource/lato'
+
+import { createGlobalStyle } from 'styled-components'
 /**
  * @constant {number}
  * Max width in pixels for which the mobile layout should be displayed
@@ -89,7 +90,7 @@ const zIndex = {
   modal: 30,
 }
 
-const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
+const GlobalStyle = createGlobalStyle<{ WindowSize: number }>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   body {

@@ -1,11 +1,11 @@
-import Newsfeed from '../components/clock/Newsfeed'
-import { getHeadlines } from '../utils/utils'
+import { useEffect,useState } from 'react'
+
 import Clock from '../components/clock/Clock'
-import { useState, useEffect } from 'react'
-import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../utils/constants'
-import { getData } from '../utils/utils'
+import Newsfeed from '../components/clock/Newsfeed'
 import Lifelines from '../components/lifelines/Lifelines'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
+import { ERROR_MSG, NUM_LIFELINES_DISPLAYED,URL } from '../utils/constants'
+import { getData,getHeadlines  } from '../utils/utils'
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
