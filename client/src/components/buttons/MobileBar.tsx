@@ -7,15 +7,18 @@ const Navbar = styled.div`
     z-index: 4;
     top: 0;
     left: 0;
-    transition: 0.5s ease;
     overflow-x: hidden;
     padding-top: 20px;
+    transform: ${(props) =>
+      props.showMobileNavbar ? 'translateY(0em)' : 'translateY(-60em)'};
+    transition: 0.6s ease;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 100%;
     background-color: #111;
   }
 `
@@ -43,7 +46,7 @@ const StyledLink = styled(Link)`
 function MobileBar(props: any) {
   const location = useLocation()
   return (
-    <Navbar style={{ height: props.height }}>
+    <Navbar showMobileNavbar={props.showMobileNavbar}>
       <StyledLink to="" selected={location.pathname === '/'}>
         Clock
       </StyledLink>
