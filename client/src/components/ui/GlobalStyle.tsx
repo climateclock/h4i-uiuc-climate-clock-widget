@@ -41,8 +41,8 @@ const theme = {
     mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
     desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
   },
-  fonts: 'KatwijkMono, sans-serif',
-  secondaryFonts: 'Lato',
+  fonts: 'KatwijkMono, "Lato", sans-serif',
+  secondaryFonts: '"Lato", sans-serif',
   // text colors
   text: '#000000',
   secondaryText: '#5a5a5a',
