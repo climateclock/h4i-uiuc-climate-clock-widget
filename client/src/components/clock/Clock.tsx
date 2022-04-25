@@ -107,10 +107,10 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
+  ${(props) => (props.isFullScreen ? 'height: 52vh;' : 'height: 44vh;')}
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
-  height: 44vh;
   @media only screen and (max-height: 700px) {
     height: 65vh;
   }
@@ -223,7 +223,7 @@ function Clock(props: ModuleResInterface) {
   }, [])
 
   return (
-    <ClockContainer>
+    <ClockContainer isFullScreen={props.isFullScreen}>
       <Header
         moduleType={props.flavor ? toUpperCase(props.flavor) : ' '}
         title={props.labels ? (props.labels[0] ? props.labels[0] : '') : ''}
