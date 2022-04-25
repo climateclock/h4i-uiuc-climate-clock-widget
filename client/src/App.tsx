@@ -4,11 +4,9 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import Settings from './pages/Settings'
 import LifelineCreation from './pages/lifelineCreation'
-import EnterFullScreen from './components/buttons/EnterFullscreen'
-import ExitFullScreen from './components/buttons/ExitFullscreen'
 import Home from './pages/Home'
-import Settings from './pages/settings'
 
 function App() {
   const [showFullscreenButton, setFullscreenButton] = useState(false)
@@ -27,12 +25,6 @@ function App() {
             <Route path="/" element={<Home />} />
           </Routes>
         </BrowserRouter>
-
-        {showFullscreenButton ? (
-          <EnterFullScreen handle={handle.enter} />
-        ) : (
-          <ExitFullScreen handle={handle.exit} />
-        )}
       </FullScreen>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}

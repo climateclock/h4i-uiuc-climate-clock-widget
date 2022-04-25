@@ -7,7 +7,7 @@ const ExitButton = styled.div`
 function ExitFullScreen({ handle }: { handle: any }) {
   return (
     <ExitButton>
-      <FullscreenExit onClick={handle} size="5%" />
+      <FullscreenExit onClick={handle} width="20px" />
     </ExitButton>
   )
 }
