@@ -3,6 +3,7 @@ import { StyledSelect } from '../components/ui/Select'
 import styled from 'styled-components'
 import Input from '../components/ui/Input'
 import { options } from '../components/utils/constants'
+import DefaultLifelineCreationForm from '../components/settings/DefaultLifelineCreationForm'
 const SettingsSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};
@@ -45,6 +46,7 @@ function Settings() {
         height="31px"
       />
       <LanguageCustomization />
+      <DefaultLifelineCreationForm />
     </SettingsSection>
   )
 }
