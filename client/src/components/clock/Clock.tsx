@@ -5,7 +5,7 @@ import { ModuleResInterface } from '../../interfaces'
 import Header from '../ui/Header'
 import { toUpperCase } from '../../utils/utils'
 const ClockSection = styled.div`
-color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.text};
   font-size: 20vh;
   font-family: ${({ theme }) => theme.fonts};
   text-align: center;
@@ -27,12 +27,12 @@ color: ${({ theme }) => theme.text};
 
   h2,
   h5 {
-    font-size: max(5.5rem, min(6.5rem,8vw));
+    font-size: max(5.5rem, min(6.5rem, 8vw));
     margin: 0%;
   }
 
   h3 {
-    font-size: max(2.75rem,min(3.25rem, 4vw));
+    font-size: max(2.75rem, min(3.25rem, 4vw));
     margin: 0%;
     margin-left: 15px;
     align-self: flex-end;
@@ -41,7 +41,7 @@ color: ${({ theme }) => theme.text};
 
   // This style deals with padding for when there is only one lifeline
   @media screen and (max-height: 700px) {
-    padding-top: calc(10vh  + 2%);
+    padding-top: calc(10vh + 2%);
   }
 
   // For iPads
@@ -51,10 +51,12 @@ color: ${({ theme }) => theme.text};
     h2 {
       font-size: 11vmin;
     }
+
     h3 {
       font-size: 4vmin;
       margin-bottom: 18px;
     }
+
     h5 {
       font-size: 10vmin;
       margin: 10px;
@@ -114,8 +116,8 @@ color: ${({ theme }) => theme.text};
 
   // Landscape style, doesn't utilize the wrap
   @media screen and (max-width: 900px) and (max-height: 800px) {
-
-    h2, h5 {
+    h2,
+    h5 {
       font-size: max(4rem, min(5rem, 6vw));
     }
 
@@ -126,8 +128,8 @@ color: ${({ theme }) => theme.text};
   }
 
   @media screen and (max-width: 700px) and (max-height: 800px) {
-
-    h2, h5 {
+    h2,
+    h5 {
       font-size: max(3rem, min(4rem, 5vw));
     }
 
