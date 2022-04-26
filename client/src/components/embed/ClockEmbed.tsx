@@ -3,118 +3,64 @@ import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
 import Header from '../ui/Header'
 import { toUpperCase } from '../../utils/utils'
+
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
-  font-size: 20vh;
   font-family: ${({ theme }) => theme.fonts};
-  text-align: center;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  line-height: 0;
-  font-weight: bold;
-  h3 {
+
+  @media only screen and (max-height: 700px) {
     display: flex;
     flex-wrap: nowrap;
-    font-size: 5.125rem;
-    display: inline-block;
-    margin-top: calc(-1rem + 4vh);
-  }
-  h2 {
-    display: flex;
-    flex-wrap: nowrap;
-    display: inline-block;
-    font-size: 4.063rem;
-    padding: 0 5px 0 5px;
-    margin-top: 9%;
-  }
-  @media screen and (max-width: 1000px) {
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    h3 {
-      display: flex;
-      flex-wrap: nowrap;
-      font-size: 5.125rem;
-      display: inline-block;
-      margin-top: 9%;
-    }
-    h2 {
-      display: flex;
-      flex-wrap: nowrap;
-      display: inline-block;
-      font-size: 4.063rem;
-      padding: 0 5px 0 5px;
-      margin-top: 5%;
-    }
-  }
-  @media only screen and (max-width: 800px) {
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    h3 {
-      font-size: 0.4em;
-      margin-top: 11%;
-    }
-    h2 {
-      font-size: 0.2em;
-      padding: 0 5px 0 5px;
-      margin-top: 8%;
-    }
-  }
-
-  @media only screen and (max-height: 600px) {
-    height: 50vh;
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    h3 {
-      font-size: 1em;
-      margin-top: 11%;
-    }
-    h2 {
-      font-size: 0.5em;
-      padding: 0 5px 0 5px;
-      margin-top: 8%;
-    }
-  }
-
-  @media screen and (max-height: 400px) {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
-    margin: 0px;
-    padding: 0px;
-
-    div {
-      margin: 0px;
-    }
-
-    h3 {
-      font-size: 6vw;
-      margin: 0px;
-    }
-
-    h2 {
-      font-size: 2vw;
-      margin: 0px;
-      margin-bottom: 15px;
-    }
+    align-items: center;
+    justify-content: flex-start;
+    height: 82.35%; // 85% of 85
+    gap: 1vw;
   }
 `
 
 const ClockContainer = styled.div`
-  ${(props) => (props.isFullScreen ? 'height: 52vh;' : 'height: 44vh;')}
   font-family: ${({ theme }) => theme.fonts};
-  font-weight: bold;
   background: ${({ theme }) => theme.red};
-  @media only screen and (max-height: 700px) {
-    height: 65vh;
-  }
+  font-weight: bold;
   width: 100vw;
+  height: 44vh;
+
+  @media only screen and (min-width: 1025px) {
+    height: auto;
+    width: 50%;
+  }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    height: 45vh;
+    width: 100%;
+  }
+`
+
+const Value = styled.div`
+  margin-left: 1vw;
+  @media only screen and (max-height: 700px) {
+    font-size: max(7vh, min(2.75rem, 12vw));
+  }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(5.5vh, min(2.25rem, 12.5vw));
+  }
+`
+
+const Unit = styled.div`
+  margin-left: 0.5vw;
+  @media only screen and (max-height: 700px) {
+    font-size: max(3.5vh, min(1.5rem, 5vw));
+    margin-bottom: -7.5vh;
+  }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(4vh, min(1.5rem, 5vw));
+    margin-bottom: -5vh;
+  }
 `
 
 function Clock(props: ModuleResInterface) {
@@ -223,17 +169,24 @@ function Clock(props: ModuleResInterface) {
   }, [])
 
   return (
-    <ClockContainer isFullScreen={props.isFullScreen}>
+    <ClockContainer>
       <Header
         moduleType={props.flavor ? toUpperCase(props.flavor) : ' '}
         title={props.labels ? (props.labels[0] ? props.labels[0] : '') : ''}
         themeColor={({ theme }) => theme.red}
       />
       <ClockSection>
-        <h3>{years}</h3> <h2>YRS</h2> <h3>{days}</h3> <h2>DAYS</h2>
-        <h3>
+        <>
+          <Value>{years}</Value>
+          <Unit>YRS</Unit>
+        </>
+        <>
+          <Value>{days}</Value>
+          <Unit>DAYS</Unit>
+        </>
+        <Value>
           {formattedHour}:{formattedMinutes}:{formattedSeconds}
-        </h3>
+        </Value>
       </ClockSection>
     </ClockContainer>
   )
