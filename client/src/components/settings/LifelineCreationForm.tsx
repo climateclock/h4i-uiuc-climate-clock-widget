@@ -12,7 +12,7 @@ import { ModuleResInterface } from '../../interfaces'
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../DraggableLifelines'
 import { UpdateURL } from '../../routing/UpdateURL'
-
+import { UpdateSettings } from '../../routing/UpdateSettings'
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
   const flavor = 'Lifeline'
@@ -39,6 +39,7 @@ const LifelineCreationForm = () => {
       setLifelineModules,
     )
     UpdateURL(navigate)
+    UpdateSettings(null, lifelineModules)
   }, [navigate, lifelineModules])
 
   /* clearProperties
@@ -59,16 +60,18 @@ const LifelineCreationForm = () => {
    */
   const formSubmit = (e: any) => {
     e.preventDefault()
-    const language: string | null = localStorage.getItem(
+    /*const language: string | null = localStorage.getItem(
       LANGUAGE_LOCAL_STORAGE_KEY,
-    )
-    if (language) {
-      const settings_json = JSON.stringify(lifelineModules + language)
-      let compressed = compressToEncodedURIComponent(settings_json)
-      navigate(':')
-      navigate(`${compressed}`)
-      localStorage.setItem(COMPRESSED_KEY, compressed)
+    )*/
+    let json = {
+      language: localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
+      lifelines: lifelineModules,
     }
+    const settings_json = JSON.stringify(json)
+    let compressed = compressToEncodedURIComponent(settings_json)
+    navigate(`${compressed}`)
+    localStorage.setItem(COMPRESSED_KEY, compressed)
+
     const llModule: ModuleResInterface = {
       labels: [title] /* stored as array in API response */,
       flavor,
