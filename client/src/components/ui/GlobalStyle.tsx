@@ -43,16 +43,19 @@ const theme = {
     desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
   },
   fonts: 'KatwijkMono, "Lato", sans-serif',
+  secondaryFonts: '"Lato", sans-serif',
   // text colors
   text: '#000000',
-  secondaryText: '#5a5a5a',
+  secondaryText: '#A3A3A3',
   tertiaryText: '#979797',
   headerText: '#333333',
+  navBarText: '#f2f2f2',
   // background
   background: '#ffffff',
-  secondaryBackground: '#f1f1f1',
+  secondaryBackground: '#A3A3A3',
   navBackground: '#f2f2f2',
   shadow: 'rgba(0, 0, 0, 0.12)',
+  buttonBackground: '#1d5479',
   // palette
   orange: '#ffa41b',
   transparentOrange: '#ffedd1',

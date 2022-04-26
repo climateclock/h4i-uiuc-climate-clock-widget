@@ -54,10 +54,10 @@ const LifelineCreationForm = () => {
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const llModule: ModuleResInterface = {
-      labels: [title] /* stored as array in API response */,
+      labels: [title.toUpperCase()] /* stored as array in API response */,
       flavor,
       initial: value,
-      unit_labels: [unit] /* stored as array in API response */,
+      unit_labels: [unit.toUpperCase()] /* stored as array in API response */,
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
       customizable: true,

@@ -27,6 +27,11 @@ export interface LifelinePropsInterface {
   resolution?: number
 }
 
+export interface optionProps {
+  value: string
+  label: string
+}
+
 /* Properties optional since some may not be
  * returned from the API
  */
@@ -44,4 +49,5 @@ export class ModuleResInterface {
   unit_labels?: string[]
   update_interval_seconds?: number
   customizable?: boolean
+  isFullScreen?: boolean
 }

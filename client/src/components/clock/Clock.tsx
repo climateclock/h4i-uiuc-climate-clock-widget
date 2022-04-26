@@ -84,21 +84,48 @@ const ClockSection = styled.div`
       margin-top: 8%;
     }
   }
+
+  @media screen and (max-height: 400px) {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin: 0px;
+    padding: 0px;
+
+    div {
+      margin: 0px;
+    }
+
+    h3 {
+      font-size: 6vw;
+      margin: 0px;
+    }
+
+    h2 {
+      font-size: 2vw;
+      margin: 0px;
+      margin-bottom: 15px;
+    }
+  }
 `
 
 const ClockContainer = styled.div`
+  ${(props) => (props.isFullScreen ? 'height: 52vh;' : 'height: 44vh;')}
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
-  height: 44vh;
   @media only screen and (max-height: 700px) {
     height: 65vh;
   }
-
   width: 100vw;
 `
 
-function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
+function Clock({
+  isFullScreen,
+  timestamp,
+  labels,
+  flavor,
+}: ModuleResInterface) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
@@ -121,7 +148,7 @@ function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
   }, [timeLeft])
 
   return (
-    <ClockContainer>
+    <ClockContainer isFullScreen={isFullScreen}>
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}
