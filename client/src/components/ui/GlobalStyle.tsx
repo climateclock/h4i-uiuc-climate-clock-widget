@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-
+import '@fontsource/lato'
 /**
  * @constant {number}
  * Max width in pixels for which the mobile layout should be displayed
@@ -41,17 +41,20 @@ const theme = {
     mobile: `(max-width: ${MOBILE_MAX_WIDTH}px)`,
     desktop: `(min-width: ${MOBILE_MAX_WIDTH + 1}px)`,
   },
-  fonts: 'KatwijkMono, sans-serif',
+  fonts: 'KatwijkMono, "Lato", sans-serif',
+  secondaryFonts: '"Lato", sans-serif',
   // text colors
   text: '#000000',
-  secondaryText: '#5a5a5a',
+  secondaryText: '#A3A3A3',
   tertiaryText: '#979797',
   headerText: '#333333',
+  navBarText: '#f2f2f2',
   // background
   background: '#ffffff',
-  secondaryBackground: '#e0e1e2',
+  secondaryBackground: '#A3A3A3',
   navBackground: '#f2f2f2',
   shadow: 'rgba(0, 0, 0, 0.12)',
+  buttonBackground: '#1d5479',
   // palette
   orange: '#ffa41b',
   transparentOrange: '#ffedd1',
@@ -94,9 +97,11 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
   -moz-osx-font-smoothing: grayscale;
   body {
     font-family: ${({ theme }) => theme.fonts};
+    font-weight: 100;
     color: ${({ theme }) => theme.text};
     margin: 0;
     padding: 0;
+    overflow: hidden;
     @media ${({ theme }) => theme.device.mobile} {
       // Disable overscrolling on iOS
       overflow: hidden;
@@ -104,6 +109,7 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
       height: 100%;
       width: 100%;
     }
+
   }
 
   #root {

@@ -43,4 +43,6 @@ export class ModuleResInterface {
   type?: string
   unit_labels?: string[]
   update_interval_seconds?: number
+  customizable?: boolean
+  isFullScreen?: boolean
 }
