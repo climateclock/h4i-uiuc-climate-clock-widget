@@ -6,6 +6,9 @@ import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../utils/constants'
 import { getData } from '../utils/utils'
 import Lifelines from '../components/lifelines/Lifelines'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
+import DeleteModal from '../components/modals/DeleteModal';
+import CreateModal from '../components/modals/CreateModal';
+import EditModal from '../components/modals/EditModal';
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -37,6 +40,9 @@ export default function Home() {
             labels={modules && modules[0] && modules[0].labels}
             flavor={modules && modules[0] && modules[0].flavor}
           />
+          <DeleteModal/>
+          <CreateModal/>
+          <EditModal/>
           <Lifelines
             lifeLineData={lifelineModules}
             displayNum={NUM_LIFELINES_DISPLAYED}
