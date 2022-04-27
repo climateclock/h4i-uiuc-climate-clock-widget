@@ -7,13 +7,14 @@ import {
   ERROR_MSG,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from '../../utils/constants'
-import { getData, returnFirstString } from '../../utils/utils'
+import { returnFirstString } from '../../utils/utils'
 import { StyledSelect } from '../ui/Select'
 
 const DefaultLifelineCreationForm = () => {
   const [optionSelected, setOptionSelected] = useState<OptionsInterface>()
   const [defaultOptions, setDefaultOptions] = useState<OptionsInterface[]>([])
   const [, setDefaultLifelines] = useState<ModuleResInterface[]>([])
+
   // think about the case when defaults have not been pulled yet
   useEffect(() => {
     let defaultLifelines: string | null = localStorage.getItem(
