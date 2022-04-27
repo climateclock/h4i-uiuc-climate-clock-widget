@@ -1,6 +1,6 @@
 import { PencilFill } from '@styled-icons/bootstrap'
-import { ModuleResInterface } from '../interfaces'
-import { returnFirstString } from '../utils/utils'
+import { ModuleResInterface } from '../../interfaces'
+import { returnFirstString } from '../../utils/utils'
 
 interface LifelineCardInterface {
   lifeline: ModuleResInterface

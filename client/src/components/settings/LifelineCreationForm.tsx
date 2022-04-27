@@ -6,7 +6,7 @@ import {
 } from '../../utils/constants'
 import { ModuleResInterface } from '../../interfaces'
 import { getData } from '../../utils/utils'
-import DraggableLifelines from '../DraggableLifelines'
+import DraggableLifelines from '../draggable/DraggableLifelines'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
