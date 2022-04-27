@@ -2,13 +2,7 @@ import Newsfeed from '../components/clock/Newsfeed'
 import { getHeadlines } from '../utils/utils'
 import Clock from '../components/clock/Clock'
 import { useState, useEffect } from 'react'
-import {
-  ERROR_MSG,
-  URL,
-  NUM_LIFELINES_DISPLAYED,
-  LIFELINES_LOCAL_STORAGE_KEY,
-  LANGUAGE_LOCAL_STORAGE_KEY,
-} from '../utils/constants'
+import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../utils/constants'
 import { getData } from '../utils/utils'
 import Lifelines from '../components/lifelines/Lifelines'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
