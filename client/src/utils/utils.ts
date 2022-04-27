@@ -5,6 +5,104 @@ import {
   LIFELINES_LOCAL_STORAGE_KEY,
 } from './constants'
 
+/* data fetching functions */
+export const fetchData = async (url: string, error: string) => {
+  return await get(url, error)
+}
+
+export const getModules = async (
+  url: string,
+  error: string,
+  setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
+) => {
+  let res: any = fetchData(url, error)
+
+  /* set modules */
+  let resModules: ModuleResInterface[] = Object.values(
+    res['data']['data']['modules'],
+  )
+  setModules(resModules)
+}
+
+export const getNewsfeedModules = async (
+  url: string,
+  error: string,
+  setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+) => {
+  let res: any = fetchData(url, error)
+
+  /* set newsfeed modules */
+  if (setNewsfeedModules) {
+    let resNewsfeedModules: NewsInterface[] = Object.values(
+      res['data']['data']['modules']['newsfeed_1']['newsfeed'],
+    )
+    setNewsfeedModules(resNewsfeedModules)
+  }
+}
+
+export const getLifelineModules = async (
+  url: string,
+  error: string,
+  setLifelineModules: React.Dispatch<
+    React.SetStateAction<ModuleResInterface[]>
+  >,
+) => {
+  let res: any = fetchData(url, error)
+
+  /* set modules */
+  let resModules: ModuleResInterface[] = Object.values(
+    res['data']['data']['modules'],
+  )
+
+  /* set lifelines */
+  if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
+    let resLifelineModules = resModules.filter((module) => {
+      if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
+        return true
+      }
+      return false
+    })
+    setLifelineModules(resLifelineModules)
+
+    /* stores lifeline modules in local storage */
+    localStorage.setItem(
+      LIFELINES_LOCAL_STORAGE_KEY,
+      JSON.stringify(resLifelineModules),
+    )
+  } else {
+    const curLifelineModules = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
+    if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
+  }
+}
+
+export const getDefaultLanguage = (
+  setDefaultLanguage: React.Dispatch<React.SetStateAction<string>>,
+) => {
+  const defaultLanguage: string | null = localStorage.getItem(
+    LANGUAGE_LOCAL_STORAGE_KEY,
+  )
+  if (defaultLanguage) setDefaultLanguage(defaultLanguage)
+  else {
+    localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, 'eng')
+    setDefaultLanguage('eng')
+  }
+}
+
+/* data setting functions */
+export const setLifelineModules = async (
+  lifelineModules: ModuleResInterface[],
+  setLifelineModules: React.Dispatch<
+    React.SetStateAction<ModuleResInterface[]>
+  >,
+) => {
+  setLifelineModules(lifelineModules)
+  localStorage.setItem(
+    LIFELINES_LOCAL_STORAGE_KEY,
+    JSON.stringify(lifelineModules),
+  )
+}
+
+/* get all data  */
 export const getData = async (
   url: string,
   error: string,

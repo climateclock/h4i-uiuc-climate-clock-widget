@@ -14,33 +14,6 @@ const DefaultLifelineCreationForm = () => {
   const [optionSelected, setOptionSelected] = useState<OptionsInterface>()
   const [defaultOptions, setDefaultOptions] = useState<OptionsInterface[]>([])
   const [, setDefaultLifelines] = useState<ModuleResInterface[]>([])
-
-  // think about the case when defaults have not been pulled yet
-  useEffect(() => {
-    let defaultLifelines: string | null = localStorage.getItem(
-      DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
-    )
-    if (defaultLifelines) {
-      let options: OptionsInterface[] = []
-      let cleanedDefaultLifelines: ModuleResInterface[] =
-        JSON.parse(defaultLifelines)
-
-      setDefaultLifelines(cleanedDefaultLifelines)
-      for (let i = 0; i < cleanedDefaultLifelines.length; i++) {
-        let defaultLifeline = cleanedDefaultLifelines[i]
-        options.push({
-          value: defaultLifeline,
-          label: returnFirstString(defaultLifeline['labels']),
-        })
-      }
-
-      setDefaultOptions(options)
-    }
-  }, [])
-
-  const handleOptionSelectedChange = (option) => {
-    setOptionSelected(option)
-  }
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
@@ -85,6 +58,33 @@ const DefaultLifelineCreationForm = () => {
     getData()
   }, [])
 
+  // think about the case when defaults have not been pulled yet
+  useEffect(() => {
+    let defaultLifelines: string | null = localStorage.getItem(
+      DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
+    )
+    if (defaultLifelines) {
+      let options: OptionsInterface[] = []
+      let cleanedDefaultLifelines: ModuleResInterface[] =
+        JSON.parse(defaultLifelines)
+
+      setDefaultLifelines(cleanedDefaultLifelines)
+      for (let i = 0; i < cleanedDefaultLifelines.length; i++) {
+        let defaultLifeline = cleanedDefaultLifelines[i]
+        options.push({
+          value: defaultLifeline,
+          label: returnFirstString(defaultLifeline['labels']),
+        })
+      }
+
+      setDefaultOptions(options)
+    }
+  }, [])
+
+  const handleOptionSelectedChange = (option) => {
+    setOptionSelected(option)
+  }
+
   const hasLifeline = (newLifeline: ModuleResInterface) => {
     for (let i = 0; i < lifelineModules.length; i++) {
       if (JSON.stringify(lifelineModules[i]) === JSON.stringify(newLifeline))
@@ -96,9 +96,7 @@ const DefaultLifelineCreationForm = () => {
   const onSubmit = (e) => {
     e.preventDefault()
     if (optionSelected && optionSelected.value) {
-      if (hasLifeline(optionSelected.value)) {
-        return
-      }
+      if (hasLifeline(optionSelected.value)) return
 
       let lifelineSelected: ModuleResInterface = optionSelected.value
 
