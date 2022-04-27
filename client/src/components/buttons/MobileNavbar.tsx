@@ -3,10 +3,8 @@ import { useState } from 'react'
 import MobileBar from './MobileBar'
 
 function MobileNavbar(props: any) {
-  // const [navHeight, setNavHeight] = useState('0%')
   const [showMobileNavbar, setMobileNavbar] = useState(false)
   const closeNavbar = () => {
-    // setNavHeight('0%')
     setMobileNavbar(!showMobileNavbar)
   }
   return (

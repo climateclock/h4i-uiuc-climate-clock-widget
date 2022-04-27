@@ -50,7 +50,7 @@ function MobileBar(props: any) {
       <StyledLink to="" selected={location.pathname === '/'}>
         Clock
       </StyledLink>
-      <StyledLink to="/lifeline" selected={location.pathname === '/lifeline'}>
+      <StyledLink to="/lifelines" selected={location.pathname === '/lifelines'}>
         Lifeline
       </StyledLink>
       <StyledLink to="/settings" selected={location.pathname === '/settings'}>
