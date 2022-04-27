@@ -2,7 +2,7 @@ import moment from 'moment'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { ModuleResInterface } from '../../interfaces'
+import { ClockProps } from '../../interfaces'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -120,12 +120,7 @@ const ClockContainer = styled.div`
   width: 100vw;
 `
 
-function Clock({
-  isFullScreen,
-  timestamp,
-  labels,
-  flavor,
-}: ModuleResInterface) {
+function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
