@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Input from '../components/ui/Input'
 import { options } from '../components/utils/constants'
 import DefaultLifelineCreationForm from '../components/settings/DefaultLifelineCreationForm'
+import { useState } from 'react'
 const SettingsSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};
@@ -31,11 +32,20 @@ const SettingsSection = styled.div`
 `
 
 function Settings() {
+  const [languageSelected, setLanguageSelected] = useState<string>()
+
+  const handleLanguageSelectedChange = (language: string) => {
+    setLanguageSelected(language)
+  }
   return (
     <SettingsSection>
       <h1>Settings</h1>
       <h3 id="language">Configure Language</h3>
-      <StyledSelect options={options} />
+      <StyledSelect
+        options={options}
+        optionSelected={languageSelected}
+        handleOptionSelectedChange={handleLanguageSelectedChange}
+      />
       <h3 id="share">Share your custom clock</h3>
       <Input
         type="text"

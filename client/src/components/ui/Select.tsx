@@ -17,9 +17,15 @@ const customStyles = {
   }),
 }
 
-export const StyledSelect = ({ options }) => (
+export const StyledSelect = ({
+  options,
+  optionSelected,
+  handleOptionSelectedChange,
+}) => (
   <Select
     styles={customStyles}
+    value={optionSelected}
+    onChange={handleOptionSelectedChange}
     options={options}
     theme={(theme) => ({
       ...theme,
