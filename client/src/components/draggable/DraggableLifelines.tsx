@@ -8,13 +8,13 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from 'react-beautiful-dnd'
-import { ModuleResInterface } from '../interfaces'
+import { ModuleResInterface } from '../../interfaces'
 import {
   LIFELINES_LOCAL_STORAGE_KEY,
   NUM_LIFELINES_DISPLAYED,
-} from '../utils/constants'
+} from '../../utils/constants'
 import LifelineCard from './LifelineCard'
-import { deleteElement, reorderElement } from '../utils/utils'
+import { deleteElement, reorderElement } from '../../utils/utils'
 
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
@@ -119,16 +119,14 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                       />
                     </div>
                     {/* render delete button */}
-                    {lifeline.customizable && (
-                      <TrashAlt
-                        size={'1.5em'}
-                        onClick={() => deleteLifeline(index)}
-                        style={{
-                          gridColumn: 3,
-                          cursor: 'pointer',
-                        }}
-                      />
-                    )}
+                    <TrashAlt
+                      size={'1.5em'}
+                      onClick={() => deleteLifeline(index)}
+                      style={{
+                        gridColumn: 3,
+                        cursor: 'pointer',
+                      }}
+                    />
                   </div>
                 )}
               </Draggable>
