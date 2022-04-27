@@ -61,6 +61,7 @@ const theme = {
   transparentBlue: '#d9e6f3',
   transparentPink: '#fbe2fb',
   blue: '#619fc8',
+  navy: '#1D5479',
   black: '#000000',
   green: '#73cd7c',
   red: '#ff3115',
