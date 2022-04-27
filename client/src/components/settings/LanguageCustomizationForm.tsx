@@ -14,7 +14,7 @@ const LanguageCustomization = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
 
   useEffect(() => {
-    UpdateURL(navigate)
+    UpdateURL(navigate, selectedLanguage, null)
     UpdateSettings(selectedLanguage, null)
   }, [navigate, selectedLanguage])
 

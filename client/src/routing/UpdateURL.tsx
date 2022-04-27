@@ -1,4 +1,19 @@
-import { COMPRESSED_KEY } from '../utils/constants'
-export const UpdateURL = (navigate) => {
-  navigate(`${localStorage.getItem(COMPRESSED_KEY)}`)
+import {
+  COMPRESSED_KEY,
+  LANGUAGE_LOCAL_STORAGE_KEY,
+  LIFELINES_LOCAL_STORAGE_KEY,
+} from '../utils/constants'
+export const UpdateURL = (navigate, language, lifelines) => {
+  if (
+    language &&
+    localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY) !== language
+  ) {
+    navigate(`${localStorage.getItem(COMPRESSED_KEY)}`)
+  }
+  if (
+    lifelines &&
+    localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY) !== lifelines
+  ) {
+    navigate(`${localStorage.getItem(COMPRESSED_KEY)}`)
+  }
 }

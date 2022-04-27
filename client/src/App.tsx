@@ -13,6 +13,7 @@ import Home from './pages/Home'
 function App() {
   const [showFullscreenButton, setFullscreenButton] = useState(false)
   const handle = useFullScreenHandle()
+
   return (
     <ThemeProvider theme={theme}>
       <FullScreen

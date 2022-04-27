@@ -2,11 +2,19 @@ import Newsfeed from '../components/clock/Newsfeed'
 import { getHeadlines } from '../utils/utils'
 import Clock from '../components/clock/Clock'
 import { useState, useEffect } from 'react'
-import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../utils/constants'
+import {
+  ERROR_MSG,
+  URL,
+  NUM_LIFELINES_DISPLAYED,
+  LIFELINES_LOCAL_STORAGE_KEY,
+  LANGUAGE_LOCAL_STORAGE_KEY,
+} from '../utils/constants'
 import { getData } from '../utils/utils'
 import Lifelines from '../components/lifelines/Lifelines'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
-
+import { UpdateURL } from '../routing/UpdateURL'
+import { UpdateSettings } from '../routing/UpdateSettings'
+import { useNavigate } from 'react-router-dom'
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
   const [modules, setModules] = useState<ModuleResInterface[]>([])
@@ -15,6 +23,7 @@ export default function Home() {
   )
   const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData(
@@ -26,7 +35,16 @@ export default function Home() {
       setLifelineModules,
       setNewsfeedModules,
     )
-  }, [defaultLanguage])
+    UpdateURL(
+      navigate,
+      localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
+      localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
+    )
+    UpdateSettings(
+      localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
+      localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
+    )
+  }, [navigate, defaultLanguage, lifelineModules])
 
   return (
     <>
