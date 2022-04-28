@@ -15,11 +15,19 @@ import {
 } from '../../utils/constants'
 import LifelineCard from './LifelineCard'
 import { deleteElement, reorderElement } from '../../utils/utils'
+import { ReOrderDotsVertical } from '@styled-icons/fluentui-system-filled/ReOrderDotsVertical'
+import styled from 'styled-components'
 
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
 }
-
+const StyledDiv = styled.div`
+  display: inline-block;
+  vertical-align: middle;
+`
+const StyledIcon = styled(ReOrderDotsVertical)`
+  display: inline-block;
+`
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 4
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
@@ -104,7 +112,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                         {index + 1}
                       </p>
                     )}
-                    <div
+                    <StyledDiv
                       style={{
                         background: '#f1f1f1',
                         borderRadius: '10px',
@@ -113,11 +121,12 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                         gridColumn: 2,
                       }}
                     >
+                      <StyledIcon size="15px" />
                       <LifelineCard
                         lifeline={lifeline}
                         isDisplayed={index < NUM_LIFELINES_DISPLAYED}
                       />
-                    </div>
+                    </StyledDiv>
                     {/* render delete button */}
                     <TrashAlt
                       size={'1.5em'}
