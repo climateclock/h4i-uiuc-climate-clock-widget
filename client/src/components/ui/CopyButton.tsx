@@ -15,21 +15,38 @@ const Button = styled.button`
   border: 0;
 `
 
-const CopyButton = () => {
+const CopyButton = ({
+  type,
+  placeholder,
+}: {
+  type: string
+  placeholder: string
+}) => {
   const [buttonText, setButtonText] = useState('Copy Link')
   const changeText = (text) => setButtonText(text)
-  let placeholder = 'https://clock.climateclock.world/oGpVDQKb95lh'
   return (
     <>
       <ButtonContainer>
-        <Input
-          type="text"
-          placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
-          font-size="12px"
-          line-height="25px"
-          width="700px"
-          height="31px"
-        />
+        {type === 'link' ? (
+          <Input
+            type="text"
+            placeholder={placeholder}
+            font-size="12px"
+            line-height="25px"
+            height="31px"
+            width="10rem"
+          />
+        ) : (
+          <Input
+            type="text"
+            placeholder={placeholder}
+            font-size="12px"
+            line-height="25px"
+            height="31px"
+            width="20rem"
+          />
+        )}
+
         <Button
           onClick={() => {
             navigator.clipboard.writeText(placeholder)

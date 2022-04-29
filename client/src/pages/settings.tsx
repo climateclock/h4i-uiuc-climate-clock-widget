@@ -81,12 +81,18 @@ function Settings() {
       <StyledSelect options={options} />
       <h3 id="share">Share your custom clock</h3>
       <h4> Shareable Link </h4>
-      <CopyButton />
+      <CopyButton
+        type="link"
+        placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
+      />
       <h4>Embed</h4>
       <p>
         To add the Climate Clock widget to your site, add the following HTML:
       </p>
-      <CopyButton />
+      <CopyButton
+        type="embed"
+        placeholder='<script src="https://climateclock.world/widget-v2.js" async></script><climate-clock /><sc '
+      />
       <h4>Social Media</h4>
       <IconContainer>
         <img src={facebook} alt="facebook" />

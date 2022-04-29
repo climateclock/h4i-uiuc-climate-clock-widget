@@ -6,6 +6,7 @@ const Input = styled.input`
   border-width: 1px;
   border-color: ${({ theme }) => theme.secondaryBackground};
   padding 8px;
+  width: ${(props) => props.width || '10rem;'};
  
   &:focus {
     outline: none;
