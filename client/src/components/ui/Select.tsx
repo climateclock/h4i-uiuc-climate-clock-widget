@@ -15,7 +15,7 @@ const customStyles = {
     ...base,
     width: '255px',
     height: '31px',
-    left: '5%',
+    left: '4%',
   }),
 }
 

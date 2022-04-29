@@ -73,9 +73,11 @@ const Image = styled.div`
 function NavBar({
   handle,
   isFullScreen,
+  atHome,
 }: {
   handle: FullScreenHandle
   isFullScreen: boolean
+  atHome: boolean
 }) {
   function MouseTrack(): boolean {
     const [y, setY] = useState()
@@ -104,13 +106,18 @@ function NavBar({
           </Button>
         </HomeLink>
       </Link>
-      <FullScreenButton>
-        {isFullScreen ? (
-          <EnterFullscreen handle={handle.enter} />
-        ) : (
-          <ExitFullscreen handle={handle.exit} />
-        )}
-      </FullScreenButton>
+      {atHome ? (
+        <FullScreenButton>
+          {isFullScreen ? (
+            <EnterFullscreen handle={handle.enter} />
+          ) : (
+            <ExitFullscreen handle={handle.exit} />
+          )}
+        </FullScreenButton>
+      ) : (
+        ' '
+      )}
+
       <Link to="/settings">
         <PageLink>Settings</PageLink>
       </Link>

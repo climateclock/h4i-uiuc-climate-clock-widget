@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Input from '../ui/Input'
+import { useState } from 'react'
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -15,6 +16,8 @@ const Button = styled.button`
 `
 
 const CopyButton = () => {
+  const [buttonText, setButtonText] = useState('Copy Link')
+  const changeText = (text) => setButtonText(text)
   let placeholder = 'https://clock.climateclock.world/oGpVDQKb95lh'
   return (
     <>
@@ -30,9 +33,10 @@ const CopyButton = () => {
         <Button
           onClick={() => {
             navigator.clipboard.writeText(placeholder)
+            changeText('Copied')
           }}
         >
-          Copy Link
+          {buttonText}
         </Button>
       </ButtonContainer>
     </>

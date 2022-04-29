@@ -7,13 +7,16 @@ import facebook from '../utils/icons/facebook.png'
 import instagram from '../utils/icons/instagram.png'
 import twitter from '../utils/icons/twitter.png'
 import whatsapp from '../utils/icons/whatsapp.png'
+import NavBar from '../components/ui/NavBar'
+import { useFullScreenHandle } from 'react-full-screen'
+
 // import { placeholder } from '@babel/types'
 
 const SettingsSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};
     font-size: 30px;
-    font-family: ${({ theme }) => theme.fonts};
+    font-family: ${({ theme }) => theme.secondaryFonts};
     font-weight: 600;
     font-size: 30px;
     line-height: 36px;
@@ -26,7 +29,7 @@ const SettingsSection = styled.div`
   }
   h3 {
     color: ${({ theme }) => theme.text};
-    font-family: ${({ theme }) => theme.fonts};
+    font-family: ${({ theme }) => theme.secondaryFonts};
     position: relative;
     top: 27.89%;
     bottom: 69.44%;
@@ -37,7 +40,7 @@ const SettingsSection = styled.div`
   }
   h4 {
     color: ${({ theme }) => theme.text};
-    font-family: ${({ theme }) => theme.fonts};
+    font-family: ${({ theme }) => theme.secondaryFonts};
     position: relative;
     top: 27.89%;
     bottom: 69.44%;
@@ -48,7 +51,7 @@ const SettingsSection = styled.div`
   }
   p {
     color: ${({ theme }) => theme.text};
-    font-family: ${({ theme }) => theme.fonts};
+    font-family: ${({ theme }) => theme.secondaryFonts};
     position: relative;
     top: 27.89%;
     bottom: 69.44%;
@@ -66,9 +69,11 @@ const IconContainer = styled.div`
 `
 
 function Settings() {
+  const handle = useFullScreenHandle()
   return (
     <SettingsSection>
-      <h1>Settings</h1>
+      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
+      <h1>Clock Settings</h1>
       <h3 id="news_ticker"> News Ticker</h3>
       <p> Turn off/on the bottom news on your clock</p>
       <h3 id="language">Configure Language</h3>

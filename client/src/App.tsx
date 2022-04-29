@@ -3,7 +3,8 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Settings from './pages/Settings'
-import LifelineCreation from './pages/lifelineCreation'
+// import LifelineCreation from './pages/lifelineCreation'
+import Lifelines from './pages/Lifelines'
 import Home from './pages/Home'
 import PageEmbed from './components/embed/PageEmbed'
 
@@ -14,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/settings" element={<Settings />} />
-          <Route path="/lifelines" element={<LifelineCreation />} />
+          <Route path="/lifelines" element={<Lifelines />} />
           <Route path="/" element={<Home />} />
           <Route path="/embed" element={<PageEmbed />} />
         </Routes>

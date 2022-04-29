@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import Input from '../components/ui/Input'
+import NavBar from '../components/ui/NavBar'
+import { useFullScreenHandle } from 'react-full-screen'
 
 const LifelinesSection = styled.div`
   h1 {
@@ -47,8 +49,10 @@ const LifelinesSection = styled.div`
   }
 `
 function Lifelines() {
+  const handle = useFullScreenHandle()
   return (
     <LifelinesSection>
+      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
       <h1>Lifelines</h1>
       <h4>Add a custom lifeline</h4>
       <p>Title</p>
