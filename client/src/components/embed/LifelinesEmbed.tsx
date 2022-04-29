@@ -54,6 +54,10 @@ export default function LifelinesEmbed({
     setLifelineSavedValues(newLifelineSavedValues)
   }
 
+  useEffect(() => {
+    console.log(lifeLineData.slice(lifelineIndex, lifelineIndex + 1))
+  }, [lifelineIndex])
+
   return (
     <>
       {lifeLineData.slice(lifelineIndex, lifelineIndex + 1).map((module) => {
@@ -66,7 +70,7 @@ export default function LifelinesEmbed({
             module_type={toUpperCase(module['flavor'])}
             value={lifelineSavedValues[lifelineIndex]}
             unit={returnFirstString(module['unit_labels'])}
-            rate={module['rate']}
+            rate={1}
             resolution={module['resolution']}
           />
         )
