@@ -104,6 +104,7 @@ function Lifeline({
   }, [llVal, value, cleanedRate])
          */
 
+  console.log(llVal, rate)
   /* update lifeline value within interval */
   useEffect(() => {
     let interval = setInterval(() => {

@@ -70,7 +70,7 @@ export default function LifelinesEmbed({
             module_type={toUpperCase(module['flavor'])}
             value={lifelineSavedValues[lifelineIndex]}
             unit={returnFirstString(module['unit_labels'])}
-            rate={1}
+            rate={module['rate']}
             resolution={module['resolution']}
           />
         )
