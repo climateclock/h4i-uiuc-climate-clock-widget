@@ -12,77 +12,137 @@ const ClockSection = styled.div`
   font-family: ${({ theme }) => theme.fonts};
   text-align: center;
   position: relative;
+  display: flex;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  line-height: 0;
   font-weight: bold;
+  padding-top: calc(2% + 5vh);
+
+  div {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 20px;
+  }
+
+  h2,
+  h5 {
+    font-size: max(5.5rem, min(6.5rem, 8vw));
+    margin: 0%;
+  }
+
   h3 {
-    display: flex;
-    flex-wrap: nowrap;
-    font-size: 5.125rem;
-    display: inline-block;
-    margin-top: calc(-1rem + 4vh);
+    font-size: max(2.75rem, min(3.25rem, 4vw));
+    margin: 0%;
+    margin-left: 15px;
+    align-self: flex-end;
+    margin-bottom: 17px;
   }
-  h2 {
-    display: flex;
-    flex-wrap: nowrap;
-    display: inline-block;
-    font-size: 4.063rem;
-    padding: 0 5px 0 5px;
-    margin-top: 9%;
+
+  // This style deals with padding for when there is only one lifeline
+  @media screen and (max-height: 700px) {
+    padding-top: calc(10vh + 2%);
   }
-  @media screen and (max-width: 1000px) {
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    h3 {
-      display: flex;
-      flex-wrap: nowrap;
-      font-size: 5.125rem;
-      display: inline-block;
-      margin-top: 9%;
-    }
+
+  // For iPads
+  @media screen and (max-width: 1000px) and (min-height: 500px) {
+    margin: 0px;
+
     h2 {
-      display: flex;
-      flex-wrap: nowrap;
-      display: inline-block;
-      font-size: 4.063rem;
-      padding: 0 5px 0 5px;
-      margin-top: 5%;
+      font-size: 11vmin;
     }
-  }
-  @media only screen and (max-width: 800px) {
-    display: flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
+
     h3 {
-      font-size: 0.4em;
-      margin-top: 11%;
+      font-size: 4vmin;
+      margin-bottom: 18px;
     }
-    h2 {
-      font-size: 0.2em;
-      padding: 0 5px 0 5px;
-      margin-top: 8%;
+
+    h5 {
+      font-size: 10vmin;
+      margin: 10px;
     }
   }
 
-  @media only screen and (max-height: 600px) {
-    height: 50vh;
+  @media screen and (max-width: 800px) and (min-height: 800px) and (orientation: portrait) {
     display: flex;
     flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    h3 {
-      font-size: 1em;
-      margin-top: 11%;
+    flex-direction: column;
+
+    div {
+      margin: 10px;
     }
+
     h2 {
-      font-size: 0.5em;
-      padding: 0 5px 0 5px;
-      margin-top: 8%;
+      font-size: max(5rem, min(6rem, 7vw));
     }
+
+    h3 {
+      font-size: max(2.5rem, min(3rem, 3.5vw));
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      font-size: max(3rem, min(2.75rem, 3.25vw));
+    }
+  }
+
+  @media screen and (max-width: 800px) and (max-height: 800px) and (orientation: portrait) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-top: 3%;
+
+    div {
+      margin: 5px;
+    }
+
+    h2 {
+      font-size: max(4rem, min(5rem, 6vw));
+    }
+
+    h3 {
+      font-size: max(2rem, min(2.5rem, 3vw));
+      margin-bottom: 9px;
+    }
+
+    h5 {
+      font-size: max(2.5rem, min(2.25rem, 2.75vw));
+    }
+  }
+
+  @media screen and (orientation: portrait) and (max-height: 700px) and (min-height: 400px) {
+    padding-top: 7vh;
+  }
+
+  // Landscape style, doesn't utilize the wrap
+  @media screen and (max-width: 900px) and (max-height: 800px) {
+    h2,
+    h5 {
+      font-size: max(4rem, min(5rem, 6vw));
+    }
+
+    h3 {
+      font-size: max(2rem, min(2.5rem, 3vw));
+      margin-bottom: 9px;
+    }
+  }
+
+  @media screen and (max-width: 700px) and (max-height: 800px) {
+    h2,
+    h5 {
+      font-size: max(3rem, min(4rem, 5vw));
+    }
+
+    h3 {
+      font-size: max(1.5rem, min(2rem, 2.5vw));
+      margin-bottom: 9px;
+    }
+  }
+
+  @media screen and (max-height: 300px) {
+    padding-top: 0px;
   }
 
   @media screen and (max-height: 400px) {

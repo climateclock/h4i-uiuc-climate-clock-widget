@@ -7,7 +7,7 @@ import {
   URL,
 } from '../../utils/constants'
 import { getData } from '../../utils/utils'
-import DraggableLifelines from '../DraggableLifelines'
+import DraggableLifelines from '../draggable/DraggableLifelines'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
