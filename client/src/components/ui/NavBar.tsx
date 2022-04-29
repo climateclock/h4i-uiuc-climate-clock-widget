@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import clock from '../../images/clock.png'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { Menu } from '@styled-icons/boxicons-regular'
+import MobileBar from '../buttons/MobileBar'
 
 import EnterFullscreen from '../../components/buttons/EnterFullscreen'
 import { FullScreenHandle } from 'react-full-screen'
@@ -13,7 +15,7 @@ const NavBox = styled.div`
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
   height: 8vh;
-  z-index: 4;
+  z-index: 11;
   background-color: ${({ theme }) => theme.black};
 
   margin-top: ${(props) =>
@@ -70,6 +72,10 @@ const Image = styled.div`
   scale(0.25, 0.25);
 `
 
+const StyledMenu = styled.div`
+  color: white;
+`
+
 function NavBar({
   handle,
   isFullScreen,
@@ -77,6 +83,20 @@ function NavBar({
   handle: FullScreenHandle
   isFullScreen: boolean
 }) {
+  const [matches, setMatches] = useState(
+    window.matchMedia('(max-width: 800px)').matches,
+  )
+  useEffect(() => {
+    window
+      .matchMedia('(max-width: 800px)')
+      .addEventListener('change', (e) => setMatches(e.matches))
+  }, [])
+
+  const [showMobileNavbar, setMobileNavbar] = useState(false)
+  const closeNavbar = () => {
+    setMobileNavbar(!showMobileNavbar)
+  }
+
   function MouseTrack(): boolean {
     const [y, setY] = useState()
     useEffect(() => {
@@ -92,6 +112,7 @@ function NavBar({
     })
     return y && y <= 100 ? true : false
   }
+
   return (
     <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
       <Link to="/">
@@ -111,12 +132,26 @@ function NavBar({
           <ExitFullscreen handle={handle.exit} />
         )}
       </FullScreenButton>
-      <Link to="/settings">
-        <PageLink>Settings</PageLink>
-      </Link>
-      <Link to="/lifelines">
-        <PageLink>Lifelines</PageLink>
-      </Link>
+      {matches ? (
+        <StyledMenu>
+          <Menu
+            size="8%"
+            onClick={() => {
+              setMobileNavbar(!showMobileNavbar)
+            }}
+          />
+        </StyledMenu>
+      ) : (
+        <div>
+          <Link to="/settings">
+            <PageLink>Settings</PageLink>
+          </Link>
+          <Link to="/lifelines">
+            <PageLink>Lifelines</PageLink>
+          </Link>
+        </div>
+      )}
+      <MobileBar showMobileNavbar={showMobileNavbar} closeNav={closeNavbar} />
     </NavBox>
   )
 }

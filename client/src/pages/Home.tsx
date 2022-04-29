@@ -8,7 +8,6 @@ import Lifelines from '../components/lifelines/Lifelines'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
 import NavBar from '../components/ui/NavBar'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import MobileNavbar from '../components/buttons/MobileNavbar'
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -33,15 +32,6 @@ export default function Home() {
     )
   }, [defaultLanguage])
 
-  const [matches, setMatches] = useState(
-    window.matchMedia('(max-width: 800px)').matches,
-  )
-  useEffect(() => {
-    window
-      .matchMedia('(max-width: 800px)')
-      .addEventListener('change', (e) => setMatches(e.matches))
-  }, [])
-
   return (
     <>
       {!errorFlag ? (
@@ -50,11 +40,7 @@ export default function Home() {
             handle={handle}
             onChange={() => setFullscreenButton(!showFullscreenButton)}
           >
-            {matches ? (
-              <MobileNavbar />
-            ) : (
-              <NavBar handle={handle} isFullScreen={showFullscreenButton} />
-            )}
+            <NavBar handle={handle} isFullScreen={showFullscreenButton} />
             <Clock
               isFullScreen={!showFullscreenButton}
               timestamp={modules && modules[0] && modules[0].timestamp}

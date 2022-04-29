@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 const Navbar = styled.div`
   @media screen and (max-width: 800px) {
     position: fixed;
-    z-index: 4;
+    z-index: 10;
     top: 0;
     left: 0;
     overflow-x: hidden;
