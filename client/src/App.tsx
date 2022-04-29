@@ -2,10 +2,10 @@ import { WindowSize } from '@reach/window-size'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
+import Lifelines from './/pages/Lifelines'
 import PageEmbed from './components/embed/PageEmbed'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Home from './pages/Home'
-import LifelineCreation from './pages/lifelineCreation'
 import Settings from './pages/Settings'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/settings" element={<Settings />} />
-          <Route path="/lifelines" element={<LifelineCreation />} />
+          <Route path="/lifelines" element={<Lifelines />} />
           <Route path="/" element={<Home />} />
           <Route path="/embed" element={<PageEmbed />} />
         </Routes>
