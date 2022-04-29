@@ -1,6 +1,7 @@
 import { get } from '../api/config'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
 import {
+  DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from './constants'
@@ -14,29 +15,41 @@ export const getModules = async (
   url: string,
   error: string,
   setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
+  setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let res: any = fetchData(url, error)
+  let res: any = await fetchData(url, error)
+  setErrorFlag('error' in res)
 
-  /* set modules */
-  let resModules: ModuleResInterface[] = Object.values(
-    res['data']['data']['modules'],
-  )
-  setModules(resModules)
+  if (!('error' in res)) {
+    /* set modules */
+    let resModules: ModuleResInterface[] = Object.values(
+      res['data']['data']['modules'],
+    )
+    setModules(resModules)
+  } else {
+    setModules([])
+  }
+
+  return res
 }
 
 export const getNewsfeedModules = async (
   url: string,
   error: string,
-  setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+  setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+  setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let res: any = fetchData(url, error)
+  let res: any = await fetchData(url, error)
+  setErrorFlag('error' in res)
 
-  /* set newsfeed modules */
-  if (setNewsfeedModules) {
+  if (!('error' in res)) {
+    /* set newsfeed modules */
     let resNewsfeedModules: NewsInterface[] = Object.values(
       res['data']['data']['modules']['newsfeed_1']['newsfeed'],
     )
     setNewsfeedModules(resNewsfeedModules)
+  } else {
+    setNewsfeedModules([])
   }
 }
 
@@ -46,32 +59,44 @@ export const getLifelineModules = async (
   setLifelineModules: React.Dispatch<
     React.SetStateAction<ModuleResInterface[]>
   >,
+  setErrorFlag?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let res: any = fetchData(url, error)
+  let res: any = await fetchData(url, error)
+  if (setErrorFlag) setErrorFlag('error' in res)
 
-  /* set modules */
-  let resModules: ModuleResInterface[] = Object.values(
-    res['data']['data']['modules'],
-  )
-
-  /* set lifelines */
-  if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-    let resLifelineModules = resModules.filter((module) => {
-      if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-        return true
-      }
-      return false
-    })
-    setLifelineModules(resLifelineModules)
-
-    /* stores lifeline modules in local storage */
-    localStorage.setItem(
-      LIFELINES_LOCAL_STORAGE_KEY,
-      JSON.stringify(resLifelineModules),
+  if (!('error' in res)) {
+    /* set modules */
+    let resModules: ModuleResInterface[] = Object.values(
+      res['data']['data']['modules'],
     )
+
+    /* set lifelines */
+    if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
+      let resLifelineModules = resModules.filter((module) => {
+        if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
+          return true
+        }
+        return false
+      })
+      setLifelineModules(resLifelineModules)
+
+      /* stores lifeline modules in local storage */
+      localStorage.setItem(
+        LIFELINES_LOCAL_STORAGE_KEY,
+        JSON.stringify(resLifelineModules),
+      )
+      localStorage.setItem(
+        DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
+        JSON.stringify(resLifelineModules),
+      )
+    } else {
+      const curLifelineModules = localStorage.getItem(
+        LIFELINES_LOCAL_STORAGE_KEY,
+      )
+      if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
+    }
   } else {
-    const curLifelineModules = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-    if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
+    setLifelineModules([])
   }
 }
 
@@ -89,17 +114,54 @@ export const getDefaultLanguage = (
 }
 
 /* data setting functions */
-export const setLifelineModules = async (
-  lifelineModules: ModuleResInterface[],
+export const setLifelines = async (
+  res: ModuleResInterface[],
   setLifelineModules: React.Dispatch<
     React.SetStateAction<ModuleResInterface[]>
   >,
 ) => {
-  setLifelineModules(lifelineModules)
-  localStorage.setItem(
-    LIFELINES_LOCAL_STORAGE_KEY,
-    JSON.stringify(lifelineModules),
+  /* set modules */
+  let resModules: ModuleResInterface[] = Object.values(
+    res['data']['data']['modules'],
   )
+
+  /* set lifelines */
+  if (
+    !localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY) ||
+    !localStorage.getItem(DEFAULT_LIFELINES_LOCAL_STORAGE_KEY)
+  ) {
+    let resLifelineModules = resModules.filter((module) => {
+      if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
+        return true
+      }
+      return false
+    })
+    setLifelineModules(resLifelineModules)
+
+    /* stores lifeline modules in local storage */
+    localStorage.setItem(
+      LIFELINES_LOCAL_STORAGE_KEY,
+      JSON.stringify(resLifelineModules),
+    )
+    localStorage.setItem(
+      DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
+      JSON.stringify(resLifelineModules),
+    )
+  } else {
+    const curLifelineModules = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
+    if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
+  }
+}
+
+export const setNewsfeeds = async (
+  res: ModuleResInterface[],
+  setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+) => {
+  /* set newsfeed modules */
+  let resNewsfeedModules: NewsInterface[] = Object.values(
+    res['data']['data']['modules']['newsfeed_1']['newsfeed'],
+  )
+  setNewsfeedModules(resNewsfeedModules)
 }
 
 /* get all data  */
@@ -114,7 +176,8 @@ export const getData = async (
   >,
   setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
-  let res: any = await get(url, error)
+  /* set modules */
+  let res: any = await getModules(url, error, setModules, setErrorFlag)
 
   /* errorWrapper returned in res */
   if ('error' in res) {
@@ -125,45 +188,14 @@ export const getData = async (
     return
   }
 
-  /* set modules */
-  let resModules: ModuleResInterface[] = Object.values(
-    res['data']['data']['modules'],
-  )
-  setModules(resModules)
-
   /* set newsfeed modules */
-  if (setNewsfeedModules) {
-    let resNewsfeedModules: NewsInterface[] = Object.values(
-      res['data']['data']['modules']['newsfeed_1']['newsfeed'],
-    )
-    setNewsfeedModules(resNewsfeedModules)
-  }
+  if (setNewsfeedModules) setNewsfeeds(res, setNewsfeedModules)
 
   /* set lifelines */
-  if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-    let resLifelineModules = resModules.filter((module) => {
-      if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-        return true
-      }
-      return false
-    })
-    setLifelineModules(resLifelineModules)
+  setLifelines(res, setLifelineModules)
 
-    /* stores lifeline modules in local storage */
-    localStorage.setItem(
-      LIFELINES_LOCAL_STORAGE_KEY,
-      JSON.stringify(resLifelineModules),
-    )
-  } else {
-    const curLifelineModules = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-    if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
-  }
-
-  const defaultLanguage: string | null = localStorage.getItem(
-    LANGUAGE_LOCAL_STORAGE_KEY,
-  )
-  if (defaultLanguage) setDefaultLanguage(defaultLanguage)
-  else localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, 'eng')
+  /* set default language */
+  getDefaultLanguage(setDefaultLanguage)
 }
 
 /* returnFirstString

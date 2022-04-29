@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { get } from '../../api/config'
 import { ModuleResInterface, OptionsInterface } from '../../interfaces'
 import {
   URL,
@@ -7,7 +6,7 @@ import {
   ERROR_MSG,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from '../../utils/constants'
-import { returnFirstString } from '../../utils/utils'
+import { getLifelineModules, returnFirstString } from '../../utils/utils'
 import { StyledSelect } from '../ui/Select'
 
 const DefaultLifelineCreationForm = () => {
@@ -19,69 +18,38 @@ const DefaultLifelineCreationForm = () => {
   )
 
   useEffect(() => {
-    const getData = async () => {
-      let res: any = await get(URL, ERROR_MSG)
-
-      if ('error' in res) {
-        return
-      }
-
-      /* set modules */
-      let resModules: ModuleResInterface[] = Object.values(
-        res['data']['data']['modules'],
+    const setDefaults = () => {
+      let defaultLifelines: string | null = localStorage.getItem(
+        DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
       )
+      if (defaultLifelines) {
+        let options: OptionsInterface[] = []
+        let cleanedDefaultLifelines: ModuleResInterface[] =
+          JSON.parse(defaultLifelines)
 
-      /* set lifelines */
-      if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-        let resLifelineModules = resModules.filter((module) => {
-          if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
-            return true
-          }
-          return false
-        })
-        setLifelineModules(resLifelineModules)
+        setDefaultLifelines(cleanedDefaultLifelines)
+        for (let i = 0; i < cleanedDefaultLifelines.length; i++) {
+          let defaultLifeline = cleanedDefaultLifelines[i]
+          options.push({
+            value: defaultLifeline,
+            label: returnFirstString(defaultLifeline['labels']),
+          })
+        }
 
-        /* stores lifeline modules in local storage */
-        localStorage.setItem(
-          LIFELINES_LOCAL_STORAGE_KEY,
-          JSON.stringify(resLifelineModules),
-        )
-      } else {
-        const curLifelineModules = localStorage.getItem(
-          LIFELINES_LOCAL_STORAGE_KEY,
-        )
-        if (curLifelineModules)
-          setLifelineModules(JSON.parse(curLifelineModules))
+        setDefaultOptions(options)
       }
     }
 
-    getData()
-  }, [])
-
-  // think about the case when defaults have not been pulled yet
-  useEffect(() => {
-    let defaultLifelines: string | null = localStorage.getItem(
-      DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
-    )
-    if (defaultLifelines) {
-      let options: OptionsInterface[] = []
-      let cleanedDefaultLifelines: ModuleResInterface[] =
-        JSON.parse(defaultLifelines)
-
-      setDefaultLifelines(cleanedDefaultLifelines)
-      for (let i = 0; i < cleanedDefaultLifelines.length; i++) {
-        let defaultLifeline = cleanedDefaultLifelines[i]
-        options.push({
-          value: defaultLifeline,
-          label: returnFirstString(defaultLifeline['labels']),
-        })
-      }
-
-      setDefaultOptions(options)
+    const data = async () => {
+      await getLifelineModules(URL, ERROR_MSG, setLifelineModules)
     }
+
+    data().then(() => {
+      setDefaults()
+    })
   }, [])
 
-  const handleOptionSelectedChange = (option) => {
+  const handleOptionSelectedChange = (option: OptionsInterface | undefined) => {
     setOptionSelected(option)
   }
 
