@@ -210,9 +210,9 @@ function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
         themeColor={({ theme }) => theme.red}
       />
       <ClockSection>
-        <h3>{years ? years : '0'}</h3> <h2>YRS</h2>
-        <h3>{days ? days : '000'}</h3> <h2>DAYS</h2>
-        <h3>{time ? time : '00:00:00'}</h3>
+        <h2>{years ? years : '0'}</h2> <h3>YRS</h3>
+        <h2>{days ? days : '000'}</h2> <h3>DAYS</h3>
+        <h2>{time ? time : '00:00:00'}</h2>
       </ClockSection>
     </ClockContainer>
   )
