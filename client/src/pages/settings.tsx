@@ -10,8 +10,6 @@ import whatsapp from '../utils/icons/whatsapp.png'
 import NavBar from '../components/ui/NavBar'
 import { useFullScreenHandle } from 'react-full-screen'
 
-// import { placeholder } from '@babel/types'
-
 const SettingsSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};
