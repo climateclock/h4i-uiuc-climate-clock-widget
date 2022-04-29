@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import clock from '../../images/clock.png'
+import { useEffect, useState } from 'react'
+import { FullScreenHandle } from 'react-full-screen'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import styled from 'styled-components'
 
 import EnterFullscreen from '../../components/buttons/EnterFullscreen'
-import { FullScreenHandle } from 'react-full-screen'
 import ExitFullscreen from '../../components/buttons/ExitFullscreen'
+import clock from '../../images/clock.png'
 
 const NavBox = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
@@ -106,9 +106,9 @@ function NavBar({
       </Link>
       <FullScreenButton>
         {isFullScreen ? (
-          <EnterFullscreen handle={handle.enter} />
+          <EnterFullscreen handle={handle} />
         ) : (
-          <ExitFullscreen handle={handle.exit} />
+          <ExitFullscreen handle={handle} />
         )}
       </FullScreenButton>
       <Link to="/settings">

@@ -1,10 +1,11 @@
 import { useState } from 'react'
+
 import { LANGUAGE_LOCAL_STORAGE_KEY } from '../../utils/constants'
 
 const LanguageCustomization = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
 
-  const formSubmit = (e: any) => {
+  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, selectedLanguage)
   }

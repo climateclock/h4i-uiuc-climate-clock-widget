@@ -1,5 +1,7 @@
 import Select from 'react-select'
 
+import { optionProps } from '../../interfaces'
+
 const customStyles = {
   control: (base, state) => ({
     ...base,
@@ -17,7 +19,7 @@ const customStyles = {
   }),
 }
 
-export const StyledSelect = ({ options }) => (
+export const StyledSelect = ({ options }: { options: optionProps[] }) => (
   <Select
     styles={customStyles}
     options={options}
