@@ -1,7 +1,7 @@
 import { Menu } from '@styled-icons/boxicons-regular'
 import { CloseOutline } from '@styled-icons/evaicons-outline'
 import { useEffect, useState } from 'react'
-import { FullScreenHandle, useFullScreenHandle } from 'react-full-screen'
+import { FullScreenHandle } from 'react-full-screen'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -91,9 +91,6 @@ function NavBar({
   }, [])
 
   const [showMobileNavbar, setMobileNavbar] = useState(false)
-  const closeNavbar = () => {
-    setMobileNavbar(!showMobileNavbar)
-  }
 
   function MouseTrack(): boolean {
     const [y, setY] = useState()
@@ -162,9 +159,7 @@ function NavBar({
           </div>
         )}
       </NavBox>
-      {matches && (
-        <MobileBar showMobileNavbar={showMobileNavbar} closeNav={closeNavbar} />
-      )}
+      {matches && <MobileBar showMobileNavbar={showMobileNavbar} />}
     </div>
   )
 }

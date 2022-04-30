@@ -37,17 +37,17 @@ const StyledLink = styled(Link)`
   :hover {
     background-color: #1d5479;
   }
-  ${({ selected }: any) =>
+  ${({ selected }) =>
     selected &&
     `
   background-color: #1d5479;
   `}
 `
 
-function MobileBar(props: any) {
+function MobileBar({ showMobileNavbar }: { showMobileNavbar: boolean }) {
   const location = useLocation()
   return (
-    <Navbar showMobileNavbar={props.showMobileNavbar}>
+    <Navbar showMobileNavbar={showMobileNavbar}>
       <StyledLink to="" selected={location.pathname === '/'}>
         Clock
       </StyledLink>
