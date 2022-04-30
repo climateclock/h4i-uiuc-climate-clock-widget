@@ -1,13 +1,13 @@
-import Newsfeed from '../components/clock/Newsfeed'
-import { getHeadlines } from '../utils/utils'
-import Clock from '../components/clock/Clock'
-import { useState, useEffect } from 'react'
-import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../utils/constants'
-import { getData } from '../utils/utils'
-import Lifelines from '../components/lifelines/Lifelines'
-import { ModuleResInterface, NewsInterface } from '../interfaces/index'
-import NavBar from '../components/ui/NavBar'
+import { useEffect, useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+
+import Clock from '../components/clock/Clock'
+import Newsfeed from '../components/clock/Newsfeed'
+import Lifelines from '../components/lifelines/Lifelines'
+import NavBar from '../components/ui/NavBar'
+import { ModuleResInterface, NewsInterface } from '../interfaces/index'
+import { ERROR_MSG, NUM_LIFELINES_DISPLAYED, URL } from '../utils/constants'
+import { getData, getHeadlines } from '../utils/utils'
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')

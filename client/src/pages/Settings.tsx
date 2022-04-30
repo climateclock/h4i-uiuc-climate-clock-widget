@@ -1,8 +1,10 @@
-import LanguageCustomization from '../components/settings/LanguageCustomizationForm'
-import { StyledSelect } from '../components/ui/Select'
 import styled from 'styled-components'
+
+import LanguageCustomization from '../components/settings/LanguageCustomizationForm'
 import Input from '../components/ui/Input'
+import { StyledSelect } from '../components/ui/Select'
 import { options } from '../components/utils/constants'
+
 const SettingsSection = styled.div`
   h1 {
     color: ${({ theme }) => theme.headerText};

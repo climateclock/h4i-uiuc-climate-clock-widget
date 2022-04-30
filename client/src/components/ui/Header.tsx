@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const PADDING: number = 1
+const PADDING = 1
 
 const HeaderBorder = styled.div`
   height: 4px;
@@ -34,7 +35,13 @@ const Module = styled.div`
   }
 `
 
-const Title = styled.div`
+const Title = ({ color, ...props }) => <div {...props}></div>
+
+Title.propTypes = {
+  color: PropTypes.func.isRequired,
+}
+
+const StyledTitle = styled(Title)`
   display: flex;
   align-items: center;
   width: 100%;
@@ -52,6 +59,7 @@ const Title = styled.div`
 interface HeaderProps {
   moduleType: string
   title: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   themeColor: any
 }
 
@@ -61,7 +69,7 @@ export default function Header({ moduleType, title, themeColor }: HeaderProps) {
       <HeaderBorder />
       <LabelContainer>
         <Module>{moduleType}</Module>
-        <Title color={themeColor}>{title}</Title>
+        <StyledTitle color={themeColor}>{title}</StyledTitle>
       </LabelContainer>
     </>
   )

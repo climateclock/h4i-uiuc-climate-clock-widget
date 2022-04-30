@@ -1,7 +1,7 @@
-import Lifeline from './Lifeline'
+import useWindowDimensions from '../../hooks/useWindowdimensions'
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
-import useWindowDimensions from '../../hooks/useWindowdimensions'
+import Lifeline from './Lifeline'
 
 interface LifelinePropsInterface {
   lifeLineData: ModuleResInterface[]
@@ -14,7 +14,7 @@ export default function Lifelines({
 }: LifelinePropsInterface) {
   const dimensions = useWindowDimensions()
 
-  let lifelineDisplayNum = dimensions.height > 700 ? displayNum : 1
+  const lifelineDisplayNum = dimensions.height > 700 ? displayNum : 1
   return (
     <>
       {lifeLineData.slice(0, lifelineDisplayNum).map((module) => {

@@ -7,10 +7,11 @@
  *
  */
 
-import Lifeline from './LifelineEmbed'
+import { useEffect, useState } from 'react'
+
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
-import { useEffect, useState } from 'react'
+import Lifeline from './LifelineEmbed'
 
 interface LifelinePropsInterface {
   lifeLineData: ModuleResInterface[]

@@ -27,6 +27,18 @@ export interface LifelinePropsInterface {
   resolution?: number
 }
 
+export interface optionProps {
+  value: string
+  label: string
+}
+
+export interface ClockProps {
+  isFullScreen: boolean
+  timestamp: string | undefined
+  labels: string[] | undefined
+  flavor: string | undefined
+}
+
 /* Properties optional since some may not be
  * returned from the API
  */
