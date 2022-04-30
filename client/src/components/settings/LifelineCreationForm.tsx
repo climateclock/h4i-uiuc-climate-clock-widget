@@ -163,10 +163,10 @@ const LifelineCreationForm = () => {
             Drag a Lifeline here to display it. Up to three Lifelines can be
             shown on the clock.
           </p>
-        
-      <DraggableLifelines lifelinesProp={lifelineModules} />
-      <h3>Hidden Lifelines</h3>
-      </StyledLifeline>
+
+          <DraggableLifelines lifelinesProp={lifelineModules} />
+          <h3>Hidden Lifelines</h3>
+        </StyledLifeline>
       </FormatSpacing>
     </>
   )
