@@ -11,11 +11,13 @@ const customStyles = {
     color: state.isFocused ? 'white' : 'white',
     width: '255px',
     height: '31px',
+    left: '5%',
   }),
   container: (base) => ({
     ...base,
     width: '255px',
     height: '31px',
+    left: '4%',
   }),
 }
 
