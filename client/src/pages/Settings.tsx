@@ -63,7 +63,7 @@ const IconContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-left: 5%;
-  gap: 2%;
+  gap: 2.5%;
 `
 
 function Settings() {
