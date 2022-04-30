@@ -1,6 +1,7 @@
-import styled from 'styled-components'
-import Input from '../ui/Input'
 import { useState } from 'react'
+import styled from 'styled-components'
+
+import Input from '../ui/Input'
 
 const ButtonContainer = styled.div`
   display: flex;
