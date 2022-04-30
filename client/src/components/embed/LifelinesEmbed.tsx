@@ -7,10 +7,11 @@
  *
  */
 
-import Lifeline from './LifelineEmbed'
+import { useEffect, useState } from 'react'
+
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
-import { useEffect, useState } from 'react'
+import Lifeline from './LifelineEmbed'
 
 interface LifelinePropsInterface {
   lifeLineData: ModuleResInterface[]
@@ -21,7 +22,7 @@ export default function LifelinesEmbed({
   lifeLineData,
   displayNum,
 }: LifelinePropsInterface) {
-  let lifelineDisplayNum = displayNum
+  const lifelineDisplayNum = displayNum
   const [lifelineIndex, setLifelineIndex] = useState<number>(0)
   const LIFELINE_DURATION = 2 // seconds displayed per lifeline
   const [lifelineSavedValues, setLifelineSavedValues] = useState<
@@ -29,7 +30,7 @@ export default function LifelinesEmbed({
   >(Array(lifelineDisplayNum)) // saved lifeline values after set time duration
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       setLifelineIndex(
         (lifelineIndex) => (lifelineIndex + 1) % lifelineDisplayNum,
       )
@@ -49,7 +50,7 @@ export default function LifelinesEmbed({
 
   /* used to update saved values to continue for next time duration */
   const updateSavedValue = (index: number, value: number) => {
-    let newLifelineSavedValues = lifelineSavedValues
+    const newLifelineSavedValues = lifelineSavedValues
     newLifelineSavedValues[index] = value
     setLifelineSavedValues(newLifelineSavedValues)
   }

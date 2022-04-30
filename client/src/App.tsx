@@ -1,11 +1,12 @@
 import { WindowSize } from '@reach/window-size'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import Settings from './pages/Settings'
-import LifelineCreation from './pages/lifelineCreation'
-import Home from './pages/Home'
+
 import PageEmbed from './components/embed/PageEmbed'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import Home from './pages/Home'
+import LifelineCreation from './pages/lifelineCreation'
+import Settings from './pages/Settings'
 
 function App() {
   /* Sets the lifeline modules upon load and every defaultLanguage change */

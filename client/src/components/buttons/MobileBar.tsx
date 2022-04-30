@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Navbar = styled.div`
   @media screen and (max-width: 800px) {

@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from 'axios'
+
 import { ApiRequestUrl } from './constants'
 
-interface ErrorWrapper {
+export interface ErrorWrapper {
   type: string
-  error: any
+  error: string
 }
 
 const instance = axios.create({

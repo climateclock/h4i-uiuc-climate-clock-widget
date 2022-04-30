@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
+
+import { ModuleResInterface } from '../../interfaces'
 import {
-  URL,
   ERROR_MSG,
   LIFELINES_LOCAL_STORAGE_KEY,
+  URL,
 } from '../../utils/constants'
-import { ModuleResInterface } from '../../interfaces'
 import { getData } from '../../utils/utils'
-import DraggableLifelines from '../DraggableLifelines'
+import DraggableLifelines from '../draggable/DraggableLifelines'
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
@@ -50,7 +51,7 @@ const LifelineCreationForm = () => {
    *
    * Description: Used to append a Lifeline module to current list of modules.
    */
-  const formSubmit = (e: any) => {
+  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const llModule: ModuleResInterface = {
       labels: [title.toUpperCase()] /* stored as array in API response */,
