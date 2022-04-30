@@ -8,7 +8,6 @@ import { ModuleResInterface } from '../../interfaces'
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../draggable/DraggableLifelines'
 import styled from 'styled-components'
-import { ReOrderDotsVertical } from '@styled-icons/fluentui-system-filled/ReOrderDotsVertical'
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
   const flavor = 'Lifeline'
@@ -94,73 +93,81 @@ const LifelineCreationForm = () => {
       font-size: 14px;
     }
   `
+  const FormatSpacing = styled.div`
+    max-width: 1090px;
+    margin: 57px;
+  `
   return (
     <>
-      <StyledLifeline>
-        <h1>Clock Lifelines</h1>
-        <form onSubmit={formSubmit}>
-          {/* title input */}
-          <label>Title</label>
-          <input
-            required={true}
-            placeholder={'Title...'}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <br />
+      <FormatSpacing>
+        <StyledLifeline>
+          <h1>Clock Lifelines</h1>
+          <form onSubmit={formSubmit}>
+            {/* title input */}
+            <label>Title</label>
+            <input
+              required={true}
+              placeholder={'Title...'}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <br />
 
-          {/* unit input */}
-          <label>Unit</label>
-          <input
-            required={true}
-            placeholder={'Unit...'}
-            type={'text'}
-            value={unit}
-            onChange={(e) => setUnit(e.target.value)}
-          />
-          <br />
+            {/* unit input */}
+            <label>Unit</label>
+            <input
+              required={true}
+              placeholder={'Unit...'}
+              type={'text'}
+              value={unit}
+              onChange={(e) => setUnit(e.target.value)}
+            />
+            <br />
 
-          {/* value input */}
-          <label>Value</label>
-          <input
-            required={true}
-            placeholder={'Value...'}
-            type={'number'}
-            value={value}
-            onChange={(e) => setValue(parseFloat(e.target.value))}
-          />
-          <br />
+            {/* value input */}
+            <label>Value</label>
+            <input
+              required={true}
+              placeholder={'Value...'}
+              type={'number'}
+              value={value}
+              onChange={(e) => setValue(parseFloat(e.target.value))}
+            />
+            <br />
 
-          {/* rate input */}
-          <label>Rate</label>
-          <input
-            type={'number'}
-            placeholder={'Rate...'}
-            value={rate}
-            onChange={(e) => setRate(parseFloat(e.target.value))}
-          />
-          <br />
+            {/* rate input */}
+            <label>Rate</label>
+            <input
+              type={'number'}
+              placeholder={'Rate...'}
+              value={rate}
+              onChange={(e) => setRate(parseFloat(e.target.value))}
+            />
+            <br />
 
-          {/* resolution input */}
-          <label>Resolution</label>
-          <input
-            min={0} /* enforces resolution is positive */
-            type={'number'}
-            placeholder={'Resolution...'}
-            value={resolution}
-            onChange={(e) => setResolution(parseInt(e.target.value))}
-          />
-          <br />
+            {/* resolution input */}
+            <label>Resolution</label>
+            <input
+              min={0} /* enforces resolution is positive */
+              type={'number'}
+              placeholder={'Resolution...'}
+              value={resolution}
+              onChange={(e) => setResolution(parseInt(e.target.value))}
+            />
+            <br />
 
-          <button type="submit">Create</button>
-        </form>
-        <h3>Displayed Lifelines</h3>
-        <p>
-          Drag a Lifeline here to display it. Up to three Lifelines can be shown
-          on the clock.
-        </p>
-      </StyledLifeline>
+            <button type="submit">Create</button>
+          </form>
+          <h3>Displayed Lifelines</h3>
+          <p>
+            Drag a Lifeline here to display it. Up to three Lifelines can be
+            shown on the clock.
+          </p>
+        
       <DraggableLifelines lifelinesProp={lifelineModules} />
+      <h3>Hidden Lifelines</h3>
+      </StyledLifeline>
+      </FormatSpacing>
     </>
   )
 }

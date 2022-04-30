@@ -22,16 +22,12 @@ interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
 }
 const StyledDiv = styled.div`
-  display: inline-block;
-  vertical-align: middle;
+  display: flex;
 `
-const StyledIcon = styled(ReOrderDotsVertical)`
-  display: inline-block;
-`
+
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 4
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
-
   /* fill lifelines with passed in props for rendering */
   useEffect(() => {
     setLifelines(lifelinesProp)
@@ -48,19 +44,18 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   const getDraggableItemStyle = (
     draggableStyle: DraggingStyle | NotDraggingStyle | undefined,
+    isDraggingOver,
   ): CSSProperties => ({
-    padding: BASE_PADDING * 2,
+    paddingBottom: BASE_PADDING * 2,
     margin: `0 0 ${BASE_PADDING}px 0`,
     alignItems: 'center',
     display: 'grid',
-    gridTemplateColumns: '2.5fr 95fr 2.5fr',
-
+    gridTemplateColumns: '0fr 95fr 2.5fr',
     // styles we need to apply on draggables
     ...draggableStyle,
   })
 
   const getDroppableStyle = () => ({
-    padding: `${BASE_PADDING}px`,
     margin: '0 auto',
     width: '95vw',
   })
@@ -91,27 +86,16 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                 draggableId={index.toString()}
                 index={index}
               >
-                {(provided, _) => (
+                {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    style={getDraggableItemStyle(provided.draggableProps.style)}
-                  >
-                    {index < NUM_LIFELINES_DISPLAYED && (
-                      <p
-                        style={{
-                          border: 'black 2px solid',
-                          borderRadius: '5px',
-                          gridColumn: 1,
-                          fontSize: '0.65em',
-                          justifySelf: 'center',
-                          padding: '10%',
-                        }}
-                      >
-                        {index + 1}
-                      </p>
+                    style={getDraggableItemStyle(
+                      provided.draggableProps.style,
+                      snapshot.draggingOver,
                     )}
+                  >
                     <StyledDiv
                       style={{
                         background: '#f1f1f1',
@@ -119,9 +103,33 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                         width: '92.5%',
                         padding: '0 2%',
                         gridColumn: 2,
+                        display: 'flex',
+                        border: '1px lightgrey solid',
+                        borderColor: `${({ theme }) => theme.secondaryText}`,
+                        borderLeft: snapshot.draggingOver
+                          ? `${({ theme }) => theme.buttonBackground}`
+                          : `${({ theme }) => theme.secondaryText}`,
                       }}
                     >
-                      <StyledIcon size="15px" />
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignSelf: 'center',
+                          width: '5%',
+                          fontSize: '1.29em',
+                          marginLeft: '0%',
+                        }}
+                      >
+                        <ReOrderDotsVertical size="20px" />
+                        <div
+                          style={{
+                            marginLeft: '15%',
+                            alignSelf: 'center',
+                          }}
+                        >
+                          {index < NUM_LIFELINES_DISPLAYED && index + 1}
+                        </div>
+                      </div>
                       <LifelineCard
                         lifeline={lifeline}
                         isDisplayed={index < NUM_LIFELINES_DISPLAYED}
