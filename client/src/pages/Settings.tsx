@@ -101,7 +101,7 @@ function Settings() {
       </SettingsText>
       <CopyButton
         type="embed"
-        placeholder='<script src="https://climateclock.world/widget-v2.js" async></script><climate-clock /><sc '
+        placeholder='<iframe src="https://climateclock.world/widget-v2.js" async></iframe><climate-clock /><sc '
       />
       <SettingCaption>Social Media</SettingCaption>
       <IconContainer>
