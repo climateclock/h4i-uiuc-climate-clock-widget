@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = styled.div`
   @media screen and (max-width: 800px) {
+    font-family: ${({ theme }) => theme.secondaryFonts};
     position: fixed;
     z-index: 10;
     top: 0;
@@ -19,7 +20,7 @@ const Navbar = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #111;
+    background-color: ${({ theme }) => theme.black};
   }
 `
 
@@ -51,12 +52,11 @@ function MobileBar(props: any) {
         Clock
       </StyledLink>
       <StyledLink to="/lifelines" selected={location.pathname === '/lifelines'}>
-        Lifeline
+        Lifelines
       </StyledLink>
       <StyledLink to="/settings" selected={location.pathname === '/settings'}>
         Settings
       </StyledLink>
-      <button onClick={props.closeNav}>X</button>
     </Navbar>
   )
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Menu } from '@styled-icons/boxicons-regular'
 import MobileBar from '../buttons/MobileBar'
+import { CloseOutline } from '@styled-icons/evaicons-outline'
 
 import EnterFullscreen from '../../components/buttons/EnterFullscreen'
 import { FullScreenHandle } from 'react-full-screen'
@@ -26,6 +27,7 @@ const NavBox = styled.div`
       ? 'translateY(-12.5em)'
       : 'translateY(0px)'};
   transition: 0.3s ease-out;
+  position: absolute;
 `
 
 const PageLink = styled.div`
@@ -72,10 +74,6 @@ const Image = styled.div`
   scale(0.25, 0.25);
 `
 
-const StyledMenu = styled.div`
-  color: white;
-`
-
 function NavBar({
   handle,
   isFullScreen,
@@ -114,45 +112,60 @@ function NavBar({
   }
 
   return (
-    <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
-      <Link to="/">
-        <HomeLink>
-          <Button>
-            Climate Clock
-            <Image>
-              <img src={clock} alt="climate_clock_logo" />
-            </Image>
-          </Button>
-        </HomeLink>
-      </Link>
-      <FullScreenButton>
-        {isFullScreen ? (
-          <EnterFullscreen handle={handle.enter} />
+    <div>
+      <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
+        <Link to="/">
+          <HomeLink>
+            <Button>
+              Climate Clock
+              <Image>
+                <img src={clock} alt="climate_clock_logo" />
+              </Image>
+            </Button>
+          </HomeLink>
+        </Link>
+        <FullScreenButton>
+          {isFullScreen ? (
+            <EnterFullscreen handle={handle.enter} />
+          ) : (
+            <ExitFullscreen handle={handle.exit} />
+          )}
+        </FullScreenButton>
+        {matches ? (
+          [
+            !showMobileNavbar ? (
+              <Menu
+                style={{ float: 'right', color: 'white' }}
+                size="2.5em"
+                onClick={() => {
+                  setMobileNavbar(!showMobileNavbar)
+                }}
+              />
+            ) : (
+              <CloseOutline
+                style={{ float: 'right', color: 'white' }}
+                size="2.5em"
+                onClick={() => {
+                  setMobileNavbar(!showMobileNavbar)
+                }}
+              />
+            ),
+          ]
         ) : (
-          <ExitFullscreen handle={handle.exit} />
+          <div>
+            <Link to="/settings">
+              <PageLink>Settings</PageLink>
+            </Link>
+            <Link to="/lifelines">
+              <PageLink>Lifelines</PageLink>
+            </Link>
+          </div>
         )}
-      </FullScreenButton>
-      {matches ? (
-        <StyledMenu>
-          <Menu
-            size="8%"
-            onClick={() => {
-              setMobileNavbar(!showMobileNavbar)
-            }}
-          />
-        </StyledMenu>
-      ) : (
-        <div>
-          <Link to="/settings">
-            <PageLink>Settings</PageLink>
-          </Link>
-          <Link to="/lifelines">
-            <PageLink>Lifelines</PageLink>
-          </Link>
-        </div>
+      </NavBox>
+      {matches && (
+        <MobileBar showMobileNavbar={showMobileNavbar} closeNav={closeNavbar} />
       )}
-      <MobileBar showMobileNavbar={showMobileNavbar} closeNav={closeNavbar} />
-    </NavBox>
+    </div>
   )
 }
 
