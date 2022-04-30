@@ -7,7 +7,7 @@ const Input = styled.input`
   border-color: ${({ theme }) => theme.secondaryBackground};
   padding 8px;
   width: ${(props) => props.width || '10rem;'};
- 
+  font-family: ${({ theme }) => theme.secondaryFont};
   &:focus {
     outline: none;
     border: 1px solid ${({ theme }) => theme.blue}
