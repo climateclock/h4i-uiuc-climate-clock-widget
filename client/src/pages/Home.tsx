@@ -43,6 +43,7 @@ export default function Home() {
             <NavBar
               handle={handle}
               isFullScreen={showFullscreenButton}
+              atHome={true}
             ></NavBar>
             <Clock
               isFullScreen={!showFullscreenButton}
