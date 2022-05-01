@@ -20,7 +20,6 @@ function App() {
         handle={handle}
         onChange={() => setFullscreenButton(!showFullscreenButton)}
       >
-        {' '}
         <BrowserRouter>
           <Routes>
             <Route path="/langForm/*" element={<LanguageCustomization />} />

@@ -25,11 +25,14 @@ const LanguageCustomization = () => {
         language: selectedLanguage,
         lifelines: localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
       }
+      console.log('inside')
       const settings_json = JSON.stringify(json)
       let compressed = compressToEncodedURIComponent(settings_json)
-      navigate(`${compressed}`)
+
       localStorage.setItem(COMPRESSED_KEY, compressed)
+      navigate(`${compressed}`)
     }
+    console.log('here2')
     localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, selectedLanguage)
   }
 

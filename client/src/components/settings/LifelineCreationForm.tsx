@@ -60,18 +60,16 @@ const LifelineCreationForm = () => {
    */
   const formSubmit = (e: any) => {
     e.preventDefault()
-    /*const language: string | null = localStorage.getItem(
-      LANGUAGE_LOCAL_STORAGE_KEY,
-    )*/
     let json = {
       language: localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
       lifelines: lifelineModules,
     }
+    console.log(localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY))
     const settings_json = JSON.stringify(json)
     let compressed = compressToEncodedURIComponent(settings_json)
-    navigate(`${compressed}`)
-    localStorage.setItem(COMPRESSED_KEY, compressed)
 
+    localStorage.setItem(COMPRESSED_KEY, compressed)
+    navigate(`${compressed}`)
     const llModule: ModuleResInterface = {
       labels: [title] /* stored as array in API response */,
       flavor,

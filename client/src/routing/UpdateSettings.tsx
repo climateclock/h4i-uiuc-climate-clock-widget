@@ -1,6 +1,7 @@
 import { decompressFromEncodedURIComponent } from 'lz-string'
 import { COMPRESSED_KEY } from '../utils/constants'
 export const UpdateSettings = (selectLanguage, lifelineModules) => {
+  console.log(localStorage.getItem(COMPRESSED_KEY))
   let decompressed = JSON.parse(
     decompressFromEncodedURIComponent(localStorage.getItem(COMPRESSED_KEY)),
   )

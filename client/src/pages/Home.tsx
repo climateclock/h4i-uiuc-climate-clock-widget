@@ -18,7 +18,6 @@ export default function Home() {
   const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const navigate = useNavigate()
-  //localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
   useEffect(() => {
     getData(
       URL,
@@ -28,9 +27,10 @@ export default function Home() {
       setModules,
       setLifelineModules,
       setNewsfeedModules,
-    )
-    UpdateURL(navigate, defaultLanguage, lifelineModules)
-    UpdateSettings(defaultLanguage, lifelineModules)
+    ).then(() => {
+      UpdateURL(navigate, defaultLanguage, lifelineModules)
+      UpdateSettings(defaultLanguage, lifelineModules)
+    })
   }, [navigate, defaultLanguage, lifelineModules])
 
   return (
@@ -42,6 +42,7 @@ export default function Home() {
             labels={modules && modules[0] && modules[0].labels}
             flavor={modules && modules[0] && modules[0].flavor}
           />
+
           <Lifelines
             lifeLineData={lifelineModules}
             displayNum={NUM_LIFELINES_DISPLAYED}
