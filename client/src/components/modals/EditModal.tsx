@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import { Close } from '@styled-icons/evaicons-solid'
 import StyledButton from '../buttons/button';
 import { PencilFill } from '@styled-icons/bootstrap';
-import Lifeline from '../lifelines/Lifeline';
 
 
 const CloseButton = styled(Close)`
@@ -131,6 +130,8 @@ function EditModal({ index } : { index : number}) {
         const LifelineArray = localStorage.getItem("lifelines")
         if (LifelineArray) {
             const lifeline = JSON.parse(LifelineArray)[index]
+            console.log(lifeline.labels[0]);
+            console.log(title);
             localStorage.setItem(lifeline.labels[0], title);
         }
         close()
