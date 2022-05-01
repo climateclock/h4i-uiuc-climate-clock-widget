@@ -34,7 +34,7 @@ const LifelineCreationForm = () => {
       setModules,
       setLifelineModules,
     )
-  }, [])
+  }, [lifelineModules])
 
   /* clearProperties
    *
@@ -131,7 +131,10 @@ const LifelineCreationForm = () => {
 
         <button type="submit">Create</button>
       </form>
-      <DefaultLifelineCreationForm />
+      <DefaultLifelineCreationForm
+        lifelineModules={lifelineModules}
+        setLifelineModules={setLifelineModules}
+      />
       <DraggableLifelines lifelinesProp={lifelineModules} />
     </>
   )

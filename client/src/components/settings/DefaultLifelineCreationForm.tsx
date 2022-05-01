@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 
 import { ModuleResInterface, OptionsInterface } from '../../interfaces'
@@ -10,13 +11,13 @@ import {
 import { getLifelineModules, returnFirstString } from '../../utils/utils'
 import { StyledSelect } from '../ui/Select'
 
-const DefaultLifelineCreationForm = () => {
+export default function DefaultLifelineCreationForm({
+  lifelineModules,
+  setLifelineModules,
+}) {
   const [optionSelected, setOptionSelected] = useState<OptionsInterface>()
   const [defaultOptions, setDefaultOptions] = useState<OptionsInterface[]>([])
   const [, setDefaultLifelines] = useState<ModuleResInterface[]>([])
-  const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
-    [],
-  )
 
   useEffect(() => {
     const setDefaults = () => {
@@ -48,7 +49,7 @@ const DefaultLifelineCreationForm = () => {
     data().then(() => {
       setDefaults()
     })
-  }, [])
+  }, [setLifelineModules])
 
   const handleOptionSelectedChange = (option: OptionsInterface | undefined) => {
     setOptionSelected(option)
@@ -68,12 +69,13 @@ const DefaultLifelineCreationForm = () => {
       if (hasLifeline(optionSelected.value)) return
 
       const lifelineSelected: ModuleResInterface = optionSelected.value
+      const newLifelineModules = lifelineModules
 
-      lifelineModules.push(lifelineSelected)
-      setLifelineModules([...lifelineModules])
+      newLifelineModules.push(lifelineSelected)
+      setLifelineModules(newLifelineModules)
       localStorage.setItem(
         LIFELINES_LOCAL_STORAGE_KEY,
-        JSON.stringify(lifelineModules),
+        JSON.stringify(newLifelineModules),
       )
     }
   }
@@ -90,4 +92,9 @@ const DefaultLifelineCreationForm = () => {
   )
 }
 
-export default DefaultLifelineCreationForm
+DefaultLifelineCreationForm.propTypes = {
+  lifelineModules: PropTypes.arrayOf(PropTypes.any),
+  setLifelineModules: PropTypes.func,
+}
+
+// export default DefaultLifelineCreationForm
