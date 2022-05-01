@@ -1,9 +1,10 @@
-import { LifelinePropsInterface } from '../../interfaces'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import { LifelinePropsInterface } from '../../interfaces'
 import Header from '../ui/Header'
 
-const VALUE_UNIT_MARGIN: number = 1
+const VALUE_UNIT_MARGIN = 1
 
 const Container = styled.div`
   & {
@@ -66,7 +67,7 @@ function Lifeline({
 
   /* update lifeline value within interval */
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (rate !== 0) {
         setLLVal((llVal) => llVal + cleanedRate)
       }
