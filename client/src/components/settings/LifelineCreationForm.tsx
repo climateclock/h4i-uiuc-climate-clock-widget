@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
@@ -8,8 +9,10 @@ import {
   URL,
 } from '../../utils/constants'
 import { getData } from '../../utils/utils'
+import StyledButton from '../buttons/button'
 import DraggableLifelines from '../draggable/DraggableLifelines'
 import Input from '../ui/Input'
+import NavBar from '../ui/NavBar'
 import DefaultLifelineCreationForm from './DefaultLifelineCreationForm'
 
 const StyledLifeline = styled.div`
@@ -40,6 +43,7 @@ const FormatSpacing = styled.div`
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
+  const handle = useFullScreenHandle()
   const flavor = 'Lifeline'
   const [title, setTitle] = useState<string>('')
   const [unit, setUnit] = useState<string>('')
@@ -101,6 +105,7 @@ const LifelineCreationForm = () => {
   }
   return (
     <>
+      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
       <FormatSpacing>
         <StyledLifeline>
           <h1>Clock Lifelines</h1>
@@ -158,8 +163,12 @@ const LifelineCreationForm = () => {
             />
             <br />
 
-            <button type="submit">Create</button>
+            <StyledButton buttonLabel={'Create'} type="submit" />
           </form>
+          <DefaultLifelineCreationForm
+            lifelineModules={lifelineModules}
+            setLifelineModules={setLifelineModules}
+          />
           <h3>Displayed Lifelines</h3>
           <p>
             Drag a Lifeline here to display it. Up to three Lifelines can be
@@ -168,10 +177,7 @@ const LifelineCreationForm = () => {
 
           {/* <button type="submit">Create</button>
       </form> */}
-          <DefaultLifelineCreationForm
-            lifelineModules={lifelineModules}
-            setLifelineModules={setLifelineModules}
-          />
+
           <DraggableLifelines lifelinesProp={lifelineModules} />
           {/* <DraggableLifelines lifelinesProp={lifelineModules} /> */}
           <h3>Hidden Lifelines</h3>

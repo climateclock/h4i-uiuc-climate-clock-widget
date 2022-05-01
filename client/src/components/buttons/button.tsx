@@ -1,7 +1,17 @@
 import styled from 'styled-components'
 
-const Button = ({ className, buttonLabel }) => {
-  return <button className={className}>{buttonLabel}</button>
+interface ButtonProps {
+  type: 'button' | 'submit' | 'reset' | undefined
+  className: string
+  buttonLabel: string
+}
+
+const Button = ({ type, className, buttonLabel }: ButtonProps) => {
+  return (
+    <button type={type} className={className}>
+      {buttonLabel}
+    </button>
+  )
 }
 
 const StyledButton = styled(Button)`
@@ -42,5 +52,4 @@ const StyledButton = styled(Button)`
 //     }
 // `;
 
-
-export default StyledButton;
+export default StyledButton

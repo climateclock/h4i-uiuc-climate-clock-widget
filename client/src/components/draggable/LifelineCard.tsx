@@ -2,8 +2,10 @@ import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
+import EditModal from '../modals/EditModal'
 
 interface LifelineCardInterface {
+  index: number
   lifeline: ModuleResInterface
   isDisplayed: boolean
 }
@@ -42,17 +44,21 @@ const HideButton = styled.p`
   grid-column: 2;
 `
 const LifelineCard = ({
+  index,
   lifeline: { labels, customizable },
   isDisplayed,
 }: LifelineCardInterface) => {
   return (
-    <Card>
-      <Text>
-        <Lifeline>{returnFirstString(labels)}</Lifeline>
-        <Source>{customizable ? '' : 'Climate Clock'}</Source>
-      </Text>
-      <HideButton>{isDisplayed ? 'Hide' : 'Show'}</HideButton>
-    </Card>
+    <>
+      <Card>
+        <Text>
+          <Lifeline>{returnFirstString(labels)}</Lifeline>
+          <Source>{customizable ? '' : 'Climate Clock'}</Source>
+        </Text>
+        <HideButton>{isDisplayed ? 'Hide' : 'Show'}</HideButton>
+      </Card>
+      {customizable && <EditModal index={index}></EditModal>}
+    </>
   )
 }
 

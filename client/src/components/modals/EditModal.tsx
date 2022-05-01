@@ -74,34 +74,47 @@ function EditModal({ index }: { index: number }) {
   const close = () => setShowDialog(false)
   const [title, setTitle] = useState(() => {
     // getting stored value
-    const saved = localStorage.getItem('title')
-    if (saved) {
-      const initialValue = JSON.parse(saved)
-      return initialValue || ''
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const saved = JSON.parse(LifelineArray)[index]
+      if (saved) {
+        const initialValue = saved.labels[0]
+        return initialValue || ''
+      }
     }
   })
   const [statistic, setStatistic] = useState(() => {
     // getting stored value
-    const saved = localStorage.getItem('statistic')
-    if (saved) {
-      const initialValue = JSON.parse(saved)
-      return initialValue || ''
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const saved = JSON.parse(LifelineArray)[index]
+      if (saved) {
+        const initialValue = saved.initial
+        return parseFloat(initialValue) || 0
+      }
     }
   })
+
   const [source, setSource] = useState(() => {
     // getting stored value
-    const saved = localStorage.getItem('source')
-    if (saved) {
-      const initialValue = JSON.parse(saved)
-      return initialValue || ''
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const saved = JSON.parse(LifelineArray)[index]
+      if (saved) {
+        const initialValue = saved.source
+        return initialValue || ''
+      }
     }
   })
   const [link, setLink] = useState(() => {
     // getting stored value
-    const saved = localStorage.getItem('link')
-    if (saved) {
-      const initialValue = JSON.parse(saved)
-      return initialValue || ''
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const saved = JSON.parse(LifelineArray)[index]
+      if (saved) {
+        const initialValue = saved.link
+        return initialValue || ''
+      }
     }
   })
 
@@ -113,7 +126,6 @@ function EditModal({ index }: { index: number }) {
     if (LifelineArray) {
       const lifeline = JSON.parse(LifelineArray)[index]
       setTitle(lifeline.labels[0])
-      console.log(lifeline.description)
       setStatistic(lifeline.unit_labels)
       if (lifeline.source) {
         setSource(lifeline.source)
@@ -122,14 +134,23 @@ function EditModal({ index }: { index: number }) {
         setLink(lifeline.link)
       }
     }
-    console.log(showDialog)
     open()
   }
-  function Submit(e) {
-    localStorage.setItem('title', e.target[0].value)
-    localStorage.setItem('statistic', e.target[0].value)
-    localStorage.setItem('source', e.target[0].value)
-    localStorage.setItem('link', e.target[0].value)
+  function onSubmit(e) {
+    e.preventDefault()
+    const LifelineArray = localStorage.getItem('lifelines')
+    console.log(LifelineArray)
+    if (LifelineArray) {
+      const lifeline = JSON.parse(LifelineArray)[index]
+      console.log(lifeline)
+      lifeline.labels[0] = e.target[0].value
+      lifeline.initial = parseFloat(e.target[1].value)
+
+      const newLifelines = JSON.parse(LifelineArray)
+      newLifelines[index] = lifeline
+      console.log(newLifelines)
+      localStorage.setItem('lifelines', JSON.stringify(newLifelines))
+    }
     close()
   }
   useEffect(() => {
@@ -181,7 +202,7 @@ function EditModal({ index }: { index: number }) {
               Enter a title and statistic to create your personal Lifeline. The
               citation and rate are optional.
             </StyledDescription>
-            <StyledForm>
+            <StyledForm onSubmit={onSubmit}>
               <div>
                 <StyledLabel>Title</StyledLabel>
                 <StyledInput
@@ -212,7 +233,7 @@ function EditModal({ index }: { index: number }) {
                     setSource(e.target.value)
                   }}
                   value={source}
-                  required={true}
+                  required={false}
                   placeholder={'Ex: WRI'}
                   type={'text'}
                 />
@@ -228,13 +249,11 @@ function EditModal({ index }: { index: number }) {
                   placeholder={
                     'Ex: https://www.wri.org/?gclid=CjwKCAjwrfCRBhAXEiwAnkmKmWhnLs_cSR3ZNsGwvjy-zsk4n3JIKDPnvPFqLVcHjye'
                   }
+                  required={false}
                 />
               </div>
               <div></div>
-              <StyledSubmit
-                buttonLabel={'Update'}
-                onClick={Submit}
-              ></StyledSubmit>
+              <StyledSubmit type="submit" buttonLabel={'Update'}></StyledSubmit>
             </StyledForm>
           </StyledDialogContainer>
         </DialogContent>
