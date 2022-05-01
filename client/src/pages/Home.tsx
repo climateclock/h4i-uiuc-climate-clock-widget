@@ -1,14 +1,17 @@
-import Newsfeed from '../components/clock/Newsfeed'
-import { getHeadlines } from '../utils/utils'
-import Clock from '../components/clock/Clock'
-import { useState, useEffect } from 'react'
-import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../utils/constants'
-import { getData } from '../utils/utils'
-import Lifelines from '../components/lifelines/Lifelines'
-import { ModuleResInterface, NewsInterface } from '../interfaces/index'
-import { UpdateURL } from '../routing/UpdateURL'
-import { UpdateSettings } from '../routing/UpdateSettings'
+import { useEffect, useState } from 'react'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { useNavigate } from 'react-router-dom'
+
+import Clock from '../components/clock/Clock'
+import Newsfeed from '../components/clock/Newsfeed'
+import Lifelines from '../components/lifelines/Lifelines'
+import NavBar from '../components/ui/NavBar'
+import { ModuleResInterface, NewsInterface } from '../interfaces/index'
+import { UpdateSettings } from '../routing/UpdateSettings'
+import { UpdateURL } from '../routing/UpdateURL'
+import { ERROR_MSG, NUM_LIFELINES_DISPLAYED, URL } from '../utils/constants'
+import { getData, getHeadlines } from '../utils/utils'
+
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
   const [modules, setModules] = useState<ModuleResInterface[]>([])
@@ -18,6 +21,9 @@ export default function Home() {
   const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
   const navigate = useNavigate()
+  const handle = useFullScreenHandle()
+  const [showFullscreenButton, setFullscreenButton] = useState(false)
+
   useEffect(() => {
     getData(
       URL,
@@ -37,17 +43,27 @@ export default function Home() {
     <>
       {!errorFlag ? (
         <div>
-          <Clock
-            timestamp={modules && modules[0] && modules[0].timestamp}
-            labels={modules && modules[0] && modules[0].labels}
-            flavor={modules && modules[0] && modules[0].flavor}
-          />
-
-          <Lifelines
-            lifeLineData={lifelineModules}
-            displayNum={NUM_LIFELINES_DISPLAYED}
-          />
-          <Newsfeed headline={getHeadlines(newsfeedModules)} />
+          <FullScreen
+            handle={handle}
+            onChange={() => setFullscreenButton(!showFullscreenButton)}
+          >
+            <NavBar
+              handle={handle}
+              isFullScreen={showFullscreenButton}
+              atHome={true}
+            ></NavBar>
+            <Clock
+              isFullScreen={!showFullscreenButton}
+              timestamp={modules && modules[0] && modules[0].timestamp}
+              labels={modules && modules[0] && modules[0].labels}
+              flavor={modules && modules[0] && modules[0].flavor}
+            />
+            <Lifelines
+              lifeLineData={lifelineModules}
+              displayNum={NUM_LIFELINES_DISPLAYED}
+            />
+            <Newsfeed headline={getHeadlines(newsfeedModules)} />
+          </FullScreen>
         </div>
       ) : (
         <h1>{ERROR_MSG}</h1>

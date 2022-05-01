@@ -1,18 +1,48 @@
-import { useEffect, useState } from 'react'
-import {
-  URL,
-  ERROR_MSG,
-  LIFELINES_LOCAL_STORAGE_KEY,
-  LANGUAGE_LOCAL_STORAGE_KEY,
-  COMPRESSED_KEY,
-} from '../../utils/constants'
 import { compressToEncodedURIComponent } from 'lz-string'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
 import { ModuleResInterface } from '../../interfaces'
-import { getData } from '../../utils/utils'
-import DraggableLifelines from '../DraggableLifelines'
-import { UpdateURL } from '../../routing/UpdateURL'
 import { UpdateSettings } from '../../routing/UpdateSettings'
+import { UpdateURL } from '../../routing/UpdateURL'
+import {
+  COMPRESSED_KEY,
+  ERROR_MSG,
+  LANGUAGE_LOCAL_STORAGE_KEY,
+  LIFELINES_LOCAL_STORAGE_KEY,
+  URL,
+} from '../../utils/constants'
+import { getData } from '../../utils/utils'
+import DraggableLifelines from '../draggable/DraggableLifelines'
+import Input from '../ui/Input'
+
+const StyledLifeline = styled.div`
+  font-family: ${({ theme }) => theme.secondaryFonts};
+  h1 {
+    color: ${({ theme }) => theme.headerText};
+    font-weight: 700;
+    line-height: 36px;
+    font-size: 30px;
+  }
+  h3 {
+    color: ${({ theme }) => theme.text};
+    font-weight: 500;
+    line-height: 22px;
+    font-size: 18px;
+  }
+  p {
+    color: ${({ theme }) => theme.text};
+    font-weight: 400;
+    line-height: 17px;
+    font-size: 14px;
+  }
+`
+const FormatSpacing = styled.div`
+  max-width: 1090px;
+  margin: 57px;
+`
+
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
   const flavor = 'Lifeline'
@@ -58,22 +88,22 @@ const LifelineCreationForm = () => {
    *
    * Description: Used to append a Lifeline module to current list of modules.
    */
-  const formSubmit = (e: any) => {
+  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    let json = {
+    const json = {
       language: localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
       lifelines: lifelineModules,
     }
     const settings_json = JSON.stringify(json)
-    let compressed = compressToEncodedURIComponent(settings_json)
+    const compressed = compressToEncodedURIComponent(settings_json)
 
     localStorage.setItem(COMPRESSED_KEY, compressed)
     navigate(`${compressed}`)
     const llModule: ModuleResInterface = {
-      labels: [title] /* stored as array in API response */,
+      labels: [title.toUpperCase()] /* stored as array in API response */,
       flavor,
       initial: value,
-      unit_labels: [unit] /* stored as array in API response */,
+      unit_labels: [unit.toUpperCase()] /* stored as array in API response */,
       rate,
       resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
       customizable: true,
@@ -86,67 +116,77 @@ const LifelineCreationForm = () => {
     )
     clearProperties()
   }
-
   return (
     <>
-      <h1>{flavor} form</h1>
-      <form onSubmit={formSubmit}>
-        {/* title input */}
-        <label>Title</label>
-        <input
-          required={true}
-          placeholder={'Title...'}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <br />
+      <FormatSpacing>
+        <StyledLifeline>
+          <h1>Clock Lifelines</h1>
+          <form onSubmit={formSubmit}>
+            {/* title input */}
+            <label>Title</label>
+            <Input
+              required={true}
+              placeholder={'Title...'}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <br />
 
-        {/* unit input */}
-        <label>Unit</label>
-        <input
-          required={true}
-          placeholder={'Unit...'}
-          type={'text'}
-          value={unit}
-          onChange={(e) => setUnit(e.target.value)}
-        />
-        <br />
+            {/* unit input */}
+            <label>Unit</label>
+            <Input
+              required={true}
+              placeholder={'Unit...'}
+              type={'text'}
+              value={unit}
+              onChange={(e) => setUnit(e.target.value)}
+            />
+            <br />
 
-        {/* value input */}
-        <label>Value</label>
-        <input
-          required={true}
-          placeholder={'Value...'}
-          type={'number'}
-          value={value}
-          onChange={(e) => setValue(parseFloat(e.target.value))}
-        />
-        <br />
+            {/* value input */}
+            <label>Value</label>
+            <Input
+              required={true}
+              placeholder={'Value...'}
+              type={'number'}
+              value={value}
+              onChange={(e) => setValue(parseFloat(e.target.value))}
+            />
+            <br />
 
-        {/* rate input */}
-        <label>Rate</label>
-        <input
-          type={'number'}
-          placeholder={'Rate...'}
-          value={rate}
-          onChange={(e) => setRate(parseFloat(e.target.value))}
-        />
-        <br />
+            {/* rate input */}
+            <label>Rate</label>
+            <Input
+              type={'number'}
+              placeholder={'Rate...'}
+              value={rate}
+              onChange={(e) => setRate(parseFloat(e.target.value))}
+            />
+            <br />
 
-        {/* resolution input */}
-        <label>Resolution</label>
-        <input
-          min={0} /* enforces resolution is positive */
-          type={'number'}
-          placeholder={'Resolution...'}
-          value={resolution}
-          onChange={(e) => setResolution(parseInt(e.target.value))}
-        />
-        <br />
+            {/* resolution input */}
+            <label>Resolution</label>
+            <Input
+              min={0} /* enforces resolution is positive */
+              type={'number'}
+              placeholder={'Resolution...'}
+              value={resolution}
+              onChange={(e) => setResolution(parseInt(e.target.value))}
+            />
+            <br />
 
-        <button type="submit">Create</button>
-      </form>
-      <DraggableLifelines lifelinesProp={lifelineModules} />
+            <button type="submit">Create</button>
+          </form>
+          <h3>Displayed Lifelines</h3>
+          <p>
+            Drag a Lifeline here to display it. Up to three Lifelines can be
+            shown on the clock.
+          </p>
+
+          <DraggableLifelines lifelinesProp={lifelineModules} />
+          <h3>Hidden Lifelines</h3>
+        </StyledLifeline>
+      </FormatSpacing>
     </>
   )
 }

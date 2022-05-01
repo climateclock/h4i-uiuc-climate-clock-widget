@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
+import { compressToEncodedURIComponent } from 'lz-string'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { UpdateSettings } from '../../routing/UpdateSettings'
+import { UpdateURL } from '../../routing/UpdateURL'
 import {
   COMPRESSED_KEY,
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from '../../utils/constants'
-import { compressToEncodedURIComponent } from 'lz-string'
-import { useNavigate } from 'react-router-dom'
-import { UpdateURL } from '../../routing/UpdateURL'
-import { UpdateSettings } from '../../routing/UpdateSettings'
 
 const LanguageCustomization = () => {
   const navigate = useNavigate()
@@ -18,15 +19,15 @@ const LanguageCustomization = () => {
     UpdateSettings(setSelectedLanguage, null)
   }, [navigate, setSelectedLanguage])
 
-  const formSubmit = (e: any) => {
+  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (selectedLanguage !== localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY)) {
-      let json = {
+      const json = {
         language: selectedLanguage,
         lifelines: localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
       }
       const settings_json = JSON.stringify(json)
-      let compressed = compressToEncodedURIComponent(settings_json)
+      const compressed = compressToEncodedURIComponent(settings_json)
 
       localStorage.setItem(COMPRESSED_KEY, compressed)
       navigate(`${compressed}`)

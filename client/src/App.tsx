@@ -1,40 +1,25 @@
-import { useState } from 'react'
 import { WindowSize } from '@reach/window-size'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-// import { get } from './api/config'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import GlobalStyle, { theme } from './components/ui/GlobalStyle'
-import LanguageCustomization from './components/settings/LanguageCustomizationForm'
-import LifelineCreation from './pages/lifelineCreation'
-import EnterFullScreen from './components/buttons/EnterFullscreen'
-import ExitFullScreen from './components/buttons/ExitFullscreen'
-import Home from './pages/Home'
-function App() {
-  const [showFullscreenButton, setFullscreenButton] = useState(false)
-  const handle = useFullScreenHandle()
 
+import PageEmbed from './components/embed/PageEmbed'
+import LifelineCreationForm from './components/settings/LifelineCreationForm'
+import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import Home from './pages/Home'
+import Settings from './pages/Settings'
+
+function App() {
+  /* Sets the lifeline modules upon load and every defaultLanguage change */
   return (
     <ThemeProvider theme={theme}>
-      <FullScreen
-        handle={handle}
-        onChange={() => setFullscreenButton(!showFullscreenButton)}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/langForm/*" element={<LanguageCustomization />} />
-            <Route path="/moduleForm/*" element={<LifelineCreation />} />
-            <Route path="/settings/*" element={<LanguageCustomization />} />
-            <Route path="/lifelines/*" element={<LifelineCreation />} />
-            <Route path="/*" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
-        {showFullscreenButton ? (
-          <EnterFullScreen handle={handle.enter} />
-        ) : (
-          <ExitFullScreen handle={handle.exit} />
-        )}
-      </FullScreen>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/lifelines" element={<LifelineCreationForm />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/embed" element={<PageEmbed />} />
+        </Routes>
+      </BrowserRouter>
       <WindowSize>
         {(windowSize) => <GlobalStyle windowSize={windowSize} />}
       </WindowSize>

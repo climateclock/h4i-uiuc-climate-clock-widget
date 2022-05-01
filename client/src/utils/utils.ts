@@ -16,7 +16,8 @@ export const getData = async (
   >,
   setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
-  let res: any = await get(url, error)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const res: any = await get(url, error)
 
   /* errorWrapper returned in res */
   if ('error' in res) {
@@ -28,14 +29,14 @@ export const getData = async (
   }
 
   /* set modules */
-  let resModules: ModuleResInterface[] = Object.values(
+  const resModules: ModuleResInterface[] = Object.values(
     res['data']['data']['modules'],
   )
   setModules(resModules)
 
   /* set newsfeed modules */
   if (setNewsfeedModules) {
-    let resNewsfeedModules: NewsInterface[] = Object.values(
+    const resNewsfeedModules: NewsInterface[] = Object.values(
       res['data']['data']['modules']['newsfeed_1']['newsfeed'],
     )
     setNewsfeedModules(resNewsfeedModules)
@@ -43,7 +44,7 @@ export const getData = async (
 
   /* set lifelines */
   if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-    let resLifelineModules = resModules.filter((module) => {
+    const resLifelineModules = resModules.filter((module) => {
       if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
         return true
       }
@@ -113,11 +114,11 @@ export const getHeadlines = (newsfeedModules: NewsInterface[]) => {
  *          index
  */
 export const reorderElement = (
-  list: Array<any>,
+  list: Array<unknown>,
   sourceIndex: number,
   destinationIndex: number,
 ) => {
-  let item = list[sourceIndex]
+  const item = list[sourceIndex]
   list.splice(sourceIndex, 1)
   list.splice(destinationIndex, 0, item)
   return list
@@ -127,6 +128,7 @@ export const reorderElement = (
  *
  * Description: Delete a element at an index
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deleteElement = (list: Array<any>, index: number) => {
   list.splice(index, 1)
   return list

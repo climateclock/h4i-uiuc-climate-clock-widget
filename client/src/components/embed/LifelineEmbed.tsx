@@ -9,30 +9,38 @@ const VALUE_UNIT_MARGIN = 1
 const Container = styled.div`
   & {
     font-family: ${({ theme }) => theme.fonts};
-    font-weight: bold;
     background: ${({ theme }) => theme.blue};
+    font-weight: bold;
     height: 14.666666667vh;
-    @media only screen and (max-height: 700px) {
-      height: 35vh;
+
+    @media only screen and (min-width: 1025px) {
+      height: auto;
+      width: 50%;
+    }
+
+    // code for stacking
+    @media only screen and (max-width: 1024px) {
+      height: auto;
+      height: 45vh;
+      width: 100%;
     }
 
     width: 100vw;
   }
 `
-const LabelContainer = styled.div`
+const ContentContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   font-size: max(1rem, min(1.5rem, 3vw));
-  height: 3vh;
   margin-bottom: 32px;
+  width: 100%;
 
   @media only screen and (max-height: 700px) {
-    height: 7vh;
+    height: 82.35%; // 85% of 85
+    margin-bottom: 0px;
+    font-size: max(5vh, min(1.5rem, 6vw));
   }
-`
-
-const ContentContainer = styled(LabelContainer)`
-  width: 100%;
 `
 
 const Value = styled.div`
@@ -42,12 +50,34 @@ const Value = styled.div`
   margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
   margin-top: 25px;
+
+  @media only screen and (max-height: 700px) {
+    font-size: max(7vh, min(2.75rem, 12vw));
+    margin-top: 0px;
+  }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(5.5vh, min(2.25rem, 12.5vw));
+  }
 `
 
 const Unit = styled.div`
-  font-size: 2em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
+  margin-right: ${VALUE_UNIT_MARGIN}vw;
+  @media only screen and (max-height: 700px) {
+    font-size: max(3.5vh, min(1.75rem, 6.5vw));
+  }
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(4vh, min(1.5rem, 5vw));
+  }
 `
+
+interface LifelifeEmbedPropsInterface extends LifelinePropsInterface {
+  lifelineIndex: number
+  updateSavedValue: (index: number, value: number) => void
+}
 
 function Lifeline({
   title,
@@ -56,7 +86,9 @@ function Lifeline({
   resolution,
   rate,
   unit,
-}: LifelinePropsInterface) {
+  lifelineIndex,
+  updateSavedValue,
+}: LifelifeEmbedPropsInterface) {
   const seconds = 0.1 // running every every seconds * 1000
   const decimalPlaces = !resolution ? 0 : Math.log10(1 / resolution) // set the precision of value (ie. props.resolution = 1e-9 => 9)
   const cleanedRate = !rate ? 0 : rate // store rate at which to update value
@@ -68,15 +100,16 @@ function Lifeline({
   /* update lifeline value within interval */
   useEffect(() => {
     const interval = setInterval(() => {
-      if (rate !== 0) {
+      if (cleanedRate !== 0) {
         setLLVal((llVal) => llVal + cleanedRate)
       }
     }, seconds * 1000)
 
     return () => {
       clearInterval(interval)
+      updateSavedValue(lifelineIndex, llVal)
     }
-  })
+  }, [cleanedRate, lifelineIndex, llVal, updateSavedValue])
 
   return (
     <Container>
