@@ -1,7 +1,7 @@
 import '@reach/dialog/styles.css'
 
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import VisuallyHidden from '@reach/visually-hidden'
+// import VisuallyHidden from '@reach/visually-hidden'
 import { Close } from '@styled-icons/evaicons-solid'
 import { useState } from 'react'
 import styled from 'styled-components'
@@ -93,7 +93,7 @@ function CreateModal() {
         >
           <StyledDialogContainer>
             <CloseButton className="close-button" onClick={close}>
-              <VisuallyHidden>Close</VisuallyHidden>
+              {/* <VisuallyHidden>Close</VisuallyHidden> */}
               <span aria-hidden>X</span>
             </CloseButton>
             <StyledHeader>Create a Lifeline</StyledHeader>
