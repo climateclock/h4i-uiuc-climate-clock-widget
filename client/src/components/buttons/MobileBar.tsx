@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Navbar = styled.div`
   @media screen and (max-width: 800px) {
     font-family: ${({ theme }) => theme.secondaryFonts};
-    position: fixed;
+    position: absolute;
     z-index: 10;
     top: 0;
     left: 0;

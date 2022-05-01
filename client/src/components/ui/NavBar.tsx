@@ -12,6 +12,7 @@ import MobileBar from '../buttons/MobileBar'
 
 const NavBox = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
+
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
@@ -27,7 +28,8 @@ const NavBox = styled.div`
       ? 'translateY(-12.5em)'
       : 'translateY(0px)'};
   transition: 0.3s ease-out;
-  position: absolute;
+  ${(props) =>
+    props.showMobileNavbar ? 'position: absolute' : 'position: relative'}
 `
 
 const PageLink = styled.div`
@@ -81,13 +83,13 @@ function NavBar({
   handle: FullScreenHandle
   isFullScreen: boolean
 }) {
-  const [matches, setMatches] = useState(
+  const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
   )
   useEffect(() => {
     window
       .matchMedia('(max-width: 800px)')
-      .addEventListener('change', (e) => setMatches(e.matches))
+      .addEventListener('change', (e) => setMobileWidth(e.matches))
   }, [])
 
   const [showMobileNavbar, setMobileNavbar] = useState(false)
@@ -128,7 +130,7 @@ function NavBar({
             <ExitFullscreen handle={handle} />
           )}
         </FullScreenButton>
-        {matches ? (
+        {mobileWidth ? (
           [
             !showMobileNavbar ? (
               <Menu
@@ -149,17 +151,17 @@ function NavBar({
             ),
           ]
         ) : (
-          <div>
+          <>
             <Link to="/settings">
               <PageLink>Settings</PageLink>
             </Link>
             <Link to="/lifelines">
               <PageLink>Lifelines</PageLink>
             </Link>
-          </div>
+          </>
         )}
       </NavBox>
-      {matches && <MobileBar showMobileNavbar={showMobileNavbar} />}
+      {mobileWidth && <MobileBar showMobileNavbar={showMobileNavbar} />}
     </div>
   )
 }
