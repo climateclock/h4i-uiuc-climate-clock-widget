@@ -10,6 +10,7 @@ import {
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../draggable/DraggableLifelines'
 import Input from '../ui/Input'
+import DefaultLifelineCreationForm from './DefaultLifelineCreationForm'
 
 const StyledLifeline = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
@@ -61,7 +62,7 @@ const LifelineCreationForm = () => {
       setModules,
       setLifelineModules,
     )
-  }, [])
+  }, [lifelineModules])
 
   /* clearProperties
    *
@@ -165,7 +166,14 @@ const LifelineCreationForm = () => {
             shown on the clock.
           </p>
 
+          {/* <button type="submit">Create</button>
+      </form> */}
+          <DefaultLifelineCreationForm
+            lifelineModules={lifelineModules}
+            setLifelineModules={setLifelineModules}
+          />
           <DraggableLifelines lifelinesProp={lifelineModules} />
+          {/* <DraggableLifelines lifelinesProp={lifelineModules} /> */}
           <h3>Hidden Lifelines</h3>
         </StyledLifeline>
       </FormatSpacing>

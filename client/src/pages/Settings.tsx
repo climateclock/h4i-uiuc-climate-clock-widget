@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
@@ -73,6 +74,10 @@ const ToggleStyle = styled.div`
 
 function Settings() {
   const handle = useFullScreenHandle()
+  const [languageSelected, setLanguageSelected] = useState<string>()
+  const handleLanguageSelectedChange = (language: string) => {
+    setLanguageSelected(language)
+  }
   return (
     <>
       <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
@@ -88,7 +93,11 @@ function Settings() {
       <SettingsText> Turn off/on the bottom news on your clock</SettingsText>
       <SettingSubheading id="language">Configure Language</SettingSubheading>
       <SettingCaption> Language </SettingCaption>
-      <StyledSelect options={options} />
+      <StyledSelect
+        options={options}
+        optionSelected={languageSelected}
+        handleOptionSelectedChange={handleLanguageSelectedChange}
+      />
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
       <SettingCaption> Shareable Link </SettingCaption>
       <CopyButton

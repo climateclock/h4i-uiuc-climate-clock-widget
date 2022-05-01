@@ -58,3 +58,11 @@ export class ModuleResInterface {
   customizable?: boolean
   isFullScreen?: boolean
 }
+
+/* Properties for options within
+ * StyledSelect component in DefaultLifelineCreationForm
+ */
+export interface OptionsInterface {
+  value: ModuleResInterface
+  label: string
+}

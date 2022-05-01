@@ -1,6 +1,5 @@
+import PropTypes from 'prop-types'
 import Select from 'react-select'
-
-import { optionProps } from '../../interfaces'
 
 const customStyles = {
   control: (base, state) => ({
@@ -21,9 +20,15 @@ const customStyles = {
   }),
 }
 
-export const StyledSelect = ({ options }: { options: optionProps[] }) => (
+export const StyledSelect = ({
+  options,
+  optionSelected,
+  handleOptionSelectedChange,
+}) => (
   <Select
     styles={customStyles}
+    value={optionSelected}
+    onChange={handleOptionSelectedChange}
     options={options}
     theme={(theme) => ({
       ...theme,
@@ -35,3 +40,9 @@ export const StyledSelect = ({ options }: { options: optionProps[] }) => (
     })}
   />
 )
+
+StyledSelect.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.any),
+  optionSelected: PropTypes.any,
+  handleOptionSelectedChange: PropTypes.func,
+}
