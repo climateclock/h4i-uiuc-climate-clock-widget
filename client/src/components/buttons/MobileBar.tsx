@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Navbar = styled.div`
   @media screen and (max-width: 800px) {
@@ -33,15 +33,14 @@ const StyledLink = styled(Link)`
   transition: 0.2s ease;
   margin: 0.3em;
   font-size: 6vw;
-
   :hover {
-    background-color: #1d5479;
+    background-color: ${({ theme }) => theme.navy};
   }
   ${({ selected }) =>
     selected &&
-    `
-  background-color: #1d5479;
-  `}
+    css`
+      background-color: ${({ theme }) => theme.navy};
+    `}
 `
 
 function MobileBar({ showMobileNavbar }: { showMobileNavbar: boolean }) {

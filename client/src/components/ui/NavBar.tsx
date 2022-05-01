@@ -16,7 +16,7 @@ const NavBox = styled.div`
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
-  height: 8vh;
+  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 9vh;')}
   z-index: 11;
   background-color: ${({ theme }) => theme.black};
 
@@ -76,12 +76,28 @@ const Image = styled.div`
   scale(0.25, 0.25);
 `
 
+const StyledMenu = styled(Menu)`
+  float: right;
+  color: white;
+  size: 2.5em;
+  display: block;
+`
+
+const StyledCloseOutline = styled(CloseOutline)`
+  float: right;
+  color: white;
+  size: 2.5em;
+  display: block;
+`
+
 function NavBar({
   handle,
   isFullScreen,
+  atHome,
 }: {
   handle: FullScreenHandle
   isFullScreen: boolean
+  atHome: boolean
 }) {
   const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
@@ -111,7 +127,7 @@ function NavBar({
   }
 
   return (
-    <div>
+    <>
       <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
         <Link to="/">
           <HomeLink>
@@ -123,26 +139,28 @@ function NavBar({
             </Button>
           </HomeLink>
         </Link>
-        <FullScreenButton>
-          {isFullScreen ? (
-            <EnterFullscreen handle={handle} />
-          ) : (
-            <ExitFullscreen handle={handle} />
-          )}
-        </FullScreenButton>
+        {atHome ? (
+          <FullScreenButton>
+            {isFullScreen ? (
+              <EnterFullscreen handle={handle} />
+            ) : (
+              <ExitFullscreen handle={handle} />
+            )}
+          </FullScreenButton>
+        ) : (
+          ' '
+        )}
         {mobileWidth ? (
           [
             !showMobileNavbar ? (
-              <Menu
-                style={{ float: 'right', color: 'white' }}
+              <StyledMenu
                 size="2.5em"
                 onClick={() => {
                   setMobileNavbar(!showMobileNavbar)
                 }}
               />
             ) : (
-              <CloseOutline
-                style={{ float: 'right', color: 'white' }}
+              <StyledCloseOutline
                 size="2.5em"
                 onClick={() => {
                   setMobileNavbar(!showMobileNavbar)
@@ -162,7 +180,7 @@ function NavBar({
         )}
       </NavBox>
       {mobileWidth && <MobileBar showMobileNavbar={showMobileNavbar} />}
-    </div>
+    </>
   )
 }
 

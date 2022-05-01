@@ -40,7 +40,11 @@ export default function Home() {
             handle={handle}
             onChange={() => setFullscreenButton(!showFullscreenButton)}
           >
-            <NavBar handle={handle} isFullScreen={showFullscreenButton} />
+            <NavBar
+              handle={handle}
+              isFullScreen={showFullscreenButton}
+              atHome={true}
+            ></NavBar>
             <Clock
               isFullScreen={!showFullscreenButton}
               timestamp={modules && modules[0] && modules[0].timestamp}
