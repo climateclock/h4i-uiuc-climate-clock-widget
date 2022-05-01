@@ -14,9 +14,9 @@ const LanguageCustomization = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('')
 
   useEffect(() => {
-    UpdateURL(navigate, selectedLanguage, null)
-    UpdateSettings(selectedLanguage, null)
-  }, [navigate, selectedLanguage])
+    UpdateURL(navigate, setSelectedLanguage, null)
+    UpdateSettings(setSelectedLanguage, null)
+  }, [navigate, setSelectedLanguage])
 
   const formSubmit = (e: any) => {
     e.preventDefault()
@@ -25,14 +25,12 @@ const LanguageCustomization = () => {
         language: selectedLanguage,
         lifelines: localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
       }
-      console.log('inside')
       const settings_json = JSON.stringify(json)
       let compressed = compressToEncodedURIComponent(settings_json)
 
       localStorage.setItem(COMPRESSED_KEY, compressed)
       navigate(`${compressed}`)
     }
-    console.log('here2')
     localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, selectedLanguage)
   }
 

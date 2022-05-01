@@ -38,9 +38,9 @@ const LifelineCreationForm = () => {
       setModules,
       setLifelineModules,
     )
-    UpdateURL(navigate, null, lifelineModules)
-    UpdateSettings(null, lifelineModules)
-  }, [navigate, lifelineModules])
+    UpdateURL(navigate, null, setLifelineModules)
+    UpdateSettings(null, setLifelineModules)
+  }, [navigate, setLifelineModules])
 
   /* clearProperties
    *
