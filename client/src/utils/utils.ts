@@ -59,6 +59,7 @@ export const getData = async (
     )
   } else {
     const curLifelineModules = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
+    console.log(curLifelineModules)
     if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
   }
 

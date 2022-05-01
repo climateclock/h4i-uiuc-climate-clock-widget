@@ -170,10 +170,10 @@ function NavBar({
           ]
         ) : (
           <>
-            <Link to="/settings">
+            <Link to={`/settings/${localStorage.getItem('compressedKey')}`}>
               <PageLink>Settings</PageLink>
             </Link>
-            <Link to="/lifelines">
+            <Link to={`/lifelines/${localStorage.getItem('compressedKey')}`}>
               <PageLink>Lifelines</PageLink>
             </Link>
           </>

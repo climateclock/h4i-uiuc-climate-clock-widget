@@ -14,9 +14,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/lifelines" element={<LifelineCreationForm />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/settings/*" element={<Settings />} />
+          <Route path="/lifelines/*" element={<LifelineCreationForm />} />
+          <Route path="/*" element={<Home />} />
           <Route path="/embed" element={<PageEmbed />} />
         </Routes>
       </BrowserRouter>
