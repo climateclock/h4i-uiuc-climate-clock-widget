@@ -30,13 +30,12 @@ export default function DefaultLifelineCreationForm({
           JSON.parse(defaultLifelines)
 
         setDefaultLifelines(cleanedDefaultLifelines)
-        for (let i = 0; i < cleanedDefaultLifelines.length; i++) {
-          const defaultLifeline = cleanedDefaultLifelines[i]
+        cleanedDefaultLifelines.forEach((defaultLifeline) => {
           options.push({
             value: defaultLifeline,
             label: returnFirstString(defaultLifeline['labels']),
           })
-        }
+        })
 
         setDefaultOptions(options)
       }
