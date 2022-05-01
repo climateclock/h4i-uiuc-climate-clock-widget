@@ -114,6 +114,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                       }}
                     >
                       <LifelineCard
+                        index={index}
                         lifeline={lifeline}
                         isDisplayed={index < NUM_LIFELINES_DISPLAYED}
                       />

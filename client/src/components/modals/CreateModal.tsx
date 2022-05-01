@@ -4,6 +4,7 @@ import { DialogContent, DialogOverlay } from '@reach/dialog';
 import VisuallyHidden from "@reach/visually-hidden";
 import styled from 'styled-components'
 import { Close } from '@styled-icons/evaicons-solid'
+import Button from '../buttons/button';
 
 const CloseButton = styled(Close)`
   color: #575757;
@@ -27,14 +28,14 @@ const StyledForm = styled.form`
     margin-right: auto;
 `;
 const StyledLabel = styled.label`
-   font-family: Lato;
+   font-family: ${({ theme }) => theme.secondaryFonts};
    display:block;
    font-size: 16px;
 `;
 
 const StyledInput = styled.input`
    display:block;
-   font-family: Lato;
+   font-family: ${({ theme }) => theme.secondaryFonts};
    width: 100%;
    border: 1px solid #000;
    font-size: 16px;
@@ -42,30 +43,23 @@ const StyledInput = styled.input`
 `;
 
 const StyledHeader = styled.h1`
-    font-family: Lato;
+    font-family: ${({ theme }) => theme.secondaryFonts};
     font-size: 24px;
     color: black;
     font-weight: 500;
 `;
 
 const StyledDescription = styled.p`
-    font-family: Lato;
+    font-family: ${({ theme }) => theme.secondaryFonts};
     font-size: 16px;
 
 `;
 
-const StyledSubmit = styled.button`
+const StyledSubmit = styled(Button)`
     display: block;
     margin-left: auto;
     margin-right: 0;
 `;
-
-//git stash, git pull
-//how to change font on text style
-//input and useStates to store the value
-//style the form 
-//CSS goes at the top
-//hook in and change the font to Lato
 
 function CreateModal() {
     const [showDialog, setShowDialog] = useState(false);
@@ -80,7 +74,6 @@ function CreateModal() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        
     }
     return(
     <div>
@@ -90,8 +83,10 @@ function CreateModal() {
           style={{
             border: "solid 1px hsla(0, 0%, 0%, 0.5)",
             borderRadius: "10px",
-            width: "650px",
-            height: "338px",
+            width: "45%",
+            left: '50%',
+            top: '50%',
+            marginTop: '200px',
           }}
         >
         <StyledDialogContainer>
@@ -142,11 +137,15 @@ function CreateModal() {
         </div>
         <div>
         </div>
-        <StyledSubmit type="submit">Create</StyledSubmit>
+        
         </StyledForm>
+        <StyledSubmit buttonLabel={ "Create" }></StyledSubmit>
+
           </StyledDialogContainer>
+        
         </DialogContent>
       </DialogOverlay>
+      
     </div>
     )
 }

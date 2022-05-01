@@ -4,12 +4,20 @@ import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { Close } from '@styled-icons/evaicons-solid'
 import VisuallyHidden from "@reach/visually-hidden";
 import styled from 'styled-components'
+import StyledButton from '../buttons/button';
+
 
 const CloseButton = styled(Close)`
   color: #575757;
   height: 36px;
   width: 36px;
   cursor: pointer;
+`;
+
+
+const SubmitButton = styled(StyledButton)`
+    float: right;
+    font-size: 12px;
 `;
 
 const StyledDialogContainer = styled.div`
@@ -26,14 +34,10 @@ const StyledDialogContainer = styled.div`
         padding-bottom: 60px;
         font-size: 16px;
     }
-    .button {
-        float: right;
-        margin: 10px;
-        font-size: 12px;
-    }
     .cancel {
         float: right;
-        margin: 10px;
+        color: ${({ theme }) => theme.buttonBackground};
+        margin: 12px;
         font-size: 12px;
         background: none;
         border-color: transparent;
@@ -43,16 +47,20 @@ const StyledDialogContainer = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-    font-family: Lato;
+    font-family: ${({ theme }) => theme.secondaryFonts};
     font-size: 24px;
     color: black;
     font-weight: 500;
 `;
 
 const StyledDescription = styled.p`
-    font-family: Lato;
+    font-family: ${({ theme }) => theme.secondaryFonts};
     font-size: 14px;
 `;
+
+// const DialogStyle = styled.div`
+
+// `;
 
 
 function DeleteModal() {
@@ -69,6 +77,17 @@ function DeleteModal() {
             borderRadius: "10px",
             width: "325px",
             height: "255px",
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            marginLeft: '-200px',
+            marginTop: '-200px',
+            // position: absolute,
+            // left: 50%,
+            // top: 50%,
+            // margin-left: -150px,
+            // margin-top: -150px,
+            //percentage
           }}
         >
         <StyledDialogContainer>
@@ -78,7 +97,7 @@ function DeleteModal() {
         </CloseButton>
           <StyledHeader className="element">Delete Lifeline</StyledHeader>
           <StyledDescription className="description">Do you want to delete this lifeline?</StyledDescription>
-          <button className="button">Delete</button>
+          <SubmitButton buttonLabel={ "Delete" }></SubmitButton>
           <button className="cancel">Cancel</button>
           </StyledDialogContainer>
         </DialogContent>

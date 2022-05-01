@@ -33,6 +33,8 @@ export interface LifelinePropsInterface {
 export class ModuleResInterface {
   description?: string
   flavor?: string
+  source?: string | undefined
+  link?: string | undefined
   growth?: string
   initial?: number
   labels?: string[] | undefined
@@ -44,4 +46,5 @@ export class ModuleResInterface {
   unit_labels?: string[]
   update_interval_seconds?: number
   customizable?: boolean
+  isFullScreen?: boolean
 }

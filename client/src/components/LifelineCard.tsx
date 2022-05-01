@@ -1,13 +1,15 @@
-import { PencilFill } from '@styled-icons/bootstrap'
 import { ModuleResInterface } from '../interfaces'
 import { returnFirstString } from '../utils/utils'
+import EditModal from './modals/EditModal'
 
 interface LifelineCardInterface {
+  index: number,
   lifeline: ModuleResInterface
   isDisplayed: boolean
 }
 
 const LifelineCard = ({
+  index, 
   lifeline: { labels, customizable },
   isDisplayed,
 }: LifelineCardInterface) => {
@@ -34,16 +36,11 @@ const LifelineCard = ({
         {isDisplayed ? 'Hide' : 'Show'}
       </p>
       {customizable && (
-        <PencilFill
-          size={'1.5em'}
-          style={{
-            justifySelf: 'center',
-            cursor: 'pointer',
-            alignSelf: 'center',
-            gridColumn: 3,
-          }}
-        />
+        <EditModal index={ index }></EditModal>
       )}
+      
+
+      
     </div>
   )
 }
