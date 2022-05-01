@@ -39,6 +39,32 @@ const ClockContainer = styled.div`
   }
 `
 
+const Value = styled.div`
+  margin-left: 1vw;
+  @media only screen and (max-height: 700px) {
+    font-size: max(7vh, min(2.75rem, 12vw));
+  }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(5.5vh, min(2.25rem, 12.5vw));
+  }
+`
+
+const Unit = styled.div`
+  margin-left: 0.5vw;
+  @media only screen and (max-height: 700px) {
+    font-size: max(3.5vh, min(1.5rem, 5vw));
+    margin-bottom: -7.5vh;
+  }
+
+  // code for stacking
+  @media only screen and (max-width: 1024px) {
+    font-size: max(4vh, min(1.5rem, 5vw));
+    margin-bottom: -5vh;
+  }
+`
+
 function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
@@ -69,9 +95,9 @@ function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
         themeColor={({ theme }) => theme.red}
       />
       <ClockSection>
-        <h3>{years ? years : '0'}</h3> <h2>YRS</h2>
-        <h3>{days ? days : '000'}</h3> <h2>DAYS</h2>
-        <h3>{time ? time : '00:00:00'}</h3>
+        <Value>{years ? years : '0'}</Value> <Unit>YRS</Unit>
+        <Value>{days ? days : '000'}</Value> <Unit>DAYS</Unit>
+        <Value>{time ? time : '00:00:00'}</Value>
       </ClockSection>
     </ClockContainer>
   )

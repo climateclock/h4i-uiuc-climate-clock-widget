@@ -25,9 +25,9 @@ export default function LifelinesEmbed({
   const lifelineDisplayNum = displayNum
   const [lifelineIndex, setLifelineIndex] = useState<number>(0)
   const LIFELINE_DURATION = 2 // seconds displayed per lifeline
-  const [lifelineSavedValues, setLifelineSavedValues] = useState<
-    (number | undefined)[]
-  >(Array(lifelineDisplayNum)) // saved lifeline values after set time duration
+  const [lifelineSavedValues, setLifelineSavedValues] = useState<number[]>(
+    Array(lifelineDisplayNum).fill(0),
+  ) // saved lifeline values after set time duration
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,18 +41,17 @@ export default function LifelinesEmbed({
     }
   }, [lifelineDisplayNum])
 
-  useEffect(() => {
-    for (let i = 0; i < lifelineDisplayNum; i++) {
-      if (lifeLineData[i]) lifelineSavedValues[i] = lifeLineData[i]['initial']
-    }
-    setLifelineSavedValues([...lifelineSavedValues])
-  }, [lifeLineData, lifelineDisplayNum, lifelineSavedValues])
-
   /* used to update saved values to continue for next time duration */
   const updateSavedValue = (index: number, value: number) => {
     const newLifelineSavedValues = lifelineSavedValues
     newLifelineSavedValues[index] = value
     setLifelineSavedValues(newLifelineSavedValues)
+  }
+
+  const returnValue = (lifelineIndex: number) => {
+    if (lifelineSavedValues[lifelineIndex] > 0)
+      return lifelineSavedValues[lifelineIndex]
+    return lifeLineData[lifelineIndex]['initial']
   }
 
   return (
@@ -65,7 +64,7 @@ export default function LifelinesEmbed({
             lifelineIndex={lifelineIndex}
             title={returnFirstString(module['labels'])}
             module_type={toUpperCase(module['flavor'])}
-            value={lifelineSavedValues[lifelineIndex]}
+            value={returnValue(lifelineIndex)}
             unit={returnFirstString(module['unit_labels'])}
             rate={module['rate']}
             resolution={module['resolution']}

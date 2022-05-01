@@ -97,12 +97,6 @@ function Lifeline({
     !value ? cleanedRate : value + cleanedRate,
   )
 
-  useEffect(() => {
-    if ((value !== 0 || cleanedRate !== 0) && llVal === 0) {
-      setLLVal(!value ? cleanedRate : value + cleanedRate)
-    }
-  }, [llVal, value, cleanedRate])
-
   /* update lifeline value within interval */
   useEffect(() => {
     const interval = setInterval(() => {
@@ -113,14 +107,9 @@ function Lifeline({
 
     return () => {
       clearInterval(interval)
-    }
-  })
-
-  useEffect(() => {
-    return () => {
       updateSavedValue(lifelineIndex, llVal)
     }
-  }, [updateSavedValue, lifelineIndex, llVal])
+  }, [cleanedRate, lifelineIndex, llVal, updateSavedValue])
 
   return (
     <Container>
