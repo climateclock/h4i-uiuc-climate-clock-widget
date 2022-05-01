@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
 import {
@@ -8,7 +9,6 @@ import {
 } from '../../utils/constants'
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../draggable/DraggableLifelines'
-import styled from 'styled-components'
 
 const StyledLifeline = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
