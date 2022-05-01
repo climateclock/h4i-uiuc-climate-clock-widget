@@ -28,7 +28,7 @@ const StyledDiv = styled.div`
   width: 92.5%;
   padding: 0 2%;
   grid-column: 2;
-  border: 1px lightgrey solid;
+  border: 2px lightgrey solid;
   ${(props) =>
     props.draggingOver
       ? css`
@@ -72,7 +72,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
     isDraggingOver,
   ): CSSProperties => ({
     paddingBottom: BASE_PADDING * 2,
-    margin: `0 0 ${BASE_PADDING}px 0`,
+    margin: `0 0 15px 0`,
     alignItems: 'center',
     display: 'grid',
     gridTemplateColumns: '0fr 95fr 2.5fr',
