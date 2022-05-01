@@ -107,9 +107,9 @@ function Lifeline({
 
     return () => {
       clearInterval(interval)
-      updateSavedValue(lifelineIndex, llVal + 20 * cleanedRate)
+      updateSavedValue(lifelineIndex, llVal)
     }
-  }, [cleanedRate])
+  }, [cleanedRate, lifelineIndex, llVal, updateSavedValue])
 
   return (
     <Container>
