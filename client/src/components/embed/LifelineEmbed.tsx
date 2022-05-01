@@ -99,7 +99,7 @@ function Lifeline({
 
   /* update lifeline value within interval */
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (cleanedRate !== 0) {
         setLLVal((llVal) => llVal + cleanedRate)
       }
