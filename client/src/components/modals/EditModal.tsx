@@ -1,7 +1,7 @@
 import '@reach/dialog/styles.css'
 
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import VisuallyHidden from '@reach/visually-hidden'
+// import VisuallyHidden from '@reach/visually-hidden'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Close } from '@styled-icons/evaicons-solid'
 import { useEffect, useState } from 'react'
@@ -194,7 +194,7 @@ function EditModal({ index }: { index: number }) {
         >
           <StyledDialogContainer>
             <CloseButton className="close-button" onClick={close}>
-              <VisuallyHidden>Close</VisuallyHidden>
+              {/* <VisuallyHidden>Close</VisuallyHidden> */}
               <span aria-hidden>X</span>
             </CloseButton>
             <StyledHeader>Edit Lifeline</StyledHeader>
