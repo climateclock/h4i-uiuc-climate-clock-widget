@@ -8,7 +8,9 @@
     "@fontsource/oxygen-mono": "^4.5.2",
     "@reach/window-size": "^0.16.0",
     "@styled-icons/bootstrap": "^10.34.0",
+    "@styled-icons/boxicons-regular": "^10.38.0",
     "@styled-icons/boxicons-solid": "^10.38.0",
+    "@styled-icons/evaicons-outline": "^10.34.0",
     "@styled-icons/open-iconic": "^10.18.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
@@ -35,6 +37,7 @@
     "react-scripts": "5.0.0",
     "react-select": "^5.2.2",
     "styled-components": "^5.3.5",
+    "styled-icons": "^10.45.0",
     "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },

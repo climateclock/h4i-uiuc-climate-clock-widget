@@ -1,4 +1,4 @@
-import { PencilFill } from '@styled-icons/bootstrap'
+import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
@@ -7,45 +7,52 @@ interface LifelineCardInterface {
   lifeline: ModuleResInterface
   isDisplayed: boolean
 }
+const Card = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+`
+const Text = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  justify-content: center;
+`
 
+const Lifeline = styled.div`
+  font-weight: 700;
+  font-size: 18px;
+  font-family: ${({ theme }) => theme.text};
+`
+
+const Source = styled.div`
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 18px;
+  font-family: ${({ theme }) => theme.text};
+`
+const HideButton = styled.p`
+  font-size: 0.8em;
+  border: 1px black solid;
+  padding: 5px 7.5px;
+  border-radius: 5px;
+  text-align: center;
+  align-self: center;
+  grid-column: 2;
+`
 const LifelineCard = ({
   lifeline: { labels, customizable },
   isDisplayed,
 }: LifelineCardInterface) => {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '15fr 1fr 1fr',
-        gridGap: '5px',
-      }}
-    >
-      <h1 style={{ gridColumn: 1 }}>{returnFirstString(labels)}</h1>
-      <p
-        style={{
-          fontSize: '0.8em',
-          border: '1px black solid',
-          padding: '5px 7.5px',
-          borderRadius: '5px',
-          textAlign: 'center',
-          alignSelf: 'center',
-          gridColumn: 2,
-        }}
-      >
-        {isDisplayed ? 'Hide' : 'Show'}
-      </p>
-      {customizable && (
-        <PencilFill
-          size={'1.5em'}
-          style={{
-            justifySelf: 'center',
-            cursor: 'pointer',
-            alignSelf: 'center',
-            gridColumn: 3,
-          }}
-        />
-      )}
-    </div>
+    <Card>
+      <Text>
+        <Lifeline>{returnFirstString(labels)}</Lifeline>
+        <Source>{customizable ? '' : 'Climate Clock'}</Source>
+      </Text>
+      <HideButton>{isDisplayed ? 'Hide' : 'Show'}</HideButton>
+    </Card>
   )
 }
 

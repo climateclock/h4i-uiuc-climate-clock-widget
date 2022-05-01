@@ -22,7 +22,7 @@ export default function LifelinesEmbed({
   lifeLineData,
   displayNum,
 }: LifelinePropsInterface) {
-  const lifelineDisplayNum = displayNum
+  const lifelineDisplayNum = Math.min(displayNum, lifeLineData.length)
   const [lifelineIndex, setLifelineIndex] = useState<number>(0)
   const LIFELINE_DURATION = 2 // seconds displayed per lifeline
   const [lifelineSavedValues, setLifelineSavedValues] = useState<number[]>(
