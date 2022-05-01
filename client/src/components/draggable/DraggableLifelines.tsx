@@ -23,8 +23,29 @@ interface DraggableLifelinesInterface {
 }
 const StyledDiv = styled.div`
   display: flex;
+  background: '#f1f1f1';
+  border-radius: '10px';
+  width: '92.5%';
+  padding: '0 2%';
+  grid-column: 2;
+  border: '1px lightgrey solid';
+  ${(props) =>
+    props.draggingOver
+      ? 'border-color: ${({ theme }) => theme.buttonBackground};'
+      : 'border-color: ${({ theme }) => theme.secondaryText};'}
+`
+const Card = styled.div`
+  display: 'flex';
+  align-self: 'center';
+  width: '5%';
+  font-size: '1.29em';
+  margin-left: '0%';
 `
 
+const Alignment = styled.div`
+  margin-left: '15%';
+  align-self: 'center';
+`
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 4
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
@@ -96,40 +117,13 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                       snapshot.draggingOver,
                     )}
                   >
-                    <StyledDiv
-                      style={{
-                        background: '#f1f1f1',
-                        borderRadius: '10px',
-                        width: '92.5%',
-                        padding: '0 2%',
-                        gridColumn: 2,
-                        display: 'flex',
-                        border: '1px lightgrey solid',
-                        borderColor: `${({ theme }) => theme.secondaryText}`,
-                        borderLeft: snapshot.draggingOver
-                          ? `${({ theme }) => theme.buttonBackground}`
-                          : `${({ theme }) => theme.secondaryText}`,
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignSelf: 'center',
-                          width: '5%',
-                          fontSize: '1.29em',
-                          marginLeft: '0%',
-                        }}
-                      >
+                    <StyledDiv draggingOver={snapshot.draggingOver}>
+                      <Card>
                         <ReOrderDotsVertical size="20px" />
-                        <div
-                          style={{
-                            marginLeft: '15%',
-                            alignSelf: 'center',
-                          }}
-                        >
+                        <Alignment>
                           {index < NUM_LIFELINES_DISPLAYED && index + 1}
-                        </div>
-                      </div>
+                        </Alignment>
+                      </Card>
                       <LifelineCard
                         lifeline={lifeline}
                         isDisplayed={index < NUM_LIFELINES_DISPLAYED}
