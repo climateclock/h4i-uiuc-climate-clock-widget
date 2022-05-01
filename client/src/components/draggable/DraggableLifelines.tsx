@@ -16,35 +16,39 @@ import {
 import LifelineCard from './LifelineCard'
 import { deleteElement, reorderElement } from '../../utils/utils'
 import { ReOrderDotsVertical } from '@styled-icons/fluentui-system-filled/ReOrderDotsVertical'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
 }
 const StyledDiv = styled.div`
   display: flex;
-  background: '#f1f1f1';
-  border-radius: '10px';
-  width: '92.5%';
-  padding: '0 2%';
+  background: #f1f1f1;
+  border-radius: 10px;
+  width: 92.5%;
+  padding: 0 2%;
   grid-column: 2;
-  border: '1px lightgrey solid';
+  border: 1px lightgrey solid;
   ${(props) =>
     props.draggingOver
-      ? 'border-color: ${({ theme }) => theme.buttonBackground};'
-      : 'border-color: ${({ theme }) => theme.secondaryText};'}
+      ? css`
+          border-color: ${({ theme }) => theme.blue};
+        `
+      : css`
+          border-color: ${({ theme }) => theme.secondaryText};
+        `}
 `
 const Card = styled.div`
-  display: 'flex';
-  align-self: 'center';
-  width: '5%';
-  font-size: '1.29em';
-  margin-left: '0%';
+  display: flex;
+  align-self: center;
+  width: 5%;
+  font-size: 1.29em;
+  margin-left: 0%;
 `
 
 const Alignment = styled.div`
-  margin-left: '15%';
-  align-self: 'center';
+  margin-left: 15%;
+  align-self: center;
 `
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 4

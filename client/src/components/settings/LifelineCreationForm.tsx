@@ -8,6 +8,35 @@ import { ModuleResInterface } from '../../interfaces'
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../draggable/DraggableLifelines'
 import styled from 'styled-components'
+
+const StyledLifeline = styled.div`
+  h1 {
+    color: ${({ theme }) => theme.headerText};
+    font-family: ${({ theme }) => theme.fonts};
+    font-weight: 700;
+    line-height: 36px;
+    font-size: 30px;
+  }
+  h3 {
+    color: ${({ theme }) => theme.text};
+    font-family: ${({ theme }) => theme.fonts};
+    font-weight: 500;
+    line-height: 22px;
+    font-size: 18px;
+  }
+  p {
+    color: ${({ theme }) => theme.text};
+    font-family: ${({ theme }) => theme.fonts};
+    font-weight: 400;
+    line-height: 17px;
+    font-size: 14px;
+  }
+`
+const FormatSpacing = styled.div`
+  max-width: 1090px;
+  margin: 57px;
+`
+
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
   const flavor = 'Lifeline'
@@ -69,34 +98,6 @@ const LifelineCreationForm = () => {
     )
     clearProperties()
   }
-
-  const StyledLifeline = styled.div`
-    h1 {
-      color: ${({ theme }) => theme.headerText};
-      font-family: ${({ theme }) => theme.fonts};
-      font-weight: 700;
-      line-height: 36px;
-      font-size: 30px;
-    }
-    h3 {
-      color: ${({ theme }) => theme.text};
-      font-family: ${({ theme }) => theme.fonts};
-      font-weight: 500;
-      line-height: 22px;
-      font-size: 18px;
-    }
-    p {
-      color: ${({ theme }) => theme.text};
-      font-family: ${({ theme }) => theme.fonts};
-      font-weight: 400;
-      line-height: 17px;
-      font-size: 14px;
-    }
-  `
-  const FormatSpacing = styled.div`
-    max-width: 1090px;
-    margin: 57px;
-  `
   return (
     <>
       <FormatSpacing>
