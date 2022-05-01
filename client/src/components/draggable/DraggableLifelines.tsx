@@ -26,13 +26,13 @@ const StyledDiv = styled.div`
   background: #f1f1f1;
   border-radius: 10px;
   width: 92.5%;
-  padding: 0 2%;
+  padding: 0 2% 0 1%;
   grid-column: 2;
   border: 2px lightgrey solid;
   ${(props) =>
     props.draggingOver
       ? css`
-          border-color: ${({ theme }) => theme.blue};
+          border-color: ${({ theme }) => theme.buttonBackground};
         `
       : css`
           border-color: ${({ theme }) => theme.secondaryText};
