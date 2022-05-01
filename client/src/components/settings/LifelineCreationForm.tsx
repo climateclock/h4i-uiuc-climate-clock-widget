@@ -9,6 +9,7 @@ import {
 } from '../../utils/constants'
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../draggable/DraggableLifelines'
+import Input from '../ui/Input'
 
 const StyledLifeline = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
@@ -105,7 +106,7 @@ const LifelineCreationForm = () => {
           <form onSubmit={formSubmit}>
             {/* title input */}
             <label>Title</label>
-            <input
+            <Input
               required={true}
               placeholder={'Title...'}
               value={title}
@@ -115,7 +116,7 @@ const LifelineCreationForm = () => {
 
             {/* unit input */}
             <label>Unit</label>
-            <input
+            <Input
               required={true}
               placeholder={'Unit...'}
               type={'text'}
@@ -126,7 +127,7 @@ const LifelineCreationForm = () => {
 
             {/* value input */}
             <label>Value</label>
-            <input
+            <Input
               required={true}
               placeholder={'Value...'}
               type={'number'}
@@ -137,7 +138,7 @@ const LifelineCreationForm = () => {
 
             {/* rate input */}
             <label>Rate</label>
-            <input
+            <Input
               type={'number'}
               placeholder={'Rate...'}
               value={rate}
@@ -147,7 +148,7 @@ const LifelineCreationForm = () => {
 
             {/* resolution input */}
             <label>Resolution</label>
-            <input
+            <Input
               min={0} /* enforces resolution is positive */
               type={'number'}
               placeholder={'Resolution...'}
