@@ -64,7 +64,6 @@ const LifelineCreationForm = () => {
       language: localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
       lifelines: lifelineModules,
     }
-    console.log(localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY))
     const settings_json = JSON.stringify(json)
     let compressed = compressToEncodedURIComponent(settings_json)
 
