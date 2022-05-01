@@ -38,7 +38,7 @@ const StyledButton = styled.button`
 //     }
 // `;
 
-const Button = ({ buttonLabel }) => {
+const Button = ({ buttonLabel }: { buttonLabel: string }) => {
   return <StyledButton>{buttonLabel}</StyledButton>
 }
 export default Button

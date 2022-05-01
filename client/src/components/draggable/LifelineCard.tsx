@@ -1,6 +1,7 @@
+import styled from 'styled-components'
+
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
-import styled from 'styled-components'
 
 interface LifelineCardInterface {
   lifeline: ModuleResInterface

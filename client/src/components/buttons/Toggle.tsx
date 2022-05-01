@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+
 const Toggler = styled.div`
   .toggle-button {
     position: relative;

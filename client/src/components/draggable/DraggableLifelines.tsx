@@ -1,22 +1,23 @@
 import { TrashAlt } from '@styled-icons/boxicons-solid'
+import { ReOrderDotsVertical } from '@styled-icons/fluentui-system-filled/ReOrderDotsVertical'
 import { CSSProperties, useEffect, useState } from 'react'
 import {
   DragDropContext,
-  Droppable,
   Draggable,
-  DropResult,
   DraggingStyle,
+  Droppable,
+  DropResult,
   NotDraggingStyle,
 } from 'react-beautiful-dnd'
+import styled, { css } from 'styled-components'
+
 import { ModuleResInterface } from '../../interfaces'
 import {
   LIFELINES_LOCAL_STORAGE_KEY,
   NUM_LIFELINES_DISPLAYED,
 } from '../../utils/constants'
-import LifelineCard from './LifelineCard'
 import { deleteElement, reorderElement } from '../../utils/utils'
-import { ReOrderDotsVertical } from '@styled-icons/fluentui-system-filled/ReOrderDotsVertical'
-import styled, { css } from 'styled-components'
+import LifelineCard from './LifelineCard'
 
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
