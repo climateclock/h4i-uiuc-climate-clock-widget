@@ -2,19 +2,20 @@ import { TrashAlt } from '@styled-icons/boxicons-solid'
 import { CSSProperties, useEffect, useState } from 'react'
 import {
   DragDropContext,
-  Droppable,
   Draggable,
-  DropResult,
   DraggingStyle,
+  Droppable,
+  DropResult,
   NotDraggingStyle,
 } from 'react-beautiful-dnd'
+
 import { ModuleResInterface } from '../../interfaces'
 import {
   LIFELINES_LOCAL_STORAGE_KEY,
   NUM_LIFELINES_DISPLAYED,
 } from '../../utils/constants'
-import LifelineCard from './LifelineCard'
 import { deleteElement, reorderElement } from '../../utils/utils'
+import LifelineCard from './LifelineCard'
 
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]

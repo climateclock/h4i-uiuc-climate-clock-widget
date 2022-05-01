@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types'
 import Select from 'react-select'
+
+// import { optionProps } from '../../interfaces'
 
 const customStyles = {
   control: (base, state) => ({
@@ -9,11 +12,13 @@ const customStyles = {
     color: state.isFocused ? 'white' : 'white',
     width: '255px',
     height: '31px',
+    left: '5%',
   }),
   container: (base) => ({
     ...base,
     width: '255px',
     height: '31px',
+    left: '4%',
   }),
 }
 
@@ -22,6 +27,7 @@ export const StyledSelect = ({
   optionSelected,
   handleOptionSelectedChange,
 }) => (
+  // export const StyledSelect = ({ options }: { options: optionProps[] }) => (
   <Select
     styles={customStyles}
     value={optionSelected}
@@ -37,3 +43,9 @@ export const StyledSelect = ({
     })}
   />
 )
+
+StyledSelect.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.any),
+  optionSelected: PropTypes.any,
+  handleOptionSelectedChange: PropTypes.func,
+}

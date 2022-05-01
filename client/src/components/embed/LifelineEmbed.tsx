@@ -1,9 +1,10 @@
-import { LifelinePropsInterface } from '../../interfaces'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import { LifelinePropsInterface } from '../../interfaces'
 import Header from '../ui/Header'
 
-const VALUE_UNIT_MARGIN: number = 1
+const VALUE_UNIT_MARGIN = 1
 
 const Container = styled.div`
   & {
@@ -96,15 +97,9 @@ function Lifeline({
     !value ? cleanedRate : value + cleanedRate,
   )
 
-  useEffect(() => {
-    if ((value !== 0 || cleanedRate !== 0) && llVal === 0) {
-      setLLVal(!value ? cleanedRate : value + cleanedRate)
-    }
-  }, [llVal, value, cleanedRate])
-
   /* update lifeline value within interval */
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (cleanedRate !== 0) {
         setLLVal((llVal) => llVal + cleanedRate)
       }
@@ -112,14 +107,9 @@ function Lifeline({
 
     return () => {
       clearInterval(interval)
-    }
-  })
-
-  useEffect(() => {
-    return () => {
       updateSavedValue(lifelineIndex, llVal)
     }
-  }, [updateSavedValue, lifelineIndex, llVal])
+  }, [cleanedRate, lifelineIndex, llVal, updateSavedValue])
 
   return (
     <Container>

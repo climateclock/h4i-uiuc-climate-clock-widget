@@ -1,63 +1,125 @@
-import LanguageCustomization from '../components/settings/LanguageCustomizationForm'
-import { StyledSelect } from '../components/ui/Select'
-import styled from 'styled-components'
-import Input from '../components/ui/Input'
-import { options } from '../components/utils/constants'
-import DefaultLifelineCreationForm from '../components/settings/DefaultLifelineCreationForm'
 import { useState } from 'react'
-const SettingsSection = styled.div`
-  h1 {
-    color: ${({ theme }) => theme.headerText};
-    font-size: 30px;
-    font-family: ${({ theme }) => theme.fonts};
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 36px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 5%;
-    bottom: 80.47%;
-  }
-  h3 {
-    color: ${({ theme }) => theme.text};
-    font-family: ${({ theme }) => theme.fonts};
-    position: relative;
-    top: 27.89%;
-    bottom: 69.44%;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-  }
+import { useFullScreenHandle } from 'react-full-screen'
+import styled from 'styled-components'
+
+import Toggle from '../components/buttons/Toggle'
+import CopyButton from '../components/ui/CopyButton'
+import NavBar from '../components/ui/NavBar'
+import { StyledSelect } from '../components/ui/Select'
+import { options } from '../components/utils/constants'
+import facebook from '../utils/icons/facebook.png'
+import instagram from '../utils/icons/instagram.png'
+import twitter from '../utils/icons/twitter.png'
+import whatsapp from '../utils/icons/whatsapp.png'
+
+const SettingsHeading = styled.div`
+  color: ${({ theme }) => theme.headerText};
+  font-size: 30px;
+  font-family: ${({ theme }) => theme.secondaryFonts};
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  padding-top: 2%;
+`
+
+const SettingSubheading = styled.div`
+  color: ${({ theme }) => theme.text};
+  font-family: ${({ theme }) => theme.secondaryFonts};
+  margin-left: 5%;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  padding-top: 1%;
+  padding-bottom: 0.25%;
+`
+
+const SettingCaption = styled.div`
+  color: ${({ theme }) => theme.text};
+  font-family: ${({ theme }) => theme.secondaryFonts};
+  margin-left: 5%;
+  font-weight: 350;
+  font-size: 1rem;
+  line-height: 24px;
+  padding-top: 1%;
+  padding-bottom: 0.5%;
+`
+
+const SettingsText = styled.div`
+  color: ${({ theme }) => theme.text};
+  font-family: ${({ theme }) => theme.secondaryFonts};
+  margin-left: 5%;
+  font-size: 0.75rem;
+  line-height: 24px;
+  padding-top: 1%;
+`
+
+const IconContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  gap: 2.5%;
+`
+
+const ToggleContainer = styled.div`
+  display: flex;
+  gap: 2%;
+`
+
+const ToggleStyle = styled.div`
+  padding-top: 1%;
 `
 
 function Settings() {
+  const handle = useFullScreenHandle()
   const [languageSelected, setLanguageSelected] = useState<string>()
-
   const handleLanguageSelectedChange = (language: string) => {
     setLanguageSelected(language)
   }
   return (
-    <SettingsSection>
-      <h1>Settings</h1>
-      <h3 id="language">Configure Language</h3>
+    <>
+      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
+      <SettingsHeading>Clock Settings</SettingsHeading>
+
+      <ToggleContainer>
+        <SettingSubheading id="news_ticker"> News Ticker</SettingSubheading>
+        <ToggleStyle>
+          <Toggle />
+        </ToggleStyle>
+      </ToggleContainer>
+
+      <SettingsText> Turn off/on the bottom news on your clock</SettingsText>
+      <SettingSubheading id="language">Configure Language</SettingSubheading>
+      <SettingCaption> Language </SettingCaption>
       <StyledSelect
         options={options}
         optionSelected={languageSelected}
         handleOptionSelectedChange={handleLanguageSelectedChange}
       />
-      <h3 id="share">Share your custom clock</h3>
-      <Input
-        type="text"
+      <SettingSubheading id="share">Share your custom clock</SettingSubheading>
+      <SettingCaption> Shareable Link </SettingCaption>
+      <CopyButton
+        type="link"
         placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
-        font-size="12px"
-        line-height="25px"
-        width="350px"
-        height="31px"
       />
-      <LanguageCustomization />
-      <DefaultLifelineCreationForm />
-    </SettingsSection>
+      <SettingCaption>Embed</SettingCaption>
+      <SettingsText>
+        To add the Climate Clock widget to your site, add the following HTML:
+      </SettingsText>
+      <CopyButton
+        type="embed"
+        placeholder='<iframe src="https://climateclock.world/widget-v2.js" async></iframe><climate-clock /><sc '
+      />
+      <SettingCaption>Social Media</SettingCaption>
+      <IconContainer>
+        <img src={facebook} alt="facebook" />
+        <img src={instagram} alt="instagram" />
+        <img src={twitter} alt="twitter" />
+        <img src={whatsapp} alt="whatsapp" />
+      </IconContainer>
+    </>
   )
 }
 

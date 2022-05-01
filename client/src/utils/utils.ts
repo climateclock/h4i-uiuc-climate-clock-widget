@@ -17,12 +17,12 @@ export const getModules = async (
   setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
   setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let res: any = await fetchData(url, error)
+  const res: any = await fetchData(url, error)
   setErrorFlag('error' in res)
 
   if (!('error' in res)) {
     /* set modules */
-    let resModules: ModuleResInterface[] = Object.values(
+    const resModules: ModuleResInterface[] = Object.values(
       res['data']['data']['modules'],
     )
     setModules(resModules)
@@ -39,12 +39,12 @@ export const getNewsfeedModules = async (
   setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
   setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let res: any = await fetchData(url, error)
+  const res: any = await fetchData(url, error)
   setErrorFlag('error' in res)
 
   if (!('error' in res)) {
     /* set newsfeed modules */
-    let resNewsfeedModules: NewsInterface[] = Object.values(
+    const resNewsfeedModules: NewsInterface[] = Object.values(
       res['data']['data']['modules']['newsfeed_1']['newsfeed'],
     )
     setNewsfeedModules(resNewsfeedModules)
@@ -61,18 +61,18 @@ export const getLifelineModules = async (
   >,
   setErrorFlag?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let res: any = await fetchData(url, error)
+  const res: any = await fetchData(url, error)
   if (setErrorFlag) setErrorFlag('error' in res)
 
   if (!('error' in res)) {
     /* set modules */
-    let resModules: ModuleResInterface[] = Object.values(
+    const resModules: ModuleResInterface[] = Object.values(
       res['data']['data']['modules'],
     )
 
     /* set lifelines */
     if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
-      let resLifelineModules = resModules.filter((module) => {
+      const resLifelineModules = resModules.filter((module) => {
         if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
           return true
         }
@@ -121,7 +121,7 @@ export const setLifelines = async (
   >,
 ) => {
   /* set modules */
-  let resModules: ModuleResInterface[] = Object.values(
+  const resModules: ModuleResInterface[] = Object.values(
     res['data']['data']['modules'],
   )
 
@@ -130,7 +130,7 @@ export const setLifelines = async (
     !localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY) ||
     !localStorage.getItem(DEFAULT_LIFELINES_LOCAL_STORAGE_KEY)
   ) {
-    let resLifelineModules = resModules.filter((module) => {
+    const resLifelineModules = resModules.filter((module) => {
       if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
         return true
       }
@@ -158,7 +158,7 @@ export const setNewsfeeds = async (
   setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
   /* set newsfeed modules */
-  let resNewsfeedModules: NewsInterface[] = Object.values(
+  const resNewsfeedModules: NewsInterface[] = Object.values(
     res['data']['data']['modules']['newsfeed_1']['newsfeed'],
   )
   setNewsfeedModules(resNewsfeedModules)
@@ -177,7 +177,7 @@ export const getData = async (
   setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
   /* set modules */
-  let res: any = await getModules(url, error, setModules, setErrorFlag)
+  const res: any = await getModules(url, error, setModules, setErrorFlag)
 
   /* errorWrapper returned in res */
   if ('error' in res) {
@@ -243,11 +243,11 @@ export const getHeadlines = (newsfeedModules: NewsInterface[]) => {
  *          index
  */
 export const reorderElement = (
-  list: Array<any>,
+  list: Array<unknown>,
   sourceIndex: number,
   destinationIndex: number,
 ) => {
-  let item = list[sourceIndex]
+  const item = list[sourceIndex]
   list.splice(sourceIndex, 1)
   list.splice(destinationIndex, 0, item)
   return list
@@ -257,6 +257,7 @@ export const reorderElement = (
  *
  * Description: Delete a element at an index
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deleteElement = (list: Array<any>, index: number) => {
   list.splice(index, 1)
   return list

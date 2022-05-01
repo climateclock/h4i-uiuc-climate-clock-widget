@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import clock from '../../images/clock.png'
+import { useEffect, useState } from 'react'
+import { FullScreenHandle } from 'react-full-screen'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import styled from 'styled-components'
 
 import EnterFullscreen from '../../components/buttons/EnterFullscreen'
-import { FullScreenHandle } from 'react-full-screen'
 import ExitFullscreen from '../../components/buttons/ExitFullscreen'
+import clock from '../../images/clock.png'
 
 const NavBox = styled.div`
   font-family: ${({ theme }) => theme.secondaryFonts};
@@ -73,9 +73,11 @@ const Image = styled.div`
 function NavBar({
   handle,
   isFullScreen,
+  atHome,
 }: {
   handle: FullScreenHandle
   isFullScreen: boolean
+  atHome: boolean
 }) {
   function MouseTrack(): boolean {
     const [y, setY] = useState()
@@ -104,13 +106,18 @@ function NavBar({
           </Button>
         </HomeLink>
       </Link>
-      <FullScreenButton>
-        {isFullScreen ? (
-          <EnterFullscreen handle={handle.enter} />
-        ) : (
-          <ExitFullscreen handle={handle.exit} />
-        )}
-      </FullScreenButton>
+      {atHome ? (
+        <FullScreenButton>
+          {isFullScreen ? (
+            <EnterFullscreen handle={handle} />
+          ) : (
+            <ExitFullscreen handle={handle} />
+          )}
+        </FullScreenButton>
+      ) : (
+        ' '
+      )}
+
       <Link to="/settings">
         <PageLink>Settings</PageLink>
       </Link>

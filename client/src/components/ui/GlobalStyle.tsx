@@ -1,5 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
 import '@fontsource/lato'
+
+import { createGlobalStyle } from 'styled-components'
 /**
  * @constant {number}
  * Max width in pixels for which the mobile layout should be displayed
@@ -61,6 +62,7 @@ const theme = {
   transparentBlue: '#d9e6f3',
   transparentPink: '#fbe2fb',
   blue: '#619fc8',
+  navy: '#1D5479',
   black: '#000000',
   green: '#73cd7c',
   red: '#ff3115',
@@ -92,7 +94,7 @@ const zIndex = {
   modal: 30,
 }
 
-const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
+const GlobalStyle = createGlobalStyle<{ WindowSize: number }>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   body {
@@ -118,7 +120,7 @@ const GlobalStyle = createGlobalStyle<{ WindowSize: any }>`
     height: ${({ windowSize }) => windowSize.height}px;
   }
   h1, h2, h3, h4, h5, h6 {
-    color: ${({ theme }) => theme.headerText};
+    color: ${({ theme }) => theme.black};
   }
   h1, h2, h3, h5, h6 {
     font-weight: bold;
