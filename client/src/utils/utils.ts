@@ -1,4 +1,6 @@
-import { get } from '../api/config'
+import { AxiosResponse } from 'axios'
+
+import { ErrorWrapper, get } from '../api/config'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
 import {
   DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
@@ -7,17 +9,20 @@ import {
 } from './constants'
 
 /* data fetching functions */
-export const fetchData = async (url: string, error: string) => {
+export const fetchData = async <T>(
+  url: string,
+  error: string,
+): Promise<AxiosResponse<T> | ErrorWrapper> => {
   return await get(url, error)
 }
 
-export const getModules = async (
+export const getModules = async <T>(
   url: string,
   error: string,
   setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
   setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const res: any = await fetchData(url, error)
+  const res: AxiosResponse<T> | ErrorWrapper = await fetchData(url, error)
   setErrorFlag('error' in res)
 
   if (!('error' in res)) {
@@ -33,13 +38,13 @@ export const getModules = async (
   return res
 }
 
-export const getNewsfeedModules = async (
+export const getNewsfeedModules = async <T>(
   url: string,
   error: string,
   setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
   setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const res: any = await fetchData(url, error)
+  const res: AxiosResponse<T> | ErrorWrapper = await fetchData(url, error)
   setErrorFlag('error' in res)
 
   if (!('error' in res)) {
@@ -53,7 +58,7 @@ export const getNewsfeedModules = async (
   }
 }
 
-export const getLifelineModules = async (
+export const getLifelineModules = async <T>(
   url: string,
   error: string,
   setLifelineModules: React.Dispatch<
@@ -61,7 +66,7 @@ export const getLifelineModules = async (
   >,
   setErrorFlag?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const res: any = await fetchData(url, error)
+  const res: AxiosResponse<T> | ErrorWrapper = await fetchData(url, error)
   if (setErrorFlag) setErrorFlag('error' in res)
 
   if (!('error' in res)) {
@@ -114,8 +119,8 @@ export const getDefaultLanguage = (
 }
 
 /* data setting functions */
-export const setLifelines = async (
-  res: ModuleResInterface[],
+export const setLifelines = async <T>(
+  res: AxiosResponse<T> | ErrorWrapper,
   setLifelineModules: React.Dispatch<
     React.SetStateAction<ModuleResInterface[]>
   >,
@@ -153,8 +158,8 @@ export const setLifelines = async (
   }
 }
 
-export const setNewsfeeds = async (
-  res: ModuleResInterface[],
+export const setNewsfeeds = async <T>(
+  res: AxiosResponse<T> | ErrorWrapper,
   setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
   /* set newsfeed modules */
@@ -165,7 +170,7 @@ export const setNewsfeeds = async (
 }
 
 /* get all data  */
-export const getData = async (
+export const getData = async <T>(
   url: string,
   error: string,
   setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
@@ -177,7 +182,12 @@ export const getData = async (
   setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
 ) => {
   /* set modules */
-  const res: any = await getModules(url, error, setModules, setErrorFlag)
+  const res: AxiosResponse<T> | ErrorWrapper = await getModules(
+    url,
+    error,
+    setModules,
+    setErrorFlag,
+  )
 
   /* errorWrapper returned in res */
   if ('error' in res) {
