@@ -1,16 +1,10 @@
-import {
-  Menu,
-  MenuList,
-  MenuButton,
-  MenuItem,
-} from "@reach/menu-button";
-import "@reach/menu-button/styles.css";
+import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button'
+import '@reach/menu-button/styles.css'
 import styled from 'styled-components'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { TrashAlt } from '@styled-icons/boxicons-solid'
 import { Show } from '@styled-icons/boxicons-regular/Show'
-import { ChevronDown } from "@styled-icons/boxicons-solid";
-import { theme } from "../ui/GlobalStyle";
+import { ChevronDown } from '@styled-icons/boxicons-solid'
 
 // export const StyledMenu = styled(Menu)`
 //   display: flex;
@@ -109,20 +103,20 @@ export const LifelineDropdown = ({}) => {
           <StyledChevronDown />
         </StyledMenuButton>
         <MenuList>
-          <StyledMenuItem onSelect={() => alert("Show")}>
-            <StyledShow/>
+          <StyledMenuItem onSelect={() => alert('Show')}>
+            <StyledShow />
             <MenuText>Show</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => alert("Edit")}>
+          <StyledMenuItem onSelect={() => alert('Edit')}>
             <StyledPencilFill />
             <MenuText>Edit</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => alert("Delete")}>
+          <StyledMenuItem onSelect={() => alert('Delete')}>
             <StyledTrash />
             <MenuText>Delete</MenuText>
           </StyledMenuItem>
         </MenuList>
       </Menu>
     </div>
-  );
+  )
 }

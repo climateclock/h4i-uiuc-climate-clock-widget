@@ -6,8 +6,11 @@
   "dependencies": {
     "@fontsource/lato": "^4.5.5",
     "@fontsource/oxygen-mono": "^4.5.2",
+    "@reach/auto-id": "^0.16.0",
+    "@reach/menu-button": "^0.16 .0",
     "@reach/window-size": "^0.16.0",
     "@styled-icons/bootstrap": "^10.34.0",
+    "@styled-icons/boxicons-regular": "^10.38.0",
     "@styled-icons/boxicons-solid": "^10.38.0",
     "@styled-icons/open-iconic": "^10.18.0",
     "@testing-library/jest-dom": "^5.16.2",
