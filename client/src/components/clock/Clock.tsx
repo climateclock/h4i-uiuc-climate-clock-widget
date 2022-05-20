@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ModuleResInterface } from '../../interfaces'
+import { LifelineDropdown } from '../lifelines/Dropdown'
 
 import Header from '../ui/Header'
 import { toUpperCase } from '../../utils/utils'
@@ -285,6 +286,7 @@ function Clock(props: ModuleResInterface) {
 
   return (
     <ClockContainer isFullScreen={props.isFullScreen}>
+      <LifelineDropdown />
       <Header
         moduleType={props.flavor ? toUpperCase(props.flavor) : ' '}
         title={props.labels ? (props.labels[0] ? props.labels[0] : '') : ''}
