@@ -1,6 +1,7 @@
 import { PencilFill } from '@styled-icons/bootstrap'
 import { ModuleResInterface } from '../interfaces'
 import { returnFirstString } from '../utils/utils'
+import { LifelineDropdown } from './lifelines/Dropdown'
 
 interface LifelineCardInterface {
   lifeline: ModuleResInterface
@@ -23,15 +24,13 @@ const LifelineCard = ({
       <p
         style={{
           fontSize: '0.8em',
-          border: '1px black solid',
-          padding: '5px 7.5px',
-          borderRadius: '5px',
           textAlign: 'center',
           alignSelf: 'center',
           gridColumn: 2,
         }}
       >
-        {isDisplayed ? 'Hide' : 'Show'}
+        <LifelineDropdown isDisplayed={isDisplayed} />
+        {/*isDisplayed ? 'Hide' : 'Show'*/}
       </p>
       {customizable && (
         <PencilFill

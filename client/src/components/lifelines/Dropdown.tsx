@@ -6,12 +6,12 @@ import { TrashAlt } from '@styled-icons/boxicons-solid'
 import { Show } from '@styled-icons/boxicons-regular/Show'
 import { ChevronDown } from '@styled-icons/boxicons-solid'
 
-// export const StyledMenu = styled(Menu)`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   border-radius: 5.25px;
-// `
+export const StyledMenuList = styled(MenuList)`
+  border-radius: 5.25px;
+  padding: 0px;
+
+  box-shadow: 0px 5px 10px;
+`
 
 export const StyledMenuButton = styled(MenuButton)`
   display: flex;
@@ -40,23 +40,22 @@ export const StyledMenuItem = styled(MenuItem)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 5.25px;
 `
 
 export const StyledTrash = styled(TrashAlt)`
-  color: ${({ theme }) => theme.secondaryText};
+  color: ${({ theme }) => theme.headerText};
   height: 16px;
   margin-right: 5px;
 `
 
 export const StyledShow = styled(Show)`
-  color: ${({ theme }) => theme.secondaryText};
+  color: ${({ theme }) => theme.headerText};
   height: 16px;
   margin-right: 5px;
 `
 
 export const StyledPencilFill = styled(PencilFill)`
-  color: ${({ theme }) => theme.secondaryText};
+  color: ${({ theme }) => theme.headerText};
   height: 16px;
   margin-right: 5px;
 `
@@ -79,22 +78,11 @@ export const MenuText = styled.h3`
   margin-left: 5px;
 `
 
-// export const StyledMenu = styled.div`
-//   [data-reach-menu] {
-//     color: blue;
-//   }
-
-//   [data-reach-menu-button][aria-expanded="true"] {
-//     background: #000;
-//     color: blue;
-//   }
-// `
-
 export const StyledMenu = styled(Menu)`
   color: theme.secondaryBackground;
 `
 
-export const LifelineDropdown = ({}) => {
+export const LifelineDropdown = ({isDisplayed}) => {
   return (
     <div>
       <Menu>
@@ -102,7 +90,7 @@ export const LifelineDropdown = ({}) => {
           <h3>Actions</h3>
           <StyledChevronDown />
         </StyledMenuButton>
-        <MenuList>
+        <StyledMenuList>
           <StyledMenuItem onSelect={() => alert('Show')}>
             <StyledShow />
             <MenuText>Show</MenuText>
@@ -115,7 +103,7 @@ export const LifelineDropdown = ({}) => {
             <StyledTrash />
             <MenuText>Delete</MenuText>
           </StyledMenuItem>
-        </MenuList>
+        </StyledMenuList>
       </Menu>
     </div>
   )
