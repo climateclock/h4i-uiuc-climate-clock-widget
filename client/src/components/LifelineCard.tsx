@@ -21,28 +21,16 @@ const LifelineCard = ({
       }}
     >
       <h1 style={{ gridColumn: 1 }}>{returnFirstString(labels)}</h1>
-      <p
+      <div
         style={{
           fontSize: '0.8em',
           textAlign: 'center',
           alignSelf: 'center',
-          gridColumn: 2,
+          gridColumn: 3,
         }}
       >
-        <LifelineDropdown isDisplayed={isDisplayed} />
-        {/*isDisplayed ? 'Hide' : 'Show'*/}
-      </p>
-      {customizable && (
-        <PencilFill
-          size={'1.5em'}
-          style={{
-            justifySelf: 'center',
-            cursor: 'pointer',
-            alignSelf: 'center',
-            gridColumn: 3,
-          }}
-        />
-      )}
+        <LifelineDropdown isDisplayed={isDisplayed} isCustomizable={customizable} />
+      </div>
     </div>
   )
 }

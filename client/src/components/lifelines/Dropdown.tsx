@@ -9,8 +9,8 @@ import { ChevronDown } from '@styled-icons/boxicons-solid'
 export const StyledMenuList = styled(MenuList)`
   border-radius: 5.25px;
   padding: 0px;
-
-  box-shadow: 0px 5px 10px;
+  border: white;
+  box-shadow: 0px 2px 5px ${({ theme }) => theme.secondaryBackground};
 `
 
 export const StyledMenuButton = styled(MenuButton)`
@@ -49,13 +49,13 @@ export const StyledTrash = styled(TrashAlt)`
 `
 
 export const StyledShow = styled(Show)`
-  color: ${({ theme }) => theme.headerText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
   height: 16px;
   margin-right: 5px;
 `
 
 export const StyledPencilFill = styled(PencilFill)`
-  color: ${({ theme }) => theme.headerText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
   height: 16px;
   margin-right: 5px;
 `
@@ -66,12 +66,8 @@ export const StyledChevronDown = styled(ChevronDown)`
   margin-right: 5px;
 `
 
-export const disabledMenuText = styled.h3`
-  color: ${({ theme }) => theme.secondaryText};
-`
-
 export const MenuText = styled.h3`
-  color: ${({ theme }) => theme.headerText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
   font-size: 1em;
   font-family: ${({ theme }) => theme.secondaryFonts};
   font-weight: lighter;
@@ -82,7 +78,7 @@ export const StyledMenu = styled(Menu)`
   color: theme.secondaryBackground;
 `
 
-export const LifelineDropdown = ({isDisplayed}) => {
+export const LifelineDropdown = ({isDisplayed, isCustomizable}) => {
   return (
     <div>
       <Menu>
@@ -92,12 +88,12 @@ export const LifelineDropdown = ({isDisplayed}) => {
         </StyledMenuButton>
         <StyledMenuList>
           <StyledMenuItem onSelect={() => alert('Show')}>
-            <StyledShow />
-            <MenuText>Show</MenuText>
+            <StyledShow isEnabled={isDisplayed} />
+            <MenuText isEnabled={isDisplayed}>Show</MenuText>
           </StyledMenuItem>
           <StyledMenuItem onSelect={() => alert('Edit')}>
-            <StyledPencilFill />
-            <MenuText>Edit</MenuText>
+            <StyledPencilFill isEnabled={isCustomizable} />
+            <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
           <StyledMenuItem onSelect={() => alert('Delete')}>
             <StyledTrash />
