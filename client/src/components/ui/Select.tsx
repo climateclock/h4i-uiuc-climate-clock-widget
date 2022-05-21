@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 
 const customStyles = {
@@ -9,17 +10,25 @@ const customStyles = {
     color: state.isFocused ? 'white' : 'white',
     width: '255px',
     height: '31px',
+    left: '5%',
   }),
   container: (base) => ({
     ...base,
     width: '255px',
     height: '31px',
+    left: '4%',
   }),
 }
 
-export const StyledSelect = ({ options }) => (
+export const StyledSelect = ({
+  options,
+  optionSelected,
+  handleOptionSelectedChange,
+}) => (
   <Select
     styles={customStyles}
+    value={optionSelected}
+    onChange={handleOptionSelectedChange}
     options={options}
     theme={(theme) => ({
       ...theme,
@@ -31,3 +40,9 @@ export const StyledSelect = ({ options }) => (
     })}
   />
 )
+
+StyledSelect.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.any),
+  optionSelected: PropTypes.any,
+  handleOptionSelectedChange: PropTypes.func,
+}

@@ -1,14 +1,14 @@
 import { WindowSize } from '@reach/window-size'
-import Newsfeed from './NewsfeedEmbed'
-import { getHeadlines } from '../../utils/utils'
-import Clock from './ClockEmbed'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { ERROR_MSG, URL, NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
-import { getData } from '../../utils/utils'
-import Lifelines from './LifelinesEmbed'
+
 import { ModuleResInterface, NewsInterface } from '../../interfaces/index'
+import { ERROR_MSG, NUM_LIFELINES_DISPLAYED, URL } from '../../utils/constants'
+import { getData, getHeadlines } from '../../utils/utils'
 import GlobalStyle from '../ui/GlobalStyle'
+import Clock from './ClockEmbed'
+import Lifelines from './LifelinesEmbed'
+import Newsfeed from './NewsfeedEmbed'
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
