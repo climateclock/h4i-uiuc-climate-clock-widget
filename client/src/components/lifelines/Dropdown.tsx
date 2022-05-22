@@ -47,6 +47,7 @@ export const StyledMenuItem = styled(MenuItem)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-radius: 5.25px;
 `
 
 export const StyledTrash = styled(TrashAlt)`
