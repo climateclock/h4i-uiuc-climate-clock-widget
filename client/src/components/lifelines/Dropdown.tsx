@@ -9,7 +9,7 @@ import styled from 'styled-components'
 interface DropdownInterface {
   isDisplayed: boolean,
   isCustomizable: boolean | undefined,
-  onDelete: (...args: any[]) => any,
+  onDelete: (...args: number[]) => number,
   index: number
 }
 
@@ -25,11 +25,11 @@ export const StyledMenuButton = styled(MenuButton)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid;
+  border: 1.1px solid;
   border-color: ${({ theme }) => theme.secondaryBackground};
   background-color: ${({ theme }) => theme.background};
   border-radius: 5.25px;
-  padding: 20px 10px 20px 10px;
+  padding: 15px 10px 15px 10px;
   margin-right: 3px;
   margin-left: 3px;
   height: 33px;
@@ -38,7 +38,6 @@ export const StyledMenuButton = styled(MenuButton)`
     font-family: ${({ theme }) => theme.secondaryFonts};
     color: ${({ theme }) => theme.secondaryText};
     font-size: 1em;
-    font-weight: lighter;
     margin-right: 5px;
   }
 `
@@ -95,11 +94,11 @@ export const LifelineDropdown = ({isDisplayed, isCustomizable, onDelete, index}:
           <StyledChevronDown />
         </StyledMenuButton>
         <StyledMenuList>
-          <StyledMenuItem onSelect={() => alert('Show')}>
+          <StyledMenuItem>
             <StyledShow isEnabled={isDisplayed} />
             <MenuText isEnabled={isDisplayed}>Show</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => alert('Edit')}>
+          <StyledMenuItem>
             <StyledPencilFill isEnabled={isCustomizable} />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>

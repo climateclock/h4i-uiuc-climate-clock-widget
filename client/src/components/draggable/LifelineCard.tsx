@@ -15,7 +15,7 @@ const Card = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0px 10px 10px;
 `
 const Text = styled.div`
   display: flex;
@@ -36,15 +36,7 @@ const Source = styled.div`
   font-size: 18px;
   font-family: ${({ theme }) => theme.text};
 `
-const HideButton = styled.p`
-  font-size: 0.8em;
-  border: 1px black solid;
-  padding: 5px 7.5px;
-  border-radius: 5px;
-  text-align: center;
-  align-self: center;
-  grid-column: 2;
-`
+
 const LifelineCard = ({
   lifeline: { labels, customizable },
   isDisplayed,
