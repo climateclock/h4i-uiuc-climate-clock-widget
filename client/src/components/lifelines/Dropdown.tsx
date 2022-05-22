@@ -1,10 +1,17 @@
-import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button'
 import '@reach/menu-button/styles.css'
-import styled from 'styled-components'
+
+import { Menu, MenuButton, MenuItem,MenuList } from '@reach/menu-button'
 import { PencilFill } from '@styled-icons/bootstrap'
-import { TrashAlt } from '@styled-icons/boxicons-solid'
 import { Show } from '@styled-icons/boxicons-regular/Show'
-import { ChevronDown } from '@styled-icons/boxicons-solid'
+import { ChevronDown,TrashAlt  } from '@styled-icons/boxicons-solid'
+import styled from 'styled-components'
+
+interface DropdownInterface {
+  isDisplayed: boolean,
+  isCustomizable: boolean | undefined,
+  onDelete: (...args: any[]) => any,
+  index: number
+}
 
 export const StyledMenuList = styled(MenuList)`
   border-radius: 5.25px;
@@ -18,16 +25,16 @@ export const StyledMenuButton = styled(MenuButton)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border: 2px solid;
   border-color: ${({ theme }) => theme.secondaryBackground};
-  color: ${({ theme }) => theme.secondaryText};
   background-color: ${({ theme }) => theme.background};
   border-radius: 5.25px;
-  padding: 10px 10px 10px 10px;
+  padding: 20px 10px 20px 10px;
   margin-right: 3px;
   margin-left: 3px;
   height: 33px;
 
-  h3 {
+  h4 {
     font-family: ${({ theme }) => theme.secondaryFonts};
     color: ${({ theme }) => theme.secondaryText};
     font-size: 1em;
@@ -49,13 +56,13 @@ export const StyledTrash = styled(TrashAlt)`
 `
 
 export const StyledShow = styled(Show)`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.tertiaryText};
   height: 16px;
   margin-right: 5px;
 `
 
 export const StyledPencilFill = styled(PencilFill)`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.tertiaryText};
   height: 16px;
   margin-right: 5px;
 `
@@ -67,7 +74,7 @@ export const StyledChevronDown = styled(ChevronDown)`
 `
 
 export const MenuText = styled.h3`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.tertiaryText};
   font-size: 1em;
   font-family: ${({ theme }) => theme.secondaryFonts};
   font-weight: lighter;
@@ -78,12 +85,12 @@ export const StyledMenu = styled(Menu)`
   color: theme.secondaryBackground;
 `
 
-export const LifelineDropdown = ({isDisplayed, isCustomizable}) => {
+export const LifelineDropdown = ({isDisplayed, isCustomizable, onDelete, index}: DropdownInterface) => {
   return (
     <div>
       <Menu>
         <StyledMenuButton>
-          <h3>Actions</h3>
+          <h4>Actions</h4>
           <StyledChevronDown />
         </StyledMenuButton>
         <StyledMenuList>
@@ -95,9 +102,9 @@ export const LifelineDropdown = ({isDisplayed, isCustomizable}) => {
             <StyledPencilFill isEnabled={isCustomizable} />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => alert('Delete')}>
+          <StyledMenuItem onSelect={() => onDelete(index)}>
             <StyledTrash />
-            <MenuText>Delete</MenuText>
+            <MenuText isEnabled={true}>Delete</MenuText>
           </StyledMenuItem>
         </StyledMenuList>
       </Menu>

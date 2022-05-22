@@ -2,15 +2,19 @@ import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
+import { LifelineDropdown } from '../lifelines/Dropdown'
 
 interface LifelineCardInterface {
   lifeline: ModuleResInterface
   isDisplayed: boolean
+  onDelete: (...args: any[]) => any,
+  index: number
 }
 const Card = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
 `
 const Text = styled.div`
@@ -44,6 +48,8 @@ const HideButton = styled.p`
 const LifelineCard = ({
   lifeline: { labels, customizable },
   isDisplayed,
+  onDelete,
+  index
 }: LifelineCardInterface) => {
   return (
     <Card>
@@ -51,7 +57,7 @@ const LifelineCard = ({
         <Lifeline>{returnFirstString(labels)}</Lifeline>
         <Source>{customizable ? '' : 'Climate Clock'}</Source>
       </Text>
-      <HideButton>{isDisplayed ? 'Hide' : 'Show'}</HideButton>
+      <LifelineDropdown isCustomizable={customizable} isDisplayed={isDisplayed} onDelete={onDelete} index={index} />
     </Card>
   )
 }
