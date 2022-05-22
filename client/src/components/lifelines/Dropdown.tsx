@@ -47,6 +47,8 @@ export const StyledMenuItem = styled(MenuItem)`
   flex-direction: row;
   align-items: center;
   border-radius: 5.25px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 `
 
 export const StyledTrash = styled(TrashAlt)`
@@ -56,13 +58,13 @@ export const StyledTrash = styled(TrashAlt)`
 `
 
 export const StyledShow = styled(Show)`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.tertiaryText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
   height: 16px;
   margin-right: 5px;
 `
 
 export const StyledPencilFill = styled(PencilFill)`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.tertiaryText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
   height: 16px;
   margin-right: 5px;
 `
@@ -74,7 +76,7 @@ export const StyledChevronDown = styled(ChevronDown)`
 `
 
 export const MenuText = styled.h3`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.tertiaryText};
+  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
   font-size: 1em;
   font-family: ${({ theme }) => theme.secondaryFonts};
   font-weight: lighter;
@@ -94,12 +96,12 @@ export const LifelineDropdown = ({isDisplayed, isCustomizable, onDelete, index}:
           <StyledChevronDown />
         </StyledMenuButton>
         <StyledMenuList>
-          <StyledMenuItem>
+          <StyledMenuItem disabled={!isDisplayed}>
             <StyledShow isEnabled={isDisplayed} />
             <MenuText isEnabled={isDisplayed}>Show</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem>
-            <StyledPencilFill isEnabled={isCustomizable} />
+          <StyledMenuItem disabled={!isCustomizable}>
+            <StyledPencilFill isEnabled={isCustomizable} onClick={()=>(console.log(isCustomizable))} />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
           <StyledMenuItem onSelect={() => onDelete(index)}>
