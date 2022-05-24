@@ -1,15 +1,15 @@
 import '@reach/menu-button/styles.css'
 
-import { Menu, MenuButton, MenuItem,MenuList } from '@reach/menu-button'
+import { Menu, MenuButton, MenuItem, MenuList } from '@reach/menu-button'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Show } from '@styled-icons/boxicons-regular/Show'
-import { ChevronDown,TrashAlt  } from '@styled-icons/boxicons-solid'
+import { ChevronDown, TrashAlt } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components'
 
 interface DropdownInterface {
-  isDisplayed: boolean,
-  isCustomizable: boolean | undefined,
-  onDelete: (...args: number[]) => number,
+  isDisplayed: boolean
+  isCustomizable: boolean | undefined
+  onDelete: (...args: number[]) => number
   index: number
 }
 
@@ -58,13 +58,19 @@ export const StyledTrash = styled(TrashAlt)`
 `
 
 export const StyledShow = styled(Show)`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
+  color: ${(props) =>
+    props.isEnabled
+      ? ({ theme }) => theme.headerText
+      : ({ theme }) => theme.secondaryText};
   height: 16px;
   margin-right: 5px;
 `
 
 export const StyledPencilFill = styled(PencilFill)`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
+  color: ${(props) =>
+    props.isEnabled
+      ? ({ theme }) => theme.headerText
+      : ({ theme }) => theme.secondaryText};
   height: 16px;
   margin-right: 5px;
 `
@@ -76,7 +82,10 @@ export const StyledChevronDown = styled(ChevronDown)`
 `
 
 export const MenuText = styled.h3`
-  color: ${props => props.isEnabled ? ({ theme }) => theme.headerText : ({ theme }) => theme.secondaryText};
+  color: ${(props) =>
+    props.isEnabled
+      ? ({ theme }) => theme.headerText
+      : ({ theme }) => theme.secondaryText};
   font-size: 1em;
   font-family: ${({ theme }) => theme.secondaryFonts};
   font-weight: lighter;
@@ -87,7 +96,12 @@ export const StyledMenu = styled(Menu)`
   color: theme.secondaryBackground;
 `
 
-export const LifelineDropdown = ({isDisplayed, isCustomizable, onDelete, index}: DropdownInterface) => {
+export const LifelineDropdown = ({
+  isDisplayed,
+  isCustomizable,
+  onDelete,
+  index,
+}: DropdownInterface) => {
   return (
     <div>
       <Menu>
@@ -101,7 +115,10 @@ export const LifelineDropdown = ({isDisplayed, isCustomizable, onDelete, index}:
             <MenuText isEnabled={isDisplayed}>Show</MenuText>
           </StyledMenuItem>
           <StyledMenuItem disabled={!isCustomizable}>
-            <StyledPencilFill isEnabled={isCustomizable} onClick={()=>(console.log(isCustomizable))} />
+            <StyledPencilFill
+              isEnabled={isCustomizable}
+              onClick={() => console.log(isCustomizable)}
+            />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
           <StyledMenuItem onSelect={() => onDelete(index)}>

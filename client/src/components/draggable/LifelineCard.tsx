@@ -7,7 +7,7 @@ import { LifelineDropdown } from '../lifelines/Dropdown'
 interface LifelineCardInterface {
   lifeline: ModuleResInterface
   isDisplayed: boolean
-  onDelete: (...args: any[]) => any,
+  onDelete: (...args: any[]) => any
   index: number
 }
 const Card = styled.div`
@@ -41,7 +41,7 @@ const LifelineCard = ({
   lifeline: { labels, customizable },
   isDisplayed,
   onDelete,
-  index
+  index,
 }: LifelineCardInterface) => {
   return (
     <Card>
@@ -49,7 +49,12 @@ const LifelineCard = ({
         <Lifeline>{returnFirstString(labels)}</Lifeline>
         <Source>{customizable ? '' : 'Climate Clock'}</Source>
       </Text>
-      <LifelineDropdown isCustomizable={customizable} isDisplayed={isDisplayed} onDelete={onDelete} index={index} />
+      <LifelineDropdown
+        isCustomizable={customizable}
+        isDisplayed={isDisplayed}
+        onDelete={onDelete}
+        index={index}
+      />
     </Card>
   )
 }
