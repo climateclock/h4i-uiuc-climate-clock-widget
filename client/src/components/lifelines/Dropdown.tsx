@@ -17,7 +17,11 @@ export const StyledMenuList = styled(MenuList)`
   border-radius: 5.25px;
   padding: 0px;
   border: white;
-  box-shadow: 0px 2px 5px ${({ theme }) => theme.secondaryBackground};
+  box-shadow: 0px 3px 6px ${({ theme }) => theme.shadow};
+
+  [data-reach-menu-item][data-selected] {
+    background: ${({ theme }) => theme.select};
+  }
 `
 
 export const StyledMenuButton = styled(MenuButton)`
