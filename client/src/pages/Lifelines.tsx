@@ -50,10 +50,9 @@ const LifelinesSection = styled.div`
   }
 `
 function Lifelines() {
-  const handle = useFullScreenHandle()
   return (
     <LifelinesSection>
-      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
+      <NavBar isFullScreen={true} atHome={false}></NavBar>
       <h1>Lifelines</h1>
       <h4>Add a custom lifeline</h4>
       <p>Title</p>

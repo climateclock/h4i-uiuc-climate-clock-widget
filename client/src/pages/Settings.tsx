@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
 import Toggle from '../components/buttons/Toggle'
@@ -73,14 +72,13 @@ const ToggleStyle = styled.div`
 `
 
 function Settings() {
-  const handle = useFullScreenHandle()
   const [languageSelected, setLanguageSelected] = useState<string>()
   const handleLanguageSelectedChange = (language: string) => {
     setLanguageSelected(language)
   }
   return (
     <>
-      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
+      <NavBar isFullScreen={true} atHome={false}></NavBar>
       <SettingsHeading>Clock Settings</SettingsHeading>
 
       <ToggleContainer>

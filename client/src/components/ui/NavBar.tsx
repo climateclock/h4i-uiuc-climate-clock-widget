@@ -91,13 +91,13 @@ const StyledCloseOutline = styled(CloseOutline)`
 `
 
 function NavBar({
-  handle,
   isFullScreen,
   atHome,
+  handle,
 }: {
-  handle: FullScreenHandle
   isFullScreen: boolean
   atHome: boolean
+  handle?: FullScreenHandle
 }) {
   const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
@@ -139,7 +139,7 @@ function NavBar({
             </Button>
           </HomeLink>
         </Link>
-        {atHome ? (
+        {atHome && handle ? (
           <FullScreenButton>
             {isFullScreen ? (
               <EnterFullscreen handle={handle} />
