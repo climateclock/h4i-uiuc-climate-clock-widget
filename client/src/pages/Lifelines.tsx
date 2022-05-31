@@ -1,4 +1,3 @@
-import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
 import Input from '../components/ui/Input'
