@@ -7,7 +7,7 @@ import { LifelineDropdown } from '../lifelines/Dropdown'
 interface LifelineCardInterface {
   lifeline: ModuleResInterface
   isDisplayed: boolean
-  onDelete: (...args: any[]) => any
+  onDelete: (index: number) => void
   index: number
 }
 const Card = styled.div`

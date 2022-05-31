@@ -9,7 +9,7 @@ import styled from 'styled-components'
 interface DropdownInterface {
   isDisplayed: boolean
   isCustomizable: boolean | undefined
-  onDelete: (...args: number[]) => number
+  onDelete: (index: number) => void
   index: number
 }
 
