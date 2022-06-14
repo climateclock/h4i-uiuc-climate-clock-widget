@@ -6,10 +6,6 @@ import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
 import { options } from '../components/utils/constants'
-import facebook from '../utils/icons/facebook.png'
-import instagram from '../utils/icons/instagram.png'
-import twitter from '../utils/icons/twitter.png'
-import whatsapp from '../utils/icons/whatsapp.png'
 
 const SettingsHeading = styled.div`
   color: ${({ theme }) => theme.headerText};
@@ -53,13 +49,6 @@ const SettingsText = styled.div`
   font-size: 0.75rem;
   line-height: 24px;
   padding-top: 1%;
-`
-
-const IconContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 5%;
-  gap: 2.5%;
 `
 
 const ToggleContainer = styled.div`
@@ -110,13 +99,6 @@ function Settings() {
         type="embed"
         placeholder='<iframe src="https://climateclock.world/widget-v2.js" async></iframe><climate-clock /><sc '
       />
-      <SettingCaption>Social Media</SettingCaption>
-      <IconContainer>
-        <img src={facebook} alt="facebook" />
-        <img src={instagram} alt="instagram" />
-        <img src={twitter} alt="twitter" />
-        <img src={whatsapp} alt="whatsapp" />
-      </IconContainer>
     </>
   )
 }
