@@ -70,14 +70,6 @@ function Settings() {
       <NavBar isFullScreen={true} atHome={false}></NavBar>
       <SettingsHeading>Clock Settings</SettingsHeading>
 
-      <ToggleContainer>
-        <SettingSubheading id="news_ticker"> News Ticker</SettingSubheading>
-        <ToggleStyle>
-          <Toggle />
-        </ToggleStyle>
-      </ToggleContainer>
-
-      <SettingsText> Turn off/on the bottom news on your clock</SettingsText>
       <SettingSubheading id="language">Configure Language</SettingSubheading>
       <SettingCaption> Language </SettingCaption>
       <StyledSelect
