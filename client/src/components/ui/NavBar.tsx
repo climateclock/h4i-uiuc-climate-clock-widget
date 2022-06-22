@@ -44,11 +44,7 @@ const PageLink = styled.div`
 
 const FullScreenButton = styled.div`
   float: right;
-  color: ${({ theme }) => theme.navBarText};
   padding: 20px 3vw;
-  &:hover {
-    color: ${({ theme }) => theme.blue};
-  }
 `
 
 const StyledCloseOutline = styled(CloseOutline)`

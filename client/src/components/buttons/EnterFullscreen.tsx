@@ -8,6 +8,12 @@ const StyledFullScreenEnter = styled(FullscreenEnter)`
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
+
+  color: ${({ theme }) => theme.navBarText};
+
+  &:hover {
+    color: ${({ theme }) => theme.blue};
+  }
 `
 
 function EnterFullScreen({ handle }: { handle: FullScreenHandle }) {
