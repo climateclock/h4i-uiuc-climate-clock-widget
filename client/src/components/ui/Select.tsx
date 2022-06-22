@@ -1,6 +1,7 @@
-import Select from 'react-select'
+import Select, { ActionMeta, SingleValue } from 'react-select'
 
 import { optionProps } from '../../interfaces'
+import { Option } from '../utils/constants'
 
 const customStyles = {
   control: (base, state) => ({
@@ -21,10 +22,23 @@ const customStyles = {
   }),
 }
 
-export const StyledSelect = ({ options }: { options: optionProps[] }) => (
+export const StyledSelect = ({
+  options,
+  onChange,
+  value,
+}: {
+  options: optionProps[]
+  onChange?: (
+    newValue: SingleValue<optionProps>,
+    actionMeta: ActionMeta<optionProps>,
+  ) => void
+  value?: Option
+}) => (
   <Select
     styles={customStyles}
     options={options}
+    onChange={onChange}
+    value={value}
     theme={(theme) => ({
       ...theme,
       border: '1px solid #A3A3A3',

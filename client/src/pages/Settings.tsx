@@ -1,11 +1,21 @@
+import { compressToEncodedURIComponent } from 'lz-string'
+import { useEffect, useState } from 'react'
 import { useFullScreenHandle } from 'react-full-screen'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Toggle from '../components/buttons/Toggle'
 import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
-import { options } from '../components/utils/constants'
+import { Option, options } from '../components/utils/constants'
+import { UpdateSettings } from '../routing/UpdateSettings'
+import { UpdateURL } from '../routing/UpdateURL'
+import {
+  COMPRESSED_KEY,
+  LANGUAGE_LOCAL_STORAGE_KEY,
+  LIFELINES_LOCAL_STORAGE_KEY,
+} from '../utils/constants'
 import facebook from '../utils/icons/facebook.png'
 import instagram from '../utils/icons/instagram.png'
 import twitter from '../utils/icons/twitter.png'
@@ -73,6 +83,33 @@ const ToggleStyle = styled.div`
 
 function Settings() {
   const handle = useFullScreenHandle()
+  const navigate = useNavigate()
+  const [selectedLanguage, setSelectedLanguage] = useState<Option>(options[0])
+
+  useEffect(() => {
+    UpdateURL(navigate, setSelectedLanguage, null)
+    UpdateSettings(selectedLanguage.value, setSelectedLanguage, null)
+  }, [navigate, selectedLanguage.value, setSelectedLanguage])
+
+  const checkLanguage = (option: Option | null) => {
+    console.log(option)
+    if (option != null) {
+      setSelectedLanguage(option)
+      if (option.value !== localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY)) {
+        const json = {
+          language: option.value,
+          lifelines: localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
+        }
+        const settings_json = JSON.stringify(json)
+        const compressed = compressToEncodedURIComponent(settings_json)
+
+        localStorage.setItem(COMPRESSED_KEY, compressed)
+        navigate(`${compressed}`)
+      }
+      localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, option.value)
+      console.log(selectedLanguage)
+    }
+  }
   return (
     <>
       <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
@@ -88,7 +125,11 @@ function Settings() {
       <SettingsText> Turn off/on the bottom news on your clock</SettingsText>
       <SettingSubheading id="language">Configure Language</SettingSubheading>
       <SettingCaption> Language </SettingCaption>
-      <StyledSelect options={options} />
+      <StyledSelect
+        options={options}
+        onChange={(option) => checkLanguage(option)}
+        value={selectedLanguage}
+      />
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
       <SettingCaption> Shareable Link </SettingCaption>
       <CopyButton
