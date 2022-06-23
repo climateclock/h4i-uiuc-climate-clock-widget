@@ -11,9 +11,7 @@ const StyledFullscreenExit = styled(FullscreenExit)`
 `
 
 function ExitFullScreen({ handle }: { handle: FullScreenHandle }) {
-  return (
-    <StyledFullscreenExit onClick={handle.exit} size="20px" />
-  )
+  return <StyledFullscreenExit onClick={handle.exit} size="20px" />
 }
 
 export default ExitFullScreen

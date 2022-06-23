@@ -54,7 +54,7 @@ const LifelineCreationForm = () => {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
-  
+
   const handle = useFullScreenHandle()
 
   useEffect(() => {

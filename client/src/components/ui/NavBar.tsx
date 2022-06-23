@@ -141,30 +141,32 @@ function NavBar({
           <HomeLink>
             <Button>
               Climate Clock
-              <Logo src={clock} alt="climate_clock_logo" height="25px" width="25px"/>
+              <Logo
+                src={clock}
+                alt="climate_clock_logo"
+                height="25px"
+                width="25px"
+              />
             </Button>
           </HomeLink>
         </Link>
-        {
-          mobileWidth &&
-          [
-            !showMobileNavbar ? (
-              <StyledMenu
-                size="2.5em"
-                onClick={() => {
-                  setMobileNavbar(!showMobileNavbar)
-                }}
-              />
-            ) : (
-              <StyledCloseOutline
-                size="2.5em"
-                onClick={() => {
-                  setMobileNavbar(!showMobileNavbar)
-                }}
-              />
-            )
-          ]
-        }
+        {mobileWidth && [
+          !showMobileNavbar ? (
+            <StyledMenu
+              size="2.5em"
+              onClick={() => {
+                setMobileNavbar(!showMobileNavbar)
+              }}
+            />
+          ) : (
+            <StyledCloseOutline
+              size="2.5em"
+              onClick={() => {
+                setMobileNavbar(!showMobileNavbar)
+              }}
+            />
+          ),
+        ]}
         {atHome ? (
           <FullScreenButton mobileWidth={mobileWidth}>
             {isFullScreen ? (
