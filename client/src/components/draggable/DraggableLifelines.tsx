@@ -1,4 +1,3 @@
-import { TrashAlt } from '@styled-icons/boxicons-solid'
 import { ReOrderDotsVertical } from '@styled-icons/fluentui-system-filled/ReOrderDotsVertical'
 import { CSSProperties, useEffect, useState } from 'react'
 import {
@@ -132,17 +131,10 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                       <LifelineCard
                         lifeline={lifeline}
                         isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                        onDelete={deleteLifeline}
+                        index={index}
                       />
                     </StyledDiv>
-                    {/* render delete button */}
-                    <TrashAlt
-                      size={'1.5em'}
-                      onClick={() => deleteLifeline(index)}
-                      style={{
-                        gridColumn: 3,
-                        cursor: 'pointer',
-                      }}
-                    />
                   </div>
                 )}
               </Draggable>
