@@ -45,7 +45,7 @@ const PageLink = styled.div`
 const FullScreenButton = styled.div`
   float: right;
   ${(props) =>
-    props.mobileWidth ? 'padding: 18px 5vw;' : 'padding: 18px 40px;'}
+    props.mobileWidth ? 'padding: 18px 5vw;' : 'padding: 18px 35px 0px 40px'}
 `
 
 const StyledCloseOutline = styled(CloseOutline)`
@@ -70,7 +70,8 @@ const HomeLink = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.black};
   text-align: center;
-  padding: 20px 1%;
+  padding-top: 20px;
+  padding-left: min(35px, 3vw);
   text-decoration: none;
   font-size: 18.5px;
   font-weight: bold;
@@ -91,7 +92,7 @@ const Logo = styled.img`
 const StyledMenu = styled(Menu)`
   float: right;
   padding-top: 10px;
-  padding-right: 5vw;
+  padding-right: 3vw;
   color: white;
   size: 2.5em;
   display: block;
@@ -165,7 +166,7 @@ function NavBar({
           ]
         }
         {atHome ? (
-          <FullScreenButton>
+          <FullScreenButton mobileWidth={mobileWidth}>
             {isFullScreen ? (
               <EnterFullscreen handle={handle} />
             ) : (
