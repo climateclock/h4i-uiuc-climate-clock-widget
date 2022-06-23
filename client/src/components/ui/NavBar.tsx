@@ -33,7 +33,7 @@ const PageLink = styled.div`
   float: right;
   color: ${({ theme }) => theme.navBarText};
   text-align: center;
-  padding: 20px 3vw;
+  padding: 20px 40px;
   text-decoration: none;
   font-size: 1em;
   font-weight: bold;
@@ -44,12 +44,14 @@ const PageLink = styled.div`
 
 const FullScreenButton = styled.div`
   float: right;
-  padding: 20px 3vw;
+  ${(props) =>
+    props.mobileWidth ? 'padding: 18px 5vw;' : 'padding: 18px 40px;'}
 `
 
 const StyledCloseOutline = styled(CloseOutline)`
   float: right;
   color: white;
+  padding-top: 10px;
   size: 2.5em;
   display: block;
 
@@ -88,9 +90,8 @@ const Logo = styled.img`
 
 const StyledMenu = styled(Menu)`
   float: right;
-  display: flex;
-  align-items: center;
-  padding-top: 
+  padding-top: 10px;
+  padding-right: 5vw;
   color: white;
   size: 2.5em;
   display: block;
@@ -143,18 +144,8 @@ function NavBar({
             </Button>
           </HomeLink>
         </Link>
-        {atHome ? (
-          <FullScreenButton>
-            {isFullScreen ? (
-              <EnterFullscreen handle={handle} />
-            ) : (
-              <ExitFullscreen handle={handle} />
-            )}
-          </FullScreenButton>
-        ) : (
-          ' '
-        )}
-        {mobileWidth ? (
+        {
+          mobileWidth &&
           [
             !showMobileNavbar ? (
               <StyledMenu
@@ -170,9 +161,21 @@ function NavBar({
                   setMobileNavbar(!showMobileNavbar)
                 }}
               />
-            ),
+            )
           ]
+        }
+        {atHome ? (
+          <FullScreenButton>
+            {isFullScreen ? (
+              <EnterFullscreen handle={handle} />
+            ) : (
+              <ExitFullscreen handle={handle} />
+            )}
+          </FullScreenButton>
         ) : (
+          ' '
+        )}
+        {!mobileWidth && (
           <>
             <Link to="/settings">
               <PageLink>Settings</PageLink>
