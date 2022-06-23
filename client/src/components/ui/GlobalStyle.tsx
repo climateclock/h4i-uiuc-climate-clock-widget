@@ -55,6 +55,7 @@ const theme = {
   secondaryBackground: '#A3A3A3',
   navBackground: '#f2f2f2',
   shadow: 'rgba(0, 0, 0, 0.12)',
+  select: '#F5F5F5',
   buttonBackground: '#1d5479',
   // palette
   orange: '#ffa41b',
