@@ -35,7 +35,12 @@ export default function Home() {
       setNewsfeedModules,
     ).then(() => {
       UpdateURL(navigate, defaultLanguage, lifelineModules)
-      UpdateSettings(defaultLanguage, setDefaultLanguage, lifelineModules)
+      UpdateSettings(
+        defaultLanguage,
+        setDefaultLanguage,
+        lifelineModules,
+        setLifelineModules,
+      )
     })
   }, [navigate, defaultLanguage, lifelineModules])
 

@@ -69,8 +69,8 @@ const LifelineCreationForm = () => {
       setLifelineModules,
     )
     UpdateURL(navigate, null, setLifelineModules)
-    UpdateSettings(null, null, setLifelineModules)
-  }, [navigate, setLifelineModules])
+    UpdateSettings(null, null, lifelineModules, setLifelineModules)
+  }, [navigate, lifelineModules, setLifelineModules])
 
   /* clearProperties
    *
@@ -90,6 +90,7 @@ const LifelineCreationForm = () => {
    */
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log(lifelineModules)
     const json = {
       language: localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY),
       lifelines: lifelineModules,

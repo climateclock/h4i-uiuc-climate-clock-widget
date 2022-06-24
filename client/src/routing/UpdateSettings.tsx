@@ -6,12 +6,16 @@ import {
   LIFELINES_LOCAL_STORAGE_KEY,
 } from '../utils/constants'
 
-export const UpdateSettings = (selectLanguage, lifelineModules) => {
+export const UpdateSettings = (
+  selectLanguage,
+  setSelectLanguage,
+  lifelineModules,
+  setLifelineModules,
+) => {
   const url = window.location.href
   const url_split = url.split('/')
   const compressed_path = url_split.at(-1)
   console.log(url_split)
-  console.log(compressed_path)
   if (!compressed_path || compressed_path.length < 20) {
     return
   }
@@ -25,12 +29,11 @@ export const UpdateSettings = (selectLanguage, lifelineModules) => {
     )
     console.log(decompressed)
     if (decompressed.language !== selectLanguage && selectLanguage) {
-      selectLanguage(decompressed.language)
+      setSelectLanguage(decompressed.language)
       localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, decompressed.language)
     }
     if (lifelineModules && decompressed.lifelines !== lifelineModules) {
-      console.log(decompressed.lifelines)
-      lifelineModules(decompressed.lifelines)
+      setLifelineModules(decompressed.lifelines)
       localStorage.setItem(LIFELINES_LOCAL_STORAGE_KEY, decompressed.lifelines)
     }
   }

@@ -88,7 +88,7 @@ function Settings() {
 
   useEffect(() => {
     UpdateURL(navigate, setSelectedLanguage, null)
-    UpdateSettings(selectedLanguage.value, setSelectedLanguage, null)
+    UpdateSettings(selectedLanguage.value, setSelectedLanguage, null, null)
   }, [navigate, selectedLanguage.value, setSelectedLanguage])
 
   const checkLanguage = (option: Option | null) => {
