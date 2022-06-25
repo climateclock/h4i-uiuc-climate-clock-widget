@@ -52,6 +52,7 @@ const StyledCloseOutline = styled(CloseOutline)`
   float: right;
   color: white;
   padding-top: 10px;
+  padding-right: 3vw;
   size: 2.5em;
   display: block;
 
