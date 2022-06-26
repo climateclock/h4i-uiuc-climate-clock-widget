@@ -78,7 +78,7 @@ function CreateModal() {
   }
   return (
     <div>
-      <button onClick={open}>Show Dialog</button>
+      <Button onClick={open} buttonLabel={'Create new lifeline'} />
       <DialogOverlay isOpen={showDialog} onDismiss={close}>
         <DialogContent
           aria-label="create modal"

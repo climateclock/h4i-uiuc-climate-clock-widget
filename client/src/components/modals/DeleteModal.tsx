@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import '@reach/dialog/styles.css'
+
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { Close } from '@styled-icons/evaicons-solid'
 import VisuallyHidden from '@reach/visually-hidden'
+import { Close } from '@styled-icons/evaicons-solid'
+import { useState } from 'react'
 import styled from 'styled-components'
+
 import StyledButton from '../buttons/button'
 
 const CloseButton = styled(Close)`
@@ -55,10 +57,6 @@ const StyledDescription = styled.p`
   font-size: 14px;
 `
 
-// const DialogStyle = styled.div`
-
-// `;
-
 function DeleteModal() {
   const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
@@ -78,12 +76,6 @@ function DeleteModal() {
             top: '50%',
             marginLeft: '-200px',
             marginTop: '-200px',
-            // position: absolute,
-            // left: 50%,
-            // top: 50%,
-            // margin-left: -150px,
-            // margin-top: -150px,
-            //percentage
           }}
         >
           <StyledDialogContainer>

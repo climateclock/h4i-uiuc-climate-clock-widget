@@ -4,11 +4,12 @@ interface ButtonProps {
   type: 'button' | 'submit' | 'reset' | undefined
   className: string
   buttonLabel: string
+  onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Button = ({ type, className, buttonLabel }: ButtonProps) => {
+const Button = ({ type, className, buttonLabel, onClick }: ButtonProps) => {
   return (
-    <button type={type} className={className}>
+    <button type={type} className={className} onClick={onClick}>
       {buttonLabel}
     </button>
   )

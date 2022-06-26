@@ -11,6 +11,7 @@ import {
 import { getData } from '../../utils/utils'
 import StyledButton from '../buttons/button'
 import DraggableLifelines from '../draggable/DraggableLifelines'
+import CreateModal from '../modals/CreateModal'
 import Input from '../ui/Input'
 import NavBar from '../ui/NavBar'
 import DefaultLifelineCreationForm from './DefaultLifelineCreationForm'
@@ -109,74 +110,16 @@ const LifelineCreationForm = () => {
       <FormatSpacing>
         <StyledLifeline>
           <h1>Clock Lifelines</h1>
-          <form onSubmit={formSubmit}>
-            {/* title input */}
-            <label>Title</label>
-            <Input
-              required={true}
-              placeholder={'Title...'}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <br />
-
-            {/* unit input */}
-            <label>Unit</label>
-            <Input
-              required={true}
-              placeholder={'Unit...'}
-              type={'text'}
-              value={unit}
-              onChange={(e) => setUnit(e.target.value)}
-            />
-            <br />
-
-            {/* value input */}
-            <label>Value</label>
-            <Input
-              required={true}
-              placeholder={'Value...'}
-              type={'number'}
-              value={value}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-            <br />
-
-            {/* rate input */}
-            <label>Rate</label>
-            <Input
-              type={'number'}
-              placeholder={'Rate...'}
-              value={rate}
-              onChange={(e) => setRate(parseFloat(e.target.value))}
-            />
-            <br />
-
-            {/* resolution input */}
-            <label>Resolution</label>
-            <Input
-              min={0} /* enforces resolution is positive */
-              type={'number'}
-              placeholder={'Resolution...'}
-              value={resolution}
-              onChange={(e) => setResolution(parseInt(e.target.value))}
-            />
-            <br />
-
-            <StyledButton buttonLabel={'Create'} type="submit" />
-          </form>
           <DefaultLifelineCreationForm
             lifelineModules={lifelineModules}
             setLifelineModules={setLifelineModules}
           />
+          <CreateModal />
           <h3>Displayed Lifelines</h3>
           <p>
             Drag a Lifeline here to display it. Up to three Lifelines can be
             shown on the clock.
           </p>
-
-          {/* <button type="submit">Create</button>
-      </form> */}
 
           <DraggableLifelines lifelinesProp={lifelineModules} />
           {/* <DraggableLifelines lifelinesProp={lifelineModules} /> */}
