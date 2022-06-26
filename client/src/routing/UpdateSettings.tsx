@@ -33,7 +33,7 @@ export const UpdateSettings = (
       localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, decompressed.language)
     }
     if (lifelineModules && decompressed.lifelines !== lifelineModules) {
-      setLifelineModules(decompressed.lifelines)
+      setLifelineModules(JSON.parse(decompressed.lifelines))
       localStorage.setItem(LIFELINES_LOCAL_STORAGE_KEY, decompressed.lifelines)
     }
   }
