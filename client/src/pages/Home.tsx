@@ -31,6 +31,7 @@ export default function Home() {
       setNewsfeedModules,
     )
   }, [defaultLanguage])
+  console.log(lifelineModules)
 
   return (
     <>

@@ -9,10 +9,8 @@ import {
   URL,
 } from '../../utils/constants'
 import { getData } from '../../utils/utils'
-import StyledButton from '../buttons/button'
 import DraggableLifelines from '../draggable/DraggableLifelines'
 import CreateModal from '../modals/CreateModal'
-import Input from '../ui/Input'
 import NavBar from '../ui/NavBar'
 import DefaultLifelineCreationForm from './DefaultLifelineCreationForm'
 
@@ -41,16 +39,24 @@ const FormatSpacing = styled.div`
   max-width: 1090px;
   margin: 57px;
 `
+export interface LifelineInterface {
+  title: string
+  statistic: number | null
+  unit: string
+  rate: number
+  source: string
+  link: string
+}
 
 const LifelineCreationForm = () => {
   /* Lifeline module properties */
   const handle = useFullScreenHandle()
   const flavor = 'Lifeline'
-  const [title, setTitle] = useState<string>('')
-  const [unit, setUnit] = useState<string>('')
-  const [value, setValue] = useState<number>(0)
-  const [rate, setRate] = useState<number>(0)
-  const [resolution, setResolution] = useState<number>(2)
+  // const [title, setTitle] = useState<string>('')
+  // const [unit, setUnit] = useState<string>('')
+  // const [value, setValue] = useState<number>(0)
+  // const [rate, setRate] = useState<number>(0)
+  // const [resolution, setResolution] = useState<number>(2)
   const [, setModules] = useState<ModuleResInterface[]>([])
   const [, setErrorFlag] = useState<boolean>(false)
   const [, setDefaultLanguage] = useState<string>('')
@@ -73,27 +79,30 @@ const LifelineCreationForm = () => {
    *
    * Description: Clear form fields for creation form
    */
-  const clearProperties = () => {
-    setTitle('')
-    setUnit('')
-    setValue(0)
-    setRate(0)
-    setResolution(0)
-  }
+  // const clearProperties = () => {
+  //   setTitle('')
+  //   setUnit('')
+  //   setValue(0)
+  //   setRate(0)
+  //   setResolution(0)
+  // }
 
   /* formSubmit
    *
    * Description: Used to append a Lifeline module to current list of modules.
    */
-  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const formSubmit = (Lifeline: LifelineInterface) => {
     const llModule: ModuleResInterface = {
-      labels: [title.toUpperCase()] /* stored as array in API response */,
+      labels: [
+        Lifeline.title.toUpperCase(),
+      ] /* stored as array in API response */,
       flavor,
-      initial: value,
-      unit_labels: [unit.toUpperCase()] /* stored as array in API response */,
-      rate,
-      resolution: Math.pow(10, -resolution) /* ie. resolution of 2 => 0.01 */,
+      initial: Lifeline.statistic ?? 0,
+      unit_labels: [
+        Lifeline.unit.toUpperCase(),
+      ] /* stored as array in API response */,
+      rate: Lifeline.rate,
+      resolution: Math.pow(10, -2) /* ie. resolution of 2 => 0.01 */,
       customizable: true,
     }
     lifelineModules.push(llModule)
@@ -102,7 +111,7 @@ const LifelineCreationForm = () => {
       LIFELINES_LOCAL_STORAGE_KEY,
       JSON.stringify(lifelineModules),
     )
-    clearProperties()
+    // clearProperties()
   }
   return (
     <>
@@ -114,7 +123,7 @@ const LifelineCreationForm = () => {
             lifelineModules={lifelineModules}
             setLifelineModules={setLifelineModules}
           />
-          <CreateModal />
+          <CreateModal formSubmit={formSubmit} />
           <h3>Displayed Lifelines</h3>
           <p>
             Drag a Lifeline here to display it. Up to three Lifelines can be

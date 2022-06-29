@@ -7,6 +7,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 import Button from '../buttons/button'
+import { LifelineInterface } from '../settings/LifelineCreationForm'
 
 const CloseButton = styled(Close)`
   color: #575757;
@@ -22,12 +23,12 @@ const StyledDialogContainer = styled.div`
   padding: 0.5em;
 `
 
-const StyledForm = styled.form`
+const FormGrid = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 35px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-right: 25px;
+  margin-bottom: 20px;
 `
 const StyledLabel = styled.label`
   font-family: ${({ theme }) => theme.secondaryFonts};
@@ -35,13 +36,23 @@ const StyledLabel = styled.label`
   font-size: 16px;
 `
 
+const ErrorLabel = styled(StyledLabel)`
+  color: ${({ theme }) => theme.red};
+`
+
 const StyledInput = styled.input`
   display: block;
   font-family: ${({ theme }) => theme.secondaryFonts};
-  width: 100%;
   border: 1px solid #000;
   font-size: 16px;
   border-radius: 3px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+`
+
+const CitationColumn = styled.div`
+  grid-column-end: span 2;
 `
 
 const StyledHeader = styled.h1`
@@ -62,19 +73,37 @@ const StyledSubmit = styled(Button)`
   margin-right: 0;
 `
 
-function CreateModal() {
-  const [showDialog, setShowDialog] = useState(false)
+function CreateModal({
+  formSubmit,
+}: {
+  formSubmit: (LifeLineInterface) => void
+}) {
+  const [showDialog, setShowDialog] = useState<boolean>(false)
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
   const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-  const [formData, setFormData] = useState({
+  const close = () => {
+    setShowErrorMessage(false)
+    setShowDialog(false)
+  }
+  const defaultFormData = {
     title: '',
-    statistic: '',
+    statistic: null,
+    unit: '',
+    rate: 0,
     source: '',
     link: '',
-  })
+  }
+  const [formData, setFormData] = useState<LifelineInterface>(defaultFormData)
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    if (formData.title !== '' && formData.statistic !== null) {
+      close()
+      setShowErrorMessage(false)
+      formSubmit(formData)
+      setFormData(defaultFormData)
+    } else {
+      setShowErrorMessage(true)
+    }
   }
   return (
     <div>
@@ -101,58 +130,97 @@ function CreateModal() {
               Enter a title and statistic to create your personal Lifeline. The
               citation and rate are optional.
             </StyledDescription>
-            <StyledForm onSubmit={handleSubmit}>
-              <div>
-                <StyledLabel>Title</StyledLabel>
-                <StyledInput
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
-                  value={formData.title}
-                  required={true}
-                  placeholder={'Ex: World’s Energy From Renewables'}
-                />
-              </div>
-              <div>
-                <StyledLabel>Statistic</StyledLabel>
-                <StyledInput
-                  onChange={(e) =>
-                    setFormData({ ...formData, statistic: e.target.value })
-                  }
-                  value={formData.statistic}
-                  required={true}
-                  placeholder={'Ex: 12.77155930'}
-                  type={'number'}
-                />
-              </div>
-              <div>
-                <StyledLabel>Source (Optional)</StyledLabel>
-                <StyledInput
-                  onChange={(e) =>
-                    setFormData({ ...formData, source: e.target.value })
-                  }
-                  value={formData.source}
-                  required={true}
-                  placeholder={'Ex: WRI'}
-                  type={'text'}
-                />
-              </div>
-              <div>
-                <StyledLabel>Citation Link (Optional)</StyledLabel>
-                <StyledInput
-                  onChange={(e) =>
-                    setFormData({ ...formData, link: e.target.value })
-                  }
-                  value={formData.link}
-                  type={'text'}
-                  placeholder={
-                    'Ex: https://www.wri.org/?gclid=CjwKCAjwrfCRBhAXEiwAnkmKmWhnLs_cSR3ZNsGwvjy-zsk4n3JIKDPnvPFqLVcHjye'
-                  }
-                />
-              </div>
-              <div></div>
-            </StyledForm>
-            <StyledSubmit buttonLabel={'Create'}></StyledSubmit>
+            <form onSubmit={handleSubmit}>
+              <FormGrid>
+                <div>
+                  <StyledLabel>Title</StyledLabel>
+                  <StyledInput
+                    type="text"
+                    onChange={(e) =>
+                      setFormData({ ...formData, title: e.target.value })
+                    }
+                    value={formData.title}
+                    required
+                    placeholder={'Ex: World’s Energy From Renewables'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Statistic</StyledLabel>
+                  <StyledInput
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        statistic: parseInt(e.target.value) ?? e.target.value,
+                      })
+                    }
+                    value={formData.statistic}
+                    required
+                    placeholder={'Ex: 12.77155930'}
+                    type={'number'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Unit</StyledLabel>
+                  <StyledInput
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        unit: e.target.value,
+                      })
+                    }
+                    value={formData.unit}
+                    required
+                    placeholder={'Ex: KM'}
+                    type={'text'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Source (Optional)</StyledLabel>
+                  <StyledInput
+                    onChange={(e) =>
+                      setFormData({ ...formData, source: e.target.value })
+                    }
+                    value={formData.source}
+                    placeholder={'Ex: WRI'}
+                    type={'text'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Rate (Optional)</StyledLabel>
+                  <StyledInput
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        rate: parseInt(e.target.value),
+                      })
+                    }
+                    value={formData.rate}
+                    placeholder={'Ex: 1.2 m/s'}
+                    type={'number'}
+                  />
+                </div>
+                <CitationColumn>
+                  <StyledLabel>Citation Link (Optional)</StyledLabel>
+                  <StyledInput
+                    onChange={(e) =>
+                      setFormData({ ...formData, link: e.target.value })
+                    }
+                    value={formData.link}
+                    type={'text'}
+                    placeholder={
+                      'Ex: https://www.wri.org/?gclid=CjwKCAjwrfCRBhAXEiwAnkmKmWhnLs_cSR3ZNsGwvjy-zsk4n3JIKDPnvPFqLVcHjye'
+                    }
+                  />
+                </CitationColumn>
+              </FormGrid>
+              {showErrorMessage ? (
+                <ErrorLabel>Missing required fields</ErrorLabel>
+              ) : (
+                <></>
+              )}
+
+              <StyledSubmit type="submit" buttonLabel={'Create'}></StyledSubmit>
+            </form>
           </StyledDialogContainer>
         </DialogContent>
       </DialogOverlay>
