@@ -11,6 +11,7 @@ const HeaderBorder = styled.div`
 const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  width: 100%;
   /* align-items: center; */
   font-size: max(1rem, min(2rem, 3vw));
   height: 3vh;

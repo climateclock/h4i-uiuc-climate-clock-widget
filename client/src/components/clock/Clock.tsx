@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ClockProps } from '../../interfaces'
+import { NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -15,16 +16,14 @@ const ClockSection = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  align-items: center;
   font-weight: bold;
-  padding-top: calc(2% + 5vh);
 
   div {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: flex-end;
-    margin: 20px;
+    margin: 0px 20px 0px 20px;
   }
 
   h2,
@@ -35,19 +34,19 @@ const ClockSection = styled.div`
 
   h3 {
     font-size: max(2.75rem, min(3.25rem, 4vw));
-    margin: 0%;
-    margin-left: 15px;
+    margin: 0px 15px 0 15px;
     align-self: flex-end;
     margin-bottom: 17px;
   }
 
   // This style deals with padding for when there is only one lifeline
   @media screen and (max-height: 700px) {
-    padding-top: calc(10vh + 2%);
+    // padding-top: calc(10vh + 2%);
   }
 
   // For iPads
   @media screen and (max-width: 1000px) and (min-height: 500px) {
+    flex-wrap: wrap;
     margin: 0px;
 
     h2 {
@@ -92,7 +91,7 @@ const ClockSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    padding-top: 3%;
+    // padding-top: 3%;
 
     div {
       margin: 5px;
@@ -113,7 +112,7 @@ const ClockSection = styled.div`
   }
 
   @media screen and (orientation: portrait) and (max-height: 700px) and (min-height: 400px) {
-    padding-top: 7vh;
+    // padding-top: 7vh;
   }
 
   // Landscape style, doesn't utilize the wrap
@@ -170,17 +169,23 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  ${(props) => (props.isFullScreen ? 'height: 52vh;' : 'height: 44vh;')}
+  // height: calc(${(props) => props.isFullScreen ? '52vh' : '44vh'} + (14.666666667vh * ${props => NUM_LIFELINES_DISPLAYED - props.lifelineCount}));
+  height: calc(100vh - 5vh - 4vh - (14.666666667vh * ${props => props.lifelineCount}));
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
-  @media only screen and (max-height: 700px) {
+  /* @media only screen and (max-height: 700px) {
     height: 65vh;
-  }
+  } */
   width: 100vw;
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `
 
-function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
+function Clock({ isFullScreen, timestamp, labels, flavor, lifelineCount }: ClockProps) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
@@ -203,16 +208,16 @@ function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
   }, [timeLeft])
 
   return (
-    <ClockContainer isFullScreen={isFullScreen}>
+    <ClockContainer isFullScreen={isFullScreen} lifelineCount={lifelineCount}>
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}
         themeColor={({ theme }) => theme.red}
       />
       <ClockSection>
-        <h2>{years ? years : '0'}</h2> <h3>YRS</h3>
-        <h2>{days ? days : '000'}</h2> <h3>DAYS</h3>
-        <h2>{time ? time : '00:00:00'}</h2>
+        <div><h2>{years ? years : '0'}</h2> <h3>YRS</h3></div>
+        <div><h2>{days ? days : '000'}</h2> <h3>DAYS</h3></div>
+        <div><h5>{time ? time : '00:00:00'}</h5></div>
       </ClockSection>
     </ClockContainer>
   )
