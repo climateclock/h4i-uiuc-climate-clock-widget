@@ -170,12 +170,12 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  ${(props) => (props.isFullScreen ? 'height: 52vh;' : 'height: 44vh;')}
+  height: calc(${(props) => (props.isFullScreen ? '52vh' : '43vh' + (props.mobileWidth ? ' + 3vh' : ' + 9vh - 55px'))});
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
   @media only screen and (max-height: 700px) {
-    height: 65vh;
+    height: 65vh - 55px - 9vh;
   }
   width: 100vw;
 `
@@ -202,8 +202,17 @@ function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
     return () => clearInterval(interval)
   }, [timeLeft])
 
+  const [mobileWidth, setMobileWidth] = useState(
+    window.matchMedia('(max-width: 800px)').matches,
+  )
+  useEffect(() => {
+    window
+      .matchMedia('(max-width: 800px)')
+      .addEventListener('change', (e) => setMobileWidth(e.matches))
+  }, [])
+
   return (
-    <ClockContainer isFullScreen={isFullScreen}>
+    <ClockContainer isFullScreen={isFullScreen} mobileWidth={mobileWidth}>
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}
