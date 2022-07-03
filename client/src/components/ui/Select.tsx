@@ -8,7 +8,7 @@ const customStyles = {
     ...base,
     backgroundColor: state.isSelected ? theme.navBackground : theme.background,
     color: theme.text,
-    fontSize: '14px'
+    fontSize: '14px',
   }),
   control: (base, state) => ({
     ...base,
@@ -17,7 +17,7 @@ const customStyles = {
     backgroundColor: state.isSelected ? 'grey' : 'white',
     width: '255px',
     height: '31px',
-    fontSize: '14px'
+    fontSize: '14px',
   }),
   container: (base) => ({
     ...base,
