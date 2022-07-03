@@ -124,7 +124,9 @@ const LifelineCreationForm = () => {
       <FormatSpacing>
         <StyledLifeline>
           <StyledHeading>Clock Lifelines</StyledHeading>
-          <StyledSubheading>Add a Lifeline to your existing clock</StyledSubheading>
+          <StyledSubheading>
+            Add a Lifeline to your existing clock
+          </StyledSubheading>
           <form onSubmit={formSubmit}>
             {/* title input */}
             <label>Title</label>
