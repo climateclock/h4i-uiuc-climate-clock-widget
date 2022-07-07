@@ -43,6 +43,9 @@ const StyledInput = styled.input`
   border: 1px solid #000;
   font-size: 16px;
   border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
 `
 
 const StyledHeader = styled.h1`
@@ -50,6 +53,9 @@ const StyledHeader = styled.h1`
   font-size: 24px;
   color: black;
   font-weight: 500;
+`
+const ErrorLabel = styled(StyledLabel)`
+  color: ${({ theme }) => theme.red};
 `
 
 const StyledDescription = styled.p`
@@ -62,14 +68,25 @@ const StyledSubmit = styled(StyledButton)`
   margin-left: auto;
   margin-right: 0;
 `
+const CitationColumn = styled.div`
+  grid-column-end: span 2;
+`
 
 const ModalContainer = styled.div`
   place-self: center;
 `
+const FormGrid = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 35px;
+  margin-right: 25px;
+  margin-bottom: 20px;
+`
 
 //prop for lifeline index
 function EditModal({ index }: { index: number }) {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState<boolean>(false)
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
   const [title, setTitle] = useState(() => {
@@ -118,6 +135,28 @@ function EditModal({ index }: { index: number }) {
     }
   })
 
+  const [unit, setUnit] = useState(() => {
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const saved = JSON.parse(LifelineArray)[index]
+      if (saved) {
+        const initialValue = saved.unit
+        return initialValue || ''
+      }
+    }
+  })
+
+  const [rate, setRate] = useState(() => {
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const saved = JSON.parse(LifelineArray)[index]
+      if (saved) {
+        const initialValue = saved.unit
+        return initialValue || 0
+      }
+    }
+  })
+
   // reset values back to original : close
   // function CloseModal() {
   // }
@@ -133,22 +172,26 @@ function EditModal({ index }: { index: number }) {
       if (lifeline.link) {
         setLink(lifeline.link)
       }
+      if (lifeline.initial) {
+        setStatistic(lifeline.initial)
+      }
+      if (lifeline.unit) {
+        setUnit(lifeline.unit)
+      }
     }
     open()
   }
-  function onSubmit(e) {
-    e.preventDefault()
+  function onSubmit() {
     const LifelineArray = localStorage.getItem('lifelines')
-    console.log(LifelineArray)
     if (LifelineArray) {
       const lifeline = JSON.parse(LifelineArray)[index]
-      console.log(lifeline)
-      lifeline.labels[0] = e.target[0].value
-      lifeline.initial = parseFloat(e.target[1].value)
+      lifeline.labels[0] = title
+      lifeline.initial = statistic
+      lifeline.source = source
+      lifeline.link = link
 
       const newLifelines = JSON.parse(LifelineArray)
       newLifelines[index] = lifeline
-      console.log(newLifelines)
       localStorage.setItem('lifelines', JSON.stringify(newLifelines))
     }
     close()
@@ -197,64 +240,81 @@ function EditModal({ index }: { index: number }) {
               {/* <VisuallyHidden>Close</VisuallyHidden> */}
               <span aria-hidden>X</span>
             </CloseButton>
-            <StyledHeader>Edit Lifeline</StyledHeader>
+            <StyledHeader>Create a Lifeline</StyledHeader>
             <StyledDescription>
               Enter a title and statistic to create your personal Lifeline. The
               citation and rate are optional.
             </StyledDescription>
-            <StyledForm onSubmit={onSubmit}>
-              <div>
-                <StyledLabel>Title</StyledLabel>
-                <StyledInput
-                  onChange={(e) => {
-                    setTitle(e.target.value)
-                  }}
-                  value={title}
-                  required={true}
-                  placeholder={'Ex: World’s Energy From Renewables'}
-                />
-              </div>
-              <div>
-                <StyledLabel>Statistic</StyledLabel>
-                <StyledInput
-                  onChange={(e) => {
-                    setStatistic(e.target.value)
-                  }}
-                  value={statistic}
-                  required={true}
-                  placeholder={'Ex: 12.77155930'}
-                  type={'number'}
-                />
-              </div>
-              <div>
-                <StyledLabel>Source (Optional)</StyledLabel>
-                <StyledInput
-                  onChange={(e) => {
-                    setSource(e.target.value)
-                  }}
-                  value={source}
-                  required={false}
-                  placeholder={'Ex: WRI'}
-                  type={'text'}
-                />
-              </div>
-              <div>
-                <StyledLabel>Citation Link (Optional)</StyledLabel>
-                <StyledInput
-                  onChange={(e) => {
-                    setLink(e.target.value)
-                  }}
-                  value={link}
-                  type={'text'}
-                  placeholder={
-                    'Ex: https://www.wri.org/?gclid=CjwKCAjwrfCRBhAXEiwAnkmKmWhnLs_cSR3ZNsGwvjy-zsk4n3JIKDPnvPFqLVcHjye'
-                  }
-                  required={false}
-                />
-              </div>
-              <div></div>
-              <StyledSubmit type="submit" buttonLabel={'Update'}></StyledSubmit>
-            </StyledForm>
+            <form onSubmit={onSubmit}>
+              <FormGrid>
+                <div>
+                  <StyledLabel>Title</StyledLabel>
+                  <StyledInput
+                    type="text"
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                    required
+                    placeholder={'Ex: World’s Energy From Renewables'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Statistic</StyledLabel>
+                  <StyledInput
+                    onChange={(e) => setStatistic(e.target.value)}
+                    value={statistic}
+                    required
+                    placeholder={'Ex: 12.77155930'}
+                    type={'number'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Unit</StyledLabel>
+                  <StyledInput
+                    onChange={(e) => setUnit(e.target.value)}
+                    value={unit}
+                    required
+                    placeholder={'Ex: KM'}
+                    type={'text'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Source (Optional)</StyledLabel>
+                  <StyledInput
+                    onChange={(e) => setSource(e.target.value)}
+                    value={source}
+                    placeholder={'Ex: WRI'}
+                    type={'text'}
+                  />
+                </div>
+                <div>
+                  <StyledLabel>Rate (Optional)</StyledLabel>
+                  <StyledInput
+                    onChange={(e) => setRate(parseInt(e.target.value))}
+                    value={rate}
+                    placeholder={'Ex: 1.2 m/s'}
+                    type={'number'}
+                  />
+                </div>
+                <CitationColumn>
+                  <StyledLabel>Citation Link (Optional)</StyledLabel>
+                  <StyledInput
+                    onChange={(e) => setLink(e.target.value)}
+                    value={link}
+                    type={'text'}
+                    placeholder={
+                      'Ex: https://www.wri.org/?gclid=CjwKCAjwrfCRBhAXEiwAnkmKmWhnLs_cSR3ZNsGwvjy-zsk4n3JIKDPnvPFqLVcHjye'
+                    }
+                  />
+                </CitationColumn>
+              </FormGrid>
+              {showErrorMessage ? (
+                <ErrorLabel>Missing required fields</ErrorLabel>
+              ) : (
+                <></>
+              )}
+
+              <StyledSubmit type="submit" buttonLabel={'Save'}></StyledSubmit>
+            </form>
           </StyledDialogContainer>
         </DialogContent>
       </DialogOverlay>
