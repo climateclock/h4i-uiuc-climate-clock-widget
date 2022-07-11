@@ -68,6 +68,7 @@ export default function LifelinesEmbed({
             unit={returnFirstString(module['unit_labels'])}
             rate={module['rate']}
             resolution={module['resolution']}
+            lifelineCount={lifeLineData.length}
           />
         )
       })}

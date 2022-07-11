@@ -53,6 +53,8 @@ const Alignment = styled.div`
 const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
   const BASE_PADDING = 4
   const [lifelines, setLifelines] = useState<ModuleResInterface[]>([])
+  const numLifelines = NUM_LIFELINES_DISPLAYED
+
   /* fill lifelines with passed in props for rendering */
   useEffect(() => {
     setLifelines(lifelinesProp)
@@ -125,14 +127,17 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                       <Card>
                         <ReOrderDotsVertical size="20px" />
                         <Alignment>
-                          {index < NUM_LIFELINES_DISPLAYED && index + 1}
+                          {index < numLifelines && index + 1}
                         </Alignment>
                       </Card>
                       <LifelineCard
+                        lifelineData={lifelinesProp}
                         lifeline={lifeline}
-                        isDisplayed={index < NUM_LIFELINES_DISPLAYED}
+                        isDisplayed={index < numLifelines}
                         onDelete={deleteLifeline}
                         index={index}
+                        lifelineCount={lifelinesProp.length}
+                        numLifelines={numLifelines}
                       />
                     </StyledDiv>
                   </div>

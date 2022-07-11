@@ -3,14 +3,19 @@ import '@reach/menu-button/styles.css'
 import { Menu, MenuButton, MenuItem, MenuList } from '@reach/menu-button'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Show } from '@styled-icons/boxicons-regular/Show'
-import { ChevronDown, TrashAlt } from '@styled-icons/boxicons-solid'
+import { ChevronDown, Hide,TrashAlt } from '@styled-icons/boxicons-solid'
 import styled from 'styled-components'
 
+import { ModuleResInterface } from '../../interfaces'
+
 interface DropdownInterface {
+  lifelineData: ModuleResInterface[]
   isDisplayed: boolean
   isCustomizable: boolean | undefined
   onDelete: (index: number) => void
   index: number
+  lifelineCount: number
+  numLifelines: number
 }
 
 export const StyledMenuList = styled(MenuList)`
@@ -62,10 +67,13 @@ export const StyledTrash = styled(TrashAlt)`
 `
 
 export const StyledShow = styled(Show)`
-  color: ${(props) =>
-    props.isEnabled
-      ? ({ theme }) => theme.headerText
-      : ({ theme }) => theme.secondaryText};
+  color: ${({ theme }) => theme.headerText};
+  height: 16px;
+  margin-right: 5px;
+`
+
+export const StyledHide = styled(Hide)`
+  color: ${({ theme }) => theme.headerText};
   height: 16px;
   margin-right: 5px;
 `
@@ -101,11 +109,36 @@ export const StyledMenu = styled(Menu)`
 `
 
 export const LifelineDropdown = ({
+  lifelineData,
   isDisplayed,
   isCustomizable,
   onDelete,
   index,
+  lifelineCount,
+  numLifelines
 }: DropdownInterface) => {
+
+  function isShowEnabled() {
+    if (lifelineCount < 3) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function onShowOrHide(isShow : boolean) {
+    const numLifelinesChange = isShow ? 1 : -1;
+
+    console.log("old: ", index, " new: ", numLifelines - 1);
+    console.log("numLifelines: ", numLifelines);
+
+    lifelineData.splice(numLifelines - 1, 0, lifelineData.splice(index, 1)[0])
+
+    console.log("index: ", index)
+
+    numLifelines += numLifelinesChange;
+  }
+
   return (
     <div>
       <Menu>
@@ -114,14 +147,20 @@ export const LifelineDropdown = ({
           <StyledChevronDown />
         </StyledMenuButton>
         <StyledMenuList>
-          <StyledMenuItem disabled={!isDisplayed}>
-            <StyledShow isEnabled={isDisplayed} />
-            <MenuText isEnabled={isDisplayed}>Show</MenuText>
+          {!isDisplayed ?
+          <StyledMenuItem disabled={!isShowEnabled} onClick={() => onShowOrHide(true)}>
+            <StyledShow isEnabled={isShowEnabled} />
+            <MenuText isEnabled={isShowEnabled}>Show</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem disabled={!isCustomizable}>
+          :
+          <StyledMenuItem onClick={() => onShowOrHide(false)}>
+            <StyledHide isEnabled={true} />
+            <MenuText isEnabled={true}>Hide</MenuText>
+          </StyledMenuItem>
+          }
+          <StyledMenuItem disabled={!isCustomizable} onSelect={() => console.log(isCustomizable)}>
             <StyledPencilFill
               isEnabled={isCustomizable}
-              onClick={() => console.log(isCustomizable)}
             />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>

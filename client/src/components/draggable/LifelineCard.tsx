@@ -5,10 +5,13 @@ import { returnFirstString } from '../../utils/utils'
 import { LifelineDropdown } from '../lifelines/Dropdown'
 
 interface LifelineCardInterface {
+  lifelineData: ModuleResInterface[]
   lifeline: ModuleResInterface
   isDisplayed: boolean
   onDelete: (index: number) => void
   index: number
+  lifelineCount: number
+  numLifelines: number
 }
 const Card = styled.div`
   display: flex;
@@ -38,10 +41,13 @@ const Source = styled.div`
 `
 
 const LifelineCard = ({
+  lifelineData,
   lifeline: { labels, customizable },
   isDisplayed,
   onDelete,
   index,
+  lifelineCount,
+  numLifelines
 }: LifelineCardInterface) => {
   return (
     <Card>
@@ -50,10 +56,13 @@ const LifelineCard = ({
         <Source>{customizable ? '' : 'Climate Clock'}</Source>
       </Text>
       <LifelineDropdown
+        lifelineData={lifelineData}
         isCustomizable={customizable}
         isDisplayed={isDisplayed}
         onDelete={onDelete}
         index={index}
+        lifelineCount={lifelineCount}
+        numLifelines={numLifelines}
       />
     </Card>
   )

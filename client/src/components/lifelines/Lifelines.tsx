@@ -27,6 +27,7 @@ export default function Lifelines({
             unit={returnFirstString(module['unit_labels'])}
             rate={module['rate']}
             resolution={module['resolution']}
+            lifelineCount={lifeLineData.length}
           />
         )
       })}
