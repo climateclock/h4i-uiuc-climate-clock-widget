@@ -5,7 +5,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 // import VisuallyHidden from '@reach/visually-hidden'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Close } from '@styled-icons/evaicons-solid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import StyledButton from '../buttons/button'
@@ -78,8 +78,15 @@ const FormGrid = styled.form`
 `
 
 //prop for lifeline index
-function EditModal({ index }: { index: number }) {
-  const [showDialog, setShowDialog] = useState<boolean>(false)
+function EditModal({
+  index,
+  showDialog,
+  setShowDialog,
+}: {
+  index: number
+  showDialog: boolean
+  setShowDialog: (boolean) => void
+}) {
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -151,31 +158,6 @@ function EditModal({ index }: { index: number }) {
     }
   })
 
-  function PopulateModal() {
-    const LifelineArray = localStorage.getItem('lifelines')
-    if (LifelineArray) {
-      const lifeline = JSON.parse(LifelineArray)[index]
-      setTitle(lifeline.labels[0])
-      setStatistic(lifeline.unit_labels)
-      if (lifeline.source) {
-        setSource(lifeline.source)
-      }
-      if (lifeline.link) {
-        setLink(lifeline.link)
-      }
-      if (lifeline.initial) {
-        setStatistic(lifeline.initial)
-      }
-      if (lifeline.unit_labels) {
-        setUnit(lifeline.unit)
-      }
-
-      if (lifeline.unit) {
-        setUnit(lifeline.unit)
-      }
-    }
-    open()
-  }
   function onSubmit() {
     if (title !== '' && statistic !== 0 && unit !== '') {
       const LifelineArray = localStorage.getItem('lifelines')
@@ -198,18 +180,33 @@ function EditModal({ index }: { index: number }) {
       setShowErrorMessage(true)
     }
   }
+  useEffect(() => {
+    const LifelineArray = localStorage.getItem('lifelines')
+    if (LifelineArray) {
+      const lifeline = JSON.parse(LifelineArray)[index]
+      setTitle(lifeline.labels[0])
+      setStatistic(lifeline.unit_labels)
+      if (lifeline.source) {
+        setSource(lifeline.source)
+      }
+      if (lifeline.link) {
+        setLink(lifeline.link)
+      }
+      if (lifeline.initial) {
+        setStatistic(lifeline.initial)
+      }
+      if (lifeline.unit_labels) {
+        setUnit(lifeline.unit)
+      }
+
+      if (lifeline.unit) {
+        setUnit(lifeline.unit)
+      }
+    }
+  }, [index, setShowDialog, showDialog])
+
   return (
     <ModalContainer>
-      <PencilFill
-        onClick={PopulateModal}
-        size={'1.5em'}
-        style={{
-          justifySelf: 'center',
-          cursor: 'pointer',
-          alignSelf: 'center',
-          gridColumn: 3,
-        }}
-      />
       <DialogOverlay isOpen={showDialog} onDismiss={close}>
         <DialogContent
           style={{

@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
-import EditModal from '../modals/EditModal'
 import { LifelineDropdown } from '../lifelines/Dropdown'
+import EditModal from '../modals/EditModal'
 
 interface LifelineCardInterface {
   index: number
@@ -58,7 +58,6 @@ const LifelineCard = ({
           index={index}
         />
       </Card>
-      {customizable && <EditModal index={index}></EditModal>}
     </>
   )
 }
