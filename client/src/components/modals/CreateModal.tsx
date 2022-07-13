@@ -96,7 +96,27 @@ function CreateModal({
   const [formData, setFormData] = useState<LifelineInterface>(defaultFormData)
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (formData.title !== '' && formData.statistic !== null) {
+    if (
+      formData.title !== '' &&
+      formData.statistic !== null &&
+      formData.unit !== ''
+    ) {
+      const LifelineArray = localStorage.getItem('lifelines')
+
+      if (LifelineArray) {
+        const lifeline = {}
+
+        lifeline['labels'] = [formData.title]
+        lifeline['initial'] = formData.statistic
+        lifeline['source'] = formData.source
+        lifeline['link'] = formData.link
+        lifeline['unit_labels'] = [formData.unit]
+
+        const newLifelines = JSON.parse(LifelineArray)
+
+        newLifelines.push(lifeline)
+        localStorage.setItem('lifelines', JSON.stringify(newLifelines))
+      }
       close()
       setShowErrorMessage(false)
       formSubmit(formData)

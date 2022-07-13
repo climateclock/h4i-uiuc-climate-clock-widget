@@ -1,10 +1,11 @@
 import '@reach/dialog/styles.css'
 
 import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { VisuallyHidden } from '@reach/visually-hidden'
 // import VisuallyHidden from '@reach/visually-hidden'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Close } from '@styled-icons/evaicons-solid'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 
 import StyledButton from '../buttons/button'
@@ -23,13 +24,6 @@ const StyledDialogContainer = styled.div`
   padding: 0.5em;
 `
 
-const StyledForm = styled.form`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 35px;
-  margin-left: auto;
-  margin-right: auto;
-`
 const StyledLabel = styled.label`
   font-family: ${({ theme }) => theme.secondaryFonts};
   display: block;
@@ -157,9 +151,6 @@ function EditModal({ index }: { index: number }) {
     }
   })
 
-  // reset values back to original : close
-  // function CloseModal() {
-  // }
   function PopulateModal() {
     const LifelineArray = localStorage.getItem('lifelines')
     if (LifelineArray) {
@@ -175,6 +166,10 @@ function EditModal({ index }: { index: number }) {
       if (lifeline.initial) {
         setStatistic(lifeline.initial)
       }
+      if (lifeline.unit_labels) {
+        setUnit(lifeline.unit)
+      }
+
       if (lifeline.unit) {
         setUnit(lifeline.unit)
       }
@@ -182,36 +177,27 @@ function EditModal({ index }: { index: number }) {
     open()
   }
   function onSubmit() {
-    const LifelineArray = localStorage.getItem('lifelines')
-    if (LifelineArray) {
-      const lifeline = JSON.parse(LifelineArray)[index]
-      lifeline.labels[0] = title
-      lifeline.initial = statistic
-      lifeline.source = source
-      lifeline.link = link
+    if (title !== '' && statistic !== 0 && unit !== '') {
+      const LifelineArray = localStorage.getItem('lifelines')
 
-      const newLifelines = JSON.parse(LifelineArray)
-      newLifelines[index] = lifeline
-      localStorage.setItem('lifelines', JSON.stringify(newLifelines))
+      if (LifelineArray) {
+        const lifeline = JSON.parse(LifelineArray)[index]
+        lifeline.labels[0] = title
+        lifeline.initial = statistic
+        lifeline.source = source
+        lifeline.link = link
+        lifeline.unit_labels[0] = unit
+
+        const newLifelines = JSON.parse(LifelineArray)
+        newLifelines[index] = lifeline
+        localStorage.setItem('lifelines', JSON.stringify(newLifelines))
+      }
+      close()
+      setShowErrorMessage(false)
+    } else {
+      setShowErrorMessage(true)
     }
-    close()
   }
-  useEffect(() => {
-    // storing input title
-    localStorage.setItem('title', JSON.stringify(title))
-  }, [title])
-  useEffect(() => {
-    // storing input title
-    localStorage.setItem('statistic', JSON.stringify(statistic))
-  }, [statistic])
-  useEffect(() => {
-    // storing input title
-    localStorage.setItem('source', JSON.stringify(source))
-  }, [source])
-  useEffect(() => {
-    // storing input title
-    localStorage.setItem('link', JSON.stringify(link))
-  }, [link])
   return (
     <ModalContainer>
       <PencilFill
@@ -237,7 +223,7 @@ function EditModal({ index }: { index: number }) {
         >
           <StyledDialogContainer>
             <CloseButton className="close-button" onClick={close}>
-              {/* <VisuallyHidden>Close</VisuallyHidden> */}
+              <VisuallyHidden>Close</VisuallyHidden>
               <span aria-hidden>X</span>
             </CloseButton>
             <StyledHeader>Create a Lifeline</StyledHeader>

@@ -1,7 +1,7 @@
 import '@reach/dialog/styles.css'
 
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import VisuallyHidden from '@reach/visually-hidden'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import { Close } from '@styled-icons/evaicons-solid'
 import { useState } from 'react'
 import styled from 'styled-components'

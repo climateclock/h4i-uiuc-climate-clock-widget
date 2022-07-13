@@ -78,8 +78,6 @@ function Lifeline({
     }
   })
 
-  console.log(llVal)
-
   return (
     <Container>
       <Header
