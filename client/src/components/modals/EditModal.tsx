@@ -3,7 +3,6 @@ import '@reach/dialog/styles.css'
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { VisuallyHidden } from '@reach/visually-hidden'
 // import VisuallyHidden from '@reach/visually-hidden'
-import { PencilFill } from '@styled-icons/bootstrap'
 import { Close } from '@styled-icons/evaicons-solid'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -88,7 +87,6 @@ function EditModal({
   setShowDialog: (boolean) => void
 }) {
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false)
-  const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
   const [title, setTitle] = useState(() => {
     // getting stored value

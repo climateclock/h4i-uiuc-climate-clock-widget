@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
 import { LifelineDropdown } from '../lifelines/Dropdown'
-import EditModal from '../modals/EditModal'
 
 interface LifelineCardInterface {
   index: number
