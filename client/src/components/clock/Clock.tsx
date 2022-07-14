@@ -169,14 +169,22 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  // height: calc(${(props) => props.isFullScreen ? '52vh' : '44vh'} + (14.666666667vh * ${props => NUM_LIFELINES_DISPLAYED - props.lifelineCount}));
-  height: calc(100vh - 5vh - 4vh - (14.666666667vh * ${props => props.lifelineCount}));
+  height: calc(
+    100vh - 55px - 4vh -
+      (
+        ${(props) => Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)} *
+          14.5vh
+      )
+  );
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
-  /* @media only screen and (max-height: 700px) {
-    height: 65vh;
-  } */
+  @media only screen and (max-height: 700px) {
+    height: calc(
+      100vh - 55px - 10vh -
+        (${(props) => Math.min(1, props.numLifelines)} * 25vh)
+    );
+  }
   width: 100vw;
   
   display: flex;
@@ -185,7 +193,13 @@ const ClockContainer = styled.div`
   justify-content: center;
 `
 
-function Clock({ isFullScreen, timestamp, labels, flavor, lifelineCount }: ClockProps) {
+function Clock({
+  isFullScreen,
+  timestamp,
+  labels,
+  flavor,
+  numLifelines,
+}: ClockProps) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
@@ -207,8 +221,21 @@ function Clock({ isFullScreen, timestamp, labels, flavor, lifelineCount }: Clock
     return () => clearInterval(interval)
   }, [timeLeft])
 
+  const [mobileWidth, setMobileWidth] = useState(
+    window.matchMedia('(max-width: 800px)').matches,
+  )
+  useEffect(() => {
+    window
+      .matchMedia('(max-width: 800px)')
+      .addEventListener('change', (e) => setMobileWidth(e.matches))
+  }, [])
+
   return (
-    <ClockContainer isFullScreen={isFullScreen} lifelineCount={lifelineCount}>
+    <ClockContainer
+      isFullScreen={isFullScreen}
+      mobileWidth={mobileWidth}
+      numLifelines={numLifelines}
+    >
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}

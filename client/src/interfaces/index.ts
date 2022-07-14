@@ -37,7 +37,7 @@ export interface ClockProps {
   timestamp: string | undefined
   labels: string[] | undefined
   flavor: string | undefined
-  lifelineCount: number
+  numLifelines: number
 }
 
 /* Properties optional since some may not be

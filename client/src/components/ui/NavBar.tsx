@@ -16,7 +16,8 @@ const NavBox = styled.div`
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
-  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height 55px;')}
+  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 55px;')}
+
   z-index: 11;
   background-color: ${({ theme }) => theme.black};
 
