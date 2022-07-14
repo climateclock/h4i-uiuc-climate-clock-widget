@@ -7,6 +7,7 @@ import { ChevronDown, TrashAlt } from '@styled-icons/boxicons-solid'
 import { useState } from 'react'
 import styled from 'styled-components'
 
+import DeleteModal from '../modals/DeleteModal'
 import EditModal from '../modals/EditModal'
 
 interface DropdownInterface {
@@ -109,7 +110,8 @@ export const LifelineDropdown = ({
   onDelete,
   index,
 }: DropdownInterface) => {
-  const [showDialog, setShowDialog] = useState<boolean>(false)
+  const [showEditDialog, setShowEditDialog] = useState<boolean>(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState<boolean>(false)
   return (
     <div>
       <Menu>
@@ -124,22 +126,27 @@ export const LifelineDropdown = ({
           </StyledMenuItem>
           <StyledMenuItem
             disabled={!isCustomizable}
-            onSelect={() => setShowDialog(true)}
+            onSelect={() => setShowEditDialog(true)}
           >
             <StyledPencilFill isEnabled={isCustomizable} />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => onDelete(index)}>
+          <StyledMenuItem onSelect={() => setShowDeleteDialog(true)}>
             <StyledTrash />
             <MenuText isEnabled={true}>Delete</MenuText>
           </StyledMenuItem>
         </StyledMenuList>
       </Menu>
       <EditModal
-        showDialog={showDialog}
-        setShowDialog={setShowDialog}
+        showDialog={showEditDialog}
+        setShowDialog={setShowEditDialog}
         index={index}
-      ></EditModal>
+      />
+      <DeleteModal
+        showDialog={showDeleteDialog}
+        setShowDialog={setShowDeleteDialog}
+        deleteLifeline={() => onDelete(index)}
+      />
     </div>
   )
 }

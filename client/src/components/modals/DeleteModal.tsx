@@ -3,7 +3,6 @@ import '@reach/dialog/styles.css'
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Close } from '@styled-icons/evaicons-solid'
-import { useState } from 'react'
 import styled from 'styled-components'
 
 import StyledButton from '../buttons/button'
@@ -57,13 +56,18 @@ const StyledDescription = styled.p`
   font-size: 14px;
 `
 
-function DeleteModal() {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
+function DeleteModal({
+  showDialog,
+  setShowDialog,
+  deleteLifeline,
+}: {
+  showDialog: boolean
+  setShowDialog: (boolean) => void
+  deleteLifeline: () => void
+}) {
   const close = () => setShowDialog(false)
   return (
     <div>
-      <button onClick={open}>Show Dialog</button>
       <DialogOverlay isOpen={showDialog} onDismiss={close}>
         <DialogContent
           style={{
@@ -87,8 +91,13 @@ function DeleteModal() {
             <StyledDescription className="description">
               Do you want to delete this lifeline?
             </StyledDescription>
-            <SubmitButton buttonLabel={'Delete'}></SubmitButton>
-            <button className="cancel">Cancel</button>
+            <SubmitButton
+              buttonLabel={'Delete'}
+              onClick={deleteLifeline}
+            ></SubmitButton>
+            <button className="cancel" onClick={() => setShowDialog(false)}>
+              Cancel
+            </button>
           </StyledDialogContainer>
         </DialogContent>
       </DialogOverlay>
