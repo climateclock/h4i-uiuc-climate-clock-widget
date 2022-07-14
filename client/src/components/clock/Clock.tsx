@@ -171,17 +171,32 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  height: calc(100vh - 55px - 4vh - (${(props) => Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)} * 14.5vh));
+  height: calc(
+    100vh - 55px - 4vh -
+      (
+        ${(props) => Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)} *
+          14.5vh
+      )
+  );
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
   @media only screen and (max-height: 700px) {
-    height: calc(100vh - 55px - 10vh - (${(props) => Math.min(1, props.numLifelines)} * 25vh));
+    height: calc(
+      100vh - 55px - 10vh -
+        (${(props) => Math.min(1, props.numLifelines)} * 25vh)
+    );
   }
   width: 100vw;
 `
 
-function Clock({ isFullScreen, timestamp, labels, flavor, numLifelines }: ClockProps) {
+function Clock({
+  isFullScreen,
+  timestamp,
+  labels,
+  flavor,
+  numLifelines,
+}: ClockProps) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
@@ -213,7 +228,11 @@ function Clock({ isFullScreen, timestamp, labels, flavor, numLifelines }: ClockP
   }, [])
 
   return (
-    <ClockContainer isFullScreen={isFullScreen} mobileWidth={mobileWidth} numLifelines={numLifelines}>
+    <ClockContainer
+      isFullScreen={isFullScreen}
+      mobileWidth={mobileWidth}
+      numLifelines={numLifelines}
+    >
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}
