@@ -1,7 +1,6 @@
 import '@reach/dialog/styles.css'
 
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-// import VisuallyHidden from '@reach/visually-hidden'
 import { Close } from '@styled-icons/evaicons-solid'
 import { useState } from 'react'
 import styled from 'styled-components'
@@ -142,13 +141,12 @@ function CreateModal({
         >
           <StyledDialogContainer>
             <CloseButton className="close-button" onClick={close}>
-              {/* <VisuallyHidden>Close</VisuallyHidden> */}
               <span aria-hidden>X</span>
             </CloseButton>
             <StyledHeader>Create a Lifeline</StyledHeader>
             <StyledDescription>
               Enter a title and statistic to create your personal Lifeline. The
-              citation and rate are optional.
+              citation, rate, and unit are optional.
             </StyledDescription>
             <form onSubmit={handleSubmit}>
               <FormGrid>
@@ -180,7 +178,7 @@ function CreateModal({
                   />
                 </div>
                 <div>
-                  <StyledLabel>Unit</StyledLabel>
+                  <StyledLabel>Unit (Optional)</StyledLabel>
                   <StyledInput
                     onChange={(e) =>
                       setFormData({
@@ -189,7 +187,6 @@ function CreateModal({
                       })
                     }
                     value={formData.unit}
-                    required
                     placeholder={'Ex: KM'}
                     type={'text'}
                   />

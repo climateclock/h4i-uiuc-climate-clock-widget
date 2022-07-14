@@ -1,7 +1,6 @@
 import '@reach/dialog/styles.css'
 
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { VisuallyHidden } from '@reach/visually-hidden'
 import { Close } from '@styled-icons/evaicons-solid'
 import styled from 'styled-components'
 
@@ -84,9 +83,9 @@ function DeleteModal({
         >
           <StyledDialogContainer>
             <CloseButton className="close-button" onClick={close}>
-              <VisuallyHidden>Close</VisuallyHidden>
               <span aria-hidden>X</span>
             </CloseButton>
+
             <StyledHeader className="element">Delete Lifeline</StyledHeader>
             <StyledDescription className="description">
               Do you want to delete this lifeline?

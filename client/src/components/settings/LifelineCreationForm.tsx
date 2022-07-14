@@ -52,11 +52,6 @@ const LifelineCreationForm = () => {
   /* Lifeline module properties */
   const handle = useFullScreenHandle()
   const flavor = 'Lifeline'
-  // const [title, setTitle] = useState<string>('')
-  // const [unit, setUnit] = useState<string>('')
-  // const [value, setValue] = useState<number>(0)
-  // const [rate, setRate] = useState<number>(0)
-  // const [resolution, setResolution] = useState<number>(2)
   const [, setModules] = useState<ModuleResInterface[]>([])
   const [, setErrorFlag] = useState<boolean>(false)
   const [, setDefaultLanguage] = useState<string>('')
@@ -74,18 +69,6 @@ const LifelineCreationForm = () => {
       setLifelineModules,
     )
   }, [lifelineModules])
-
-  /* clearProperties
-   *
-   * Description: Clear form fields for creation form
-   */
-  // const clearProperties = () => {
-  //   setTitle('')
-  //   setUnit('')
-  //   setValue(0)
-  //   setRate(0)
-  //   setResolution(0)
-  // }
 
   /* formSubmit
    *
@@ -111,7 +94,6 @@ const LifelineCreationForm = () => {
       LIFELINES_LOCAL_STORAGE_KEY,
       JSON.stringify(lifelineModules),
     )
-    // clearProperties()
   }
   return (
     <>
