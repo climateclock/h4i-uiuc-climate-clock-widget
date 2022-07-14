@@ -11,7 +11,7 @@ const Navbar = styled.div`
     overflow-x: hidden;
     padding-top: 20px;
     transform: ${(props) =>
-      props.showMobileNavbar ? 'translateY(0em)' : 'translateY(-100em)'};
+      props.showMobileNavbar ? 'translateY(0em)' : 'translateY(-60em)'};
     transition: 0.6s ease;
     width: 100%;
     height: 100%;

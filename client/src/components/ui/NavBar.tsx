@@ -16,17 +16,20 @@ const NavBox = styled.div`
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
-  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 55px;')}
-
+  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 9vh;')}
   z-index: 11;
   background-color: ${({ theme }) => theme.black};
 
   margin-top: ${(props) =>
-    props.isFullScreen && !props.inBounds ? '-55px' : '0px'};
+    props.isFullScreen && !props.inBounds ? '-6.25em' : '0px'};
 
+  transform: ${(props) =>
+    props.isFullScreen && !props.inBounds
+      ? 'translateY(-12.5em)'
+      : 'translateY(0px)'};
   transition: 0.3s ease-out;
   ${(props) =>
-    props.showMobileNavbar ? 'position: absolute' : 'position: relative'};
+    props.showMobileNavbar ? 'position: absolute' : 'position: relative'}
 `
 
 const PageLink = styled.div`
@@ -34,10 +37,9 @@ const PageLink = styled.div`
   float: right;
   color: ${({ theme }) => theme.navBarText};
   text-align: center;
-  padding: 20px 40px;
+  padding: 2vw 3vw;
   text-decoration: none;
   font-size: 1em;
-  font-weight: bold;
   &:hover {
     color: ${({ theme }) => theme.blue};
   }
@@ -45,38 +47,20 @@ const PageLink = styled.div`
 
 const FullScreenButton = styled.div`
   float: right;
-  ${(props) =>
-    props.mobileWidth ? 'padding: 18px 5vw;' : 'padding: 18px 35px 0px 40px'}
-`
-
-const StyledCloseOutline = styled(CloseOutline)`
-  float: right;
-  color: white;
-  padding-top: 10px;
-  padding-right: 3vw;
-  size: 2.5em;
-  display: block;
-
+  color: ${({ theme }) => theme.navBarText};
+  padding: 2vw 3vw;
   &:hover {
     color: ${({ theme }) => theme.blue};
   }
 `
 
-/*
-The padding is slightly weird; however, the logo's left-padding should match that of the deadline
-So, if that changes, so should this value
-*/
 const HomeLink = styled.div`
   float: left;
-  display: flex;
-  align-items: center;
   color: ${({ theme }) => theme.black};
   text-align: center;
-  padding-top: 20px;
-  padding-left: min(35px, 3vw);
+  padding: 2vw 3vw;
   text-decoration: none;
-  font-size: 18.5px;
-  font-weight: bold;
+  font-size: 17px;
   color: white;
   &:hover {
     color: ${({ theme }) => theme.blue};
@@ -87,14 +71,20 @@ const Button = styled.div`
   display: inline-flex;
 `
 
-const Logo = styled.img`
-  padding-left: 10px;
+const Image = styled.div`
+  padding-left: 0.75vw;
+  scale(0.25, 0.25);
 `
 
 const StyledMenu = styled(Menu)`
   float: right;
-  padding-top: 10px;
-  padding-right: 3vw;
+  color: white;
+  size: 2.5em;
+  display: block;
+`
+
+const StyledCloseOutline = styled(CloseOutline)`
+  float: right;
   color: white;
   size: 2.5em;
   display: block;
@@ -143,34 +133,14 @@ function NavBar({
           <HomeLink>
             <Button>
               Climate Clock
-              <Logo
-                src={clock}
-                alt="climate_clock_logo"
-                height="25px"
-                width="25px"
-              />
+              <Image>
+                <img src={clock} alt="climate_clock_logo" />
+              </Image>
             </Button>
           </HomeLink>
         </Link>
-        {mobileWidth && [
-          !showMobileNavbar ? (
-            <StyledMenu
-              size="2.5em"
-              onClick={() => {
-                setMobileNavbar(!showMobileNavbar)
-              }}
-            />
-          ) : (
-            <StyledCloseOutline
-              size="2.5em"
-              onClick={() => {
-                setMobileNavbar(!showMobileNavbar)
-              }}
-            />
-          ),
-        ]}
         {atHome ? (
-          <FullScreenButton mobileWidth={mobileWidth}>
+          <FullScreenButton>
             {isFullScreen ? (
               <EnterFullscreen handle={handle} />
             ) : (
@@ -180,7 +150,25 @@ function NavBar({
         ) : (
           ' '
         )}
-        {!mobileWidth && (
+        {mobileWidth ? (
+          [
+            !showMobileNavbar ? (
+              <StyledMenu
+                size="2.5em"
+                onClick={() => {
+                  setMobileNavbar(!showMobileNavbar)
+                }}
+              />
+            ) : (
+              <StyledCloseOutline
+                size="2.5em"
+                onClick={() => {
+                  setMobileNavbar(!showMobileNavbar)
+                }}
+              />
+            ),
+          ]
+        ) : (
           <>
             <Link to="/settings">
               <PageLink>Settings</PageLink>

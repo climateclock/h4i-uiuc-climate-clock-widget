@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ClockProps } from '../../interfaces'
-import { NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -171,32 +170,17 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  height: calc(
-    100vh - 55px - 4vh -
-      (
-        ${(props) => Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)} *
-          14.5vh
-      )
-  );
+  ${(props) => (props.isFullScreen ? 'height: 52vh;' : 'height: 44vh;')}
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
   @media only screen and (max-height: 700px) {
-    height: calc(
-      100vh - 55px - 10vh -
-        (${(props) => Math.min(1, props.numLifelines)} * 25vh)
-    );
+    height: 65vh;
   }
   width: 100vw;
 `
 
-function Clock({
-  isFullScreen,
-  timestamp,
-  labels,
-  flavor,
-  numLifelines,
-}: ClockProps) {
+function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
@@ -218,21 +202,8 @@ function Clock({
     return () => clearInterval(interval)
   }, [timeLeft])
 
-  const [mobileWidth, setMobileWidth] = useState(
-    window.matchMedia('(max-width: 800px)').matches,
-  )
-  useEffect(() => {
-    window
-      .matchMedia('(max-width: 800px)')
-      .addEventListener('change', (e) => setMobileWidth(e.matches))
-  }, [])
-
   return (
-    <ClockContainer
-      isFullScreen={isFullScreen}
-      mobileWidth={mobileWidth}
-      numLifelines={numLifelines}
-    >
+    <ClockContainer isFullScreen={isFullScreen}>
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}

@@ -50,7 +50,6 @@ export default function Home() {
               timestamp={modules && modules[0] && modules[0].timestamp}
               labels={modules && modules[0] && modules[0].labels}
               flavor={modules && modules[0] && modules[0].flavor}
-              numLifelines={lifelineModules.length}
             />
             <Lifelines
               lifeLineData={lifelineModules}

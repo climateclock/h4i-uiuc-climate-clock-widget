@@ -11,7 +11,7 @@ const MarqueeContainer = styled.div`
   height: 4vh;
 
 
-  @media only screen and (max-height: 700px) {
+  @media only screen and (min-height: 800) {
       height: 10vh;
   }
 `
