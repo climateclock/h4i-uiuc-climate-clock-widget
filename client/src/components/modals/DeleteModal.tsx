@@ -93,7 +93,10 @@ function DeleteModal({
             </StyledDescription>
             <SubmitButton
               buttonLabel={'Delete'}
-              onClick={deleteLifeline}
+              onClick={() => {
+                deleteLifeline()
+                setShowDialog(false)
+              }}
             ></SubmitButton>
             <button className="cancel" onClick={() => setShowDialog(false)}>
               Cancel
