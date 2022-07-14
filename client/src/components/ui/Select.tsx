@@ -1,22 +1,30 @@
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 
+import { theme } from './GlobalStyle'
+
 const customStyles = {
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? theme.navBackground : theme.background,
+    color: theme.text,
+    fontSize: '14px',
+  }),
   control: (base, state) => ({
     ...base,
     boxShadow: state.isFocused ? 'grey' : 'grey',
     borderColor: 'grey',
-    backgroundColor: 'white',
-    color: state.isFocused ? 'white' : 'white',
+    backgroundColor: state.isSelected ? 'grey' : 'white',
     width: '255px',
     height: '31px',
-    left: '5%',
+    fontSize: '14px',
   }),
   container: (base) => ({
     ...base,
+    fontFamily: theme.secondaryFonts,
     width: '255px',
     height: '31px',
-    left: '4%',
+    left: '5%',
   }),
 }
 
