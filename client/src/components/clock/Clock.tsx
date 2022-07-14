@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ClockProps } from '../../interfaces'
+import { NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -170,17 +171,17 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  height: calc(${(props) => (props.isFullScreen ? '52vh' : '43vh' + (props.mobileWidth ? ' + 3vh' : ' + 9vh - 55px'))});
+  height: calc(100vh - 55px - 4vh - (${(props) => Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)} * 14.5vh));
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
   @media only screen and (max-height: 700px) {
-    height: 65vh - 55px - 9vh;
+    height: calc(100vh - 55px - 10vh - (${(props) => Math.min(1, props.numLifelines)} * 25vh));
   }
   width: 100vw;
 `
 
-function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
+function Clock({ isFullScreen, timestamp, labels, flavor, numLifelines }: ClockProps) {
   const [timeLeft, setTimeLeft] = useState(0)
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
@@ -212,7 +213,7 @@ function Clock({ isFullScreen, timestamp, labels, flavor }: ClockProps) {
   }, [])
 
   return (
-    <ClockContainer isFullScreen={isFullScreen} mobileWidth={mobileWidth}>
+    <ClockContainer isFullScreen={isFullScreen} mobileWidth={mobileWidth} numLifelines={numLifelines}>
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
         title={labels ? (labels[0] ? labels[0] : '') : ''}
