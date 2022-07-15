@@ -32,16 +32,21 @@ const LabelContainer = styled.div`
 `
 
 const ContentContainer = styled(LabelContainer)`
+  display: flex;
+  align-items: center;
   width: 100%;
+  height: calc(100% - 4px - 3vh);
+
+  @media only screen and (max-height: 700px) {
+    height: calc(100% - 4px - 17.65%);
+  }
 `
 
 const Value = styled.div`
   display: flex;
   align-items: center;
   font-size: 3em;
-  margin-right: ${VALUE_UNIT_MARGIN}vw;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
-  margin-top: 25px;
 `
 
 const Unit = styled.div`
