@@ -1,7 +1,8 @@
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { IsMobileContext } from '../../App'
 import { ClockProps } from '../../interfaces'
 import { NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
 import { toUpperCase } from '../../utils/utils'
@@ -169,22 +170,16 @@ const ClockSection = styled.div`
 `
 
 const ClockContainer = styled.div`
-  height: calc(
-    100vh - 55px - 4vh -
-      (
-        ${(props) => Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)} *
-          14.5vh
-      )
-  );
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
-  @media only screen and (max-height: 700px) {
-    height: calc(
-      100vh - 55px - 10vh -
-        (${(props) => Math.min(1, props.numLifelines)} * 25vh)
-    );
-  }
+
+  ${(props) => 
+  props.isMobile ?
+    `height: calc(100vh - 55px - 10vh - 25vh * ${Math.min(1, props.numLifelines)})`
+  :
+   `height: calc(100vh - 55px - 4vh - 14.5vh * ${Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)})`
+  };
   width: 100vw;
   
   display: flex;
@@ -209,6 +204,8 @@ function Clock({
       setTimeLeft(moment(timestamp).diff(moment()))
     }
   }, [timestamp])
+
+  const { isMobile } = useContext(IsMobileContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -235,6 +232,7 @@ function Clock({
       isFullScreen={isFullScreen}
       mobileWidth={mobileWidth}
       numLifelines={numLifelines}
+      isMobile={isMobile}
     >
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}
