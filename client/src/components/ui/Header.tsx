@@ -15,7 +15,7 @@ const LabelContainer = styled.div`
   /* align-items: center; */
   font-size: max(1rem, min(2rem, 3vw));
   height: 3vh;
-  margin-bottom: 32px;
+  // margin-bottom: 32px;
 
   @media only screen and (max-height: 700px) {
     margin-bottom: 0px;

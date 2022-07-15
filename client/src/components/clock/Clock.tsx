@@ -8,6 +8,19 @@ import { NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
+const TempContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // subtracting header height from container in order to center content
+  height: calc(100% - 4px - 3vh);
+
+  @media only screen and (max-height: 700px) {
+    height: calc(100% - 4px - 17.65%);
+  }
+`
+
 const ClockSection = styled.div`
   color: ${({ theme }) => theme.text};
   font-size: 20vh;
@@ -181,11 +194,6 @@ const ClockContainer = styled.div`
    `height: calc(100vh - 55px - 4vh - 14.5vh * ${Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)})`
   };
   width: 100vw;
-  
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 `
 
 function Clock({
@@ -239,11 +247,13 @@ function Clock({
         title={labels ? (labels[0] ? labels[0] : '') : ''}
         themeColor={({ theme }) => theme.red}
       />
-      <ClockSection>
-        <div><h2>{years ? years : '0'}</h2> <h3>YRS</h3></div>
-        <div><h2>{days ? days : '000'}</h2> <h3>DAYS</h3></div>
-        <div><h5>{time ? time : '00:00:00'}</h5></div>
-      </ClockSection>
+      <TempContainer>
+        <ClockSection>
+          <div><h2>{years ? years : '0'}</h2> <h3>YRS</h3></div>
+          <div><h2>{days ? days : '000'}</h2> <h3>DAYS</h3></div>
+          <div><h5>{time ? time : '00:00:00'}</h5></div>
+        </ClockSection>
+      </TempContainer>
     </ClockContainer>
   )
 }
