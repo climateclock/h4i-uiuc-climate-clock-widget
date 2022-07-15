@@ -53,11 +53,6 @@ const ClockSection = styled.div`
     margin-bottom: 17px;
   }
 
-  // This style deals with padding for when there is only one lifeline
-  @media screen and (max-height: 700px) {
-    // padding-top: calc(10vh + 2%);
-  }
-
   // For iPads
   @media screen and (max-width: 1000px) and (min-height: 500px) {
     flex-wrap: wrap;
@@ -125,10 +120,6 @@ const ClockSection = styled.div`
     }
   }
 
-  @media screen and (orientation: portrait) and (max-height: 700px) and (min-height: 400px) {
-    // padding-top: 7vh;
-  }
-
   // Landscape style, doesn't utilize the wrap
   @media screen and (max-width: 900px) and (max-height: 800px) {
     h2,
@@ -152,10 +143,6 @@ const ClockSection = styled.div`
       font-size: max(1.5rem, min(2rem, 2.5vw));
       margin-bottom: 9px;
     }
-  }
-
-  @media screen and (max-height: 300px) {
-    padding-top: 0px;
   }
 
   @media screen and (max-height: 400px) {
