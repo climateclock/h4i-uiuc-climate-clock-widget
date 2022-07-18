@@ -40,133 +40,191 @@ const ClockSection = styled.div`
     margin: 0px 20px 0px 20px;
   }
 
-  h2,
-  h5 {
-    font-size: max(5.5rem, min(6.5rem, 8vw));
-    margin: 0%;
-  }
-
-  h3 {
-    font-size: max(2.75rem, min(3.25rem, 4vw));
-    margin: 0px 15px 0 15px;
-    align-self: flex-end;
-    margin-bottom: 17px;
-  }
-
-  // For iPads
-  @media screen and (max-width: 1000px) and (min-height: 500px) {
-    flex-wrap: wrap;
-    margin: 0px;
-
-    h2 {
-      font-size: 11vmin;
+  @media screen and (orientation: landscape) and (min-width: 300px) {
+    h2,
+    h5 {
+      font-size: max(4vw, min(4rem, 6vh));
+      margin: 0%;
     }
 
     h3 {
-      font-size: 4vmin;
-      margin-bottom: 18px;
-    }
-
-    h5 {
-      font-size: 10vmin;
-      margin: 10px;
+      font-size: max(2.75vw, min(3.25rem, 4vh));
+      margin: 0px 1px 0 1px;
+      align-self: flex-end;
+      margin-bottom: 1px;
     }
   }
 
-  @media screen and (max-width: 800px) and (min-height: 800px) and (orientation: portrait) {
+  @media screen and (orientation: landscape) and (min-width: 450px) {
+    h2,
+    h5 {
+      font-size: max(5.5vw, min(6.5rem, 8vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(2.75vw, min(3.25rem, 4vh));
+      margin: 0px 3px 0 3px;
+      align-self: flex-end;
+      margin-bottom: 3px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (min-width: 750px) {
+    h2,
+    h5 {
+      font-size: max(4.5vw, min(4rem, 8vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(2.75vw, min(3.25rem, 4vh));
+      margin: 0px 5px 0 5px;
+      align-self: flex-end;
+      margin-bottom: 5px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (min-width: 900px) {
+    h2,
+    h5 {
+      font-size: max(5.5vw, min(4.5rem, 9vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(2.75vw, min(3.25rem, 4vh));
+      margin: 0px 7px 0 7px;
+      align-self: flex-end;
+      margin-bottom: 7px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (min-width: 1000px) {
+    h2,
+    h5 {
+      font-size: max(6.5vw, min(5.5rem, 12vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(3.75vw, min(2.75rem, 6vh));
+      margin: 0px 9px 0 9px;
+      align-self: flex-end;
+      margin-bottom: 9px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (min-width: 1500px) {
+    h3 {
+      margin-bottom: 12px;
+    }
+  }
+
+  @media screen and (orientation: landscape) and (min-width: 2000px) {
+    h2,
+    h5 {
+      font-size: max(7.5vw, min(6rem, 15vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(3.75vw, min(3.25rem, 4vh));
+      margin: 0px 15px 0 15px;
+      align-self: flex-end;
+      margin-bottom: 19px;
+    }
+  }
+
+  @media screen and (orientation: portrait) and (min-height: 600px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+    div {
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: max(11vw, min(6rem, 9vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(5.5vw, min(3rem, 4.5vh));
+      margin: 0px 7px 0 7px;
+      align-self: flex-end;
+      margin-bottom: 7px;
+    }
+
+    h5 {
+      font-size: max(7vw, min(4rem, 6vh));
+      margin: 0%;
+    }
+  }
+
+  @media screen and (orientation: portrait) and (min-height: 800px) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 
-    div {
-      margin: 10px;
-    }
-
     h2 {
-      font-size: max(5rem, min(6rem, 7vw));
+      font-size: max(10vw, min(7rem, 12vh));
+      margin: 0%;
     }
 
     h3 {
-      font-size: max(2.5rem, min(3rem, 3.5vw));
-      margin-bottom: 9px;
+      font-size: max(5vw, min(3.5rem, 6vh));
+      margin: 0px 7px 0 7px;
+      align-self: flex-end;
+      margin-bottom: 7px;
     }
 
     h5 {
-      font-size: max(3rem, min(2.75rem, 3.25vw));
+      font-size: max(8vw, min(5rem, 9vh));
     }
   }
 
-  @media screen and (max-width: 800px) and (max-height: 800px) and (orientation: portrait) {
+  @media screen and (orientation: portrait) and (max-width: 450px) and (min-height: 800px) {
+
+    h2 {
+      font-size: max(6.5vw, min(4.5rem, 9vh));
+      margin: 0%;
+    }
+
+    h3 {
+      font-size: max(3.75vw, min(2.75rem, 4.5vh));
+      margin: 0px 7px 0 7px;
+      align-self: flex-end;
+      margin-bottom: 7px;
+    }
+
+    h5 {
+      font-size: max(5vw, min(4rem, 7vh));
+    }
+  }
+
+  @media screen and (orientation: portrait) and (max-width: 300px) and (min-height: 800px) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    // padding-top: 3%;
-
-    div {
-      margin: 5px;
-    }
 
     h2 {
-      font-size: max(4rem, min(5rem, 6vw));
+      font-size: max(6.5vw, min(4.5rem, 9vh));
+      margin: 0%;
     }
 
     h3 {
-      font-size: max(2rem, min(2.5rem, 3vw));
-      margin-bottom: 9px;
+      font-size: max(2.75vw, min(3.25rem, 4vh));
+      margin: 0px 7px 0 7px;
+      align-self: flex-end;
+      margin-bottom: 7px;
     }
 
     h5 {
-      font-size: max(2.5rem, min(2.25rem, 2.75vw));
+      font-size: max(5vw, min(3.75rem, 6vh));
     }
-  }
-
-  // Landscape style, doesn't utilize the wrap
-  @media screen and (max-width: 900px) and (max-height: 800px) {
-    h2,
-    h5 {
-      font-size: max(4rem, min(5rem, 6vw));
-    }
-
-    h3 {
-      font-size: max(2rem, min(2.5rem, 3vw));
-      margin-bottom: 9px;
-    }
-  }
-
-  @media screen and (max-width: 700px) and (max-height: 800px) {
-    h2,
-    h5 {
-      font-size: max(3rem, min(4rem, 5vw));
-    }
-
-    h3 {
-      font-size: max(1.5rem, min(2rem, 2.5vw));
-      margin-bottom: 9px;
-    }
-  }
-
-  @media screen and (max-height: 400px) {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
-    margin: 0px;
-    padding: 0px;
-
-    div {
-      margin: 0px;
-    }
-
-    h3 {
-      font-size: 6vw;
-      margin: 0px;
-    }
-
-    h2 {
-      font-size: 2vw;
-      margin: 0px;
-      margin-bottom: 15px;
-    }
-  }
+  }  
 `
 
 const ClockContainer = styled.div`

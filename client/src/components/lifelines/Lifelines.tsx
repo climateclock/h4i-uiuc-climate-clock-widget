@@ -1,3 +1,6 @@
+import { useContext } from 'react'
+
+import { IsMobileContext } from '../../App'
 import useWindowDimensions from '../../hooks/useWindowdimensions'
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
@@ -12,9 +15,9 @@ export default function Lifelines({
   lifeLineData,
   displayNum,
 }: LifelinePropsInterface) {
-  const dimensions = useWindowDimensions()
+  const isMobile = useContext(IsMobileContext)
 
-  const lifelineDisplayNum = dimensions.height > 700 ? displayNum : 1
+  const lifelineDisplayNum = isMobile ? 1 : displayNum
   return (
     <>
       {lifeLineData.slice(0, lifelineDisplayNum).map((module) => {
