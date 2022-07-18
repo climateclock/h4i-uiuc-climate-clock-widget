@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
@@ -72,6 +73,8 @@ const LifelineCreationForm = () => {
     [],
   )
 
+  const handle = useFullScreenHandle()
+
   useEffect(() => {
     getData(
       URL,
@@ -120,7 +123,7 @@ const LifelineCreationForm = () => {
   }
   return (
     <>
-      <NavBar isFullScreen={true} atHome={false}></NavBar>
+      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
       <FormatSpacing>
         <StyledLifeline>
           <StyledHeading>Clock Lifelines</StyledHeading>

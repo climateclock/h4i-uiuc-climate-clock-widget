@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
 import CopyButton from '../components/ui/CopyButton'
@@ -26,15 +27,15 @@ const SettingSubheading = styled.div`
   font-weight: bold;
   font-size: 20px;
   line-height: 24px;
-  padding-top: 1%;
-  padding-bottom: 0.25%;
+  // top margin should only be applied to settings that are not the first (right under "Clock Settings")
+  margin-top: ${(props) => (props.isTopSetting ? '1%' : '3%')};
 `
 
 const SettingCaption = styled.div`
   color: ${({ theme }) => theme.text};
   font-family: ${({ theme }) => theme.secondaryFonts};
   margin-left: 5%;
-  font-weight: 350;
+  font-weight: 575;
   font-size: 1rem;
   line-height: 24px;
   padding-top: 1%;
@@ -50,16 +51,18 @@ const SettingsText = styled.div`
 `
 
 function Settings() {
+  const handle = useFullScreenHandle()
   const [languageSelected, setLanguageSelected] = useState<string>()
   const handleLanguageSelectedChange = (language: string) => {
     setLanguageSelected(language)
   }
   return (
     <>
-      <NavBar isFullScreen={true} atHome={false}></NavBar>
+      <NavBar isFullScreen={true} atHome={false} handle={handle}></NavBar>
       <SettingsHeading>Clock Settings</SettingsHeading>
-
-      <SettingSubheading id="language">Configure Language</SettingSubheading>
+      <SettingSubheading id="language" isTopSetting={true}>
+        Configure Language
+      </SettingSubheading>
       <SettingCaption> Language </SettingCaption>
       <StyledSelect
         options={options}
@@ -67,7 +70,8 @@ function Settings() {
         handleOptionSelectedChange={handleLanguageSelectedChange}
       />
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
-      <SettingCaption> Shareable Link </SettingCaption>
+      <SettingCaption isTopSetting={false}> Shareable Link </SettingCaption>
+      <SettingsText>Copy this URL to share your clock with others</SettingsText>
       <CopyButton
         type="link"
         placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
