@@ -48,16 +48,6 @@ const SettingsText = styled.div`
   margin-left: 5%;
   font-size: 0.75rem;
   line-height: 24px;
-  padding-top: 1%;
-`
-
-const ToggleContainer = styled.div`
-  display: flex;
-  gap: 2%;
-`
-
-const ToggleStyle = styled.div`
-  padding-top: 1%;
 `
 
 function Settings() {

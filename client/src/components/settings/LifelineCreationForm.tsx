@@ -197,7 +197,6 @@ const LifelineCreationForm = () => {
           />
           <DraggableLifelines lifelinesProp={lifelineModules} />
           {/* <DraggableLifelines lifelinesProp={lifelineModules} /> */}
-          <h3>Hidden Lifelines</h3>
         </StyledLifeline>
       </FormatSpacing>
     </>
