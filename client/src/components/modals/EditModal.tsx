@@ -139,7 +139,6 @@ function EditModal({
       const saved = JSON.parse(LifelineArray)[index]
       if (saved) {
         const initialValue = saved.unit_labels[0]
-        console.log(initialValue)
         return initialValue || ''
       }
     }
@@ -170,7 +169,6 @@ function EditModal({
 
         const newLifelines = JSON.parse(LifelineArray)
         newLifelines[index] = lifeline
-        console.log(newLifelines)
         localStorage.setItem('lifelines', JSON.stringify(newLifelines))
       }
       close()

@@ -11,7 +11,6 @@ import {
 import { getData } from '../../utils/utils'
 import DraggableLifelines from '../draggable/DraggableLifelines'
 import CreateModal from '../modals/CreateModal'
-
 import NavBar from '../ui/NavBar'
 import DefaultLifelineCreationForm from './DefaultLifelineCreationForm'
 
