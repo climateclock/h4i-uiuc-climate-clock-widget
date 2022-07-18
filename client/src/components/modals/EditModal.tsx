@@ -133,12 +133,13 @@ function EditModal({
     }
   })
 
-  const [unit, setUnit] = useState(() => {
+  const [unit, setUnit] = useState<string>(() => {
     const LifelineArray = localStorage.getItem('lifelines')
     if (LifelineArray) {
       const saved = JSON.parse(LifelineArray)[index]
       if (saved) {
-        const initialValue = saved.unit
+        const initialValue = saved.unit_labels[0]
+        console.log(initialValue)
         return initialValue || ''
       }
     }
@@ -149,14 +150,14 @@ function EditModal({
     if (LifelineArray) {
       const saved = JSON.parse(LifelineArray)[index]
       if (saved) {
-        const initialValue = saved.unit
+        const initialValue = saved.rate
         return initialValue || 0
       }
     }
   })
 
   function onSubmit() {
-    if (title !== '' && statistic !== 0 && unit !== '') {
+    if (title !== '' && statistic !== 0) {
       const LifelineArray = localStorage.getItem('lifelines')
 
       if (LifelineArray) {
@@ -169,6 +170,7 @@ function EditModal({
 
         const newLifelines = JSON.parse(LifelineArray)
         newLifelines[index] = lifeline
+        console.log(newLifelines)
         localStorage.setItem('lifelines', JSON.stringify(newLifelines))
       }
       close()
@@ -193,11 +195,7 @@ function EditModal({
         setStatistic(lifeline.initial)
       }
       if (lifeline.unit_labels) {
-        setUnit(lifeline.unit)
-      }
-
-      if (lifeline.unit) {
-        setUnit(lifeline.unit)
+        setUnit(lifeline.unit_labels[0])
       }
     }
   }, [index, setShowDialog, showDialog])
@@ -252,7 +250,6 @@ function EditModal({
                   <StyledInput
                     onChange={(e) => setUnit(e.target.value)}
                     value={unit}
-                    required
                     placeholder={'Ex: KM'}
                     type={'text'}
                   />
