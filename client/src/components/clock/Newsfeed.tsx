@@ -11,11 +11,11 @@ const MarqueeContainer = styled.div`
   display: flex;
   align-items: center
   font-weight: bold;
-  height: ${(props) => props.isMobile ? '10vh' : '4vh'};
+  height: ${(props) => (props.isMobile ? '10vh' : '4vh')};
 `
 
 const Newsfeed = ({ headline }: { headline: string }) => {
-  const { isMobile } = useContext(IsMobileContext);
+  const { isMobile } = useContext(IsMobileContext)
 
   return (
     <MarqueeContainer isMobile={isMobile}>

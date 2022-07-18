@@ -11,8 +11,8 @@ const Container = styled.div`
     font-family: ${({ theme }) => theme.fonts};
     font-weight: bold;
     background: ${({ theme }) => theme.blue};
-    
-    height: ${(props) => props.isMobile ? '25vh' : '14.5vh'};
+
+    height: ${(props) => (props.isMobile ? '25vh' : '14.5vh')};
 
     width: 100vw;
   }

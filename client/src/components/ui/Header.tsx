@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const PADDING = 1
-
 const HeaderBorder = styled.div`
   height: 4px;
   background: ${({ theme }) => theme.black};
@@ -14,7 +12,7 @@ const LabelContainer = styled.div`
   width: 100%;
   /* align-items: center; */
   font-size: max(1rem, min(2rem, 3vw));
-  height: 3vh;
+  height: 4vh;
   // margin-bottom: 32px;
 
   @media only screen and (max-height: 700px) {
@@ -27,8 +25,9 @@ const LabelContainer = styled.div`
 const Module = styled.div`
   display: flex;
   align-items: center;
-  padding: ${PADDING}% ${PADDING}%;
+  padding-right: min(35px, 3vw);
   text-align: center;
+  margin-left: min(35px, 3vw);
 
   @media only screen and (max-height: 700px) {
     padding-top: 10px;

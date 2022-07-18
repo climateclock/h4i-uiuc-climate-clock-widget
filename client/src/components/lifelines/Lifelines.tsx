@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 
 import { IsMobileContext } from '../../App'
-import useWindowDimensions from '../../hooks/useWindowdimensions'
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString, toUpperCase } from '../../utils/utils'
 import Lifeline from './Lifeline'

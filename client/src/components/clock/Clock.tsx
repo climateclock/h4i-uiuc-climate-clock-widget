@@ -140,7 +140,7 @@ const ClockSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    
+
     div {
       margin-bottom: 12px;
     }
@@ -186,7 +186,6 @@ const ClockSection = styled.div`
   }
 
   @media screen and (orientation: portrait) and (max-width: 450px) and (min-height: 800px) {
-
     h2 {
       font-size: max(6.5vw, min(4.5rem, 9vh));
       margin: 0%;
@@ -224,7 +223,7 @@ const ClockSection = styled.div`
     h5 {
       font-size: max(5vw, min(3.75rem, 6vh));
     }
-  }  
+  }
 `
 
 const ClockContainer = styled.div`
@@ -232,12 +231,16 @@ const ClockContainer = styled.div`
   font-weight: bold;
   background: ${({ theme }) => theme.red};
 
-  ${(props) => 
-  props.isMobile ?
-    `height: calc(100vh - 55px - 10vh - 25vh * ${Math.min(1, props.numLifelines)})`
-  :
-   `height: calc(100vh - 55px - 4vh - 14.5vh * ${Math.min(NUM_LIFELINES_DISPLAYED, props.numLifelines)})`
-  };
+  ${(props) =>
+    props.isMobile
+      ? `height: calc(100vh - 55px - 10vh - 25vh * ${Math.min(
+          1,
+          props.numLifelines,
+        )})`
+      : `height: calc(100vh - 55px - 4vh - 14.5vh * ${Math.min(
+          NUM_LIFELINES_DISPLAYED,
+          props.numLifelines,
+        )})`};
   width: 100vw;
 `
 
@@ -258,7 +261,7 @@ function Clock({
     }
   }, [timestamp])
 
-  const { isMobile } = useContext(IsMobileContext);
+  const { isMobile } = useContext(IsMobileContext)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -294,9 +297,15 @@ function Clock({
       />
       <TempContainer>
         <ClockSection>
-          <div><h2>{years ? years : '0'}</h2> <h3>YRS</h3></div>
-          <div><h2>{days ? days : '000'}</h2> <h3>DAYS</h3></div>
-          <div><h5>{time ? time : '00:00:00'}</h5></div>
+          <div>
+            <h2>{years ? years : '0'}</h2> <h3>YRS</h3>
+          </div>
+          <div>
+            <h2>{days ? days : '000'}</h2> <h3>DAYS</h3>
+          </div>
+          <div>
+            <h5>{time ? time : '00:00:00'}</h5>
+          </div>
         </ClockSection>
       </TempContainer>
     </ClockContainer>

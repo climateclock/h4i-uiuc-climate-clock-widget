@@ -9,21 +9,25 @@ import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 
-let IsMobileContext;
+let IsMobileContext
 
 function App() {
-  const [isMobile, setIsMobile] = useState<boolean>();
+  const [isMobile, setIsMobile] = useState<boolean>()
 
   useEffect(() => {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi/i.test(navigator.userAgent)) {
-      setIsMobile(true);
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi/i.test(
+        navigator.userAgent,
+      )
+    ) {
+      setIsMobile(true)
     } else {
-      setIsMobile(false);
+      setIsMobile(false)
     }
   }, [])
 
   // archna: move to context file
-  IsMobileContext = createContext(isMobile ? true : false);
+  IsMobileContext = createContext(isMobile ? true : false)
 
   /* Sets the lifeline modules upon load and every defaultLanguage change */
   return (
