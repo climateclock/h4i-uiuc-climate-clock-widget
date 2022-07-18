@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import Toggle from '../components/buttons/Toggle'
 import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
