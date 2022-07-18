@@ -156,7 +156,7 @@ function EditModal({
   })
 
   function onSubmit() {
-    if (title !== '' && statistic !== 0 && unit !== '') {
+    if (title !== '' && statistic !== 0) {
       const LifelineArray = localStorage.getItem('lifelines')
 
       if (LifelineArray) {

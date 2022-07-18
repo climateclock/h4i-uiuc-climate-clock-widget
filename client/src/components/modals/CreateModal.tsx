@@ -95,11 +95,7 @@ function CreateModal({
   const [formData, setFormData] = useState<LifelineInterface>(defaultFormData)
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (
-      formData.title !== '' &&
-      formData.statistic !== null &&
-      formData.unit !== ''
-    ) {
+    if (formData.title !== '' && formData.statistic !== null) {
       const LifelineArray = localStorage.getItem('lifelines')
 
       if (LifelineArray) {
