@@ -255,13 +255,14 @@ function Clock({
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
   const [time, setTime] = useState('')
+
+  const isMobile = useContext(IsMobileContext)
+
   useEffect(() => {
     if (timestamp) {
       setTimeLeft(moment(timestamp).diff(moment()))
     }
   }, [timestamp])
-
-  const { isMobile } = useContext(IsMobileContext)
 
   useEffect(() => {
     const interval = setInterval(() => {
