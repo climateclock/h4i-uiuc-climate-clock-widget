@@ -114,10 +114,10 @@ export const LifelineDropdown = ({
           <StyledChevronDown />
         </StyledMenuButton>
         <StyledMenuList>
-          <StyledMenuItem disabled={!isDisplayed}>
+          {/* <StyledMenuItem disabled={!isDisplayed}>
             <StyledShow isEnabled={isDisplayed} />
             <MenuText isEnabled={isDisplayed}>Show</MenuText>
-          </StyledMenuItem>
+          </StyledMenuItem> */}
           <StyledMenuItem disabled={!isCustomizable}>
             <StyledPencilFill
               isEnabled={isCustomizable}
