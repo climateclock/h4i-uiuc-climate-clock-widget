@@ -244,7 +244,7 @@ function EditModal({
                   />
                 </div>
                 <div>
-                  <StyledLabel>Unit</StyledLabel>
+                  <StyledLabel>Unit (Optional)</StyledLabel>
                   <StyledInput
                     onChange={(e) => setUnit(e.target.value)}
                     value={unit}
