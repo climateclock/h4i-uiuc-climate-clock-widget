@@ -4,7 +4,11 @@ import { Menu, MenuButton, MenuItem, MenuList } from '@reach/menu-button'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Show } from '@styled-icons/boxicons-regular/Show'
 import { ChevronDown, TrashAlt } from '@styled-icons/boxicons-solid'
+import { useState } from 'react'
 import styled from 'styled-components'
+
+import DeleteModal from '../modals/DeleteModal'
+import EditModal from '../modals/EditModal'
 
 interface DropdownInterface {
   isDisplayed: boolean
@@ -106,6 +110,8 @@ export const LifelineDropdown = ({
   onDelete,
   index,
 }: DropdownInterface) => {
+  const [showEditDialog, setShowEditDialog] = useState<boolean>(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState<boolean>(false)
   return (
     <div>
       <Menu>
@@ -118,19 +124,29 @@ export const LifelineDropdown = ({
             <StyledShow isEnabled={isDisplayed} />
             <MenuText isEnabled={isDisplayed}>Show</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem disabled={!isCustomizable}>
-            <StyledPencilFill
-              isEnabled={isCustomizable}
-              onClick={() => console.log(isCustomizable)}
-            />
+          <StyledMenuItem
+            disabled={!isCustomizable}
+            onSelect={() => setShowEditDialog(true)}
+          >
+            <StyledPencilFill isEnabled={isCustomizable} />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => onDelete(index)}>
+          <StyledMenuItem onSelect={() => setShowDeleteDialog(true)}>
             <StyledTrash />
             <MenuText isEnabled={true}>Delete</MenuText>
           </StyledMenuItem>
         </StyledMenuList>
       </Menu>
+      <EditModal
+        showDialog={showEditDialog}
+        setShowDialog={setShowEditDialog}
+        index={index}
+      />
+      <DeleteModal
+        showDialog={showDeleteDialog}
+        setShowDialog={setShowDeleteDialog}
+        deleteLifeline={() => onDelete(index)}
+      />
     </div>
   )
 }

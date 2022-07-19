@@ -129,10 +129,10 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
                         </Alignment>
                       </Card>
                       <LifelineCard
+                        index={index}
                         lifeline={lifeline}
                         isDisplayed={index < NUM_LIFELINES_DISPLAYED}
                         onDelete={deleteLifeline}
-                        index={index}
                       />
                     </StyledDiv>
                   </div>
