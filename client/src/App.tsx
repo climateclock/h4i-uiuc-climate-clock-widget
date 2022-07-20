@@ -15,11 +15,10 @@ function App() {
   const [isMobile, setIsMobile] = useState<boolean>()
 
   useEffect(() => {
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi/i.test(
-        navigator.userAgent,
-      )
-    ) {
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+
+    if (Math.min(vw, vh) < 700) {
       setIsMobile(true)
     } else {
       setIsMobile(false)
