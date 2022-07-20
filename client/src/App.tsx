@@ -1,32 +1,17 @@
 import { WindowSize } from '@reach/window-size'
-import { createContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import PageEmbed from './components/embed/PageEmbed'
 import LifelineCreationForm from './components/settings/LifelineCreationForm'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
+import { IsMobileContext } from './contexts/index'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 
-let IsMobileContext
-
 function App() {
-  const [isMobile, setIsMobile] = useState<boolean>()
-
-  useEffect(() => {
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-
-    if (Math.min(vw, vh) < 700) {
-      setIsMobile(true)
-    } else {
-      setIsMobile(false)
-    }
-  }, [])
-
-  // archna: move to context file
-  IsMobileContext = createContext(isMobile ? true : false)
+  const isMobile = useContext(IsMobileContext)
 
   /* Sets the lifeline modules upon load and every defaultLanguage change */
   return (
