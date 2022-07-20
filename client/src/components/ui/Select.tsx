@@ -32,6 +32,7 @@ export const StyledSelect = ({
   options,
   optionSelected,
   handleOptionSelectedChange,
+  placeholder,
 }) => (
   <Select
     styles={customStyles}
@@ -46,6 +47,7 @@ export const StyledSelect = ({
         primary25: 'neutral0',
       },
     })}
+    placeholder={placeholder}
   />
 )
 
@@ -53,4 +55,5 @@ StyledSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.any),
   optionSelected: PropTypes.any,
   handleOptionSelectedChange: PropTypes.func,
+  placeholder: String,
 }

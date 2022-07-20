@@ -83,6 +83,7 @@ export default function DefaultLifelineCreationForm({
   return (
     <form onSubmit={onSubmit}>
       <StyledSelect
+        placeholder="Select default lifeline"
         options={defaultOptions}
         optionSelected={optionSelected}
         handleOptionSelectedChange={handleOptionSelectedChange}
