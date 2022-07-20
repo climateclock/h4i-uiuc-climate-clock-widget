@@ -264,8 +264,6 @@ function Clock({
     }
   }, [timestamp])
 
-  const isMobile = useContext(IsMobileContext)
-
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft(moment(timeLeft).subtract(1, 'seconds').valueOf())
