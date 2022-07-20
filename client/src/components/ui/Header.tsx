@@ -18,7 +18,6 @@ const LabelContainer = styled.div`
   @media only screen and (max-height: 700px) {
     margin-bottom: 0px;
     height: 17.65%; // 15% of 85
-    font-size: min(15vh, 1.5vw);
   }
 `
 
