@@ -15,8 +15,8 @@ const MarqueeContainer = styled.div`
 `
 
 const Newsfeed = ({ headline }: { headline: string }) => {
-  const { isMobile } = useContext(IsMobileContext)
-
+  const isMobile = useContext(IsMobileContext)
+  
   return (
     <MarqueeContainer isMobile={isMobile}>
       <Marquee

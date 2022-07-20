@@ -261,7 +261,7 @@ function Clock({
     }
   }, [timestamp])
 
-  const { isMobile } = useContext(IsMobileContext)
+  const isMobile = useContext(IsMobileContext)
 
   useEffect(() => {
     const interval = setInterval(() => {

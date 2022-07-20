@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useContext,useEffect, useState  } from 'react'
 import styled from 'styled-components'
 
+import { IsMobileContext } from '../../App'
 import { LifelinePropsInterface } from '../../interfaces'
 import Header from '../ui/Header'
 
@@ -68,6 +69,8 @@ function Lifeline({
     !value ? cleanedRate : value + cleanedRate,
   )
 
+  const isMobile = useContext(IsMobileContext)
+
   /* update lifeline value within interval */
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,7 +85,7 @@ function Lifeline({
   })
 
   return (
-    <Container>
+    <Container isMobile={isMobile}>
       <Header
         moduleType={module_type}
         title={title}
