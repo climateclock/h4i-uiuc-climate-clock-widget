@@ -1,5 +1,8 @@
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
+interface TitleProps {
+  color: string,
+}
 
 const HeaderBorder = styled.div`
   height: 4px;
@@ -10,14 +13,12 @@ const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  /* align-items: center; */
   font-size: max(1rem, min(2rem, 3vw));
-  height: 4vh;
-  // margin-bottom: 32px;
+  // height: 4vh;
 
   @media only screen and (max-height: 700px) {
     margin-bottom: 0px;
-    height: 17.65%; // 15% of 85
+    font-size: max(1rem, min(2rem, 3vh));
   }
 `
 
@@ -29,29 +30,23 @@ const Module = styled.div`
   margin-left: min(35px, 3vw);
 
   @media only screen and (max-height: 700px) {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 `
 
-const Title = ({ color, ...props }) => <div {...props}></div>
-
-Title.propTypes = {
-  color: PropTypes.func.isRequired,
-}
-
-const StyledTitle = styled(Title)`
+const StyledTitle = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  background: ${({ theme }) => theme.black};
+  background-color: ${({ theme }) => theme.black};
   padding: 0 2%;
   opacity: 100%;
-  color: ${(props) => props.color};
+  color: ${(props : TitleProps) => props.color};
 
   @media only screen and (max-height: 700px) {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 `
 
