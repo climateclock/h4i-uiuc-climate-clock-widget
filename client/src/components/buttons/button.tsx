@@ -18,7 +18,7 @@ const Button = ({ type, className, buttonLabel, onClick }: ButtonProps) => {
 const StyledButton = styled(Button)`
   background-color: ${({ theme }) => theme.buttonBackground};
   display: inline-block;
-  margin: 4px 2px;
+  margin: 1px 2px;
   border: none;
   cursor: pointer;
   text-align: center;

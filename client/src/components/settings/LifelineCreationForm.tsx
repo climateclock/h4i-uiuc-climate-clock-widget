@@ -35,6 +35,11 @@ const StyledLifeline = styled.div`
     font-size: 14px;
   }
 `
+const StyledCreationLifelinesContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 50%;
+`
+
 const FormatSpacing = styled.div`
   max-width: 1090px;
   margin: 57px;
@@ -101,11 +106,13 @@ const LifelineCreationForm = () => {
       <FormatSpacing>
         <StyledLifeline>
           <h1>Clock Lifelines</h1>
-          <DefaultLifelineCreationForm
-            lifelineModules={lifelineModules}
-            setLifelineModules={setLifelineModules}
-          />
-          <CreateModal formSubmit={formSubmit} />
+          <StyledCreationLifelinesContainer>
+            <DefaultLifelineCreationForm
+              lifelineModules={lifelineModules}
+              setLifelineModules={setLifelineModules}
+            />
+            <CreateModal formSubmit={formSubmit} />
+          </StyledCreationLifelinesContainer>
           <h3>Displayed Lifelines</h3>
           <p>
             Drag a Lifeline here to display it. Up to three Lifelines can be
