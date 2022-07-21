@@ -9,7 +9,6 @@ import {
   URL,
 } from '../../utils/constants'
 import { getLifelineModules, returnFirstString } from '../../utils/utils'
-import StyledButton from '../buttons/button'
 import { StyledSelect } from '../ui/Select'
 
 export default function DefaultLifelineCreationForm({
