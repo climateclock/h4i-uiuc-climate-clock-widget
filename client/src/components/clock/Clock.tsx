@@ -281,7 +281,7 @@ function Clock({
 
   useEffect(() => {
     const query = window.matchMedia('(max-width: 800px)')
-    
+
     // Safari doesn't support addEventListener
     try {
       query.addEventListener('change', (e) => setMobileWidth(e.matches))
@@ -292,11 +292,11 @@ function Clock({
         /* tslint:disable-next-line */
         query.addListener((e) => setMobileWidth(e.matches))
 
-        console.log("tried alternative")
+        console.log('tried alternative')
       } catch (e2) {
-        console.error(e2);
+        console.error(e2)
       }
-    }  
+    }
   }, [])
 
   return (
