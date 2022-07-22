@@ -36,23 +36,6 @@ const StyledLifeline = styled.div`
   }
 `
 
-const StyledHeading = styled.h1`
-  color: ${({ theme }) => theme.navy} !important;
-  margin: 0px;
-`
-
-const StyledSubheading = styled.h2`
-  font-weight: lighter;
-  font-size: 1.3rem;
-  margin: 0px;
-  margin-top: 14px;
-`
-
-const StyledDescription = styled.p`
-  margin-top: 5px;
-  font-weight: lighter;
-`
-
 const FormatSpacing = styled.div`
   max-width: 1090px;
   margin: 57px;
