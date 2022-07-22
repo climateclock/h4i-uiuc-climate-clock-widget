@@ -7,34 +7,35 @@ import { createGlobalStyle } from 'styled-components'
  */
 const MOBILE_MAX_WIDTH = 767
 
-// interface ThemeType {
-//   device: {
-//     mobile: string
-//     desktop: string
-//   }
-//   fonts: string
-//   text: string
-//   secondaryText: string
-//   tertiaryText: string
-//   headerText: string
-//   background: string
-//   secondaryBackground: string
-//   navBackground: string
-//   shadow: string
-//   orange: string
-//   transparentOrange: string
-//   transparentBlue: string
-//   transparentPink: string
-//   blue: string
-//   green: string
-//   red: string
-//   invalid: string
-//   tag: {
-//     access: string
-//     verified: string
-//     unverified: string
-//   }
-// }
+interface ThemeType {
+  device: {
+    mobile: string
+    desktop: string
+  }
+  fonts: string
+  text: string
+  secondaryText: string
+  tertiaryText: string
+  headerText: string
+  background: string
+  secondaryBackground: string
+  navBackground: string
+  shadow: string
+  orange: string
+  transparentOrange: string
+  transparentBlue: string
+  transparentPink: string
+  black: string
+  blue: string
+  green: string
+  red: string
+  invalid: string
+  tag: {
+    access: string
+    verified: string
+    unverified: string
+  }
+}
 
 const theme = {
   // media queries for mobile and desktop
@@ -95,7 +96,10 @@ const zIndex = {
   modal: 30,
 }
 
-const GlobalStyle = createGlobalStyle<{ WindowSize: number }>`
+const GlobalStyle = createGlobalStyle<{
+  windowSize: { width: number; height: number }
+  theme: ThemeType
+}>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   body {

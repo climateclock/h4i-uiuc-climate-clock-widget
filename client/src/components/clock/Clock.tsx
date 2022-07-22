@@ -226,7 +226,12 @@ const ClockSection = styled.div`
   }
 `
 
-const ClockContainer = styled.div`
+const ClockContainer = styled.div<{
+  isFullScreen?: boolean
+  isMobile?: boolean
+  numLifelines: number
+  mobileWidth?: boolean
+}>`
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};

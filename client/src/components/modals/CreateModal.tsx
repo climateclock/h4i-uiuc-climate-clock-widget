@@ -167,7 +167,7 @@ function CreateModal({
                         statistic: parseInt(e.target.value) ?? e.target.value,
                       })
                     }
-                    value={formData.statistic}
+                    value={formData.statistic ?? 0}
                     required
                     placeholder={'Ex: 12.77155930'}
                     type={'number'}
