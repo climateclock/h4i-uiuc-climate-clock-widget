@@ -1,5 +1,8 @@
+import { useContext } from 'react'
 import Marquee from 'react-fast-marquee'
 import styled from 'styled-components'
+
+import { IsMobileContext } from '../../App'
 
 const MarqueeContainer = styled.div`
   background: ${({ theme }) => theme.black};
@@ -8,17 +11,14 @@ const MarqueeContainer = styled.div`
   display: flex;
   align-items: center
   font-weight: bold;
-  height: 4vh;
-
-
-  @media only screen and (max-height: 700px) {
-      height: 10vh;
-  }
+  height: ${(props) => (props.isMobile ? '10vh' : '4vh')};
 `
 
 const Newsfeed = ({ headline }: { headline: string }) => {
+  const isMobile = useContext(IsMobileContext)
+
   return (
-    <MarqueeContainer>
+    <MarqueeContainer isMobile={isMobile}>
       <Marquee
         style={{ fontWeight: 'bold' }}
         gradient={false}
