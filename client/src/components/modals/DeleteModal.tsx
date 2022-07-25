@@ -4,7 +4,7 @@ import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { Close } from '@styled-icons/evaicons-solid'
 import styled from 'styled-components'
 
-import StyledButton, { ButtonProps } from '../buttons/button'
+import StyledButton from '../buttons/button'
 
 const CloseButton = styled(Close)`
   color: #575757;
@@ -13,7 +13,7 @@ const CloseButton = styled(Close)`
   cursor: pointer;
 `
 
-const SubmitButton = styled(StyledButton)<ButtonProps>`
+const SubmitButton = styled(StyledButton)`
   float: right;
   font-size: 12px;
 `

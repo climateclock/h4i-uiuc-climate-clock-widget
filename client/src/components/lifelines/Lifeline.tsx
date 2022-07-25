@@ -7,7 +7,7 @@ import Header from '../ui/Header'
 
 const VALUE_UNIT_MARGIN = 1
 
-const Container = styled.div<{ isMobile: boolean }>`
+const Container = styled.div`
   & {
     font-family: ${({ theme }) => theme.fonts};
     font-weight: bold;
@@ -18,7 +18,6 @@ const Container = styled.div<{ isMobile: boolean }>`
     width: 100vw;
   }
 `
-
 const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
