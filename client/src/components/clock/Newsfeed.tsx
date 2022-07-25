@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { IsMobileContext } from '../../App'
 
-const MarqueeContainer = styled.div`
+const MarqueeContainer = styled.div<{ isMobile: boolean }>`
   background: ${({ theme }) => theme.black};
   color: ${({ theme }) => theme.blue};
   font-size: min(3vh, 4vw);
