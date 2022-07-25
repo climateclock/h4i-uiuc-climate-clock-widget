@@ -12,7 +12,6 @@ import MobileBar from '../buttons/MobileBar'
 
 const NavBox = styled.div<{
   isFullScreen: boolean
-  mobileWidth: boolean
   inBounds: boolean
   showMobileNavbar?: boolean
 }>`
@@ -21,7 +20,7 @@ const NavBox = styled.div<{
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
-  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 55px;')}
+  height: 55px;
 
   z-index: 11;
   background-color: ${({ theme }) => theme.black};
@@ -161,7 +160,6 @@ function NavBar({
         showMobileNavbar={showMobileNavbar}
         isFullScreen={!isFullScreen}
         inBounds={MouseTrack()}
-        mobileWidth={mobileWidth}
       >
         <Link to="/">
           <HomeLink>
