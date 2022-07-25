@@ -71,9 +71,6 @@ const ToggleContainer = styled.div`
 const ToggleStyle = styled.div`
   padding-top: 1%;
 `
-const SelectContainer = styled.div`
-  margin-left: 5%;
-`
 
 function Settings() {
   const handle = useFullScreenHandle()
@@ -96,13 +93,11 @@ function Settings() {
       <SettingsText> Turn off/on the bottom news on your clock</SettingsText>
       <SettingSubheading id="language">Configure Language</SettingSubheading>
       <SettingCaption> Language </SettingCaption>
-      <SelectContainer>
-        <StyledSelect
-          options={options}
-          optionSelected={languageSelected}
-          handleOptionSelectedChange={handleLanguageSelectedChange}
-        />
-      </SelectContainer>
+      <StyledSelect
+        options={options}
+        optionSelected={languageSelected}
+        handleOptionSelectedChange={handleLanguageSelectedChange}
+      />
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
       <SettingCaption> Shareable Link </SettingCaption>
       <CopyButton

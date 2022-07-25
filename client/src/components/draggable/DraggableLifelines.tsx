@@ -21,7 +21,7 @@ import LifelineCard from './LifelineCard'
 interface DraggableLifelinesInterface {
   lifelinesProp: ModuleResInterface[]
 }
-const StyledDiv = styled.div<{ draggingOver?: string }>`
+const StyledDiv = styled.div`
   display: flex;
   background: #f1f1f1;
   border-radius: 10px;

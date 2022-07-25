@@ -24,6 +24,7 @@ const customStyles = {
     fontFamily: theme.secondaryFonts,
     width: '255px',
     height: '31px',
+    left: '5%',
   }),
 }
 

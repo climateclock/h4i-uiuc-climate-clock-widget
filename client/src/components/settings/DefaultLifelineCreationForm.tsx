@@ -9,6 +9,7 @@ import {
   URL,
 } from '../../utils/constants'
 import { getLifelineModules, returnFirstString } from '../../utils/utils'
+import StyledButton from '../buttons/button'
 import { StyledSelect } from '../ui/Select'
 
 export default function DefaultLifelineCreationForm({
@@ -50,14 +51,20 @@ export default function DefaultLifelineCreationForm({
     })
   }, [setLifelineModules])
 
-  useEffect(() => {
-    const hasLifeline = (newLifeline: ModuleResInterface) => {
-      for (let i = 0; i < lifelineModules.length; i++) {
-        if (JSON.stringify(lifelineModules[i]) === JSON.stringify(newLifeline))
-          return true
-      }
-      return false
+  const handleOptionSelectedChange = (option: OptionsInterface | undefined) => {
+    setOptionSelected(option)
+  }
+
+  const hasLifeline = (newLifeline: ModuleResInterface) => {
+    for (let i = 0; i < lifelineModules.length; i++) {
+      if (JSON.stringify(lifelineModules[i]) === JSON.stringify(newLifeline))
+        return true
     }
+    return false
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
     if (optionSelected && optionSelected.value) {
       if (hasLifeline(optionSelected.value)) return
 
@@ -71,17 +78,17 @@ export default function DefaultLifelineCreationForm({
         JSON.stringify(newLifelineModules),
       )
     }
-  }, [lifelineModules, optionSelected, setLifelineModules])
-  const handleOptionSelectedChange = (option: OptionsInterface | undefined) => {
-    setOptionSelected(option)
   }
 
   return (
-    <StyledSelect
-      options={defaultOptions}
-      optionSelected={optionSelected}
-      handleOptionSelectedChange={handleOptionSelectedChange}
-    />
+    <form onSubmit={onSubmit}>
+      <StyledSelect
+        options={defaultOptions}
+        optionSelected={optionSelected}
+        handleOptionSelectedChange={handleOptionSelectedChange}
+      />
+      <StyledButton type="submit" buttonLabel={'Create default'} />
+    </form>
   )
 }
 
