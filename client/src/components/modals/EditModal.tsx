@@ -6,7 +6,7 @@ import { Close } from '@styled-icons/evaicons-solid'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import StyledButton from '../buttons/button'
+import StyledButton, { ButtonProps } from '../buttons/button'
 
 const CloseButton = styled(Close)`
   color: #575757;
@@ -55,7 +55,7 @@ const StyledDescription = styled.p`
   font-size: 16px;
 `
 
-const StyledSubmit = styled(StyledButton)`
+const StyledSubmit = styled(StyledButton)<ButtonProps>`
   display: block;
   margin-left: auto;
   margin-right: 0;
@@ -236,7 +236,7 @@ function EditModal({
                 <div>
                   <StyledLabel>Statistic</StyledLabel>
                   <StyledInput
-                    onChange={(e) => setStatistic(e.target.value)}
+                    onChange={(e) => setStatistic(parseInt(e.target.value))}
                     value={statistic}
                     required
                     placeholder={'Ex: 12.77155930'}
