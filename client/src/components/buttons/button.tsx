@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-interface ButtonProps {
-  type: 'button' | 'submit' | 'reset' | undefined
-  className: string
-  buttonLabel: string
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset' | undefined
+  className?: string
+  buttonLabel?: string
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const Button = ({ type, className, buttonLabel, onClick }: ButtonProps) => {
@@ -15,10 +15,10 @@ const Button = ({ type, className, buttonLabel, onClick }: ButtonProps) => {
   )
 }
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(Button)<ButtonProps>`
   background-color: ${({ theme }) => theme.buttonBackground};
   display: inline-block;
-  margin: 4px 2px;
+  margin: 1px 2px;
   border: none;
   cursor: pointer;
   text-align: center;

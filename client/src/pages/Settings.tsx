@@ -49,6 +49,9 @@ const SettingsText = styled.div`
   font-size: 0.75rem;
   line-height: 24px;
 `
+const SelectContainer = styled.div`
+  margin-left: 5%;
+`
 
 function Settings() {
   const handle = useFullScreenHandle()
@@ -64,11 +67,13 @@ function Settings() {
         Configure Language
       </SettingSubheading>
       <SettingCaption> Language </SettingCaption>
-      <StyledSelect
-        options={options}
-        optionSelected={languageSelected}
-        handleOptionSelectedChange={handleLanguageSelectedChange}
-      />
+      <SelectContainer>
+        <StyledSelect
+          options={options}
+          optionSelected={languageSelected}
+          handleOptionSelectedChange={handleLanguageSelectedChange}
+        />
+      </SelectContainer>
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
       <SettingCaption isTopSetting={false}> Shareable Link </SettingCaption>
       <SettingsText>Copy this URL to share your clock with others</SettingsText>

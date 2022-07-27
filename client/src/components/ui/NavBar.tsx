@@ -10,13 +10,17 @@ import ExitFullscreen from '../../components/buttons/ExitFullscreen'
 import clock from '../../images/clock.png'
 import MobileBar from '../buttons/MobileBar'
 
-const NavBox = styled.div`
+const NavBox = styled.div<{
+  isFullScreen: boolean
+  inBounds: boolean
+  showMobileNavbar?: boolean
+}>`
   font-family: ${({ theme }) => theme.secondaryFonts};
 
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
-  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 55px;')}
+  height: 55px;
 
   z-index: 11;
   background-color: ${({ theme }) => theme.black};
@@ -43,7 +47,7 @@ const PageLink = styled.div`
   }
 `
 
-const FullScreenButton = styled.div`
+const FullScreenButton = styled.div<{ mobileWidth: boolean }>`
   float: right;
   ${(props) =>
     props.mobileWidth ? 'padding: 18px 5vw;' : 'padding: 18px 35px 0px 40px'}
@@ -152,7 +156,11 @@ function NavBar({
 
   return (
     <>
-      <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
+      <NavBox
+        showMobileNavbar={showMobileNavbar}
+        isFullScreen={!isFullScreen}
+        inBounds={MouseTrack()}
+      >
         <Link to="/">
           <HomeLink>
             <Button>
