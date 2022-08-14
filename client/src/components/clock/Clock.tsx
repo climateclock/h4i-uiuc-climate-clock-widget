@@ -226,7 +226,12 @@ const ClockSection = styled.div`
   }
 `
 
-const ClockContainer = styled.div`
+const ClockContainer = styled.div<{
+  isFullScreen?: boolean
+  isMobile?: boolean
+  numLifelines: number
+  mobileWidth?: boolean
+}>`
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
   background: ${({ theme }) => theme.red};
@@ -255,13 +260,14 @@ function Clock({
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
   const [time, setTime] = useState('')
+
+  const isMobile = useContext(IsMobileContext)
+
   useEffect(() => {
     if (timestamp) {
       setTimeLeft(moment(timestamp).diff(moment()))
     }
   }, [timestamp])
-
-  const { isMobile } = useContext(IsMobileContext)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -277,10 +283,25 @@ function Clock({
   const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
   )
+
   useEffect(() => {
-    window
-      .matchMedia('(max-width: 800px)')
-      .addEventListener('change', (e) => setMobileWidth(e.matches))
+    const query = window.matchMedia('(max-width: 800px)')
+
+    // Safari doesn't support addEventListener
+    try {
+      query.addEventListener('change', (e) => setMobileWidth(e.matches))
+    } catch (e1) {
+      try {
+        // Safari
+        // eslint-disable-next-line
+        /* tslint:disable-next-line */
+        query.addListener((e) => setMobileWidth(e.matches))
+
+        console.log('tried alternative')
+      } catch (e2) {
+        console.error(e2)
+      }
+    }
   }, [])
 
   return (

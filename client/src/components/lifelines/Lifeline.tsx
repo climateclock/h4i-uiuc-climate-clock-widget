@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { IsMobileContext } from '../../App'
 import { LifelinePropsInterface } from '../../interfaces'
 import Header from '../ui/Header'
 
 const VALUE_UNIT_MARGIN = 1
 
-const Container = styled.div`
+const Container = styled.div<{ isMobile: boolean }>`
   & {
     font-family: ${({ theme }) => theme.fonts};
     font-weight: bold;
@@ -17,6 +18,7 @@ const Container = styled.div`
     width: 100vw;
   }
 `
+
 const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -68,6 +70,8 @@ function Lifeline({
     !value ? cleanedRate : value + cleanedRate,
   )
 
+  const isMobile = useContext(IsMobileContext)
+
   /* update lifeline value within interval */
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,7 +86,7 @@ function Lifeline({
   })
 
   return (
-    <Container>
+    <Container isMobile={isMobile}>
       <Header
         moduleType={module_type}
         title={title}

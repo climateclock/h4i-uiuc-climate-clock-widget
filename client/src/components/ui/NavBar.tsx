@@ -10,13 +10,17 @@ import ExitFullscreen from '../../components/buttons/ExitFullscreen'
 import clock from '../../images/clock.png'
 import MobileBar from '../buttons/MobileBar'
 
-const NavBox = styled.div`
+const NavBox = styled.div<{
+  isFullScreen: boolean
+  inBounds: boolean
+  showMobileNavbar?: boolean
+}>`
   font-family: ${({ theme }) => theme.secondaryFonts};
 
   ${(props) =>
     props.isFullScreen ? 'position: absolute;' : 'overflow: hidden;'}
   width: 100%;
-  ${(props) => (props.mobileWidth ? 'height: 2vh;' : 'height: 55px;')}
+  height: 55px;
 
   z-index: 11;
   background-color: ${({ theme }) => theme.black};
@@ -43,7 +47,7 @@ const PageLink = styled.div`
   }
 `
 
-const FullScreenButton = styled.div`
+const FullScreenButton = styled.div<{ mobileWidth: boolean }>`
   float: right;
   ${(props) =>
     props.mobileWidth ? 'padding: 18px 5vw;' : 'padding: 18px 35px 0px 40px'}
@@ -112,10 +116,24 @@ function NavBar({
   const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
   )
+
   useEffect(() => {
-    window
-      .matchMedia('(max-width: 800px)')
-      .addEventListener('change', (e) => setMobileWidth(e.matches))
+    const query = window.matchMedia('(max-width: 800px)')
+
+    // Safari doesn't support addEventListener
+    try {
+      query.addEventListener('change', (e) => setMobileWidth(e.matches))
+    } catch (e1) {
+      try {
+        // eslint-disable-next-line
+        /* tslint:disable-next-line */
+        query.addListener((e) => setMobileWidth(e.matches))
+
+        console.log('tried alternative')
+      } catch (e2) {
+        console.error(e2)
+      }
+    }
   }, [])
 
   const [showMobileNavbar, setMobileNavbar] = useState(false)
@@ -138,7 +156,11 @@ function NavBar({
 
   return (
     <>
-      <NavBox isFullScreen={!isFullScreen} inBounds={MouseTrack()}>
+      <NavBox
+        showMobileNavbar={showMobileNavbar}
+        isFullScreen={!isFullScreen}
+        inBounds={MouseTrack()}
+      >
         <Link to="/">
           <HomeLink>
             <Button>
