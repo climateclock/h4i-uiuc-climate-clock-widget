@@ -1,11 +1,20 @@
-import { useState } from 'react'
+import { compressToEncodedURIComponent } from 'lz-string'
+import { useEffect, useState, useState } from 'react'
 import { useFullScreenHandle } from 'react-full-screen'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
-import { options } from '../components/utils/constants'
+import { Option, options } from '../components/utils/constants'
+import { UpdateSettings } from '../routing/UpdateSettings'
+import { UpdateURL } from '../routing/UpdateURL'
+import {
+  COMPRESSED_KEY,
+  LANGUAGE_LOCAL_STORAGE_KEY,
+  LIFELINES_LOCAL_STORAGE_KEY,
+} from '../utils/constants'
 
 const SettingsHeading = styled.div`
   color: ${({ theme }) => theme.headerText};
@@ -55,6 +64,33 @@ const SelectContainer = styled.div`
 
 function Settings() {
   const handle = useFullScreenHandle()
+  const navigate = useNavigate()
+  const [selectedLanguage, setSelectedLanguage] = useState<Option>(options[0])
+
+  useEffect(() => {
+    UpdateURL(navigate, setSelectedLanguage, null)
+    UpdateSettings(selectedLanguage.value, setSelectedLanguage, null, null)
+  }, [navigate, selectedLanguage.value, setSelectedLanguage])
+
+  const checkLanguage = (option: Option | null) => {
+    console.log(option)
+    if (option != null) {
+      setSelectedLanguage(option)
+      if (option.value !== localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY)) {
+        const json = {
+          language: option.value,
+          lifelines: localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY),
+        }
+        const settings_json = JSON.stringify(json)
+        const compressed = compressToEncodedURIComponent(settings_json)
+
+        localStorage.setItem(COMPRESSED_KEY, compressed)
+        navigate(`${compressed}`)
+      }
+      localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, option.value)
+      console.log(selectedLanguage)
+    }
+  }
   const [languageSelected, setLanguageSelected] = useState<string>()
   const handleLanguageSelectedChange = (language: string) => {
     setLanguageSelected(language)

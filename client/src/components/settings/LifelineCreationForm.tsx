@@ -1,10 +1,16 @@
+import { compressToEncodedURIComponent } from 'lz-string'
 import { useEffect, useState } from 'react'
 import { useFullScreenHandle } from 'react-full-screen'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
+import { UpdateSettings } from '../../routing/UpdateSettings'
+import { UpdateURL } from '../../routing/UpdateURL'
 import {
+  COMPRESSED_KEY,
   ERROR_MSG,
+  LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
   URL,
 } from '../../utils/constants'
@@ -63,6 +69,7 @@ const LifelineCreationForm = () => {
   const [lifelineModules, setLifelineModules] = useState<ModuleResInterface[]>(
     [],
   )
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData(

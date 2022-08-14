@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import { useNavigate } from 'react-router-dom'
 
 import Clock from '../components/clock/Clock'
 import Newsfeed from '../components/clock/Newsfeed'
 import Lifelines from '../components/lifelines/Lifelines'
 import NavBar from '../components/ui/NavBar'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
+import { UpdateSettings } from '../routing/UpdateSettings'
+import { UpdateURL } from '../routing/UpdateURL'
 import { ERROR_MSG, NUM_LIFELINES_DISPLAYED, URL } from '../utils/constants'
 import { getData, getHeadlines } from '../utils/utils'
 
@@ -17,6 +20,7 @@ export default function Home() {
   )
   const [newsfeedModules, setNewsfeedModules] = useState<NewsInterface[]>([])
   const [errorFlag, setErrorFlag] = useState<boolean>(false)
+  const navigate = useNavigate()
   const handle = useFullScreenHandle()
   const [showFullscreenButton, setFullscreenButton] = useState(false)
 
@@ -29,8 +33,16 @@ export default function Home() {
       setModules,
       setLifelineModules,
       setNewsfeedModules,
-    )
-  }, [defaultLanguage])
+    ).then(() => {
+      UpdateURL(navigate, defaultLanguage, lifelineModules)
+      UpdateSettings(
+        defaultLanguage,
+        setDefaultLanguage,
+        lifelineModules,
+        setLifelineModules,
+      )
+    })
+  }, [navigate, defaultLanguage, lifelineModules])
 
   return (
     <>
