@@ -1,44 +1,42 @@
-import Select, { ActionMeta, SingleValue } from 'react-select'
+import PropTypes from 'prop-types'
+import Select from 'react-select'
 
-import { optionProps } from '../../interfaces'
-import { Option } from '../utils/constants'
+import { theme } from './GlobalStyle'
 
 const customStyles = {
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? theme.navBackground : theme.background,
+    color: theme.text,
+    fontSize: '14px',
+  }),
   control: (base, state) => ({
     ...base,
     boxShadow: state.isFocused ? 'grey' : 'grey',
     borderColor: 'grey',
-    backgroundColor: 'white',
-    color: state.isFocused ? 'white' : 'white',
+    backgroundColor: state.isSelected ? 'grey' : 'white',
     width: '255px',
     height: '31px',
-    left: '5%',
+    fontSize: '14px',
   }),
   container: (base) => ({
     ...base,
+    fontFamily: theme.secondaryFonts,
     width: '255px',
     height: '31px',
-    left: '4%',
   }),
 }
 
 export const StyledSelect = ({
   options,
-  onChange,
-  value,
-}: {
-  options: optionProps[]
-  onChange?: (
-    newValue: SingleValue<optionProps>,
-    actionMeta: ActionMeta<optionProps>,
-  ) => void
-  value?: Option
+  optionSelected,
+  handleOptionSelectedChange,
 }) => (
   <Select
     styles={customStyles}
+    value={optionSelected}
+    onChange={handleOptionSelectedChange}
     options={options}
-    onChange={onChange}
-    value={value}
     theme={(theme) => ({
       ...theme,
       border: '1px solid #A3A3A3',
@@ -49,3 +47,9 @@ export const StyledSelect = ({
     })}
   />
 )
+
+StyledSelect.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.any),
+  optionSelected: PropTypes.any,
+  handleOptionSelectedChange: PropTypes.func,
+}

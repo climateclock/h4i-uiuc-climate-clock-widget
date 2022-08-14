@@ -37,6 +37,7 @@ export interface ClockProps {
   timestamp: string | undefined
   labels: string[] | undefined
   flavor: string | undefined
+  numLifelines: number
 }
 
 /* Properties optional since some may not be
@@ -45,6 +46,8 @@ export interface ClockProps {
 export class ModuleResInterface {
   description?: string
   flavor?: string
+  source?: string | undefined
+  link?: string | undefined
   growth?: string
   initial?: number
   labels?: string[] | undefined
@@ -57,4 +60,12 @@ export class ModuleResInterface {
   update_interval_seconds?: number
   customizable?: boolean
   isFullScreen?: boolean
+}
+
+/* Properties for options within
+ * StyledSelect component in DefaultLifelineCreationForm
+ */
+export interface OptionsInterface {
+  value: ModuleResInterface
+  label: string
 }

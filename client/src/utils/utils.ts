@@ -1,49 +1,140 @@
-import { get } from '../api/config'
+import { AxiosResponse } from 'axios'
+
+import { ErrorWrapper, get } from '../api/config'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
 import {
+  DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
   LANGUAGE_LOCAL_STORAGE_KEY,
   LIFELINES_LOCAL_STORAGE_KEY,
 } from './constants'
 
-export const getData = async (
+/* data fetching functions */
+export const fetchData = async <T>(
   url: string,
   error: string,
-  setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
-  setDefaultLanguage: React.Dispatch<React.SetStateAction<string>>,
-  setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
-  setLifelineModules: React.Dispatch<
-    React.SetStateAction<ModuleResInterface[]>
-  >,
-  setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
-) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const res: any = await get(url, error)
+): Promise<AxiosResponse<T> | ErrorWrapper> => {
+  return await get(url, error)
+}
 
-  /* errorWrapper returned in res */
-  if ('error' in res) {
-    setErrorFlag(true)
+export const getModules = async <T>(
+  url: string,
+  error: string,
+  setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
+  setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+  const res: AxiosResponse<T> | ErrorWrapper = await fetchData(url, error)
+  setErrorFlag('error' in res)
+
+  if (!('error' in res)) {
+    /* set modules */
+    const resModules: ModuleResInterface[] = Object.values(
+      res['data']['data']['modules'],
+    )
+    setModules(resModules)
+  } else {
     setModules([])
-    setLifelineModules([])
-    if (setNewsfeedModules) setNewsfeedModules([])
-    return
   }
 
-  /* set modules */
-  const resModules: ModuleResInterface[] = Object.values(
-    res['data']['data']['modules'],
-  )
-  setModules(resModules)
+  return res
+}
 
-  /* set newsfeed modules */
-  if (setNewsfeedModules) {
+export const getNewsfeedModules = async <T>(
+  url: string,
+  error: string,
+  setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+  setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+  const res: AxiosResponse<T> | ErrorWrapper = await fetchData(url, error)
+  setErrorFlag('error' in res)
+
+  if (!('error' in res)) {
+    /* set newsfeed modules */
     const resNewsfeedModules: NewsInterface[] = Object.values(
       res['data']['data']['modules']['newsfeed_1']['newsfeed'],
     )
     setNewsfeedModules(resNewsfeedModules)
+  } else {
+    setNewsfeedModules([])
   }
+}
+
+export const getLifelineModules = async <T>(
+  url: string,
+  error: string,
+  setLifelineModules: React.Dispatch<
+    React.SetStateAction<ModuleResInterface[]>
+  >,
+  setErrorFlag?: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+  const res: AxiosResponse<T> | ErrorWrapper = await fetchData(url, error)
+  if (setErrorFlag) setErrorFlag('error' in res)
+
+  if (!('error' in res)) {
+    /* set modules */
+    const resModules: ModuleResInterface[] = Object.values(
+      res['data']['data']['modules'],
+    )
+
+    /* set lifelines */
+    if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
+      const resLifelineModules = resModules.filter((module) => {
+        if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
+          return true
+        }
+        return false
+      })
+      setLifelineModules(resLifelineModules)
+
+      /* stores lifeline modules in local storage */
+      localStorage.setItem(
+        LIFELINES_LOCAL_STORAGE_KEY,
+        JSON.stringify(resLifelineModules),
+      )
+      localStorage.setItem(
+        DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
+        JSON.stringify(resLifelineModules),
+      )
+    } else {
+      const curLifelineModules = localStorage.getItem(
+        LIFELINES_LOCAL_STORAGE_KEY,
+      )
+      if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
+    }
+  } else {
+    setLifelineModules([])
+  }
+}
+
+export const getDefaultLanguage = (
+  setDefaultLanguage: React.Dispatch<React.SetStateAction<string>>,
+) => {
+  const defaultLanguage: string | null = localStorage.getItem(
+    LANGUAGE_LOCAL_STORAGE_KEY,
+  )
+  if (defaultLanguage) setDefaultLanguage(defaultLanguage)
+  else {
+    localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, 'eng')
+    setDefaultLanguage('eng')
+  }
+}
+
+/* data setting functions */
+export const setLifelines = async <T>(
+  res: AxiosResponse<T> | ErrorWrapper,
+  setLifelineModules: React.Dispatch<
+    React.SetStateAction<ModuleResInterface[]>
+  >,
+) => {
+  /* set modules */
+  const resModules: ModuleResInterface[] = Object.values(
+    res['data']['data']['modules'],
+  )
 
   /* set lifelines */
-  if (!localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)) {
+  if (
+    !localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY) ||
+    !localStorage.getItem(DEFAULT_LIFELINES_LOCAL_STORAGE_KEY)
+  ) {
     const resLifelineModules = resModules.filter((module) => {
       if (module['type'] === 'value' && module['flavor'] === 'lifeline') {
         return true
@@ -57,18 +148,64 @@ export const getData = async (
       LIFELINES_LOCAL_STORAGE_KEY,
       JSON.stringify(resLifelineModules),
     )
-    console.log(localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY))
+    localStorage.setItem(
+      DEFAULT_LIFELINES_LOCAL_STORAGE_KEY,
+      JSON.stringify(resLifelineModules),
+    )
   } else {
     const curLifelineModules = localStorage.getItem(LIFELINES_LOCAL_STORAGE_KEY)
-    console.log(curLifelineModules)
     if (curLifelineModules) setLifelineModules(JSON.parse(curLifelineModules))
   }
+}
 
-  const defaultLanguage: string | null = localStorage.getItem(
-    LANGUAGE_LOCAL_STORAGE_KEY,
+export const setNewsfeeds = async <T>(
+  res: AxiosResponse<T> | ErrorWrapper,
+  setNewsfeedModules: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+) => {
+  /* set newsfeed modules */
+  const resNewsfeedModules: NewsInterface[] = Object.values(
+    res['data']['data']['modules']['newsfeed_1']['newsfeed'],
   )
-  if (defaultLanguage) setDefaultLanguage(defaultLanguage)
-  else localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, 'eng')
+  setNewsfeedModules(resNewsfeedModules)
+}
+
+/* get all data  */
+export const getData = async <T>(
+  url: string,
+  error: string,
+  setErrorFlag: React.Dispatch<React.SetStateAction<boolean>>,
+  setDefaultLanguage: React.Dispatch<React.SetStateAction<string>>,
+  setModules: React.Dispatch<React.SetStateAction<ModuleResInterface[]>>,
+  setLifelineModules: React.Dispatch<
+    React.SetStateAction<ModuleResInterface[]>
+  >,
+  setNewsfeedModules?: React.Dispatch<React.SetStateAction<NewsInterface[]>>,
+) => {
+  /* set modules */
+  const res: AxiosResponse<T> | ErrorWrapper = await getModules(
+    url,
+    error,
+    setModules,
+    setErrorFlag,
+  )
+
+  /* errorWrapper returned in res */
+  if ('error' in res) {
+    setErrorFlag(true)
+    setModules([])
+    setLifelineModules([])
+    if (setNewsfeedModules) setNewsfeedModules([])
+    return
+  }
+
+  /* set newsfeed modules */
+  if (setNewsfeedModules) setNewsfeeds(res, setNewsfeedModules)
+
+  /* set lifelines */
+  setLifelines(res, setLifelineModules)
+
+  /* set default language */
+  getDefaultLanguage(setDefaultLanguage)
 }
 
 /* returnFirstString

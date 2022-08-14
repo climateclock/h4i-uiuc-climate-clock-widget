@@ -2,16 +2,20 @@ import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
 import { returnFirstString } from '../../utils/utils'
+import { LifelineDropdown } from '../lifelines/Dropdown'
 
 interface LifelineCardInterface {
+  index: number
   lifeline: ModuleResInterface
   isDisplayed: boolean
+  onDelete: (index: number) => void
 }
 const Card = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  padding: 10px 0px 10px 10px;
 `
 const Text = styled.div`
   display: flex;
@@ -32,27 +36,28 @@ const Source = styled.div`
   font-size: 18px;
   font-family: ${({ theme }) => theme.text};
 `
-const HideButton = styled.p`
-  font-size: 0.8em;
-  border: 1px black solid;
-  padding: 5px 7.5px;
-  border-radius: 5px;
-  text-align: center;
-  align-self: center;
-  grid-column: 2;
-`
+
 const LifelineCard = ({
+  index,
   lifeline: { labels, customizable },
   isDisplayed,
+  onDelete,
 }: LifelineCardInterface) => {
   return (
-    <Card>
-      <Text>
-        <Lifeline>{returnFirstString(labels)}</Lifeline>
-        <Source>{customizable ? '' : 'Climate Clock'}</Source>
-      </Text>
-      <HideButton>{isDisplayed ? 'Hide' : 'Show'}</HideButton>
-    </Card>
+    <>
+      <Card>
+        <Text>
+          <Lifeline>{returnFirstString(labels)}</Lifeline>
+          <Source>{customizable ? '' : 'Climate Clock'}</Source>
+        </Text>
+        <LifelineDropdown
+          isCustomizable={customizable}
+          isDisplayed={isDisplayed}
+          onDelete={onDelete}
+          index={index}
+        />
+      </Card>
+    </>
   )
 }
 

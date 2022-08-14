@@ -1,13 +1,28 @@
 import styled from 'styled-components'
 
-const StyledButton = styled.button`
+export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset' | undefined
+  className?: string
+  buttonLabel?: string
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const Button = ({ type, className, buttonLabel, onClick }: ButtonProps) => {
+  return (
+    <button type={type} className={className} onClick={onClick}>
+      {buttonLabel}
+    </button>
+  )
+}
+
+const StyledButton = styled(Button)<ButtonProps>`
   background-color: ${({ theme }) => theme.buttonBackground};
+  display: inline-block;
+  margin: 1px 2px;
   border: none;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  margin: 4px 2px;
-  display: inline-block;
   color: white;
   border-radius: 5px;
   font-size: 12px;
@@ -38,7 +53,4 @@ const StyledButton = styled.button`
 //     }
 // `;
 
-const Button = ({ buttonLabel }: { buttonLabel: string }) => {
-  return <StyledButton>{buttonLabel}</StyledButton>
-}
-export default Button
+export default StyledButton
