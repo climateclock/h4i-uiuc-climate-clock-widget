@@ -2,15 +2,10 @@ import { useState } from 'react'
 import { useFullScreenHandle } from 'react-full-screen'
 import styled from 'styled-components'
 
-import Toggle from '../components/buttons/Toggle'
 import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
 import { options } from '../components/utils/constants'
-import facebook from '../utils/icons/facebook.png'
-import instagram from '../utils/icons/instagram.png'
-import twitter from '../utils/icons/twitter.png'
-import whatsapp from '../utils/icons/whatsapp.png'
 
 const SettingsHeading = styled.div`
   color: ${({ theme }) => theme.headerText};
@@ -25,22 +20,22 @@ const SettingsHeading = styled.div`
   padding-top: 2%;
 `
 
-const SettingSubheading = styled.div`
+const SettingSubheading = styled.div<{ isTopSetting?: boolean }>`
   color: ${({ theme }) => theme.text};
   font-family: ${({ theme }) => theme.secondaryFonts};
   margin-left: 5%;
   font-weight: bold;
   font-size: 20px;
   line-height: 24px;
-  padding-top: 1%;
-  padding-bottom: 0.25%;
+  // top margin should only be applied to settings that are not the first (right under "Clock Settings")
+  margin-top: ${(props) => (props.isTopSetting ? '1%' : '3%')};
 `
 
 const SettingCaption = styled.div`
   color: ${({ theme }) => theme.text};
   font-family: ${({ theme }) => theme.secondaryFonts};
   margin-left: 5%;
-  font-weight: 350;
+  font-weight: 575;
   font-size: 1rem;
   line-height: 24px;
   padding-top: 1%;
@@ -53,23 +48,6 @@ const SettingsText = styled.div`
   margin-left: 5%;
   font-size: 0.75rem;
   line-height: 24px;
-  padding-top: 1%;
-`
-
-const IconContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 5%;
-  gap: 2.5%;
-`
-
-const ToggleContainer = styled.div`
-  display: flex;
-  gap: 2%;
-`
-
-const ToggleStyle = styled.div`
-  padding-top: 1%;
 `
 const SelectContainer = styled.div`
   margin-left: 5%;
@@ -83,18 +61,11 @@ function Settings() {
   }
   return (
     <>
-      <NavBar handle={handle} isFullScreen={true} atHome={false}></NavBar>
+      <NavBar isFullScreen={true} atHome={false} handle={handle}></NavBar>
       <SettingsHeading>Clock Settings</SettingsHeading>
-
-      <ToggleContainer>
-        <SettingSubheading id="news_ticker"> News Ticker</SettingSubheading>
-        <ToggleStyle>
-          <Toggle />
-        </ToggleStyle>
-      </ToggleContainer>
-
-      <SettingsText> Turn off/on the bottom news on your clock</SettingsText>
-      <SettingSubheading id="language">Configure Language</SettingSubheading>
+      <SettingSubheading id="language" isTopSetting={true}>
+        Configure Language
+      </SettingSubheading>
       <SettingCaption> Language </SettingCaption>
       <SelectContainer>
         <StyledSelect
@@ -105,6 +76,7 @@ function Settings() {
       </SelectContainer>
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
       <SettingCaption> Shareable Link </SettingCaption>
+      <SettingsText>Copy this URL to share your clock with others</SettingsText>
       <CopyButton
         type="link"
         placeholder="https://clock.climateclock.world/oGpVDQKb95lh"
@@ -117,13 +89,6 @@ function Settings() {
         type="embed"
         placeholder='<iframe src="https://climateclock.world/widget-v2.js" async></iframe><climate-clock /><sc '
       />
-      <SettingCaption>Social Media</SettingCaption>
-      <IconContainer>
-        <img src={facebook} alt="facebook" />
-        <img src={instagram} alt="instagram" />
-        <img src={twitter} alt="twitter" />
-        <img src={whatsapp} alt="whatsapp" />
-      </IconContainer>
     </>
   )
 }
