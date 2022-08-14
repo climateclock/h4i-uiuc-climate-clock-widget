@@ -20,7 +20,7 @@ const SettingsHeading = styled.div`
   padding-top: 2%;
 `
 
-const SettingSubheading = styled.div`
+const SettingSubheading = styled.div<{ isTopSetting?: boolean }>`
   color: ${({ theme }) => theme.text};
   font-family: ${({ theme }) => theme.secondaryFonts};
   margin-left: 5%;
@@ -75,7 +75,7 @@ function Settings() {
         />
       </SelectContainer>
       <SettingSubheading id="share">Share your custom clock</SettingSubheading>
-      <SettingCaption isTopSetting={false}> Shareable Link </SettingCaption>
+      <SettingCaption> Shareable Link </SettingCaption>
       <SettingsText>Copy this URL to share your clock with others</SettingsText>
       <CopyButton
         type="link"
