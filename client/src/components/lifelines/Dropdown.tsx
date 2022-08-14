@@ -4,7 +4,20 @@ import { Menu, MenuButton, MenuItem, MenuList } from '@reach/menu-button'
 import { PencilFill } from '@styled-icons/bootstrap'
 import { Show } from '@styled-icons/boxicons-regular/Show'
 import { ChevronDown, TrashAlt } from '@styled-icons/boxicons-solid'
+import { useState } from 'react'
 import styled from 'styled-components'
+
+import DeleteModal from '../modals/DeleteModal'
+import EditModal from '../modals/EditModal'
+
+type MenuItemProps = {
+  children?: React.ReactNode
+  onSelect(): void
+  disabled?: boolean
+  index?: number
+  valueText?: string
+  isEnabled?: boolean
+}
 
 interface DropdownInterface {
   isDisplayed: boolean
@@ -46,7 +59,7 @@ export const StyledMenuButton = styled(MenuButton)`
   }
 `
 
-export const StyledMenuItem = styled(MenuItem)`
+export const StyledMenuItem = styled(MenuItem)<MenuItemProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -61,7 +74,11 @@ export const StyledTrash = styled(TrashAlt)`
   margin-right: 5px;
 `
 
-export const StyledShow = styled(Show)`
+export const StyledShow = styled(Show)<{
+  disabled?: boolean
+  onSelect?: () => void
+  isEnabled?: boolean
+}>`
   color: ${(props) =>
     props.isEnabled
       ? ({ theme }) => theme.headerText
@@ -70,7 +87,7 @@ export const StyledShow = styled(Show)`
   margin-right: 5px;
 `
 
-export const StyledPencilFill = styled(PencilFill)`
+export const StyledPencilFill = styled(PencilFill)<{ isEnabled?: boolean }>`
   color: ${(props) =>
     props.isEnabled
       ? ({ theme }) => theme.headerText
@@ -85,7 +102,7 @@ export const StyledChevronDown = styled(ChevronDown)`
   margin-right: 5px;
 `
 
-export const MenuText = styled.h3`
+export const MenuText = styled.h3<{ isEnabled?: boolean }>`
   color: ${(props) =>
     props.isEnabled
       ? ({ theme }) => theme.headerText
@@ -106,6 +123,8 @@ export const LifelineDropdown = ({
   onDelete,
   index,
 }: DropdownInterface) => {
+  const [showEditDialog, setShowEditDialog] = useState<boolean>(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState<boolean>(false)
   return (
     <div>
       <Menu>
@@ -114,23 +133,38 @@ export const LifelineDropdown = ({
           <StyledChevronDown />
         </StyledMenuButton>
         <StyledMenuList>
-          <StyledMenuItem disabled={!isDisplayed}>
+          {/* <StyledMenuItem
+            onSelect={() => {
+              console.log()
+            }}
+            disabled={!isDisplayed}
+          >
             <StyledShow isEnabled={isDisplayed} />
             <MenuText isEnabled={isDisplayed}>Show</MenuText>
-          </StyledMenuItem>
-          <StyledMenuItem disabled={!isCustomizable}>
-            <StyledPencilFill
-              isEnabled={isCustomizable}
-              onClick={() => console.log(isCustomizable)}
-            />
+          </StyledMenuItem> */}
+          <StyledMenuItem
+            disabled={!isCustomizable}
+            onSelect={() => setShowEditDialog(true)}
+          >
+            <StyledPencilFill isEnabled={isCustomizable} />
             <MenuText isEnabled={isCustomizable}>Edit</MenuText>
           </StyledMenuItem>
-          <StyledMenuItem onSelect={() => onDelete(index)}>
+          <StyledMenuItem onSelect={() => setShowDeleteDialog(true)}>
             <StyledTrash />
             <MenuText isEnabled={true}>Delete</MenuText>
           </StyledMenuItem>
         </StyledMenuList>
       </Menu>
+      <EditModal
+        showDialog={showEditDialog}
+        setShowDialog={setShowEditDialog}
+        index={index}
+      />
+      <DeleteModal
+        showDialog={showDeleteDialog}
+        setShowDialog={setShowDeleteDialog}
+        deleteLifeline={() => onDelete(index)}
+      />
     </div>
   )
 }

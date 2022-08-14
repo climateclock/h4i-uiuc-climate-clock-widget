@@ -46,6 +46,8 @@ export interface ClockProps {
 export class ModuleResInterface {
   description?: string
   flavor?: string
+  source?: string | undefined
+  link?: string | undefined
   growth?: string
   initial?: number
   labels?: string[] | undefined

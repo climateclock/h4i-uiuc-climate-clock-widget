@@ -1,7 +1,7 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLinkProps, useLocation } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
-const Navbar = styled.div`
+const Navbar = styled.div<{ showMobileNavbar: boolean }>`
   @media screen and (max-width: 800px) {
     font-family: ${({ theme }) => theme.secondaryFonts};
     position: absolute;
@@ -24,7 +24,7 @@ const Navbar = styled.div`
   }
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<NavLinkProps & { selected: boolean }>`
   text-decoration: none;
   color: white;
   padding-left: 200px;
