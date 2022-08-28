@@ -80,7 +80,6 @@ function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(countdown)
       const cd = countdown(new Date(), deadline, countdown.YEARS | countdown.DAYS | countdown.HOURS | countdown.MINUTES | countdown.SECONDS)
       setYears(cd.years)
       setDays(cd.days)
