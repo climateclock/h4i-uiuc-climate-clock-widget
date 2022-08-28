@@ -271,9 +271,7 @@ function Clock({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(countdown)
       const cd = countdown(new Date(), deadline, countdown.YEARS | countdown.DAYS | countdown.HOURS | countdown.MINUTES | countdown.SECONDS)
-      console.log(cd)
       setYears(cd.years)
       setDays(cd.days)
       setTime(`${cd.hours}:${cd.minutes}:${cd.seconds}`)
