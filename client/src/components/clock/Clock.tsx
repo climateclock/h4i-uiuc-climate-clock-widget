@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { IsMobileContext } from '../../App'
 import { ClockProps } from '../../interfaces'
 import { NUM_LIFELINES_DISPLAYED } from '../../utils/constants'
-import {countdown} from '../../utils/countdown'
+import { countdown } from '../../utils/countdown'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -271,7 +271,15 @@ function Clock({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const cd = countdown(new Date(), deadline, countdown.YEARS | countdown.DAYS | countdown.HOURS | countdown.MINUTES | countdown.SECONDS)
+      const cd = countdown(
+        new Date(),
+        deadline,
+        countdown.YEARS |
+          countdown.DAYS |
+          countdown.HOURS |
+          countdown.MINUTES |
+          countdown.SECONDS,
+      )
       setYears(cd.years)
       setDays(cd.days)
       setTime(`${cd.hours}:${cd.minutes}:${cd.seconds}`)

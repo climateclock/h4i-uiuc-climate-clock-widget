@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
-import {countdown} from '../../utils/countdown'
+import { countdown } from '../../utils/countdown'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -77,10 +77,17 @@ function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
     }
   }, [timestamp])
 
-
   useEffect(() => {
     const interval = setInterval(() => {
-      const cd = countdown(new Date(), deadline, countdown.YEARS | countdown.DAYS | countdown.HOURS | countdown.MINUTES | countdown.SECONDS)
+      const cd = countdown(
+        new Date(),
+        deadline,
+        countdown.YEARS |
+          countdown.DAYS |
+          countdown.HOURS |
+          countdown.MINUTES |
+          countdown.SECONDS,
+      )
       setYears(cd.years)
       setDays(cd.days)
       setTime(`${cd.hours}:${cd.minutes}:${cd.seconds}`)
