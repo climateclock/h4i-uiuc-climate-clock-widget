@@ -25,7 +25,7 @@ export interface LifelinePropsInterface {
   unit: string
   rate?: number
   resolution?: number
-  timestamp?: string,
+  timestamp?: string
 }
 
 export interface optionProps {

@@ -67,17 +67,17 @@ function Lifeline({
   const decimalPlaces = !resolution ? 0 : Math.log10(1 / resolution) // set the precision of value (ie. props.resolution = 1e-9 => 9)
   const cleanedRate = !rate ? 0 : rate // store rate at which to update value
   const isMoneyVal = !unit || unit.charAt(0) !== '$' ? false : true // used to fix monetary units passed in (ie. $)
-  
+
   // Uses the difference between the current date and the timestamp, where available
   let initialValue
   if (timestamp && value && rate) {
     const tElapsed = new Date().getTime() - new Date(timestamp).getTime()
-    initialValue = (value + (tElapsed / 1000) * rate)
+    initialValue = value + (tElapsed / 1000) * rate
   } else if (value) {
-    initialValue = value + cleanedRate;  
+    initialValue = value + cleanedRate
   } else {
-    initialValue = cleanedRate;
-  }    
+    initialValue = cleanedRate
+  }
 
   const [llVal, setLLVal] = useState<number>(initialValue)
 
