@@ -1,8 +1,8 @@
-import moment from 'moment'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { ModuleResInterface } from '../../interfaces'
+import { countdown } from '../../utils/countdown'
 import { toUpperCase } from '../../utils/utils'
 import Header from '../ui/Header'
 
@@ -66,26 +66,35 @@ const Unit = styled.div`
 `
 
 function Clock({ timestamp, labels, flavor }: ModuleResInterface) {
-  const [timeLeft, setTimeLeft] = useState(0)
+  const [deadline, setDeadline] = useState(new Date())
   const [years, setYears] = useState('')
   const [days, setDays] = useState('')
   const [time, setTime] = useState('')
+
   useEffect(() => {
     if (timestamp) {
-      setTimeLeft(moment(timestamp).diff(moment()))
+      setDeadline(new Date(timestamp))
     }
   }, [timestamp])
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(moment(timeLeft).subtract(1, 'seconds').valueOf())
-      setYears(moment.duration(timeLeft).years().toString())
-      setDays(moment.utc(timeLeft).format('DDDD'))
-      setTime(moment.utc(timeLeft).format('hh:mm:ss'))
+      const cd = countdown(
+        new Date(),
+        deadline,
+        countdown.YEARS |
+          countdown.DAYS |
+          countdown.HOURS |
+          countdown.MINUTES |
+          countdown.SECONDS,
+      )
+      setYears(cd.years)
+      setDays(cd.days)
+      setTime(`${cd.hours}:${cd.minutes}:${cd.seconds}`)
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [timeLeft])
+  }, [deadline])
 
   return (
     <ClockContainer>
