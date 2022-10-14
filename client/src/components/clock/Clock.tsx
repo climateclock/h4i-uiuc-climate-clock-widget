@@ -283,9 +283,14 @@ function Clock({
           countdown.MINUTES |
           countdown.SECONDS,
       )
+      // account for number padding
+      const hours = String(cd.hours).padStart(2, '0')
+      const minutes = String(cd.minutes).padStart(2, '0')
+      const seconds = String(cd.seconds).padStart(2, '0')
+
       setYears(cd.years)
       setDays(cd.days)
-      setTime(`${cd.hours}:${cd.minutes}:${cd.seconds}`)
+      setTime(`${hours}:${minutes}:${seconds}`)
     }, 1000)
 
     return () => clearInterval(interval)

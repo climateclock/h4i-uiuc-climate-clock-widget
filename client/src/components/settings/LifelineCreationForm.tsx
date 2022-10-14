@@ -36,8 +36,9 @@ const StyledLifeline = styled.div`
   }
 `
 const StyledCreationLifelinesContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `
 
 const FormatSpacing = styled.div`

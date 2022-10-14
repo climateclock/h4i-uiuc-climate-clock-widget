@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <>
       {!errorFlag ? (
-        <div>
+        <div style={{ overflow: 'hidden' }}>
           <FullScreen
             handle={handle}
             onChange={() => setFullscreenButton(!showFullscreenButton)}

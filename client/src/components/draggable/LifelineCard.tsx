@@ -12,6 +12,7 @@ interface LifelineCardInterface {
 }
 const Card = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
   align-items: center;
