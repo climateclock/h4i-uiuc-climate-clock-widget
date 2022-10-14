@@ -108,10 +108,12 @@ function NavBar({
   isFullScreen,
   atHome,
   handle,
+  hideNavBar,
 }: {
   isFullScreen: boolean
   atHome: boolean
-  handle: FullScreenHandle
+  handle: FullScreenHandle,
+  hideNavBar?: boolean,
 }) {
   const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
@@ -138,28 +140,12 @@ function NavBar({
 
   const [showMobileNavbar, setMobileNavbar] = useState(false)
 
-  function MouseTrack(): boolean {
-    const [y, setY] = useState()
-    useEffect(() => {
-      const update = (e) => {
-        setY(e.y)
-      }
-      window.addEventListener('mousemove', update)
-      window.addEventListener('touchmove', update)
-      return () => {
-        window.removeEventListener('mousemove', update)
-        window.removeEventListener('touchmove', update)
-      }
-    })
-    return y && y <= 100 ? true : false
-  }
-
   return (
     <>
       <NavBox
         showMobileNavbar={showMobileNavbar}
         isFullScreen={!isFullScreen}
-        inBounds={MouseTrack()}
+        inBounds={hideNavBar ? hideNavBar : false}
       >
         <Link to="/">
           <HomeLink>

@@ -34,11 +34,12 @@ export interface optionProps {
 }
 
 export interface ClockProps {
-  isFullScreen: boolean
-  timestamp: string | undefined
-  labels: string[] | undefined
-  flavor: string | undefined
-  numLifelines: number
+  isFullScreen: boolean,
+  timestamp: string | undefined,
+  labels: string[] | undefined,
+  flavor: string | undefined,
+  numLifelines: number,
+  navBarHidden: boolean | undefined,
 }
 
 /* Properties optional since some may not be

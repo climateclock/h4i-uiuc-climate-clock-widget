@@ -20,6 +20,22 @@ export default function Home() {
   const handle = useFullScreenHandle()
   const [showFullscreenButton, setFullscreenButton] = useState(false)
 
+  function MouseTrack(): boolean {
+    const [y, setY] = useState()
+    useEffect(() => {
+      const update = (e) => {
+        setY(e.y)
+      }
+      window.addEventListener('mousemove', update)
+      window.addEventListener('touchmove', update)
+      return () => {
+        window.removeEventListener('mousemove', update)
+        window.removeEventListener('touchmove', update)
+      }
+    })
+    return y && y <= 100 ? true : false
+  }
+
   useEffect(() => {
     getData(
       URL,
@@ -44,8 +60,10 @@ export default function Home() {
               handle={handle}
               isFullScreen={showFullscreenButton}
               atHome={true}
+              hideNavBar={MouseTrack()}
             ></NavBar>
             <Clock
+              navBarHidden={!MouseTrack() && !showFullscreenButton}
               isFullScreen={!showFullscreenButton}
               timestamp={modules && modules[0] && modules[0].timestamp}
               labels={modules && modules[0] && modules[0].labels}
