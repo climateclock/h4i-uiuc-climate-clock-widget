@@ -47,8 +47,6 @@ export const StyledMenuButton = styled(MenuButton)`
   background-color: ${({ theme }) => theme.background};
   border-radius: 5.25px;
   padding: 15px 10px 15px 10px;
-  margin-right: 3px;
-  margin-left: 3px;
   height: 33px;
 
   h4 {
