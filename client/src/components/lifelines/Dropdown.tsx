@@ -26,6 +26,14 @@ interface DropdownInterface {
   index: number
 }
 
+const DropDownContainer = styled.div`
+  width: 100%;
+  max-width: 300px;
+  @media (max-width: 850px) {
+    max-width: 100%;
+  }
+`
+
 export const StyledMenuList = styled(MenuList)`
   border-radius: 5.25px;
   padding: 0px;
@@ -48,7 +56,7 @@ export const StyledMenuButton = styled(MenuButton)`
   border-radius: 5.25px;
   padding: 15px 10px 15px 10px;
   height: 33px;
-
+  width: 100%;
   h4 {
     font-family: ${({ theme }) => theme.secondaryFonts};
     color: ${({ theme }) => theme.secondaryText};
@@ -124,7 +132,7 @@ export const LifelineDropdown = ({
   const [showEditDialog, setShowEditDialog] = useState<boolean>(false)
   const [showDeleteDialog, setShowDeleteDialog] = useState<boolean>(false)
   return (
-    <div>
+    <DropDownContainer>
       <Menu>
         <StyledMenuButton>
           <h4>Actions</h4>
@@ -163,6 +171,6 @@ export const LifelineDropdown = ({
         setShowDialog={setShowDeleteDialog}
         deleteLifeline={() => onDelete(index)}
       />
-    </div>
+    </DropDownContainer>
   )
 }
