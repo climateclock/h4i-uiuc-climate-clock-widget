@@ -25,7 +25,7 @@ const StyledDiv = styled.div<{ draggingOver?: string }>`
   display: flex;
   background: #f1f1f1;
   border-radius: 10px;
-  width: 92.5%;
+  width: 100%;
   padding: 0 2% 0 1%;
   grid-column: 2;
   border: 2px lightgrey solid;
@@ -82,7 +82,7 @@ const DraggableLifelines = ({ lifelinesProp }: DraggableLifelinesInterface) => {
 
   const getDroppableStyle = () => ({
     margin: '0 auto',
-    width: '95vw',
+    width: '100%',
   })
 
   const onDragEnd = (result: DropResult) => {

@@ -23,6 +23,7 @@ const customStyles = {
     ...base,
     fontFamily: theme.secondaryFonts,
     width: '255px',
+    marginBottom: '31px',
     height: '31px',
   }),
 }
