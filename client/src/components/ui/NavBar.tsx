@@ -112,8 +112,8 @@ function NavBar({
 }: {
   isFullScreen: boolean
   atHome: boolean
-  handle: FullScreenHandle,
-  hideNavBar?: boolean,
+  handle: FullScreenHandle
+  hideNavBar?: boolean
 }) {
   const [mobileWidth, setMobileWidth] = useState(
     window.matchMedia('(max-width: 800px)').matches,
