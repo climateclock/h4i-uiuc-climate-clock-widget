@@ -231,6 +231,7 @@ const ClockContainer = styled.div<{
   isMobile?: boolean
   numLifelines: number
   mobileWidth?: boolean
+  navBarHidden: boolean
 }>`
   font-family: ${({ theme }) => theme.fonts};
   font-weight: bold;
@@ -238,11 +239,12 @@ const ClockContainer = styled.div<{
 
   ${(props) =>
     props.isMobile
-      ? `height: calc(100vh - 55px - 10vh - 25vh * ${Math.min(
-          1,
-          props.numLifelines,
-        )})`
-      : `height: calc(100vh - 55px - 4vh - 14.5vh * ${Math.min(
+      ? `height: calc(100vh - ${
+          props.navBarHidden ? '0px' : '55px'
+        } - 10vh - 25vh * ${Math.min(1, props.numLifelines)})`
+      : `height: calc(100vh - ${
+          props.navBarHidden ? '0px' : '55px'
+        } - 4vh - 14.5vh * ${Math.min(
           NUM_LIFELINES_DISPLAYED,
           props.numLifelines,
         )})`};
@@ -255,6 +257,7 @@ function Clock({
   labels,
   flavor,
   numLifelines,
+  navBarHidden,
 }: ClockProps) {
   const [deadline, setDeadline] = useState(new Date())
   const [years, setYears] = useState('')
@@ -318,6 +321,7 @@ function Clock({
       mobileWidth={mobileWidth}
       numLifelines={numLifelines}
       isMobile={isMobile}
+      navBarHidden={navBarHidden ? navBarHidden : false}
     >
       <Header
         moduleType={flavor ? toUpperCase(flavor) : ''}

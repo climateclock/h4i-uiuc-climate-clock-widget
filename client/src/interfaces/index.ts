@@ -39,6 +39,7 @@ export interface ClockProps {
   labels: string[] | undefined
   flavor: string | undefined
   numLifelines: number
+  navBarHidden: boolean | undefined
 }
 
 /* Properties optional since some may not be
