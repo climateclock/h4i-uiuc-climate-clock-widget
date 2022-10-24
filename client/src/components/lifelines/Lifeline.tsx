@@ -50,9 +50,26 @@ const Value = styled.div`
 `
 
 const Unit = styled.div`
-  font-size: 2em;
+  font-size: 3em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
 `
+
+function convertUnit(unit) {
+  unit = unit.toLowerCase();
+  let res = ""
+  switch (unit) {
+    case "m":
+      res = "million";
+      break;
+    case "b":
+      res = "billion";
+      break;
+    case "t":
+      res = "trillion";
+      break;
+  }
+  return res.toUpperCase();
+}
 
 function Lifeline({
   title,
@@ -96,6 +113,14 @@ function Lifeline({
     }
   })
 
+  const getUnit = () => {
+    let moneyUnit = unit.substring(1);
+    if (llVal.toString().length < 7) { // arbitrary value
+      moneyUnit = convertUnit(moneyUnit);
+    }
+    return !isMoneyVal ? unit : moneyUnit;
+  }
+
   return (
     <Container isMobile={isMobile}>
       <Header
@@ -108,7 +133,7 @@ function Lifeline({
           {isMoneyVal && '$'}
           {llVal.toFixed(decimalPlaces)}
         </Value>
-        <Unit> {!isMoneyVal ? unit : unit.substring(1)}</Unit>
+        <Unit> {getUnit()}</Unit>
       </ContentContainer>
     </Container>
   )
