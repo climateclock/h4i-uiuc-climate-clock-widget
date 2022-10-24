@@ -55,20 +55,20 @@ const Unit = styled.div`
 `
 
 function convertUnit(unit) {
-  unit = unit.toLowerCase();
-  let res = ""
+  unit = unit.toLowerCase()
+  let res = ''
   switch (unit) {
-    case "m":
-      res = "million";
-      break;
-    case "b":
-      res = "billion";
-      break;
-    case "t":
-      res = "trillion";
-      break;
+    case 'm':
+      res = 'million'
+      break
+    case 'b':
+      res = 'billion'
+      break
+    case 't':
+      res = 'trillion'
+      break
   }
-  return res.toUpperCase();
+  return res.toUpperCase()
 }
 
 function Lifeline({
@@ -114,11 +114,12 @@ function Lifeline({
   })
 
   const getUnit = () => {
-    let moneyUnit = unit.substring(1);
-    if (llVal.toString().length < 7) { // arbitrary value
-      moneyUnit = convertUnit(moneyUnit);
+    let moneyUnit = unit.substring(1)
+    if (llVal.toString().length < 7) {
+      // arbitrary value
+      moneyUnit = convertUnit(moneyUnit)
     }
-    return !isMoneyVal ? unit : moneyUnit;
+    return !isMoneyVal ? unit : moneyUnit
   }
 
   return (

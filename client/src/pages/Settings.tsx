@@ -6,7 +6,7 @@ import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
 import { options } from '../components/utils/constants'
-import PageContainer from './PageContainer';
+import PageContainer from './PageContainer'
 
 const SettingsHeading = styled.div`
   color: ${({ theme }) => theme.headerText};
