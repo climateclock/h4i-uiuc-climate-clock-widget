@@ -7,7 +7,7 @@ import PageEmbed from './components/embed/PageEmbed'
 import GlobalStyle, { theme } from './components/ui/GlobalStyle'
 import { IsMobileContext } from './contexts/index'
 import Home from './pages/Home'
-import LifelineCreation from './pages/LifelineCreation'
+import LifelineCreation from './pages/lifelineCreation'
 import Settings from './pages/Settings'
 
 function App() {

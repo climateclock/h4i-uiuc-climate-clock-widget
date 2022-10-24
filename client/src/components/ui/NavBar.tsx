@@ -141,7 +141,7 @@ function NavBar({
   const [showMobileNavbar, setMobileNavbar] = useState(false)
 
   // no fullscreen button on iOS
-  const _iOSDevice = !!navigator.platform.match(/iPhone|iPod|iPad/);
+  const _iOSDevice = !!navigator.platform.match(/iPhone|iPod|iPad/)
 
   return (
     <>
