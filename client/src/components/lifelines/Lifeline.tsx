@@ -115,7 +115,7 @@ function Lifeline({
 
   const getUnit = () => {
     let moneyUnit = unit.substring(1)
-    if (llVal.toString().length < 7) {
+    if (window.innerWidth > 950) {
       // arbitrary value
       moneyUnit = convertUnit(moneyUnit)
     }
