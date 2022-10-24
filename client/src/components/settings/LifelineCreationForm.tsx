@@ -74,7 +74,7 @@ const LifelineCreationForm = () => {
       setModules,
       setLifelineModules,
     )
-  }, [lifelineModules])
+  }, [])
 
   /* formSubmit
    *

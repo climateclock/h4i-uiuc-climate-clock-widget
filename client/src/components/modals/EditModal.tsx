@@ -202,6 +202,7 @@ function EditModal({
     <ModalContainer>
       <DialogOverlay isOpen={showDialog} onDismiss={close}>
         <DialogContent
+          aria-label="Edit a custom lifeline"
           style={{
             border: 'solid 1px hsla(0, 0%, 0%, 0.5)',
             borderRadius: '10px',

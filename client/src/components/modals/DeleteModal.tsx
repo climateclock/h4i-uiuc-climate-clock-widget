@@ -69,6 +69,7 @@ function DeleteModal({
     <div>
       <DialogOverlay isOpen={showDialog} onDismiss={close}>
         <DialogContent
+          aria-label="Delete a custom lifeline"
           style={{
             border: 'solid 1px hsla(0, 0%, 0%, 0.5)',
             borderRadius: '10px',
