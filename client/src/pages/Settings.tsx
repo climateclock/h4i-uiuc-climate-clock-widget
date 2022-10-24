@@ -6,6 +6,7 @@ import CopyButton from '../components/ui/CopyButton'
 import NavBar from '../components/ui/NavBar'
 import { StyledSelect } from '../components/ui/Select'
 import { options } from '../components/utils/constants'
+import PageContainer from './PageContainer'
 
 const SettingsHeading = styled.div`
   color: ${({ theme }) => theme.headerText};
@@ -60,7 +61,7 @@ function Settings() {
     setLanguageSelected(language)
   }
   return (
-    <>
+    <PageContainer>
       <NavBar isFullScreen={true} atHome={false} handle={handle}></NavBar>
       <SettingsHeading>Clock Settings</SettingsHeading>
       <SettingSubheading id="language" isTopSetting={true}>
@@ -89,7 +90,7 @@ function Settings() {
         type="embed"
         placeholder='<iframe src="https://climateclock.world/widget-v2.js" async></iframe><climate-clock /><sc '
       />
-    </>
+    </PageContainer>
   )
 }
 

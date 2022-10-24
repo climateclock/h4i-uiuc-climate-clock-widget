@@ -1,6 +1,11 @@
 import LifelineCreationForm from '../components/settings/LifelineCreationForm'
+import PageContainer from './PageContainer'
 
 function LifelineCreation() {
-  return <LifelineCreationForm />
+  return (
+    <PageContainer>
+      <LifelineCreationForm />
+    </PageContainer>
+  )
 }
 export default LifelineCreation

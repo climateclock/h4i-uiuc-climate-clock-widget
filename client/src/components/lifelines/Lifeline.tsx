@@ -50,9 +50,26 @@ const Value = styled.div`
 `
 
 const Unit = styled.div`
-  font-size: 2em;
+  font-size: 3em;
   margin-left: ${VALUE_UNIT_MARGIN}vw;
 `
+
+function convertUnit(unit) {
+  unit = unit.toLowerCase()
+  let res = ''
+  switch (unit) {
+    case 'm':
+      res = 'million'
+      break
+    case 'b':
+      res = 'billion'
+      break
+    case 't':
+      res = 'trillion'
+      break
+  }
+  return res.toUpperCase()
+}
 
 function Lifeline({
   title,
@@ -69,9 +86,9 @@ function Lifeline({
   const isMoneyVal = !unit || unit.charAt(0) !== '$' ? false : true // used to fix monetary units passed in (ie. $)
 
   // Uses the difference between the current date and the timestamp, where available
-  let initialValue;
+  let initialValue
   if (timestamp && value && rate) {
-    initialValue = value;
+    initialValue = value
   } else if (value) {
     initialValue = value + cleanedRate
   } else {
@@ -87,7 +104,7 @@ function Lifeline({
     const interval = setInterval(() => {
       if (cleanedRate !== 0 && timestamp && rate) {
         const tElapsed = new Date().getTime() - new Date(timestamp).getTime()
-        setLLVal(initialValue + (tElapsed / 1000 * cleanedRate))
+        setLLVal(initialValue + (tElapsed / 1000) * cleanedRate)
       }
     }, seconds * 1000)
 
@@ -95,6 +112,15 @@ function Lifeline({
       clearInterval(interval)
     }
   })
+
+  const getUnit = () => {
+    let moneyUnit = unit.substring(1)
+    if (llVal.toString().length < 7) {
+      // arbitrary value
+      moneyUnit = convertUnit(moneyUnit)
+    }
+    return !isMoneyVal ? unit : moneyUnit
+  }
 
   return (
     <Container isMobile={isMobile}>
@@ -108,7 +134,7 @@ function Lifeline({
           {isMoneyVal && '$'}
           {llVal.toFixed(decimalPlaces)}
         </Value>
-        <Unit> {!isMoneyVal ? unit : unit.substring(1)}</Unit>
+        <Unit> {getUnit()}</Unit>
       </ContentContainer>
     </Container>
   )

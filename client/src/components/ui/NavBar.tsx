@@ -140,6 +140,9 @@ function NavBar({
 
   const [showMobileNavbar, setMobileNavbar] = useState(false)
 
+  // no fullscreen button on iOS
+  const _iOSDevice = !!navigator.platform.match(/iPhone|iPod|iPad/);
+
   return (
     <>
       <NavBox
@@ -177,7 +180,7 @@ function NavBar({
             />
           ),
         ]}
-        {atHome ? (
+        {atHome && !_iOSDevice ? (
           <FullScreenButton mobileWidth={mobileWidth}>
             {isFullScreen ? (
               <EnterFullscreen handle={handle} />
