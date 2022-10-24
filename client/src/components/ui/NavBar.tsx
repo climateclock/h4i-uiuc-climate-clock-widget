@@ -193,9 +193,9 @@ function NavBar({
         )}
         {!mobileWidth && (
           <>
-            <Link to="/settings">
+            {/* <Link to="/settings">
               <PageLink>Settings</PageLink>
-            </Link>
+            </Link> */}
             <Link to="/lifelines">
               <PageLink>Lifelines</PageLink>
             </Link>

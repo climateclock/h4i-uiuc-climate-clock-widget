@@ -53,9 +53,9 @@ function MobileBar({ showMobileNavbar }: { showMobileNavbar: boolean }) {
       <StyledLink to="/lifelines" selected={location.pathname === '/lifelines'}>
         Lifelines
       </StyledLink>
-      <StyledLink to="/settings" selected={location.pathname === '/settings'}>
+      {/* <StyledLink to="/settings" selected={location.pathname === '/settings'}>
         Settings
-      </StyledLink>
+      </StyledLink> */}
     </Navbar>
   )
 }
