@@ -8,6 +8,7 @@ import NavBar from '../components/ui/NavBar'
 import { ModuleResInterface, NewsInterface } from '../interfaces/index'
 import { ERROR_MSG, NUM_LIFELINES_DISPLAYED, URL } from '../utils/constants'
 import { getData, getHeadlines } from '../utils/utils'
+import PageContainer from './PageContainer'
 
 export default function Home() {
   const [defaultLanguage, setDefaultLanguage] = useState<string>('eng')
@@ -48,38 +49,36 @@ export default function Home() {
     )
   }, [defaultLanguage])
 
-  return (
-    <>
-      {!errorFlag ? (
-        <div style={{ overflow: 'hidden' }}>
-          <FullScreen
+  if (errorFlag) {
+    return <h1>{ERROR_MSG}</h1>
+  } else {
+    return (
+      <PageContainer style={{ overflow: 'hidden' }}>
+        <FullScreen
+          handle={handle}
+          onChange={() => setFullscreenButton(!showFullscreenButton)}
+        >
+          <NavBar
             handle={handle}
-            onChange={() => setFullscreenButton(!showFullscreenButton)}
-          >
-            <NavBar
-              handle={handle}
-              isFullScreen={showFullscreenButton}
-              atHome={true}
-              hideNavBar={MouseTrack()}
-            ></NavBar>
-            <Clock
-              navBarHidden={!MouseTrack() && !showFullscreenButton}
-              isFullScreen={!showFullscreenButton}
-              timestamp={modules && modules[0] && modules[0].timestamp}
-              labels={modules && modules[0] && modules[0].labels}
-              flavor={modules && modules[0] && modules[0].flavor}
-              numLifelines={lifelineModules.length}
-            />
-            <Lifelines
-              lifeLineData={lifelineModules}
-              displayNum={NUM_LIFELINES_DISPLAYED}
-            />
-            <Newsfeed headline={getHeadlines(newsfeedModules)} />
-          </FullScreen>
-        </div>
-      ) : (
-        <h1>{ERROR_MSG}</h1>
-      )}
-    </>
-  )
+            isFullScreen={showFullscreenButton}
+            atHome={true}
+            hideNavBar={MouseTrack()}
+          ></NavBar>
+          <Clock
+            navBarHidden={!MouseTrack() && !showFullscreenButton}
+            isFullScreen={!showFullscreenButton}
+            timestamp={modules && modules[0] && modules[0].timestamp}
+            labels={modules && modules[0] && modules[0].labels}
+            flavor={modules && modules[0] && modules[0].flavor}
+            numLifelines={lifelineModules.length}
+          />
+          <Lifelines
+            lifeLineData={lifelineModules}
+            displayNum={NUM_LIFELINES_DISPLAYED}
+          />
+          <Newsfeed headline={getHeadlines(newsfeedModules)} />
+        </FullScreen>
+      </PageContainer>
+    )
+  }
 }

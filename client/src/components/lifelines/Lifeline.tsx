@@ -69,9 +69,9 @@ function Lifeline({
   const isMoneyVal = !unit || unit.charAt(0) !== '$' ? false : true // used to fix monetary units passed in (ie. $)
 
   // Uses the difference between the current date and the timestamp, where available
-  let initialValue;
+  let initialValue
   if (timestamp && value && rate) {
-    initialValue = value;
+    initialValue = value
   } else if (value) {
     initialValue = value + cleanedRate
   } else {
@@ -87,7 +87,7 @@ function Lifeline({
     const interval = setInterval(() => {
       if (cleanedRate !== 0 && timestamp && rate) {
         const tElapsed = new Date().getTime() - new Date(timestamp).getTime()
-        setLLVal(initialValue + (tElapsed / 1000 * cleanedRate))
+        setLLVal(initialValue + (tElapsed / 1000) * cleanedRate)
       }
     }, seconds * 1000)
 
