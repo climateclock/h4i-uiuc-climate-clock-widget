@@ -47,7 +47,7 @@ function MobileBar({ showMobileNavbar }: { showMobileNavbar: boolean }) {
   const location = useLocation()
   return (
     <Navbar showMobileNavbar={showMobileNavbar}>
-      <StyledLink to="" selected={location.pathname === '/'}>
+      <StyledLink to="/" selected={location.pathname === '/'}>
         Clock
       </StyledLink>
       <StyledLink to="/lifelines" selected={location.pathname === '/lifelines'}>
