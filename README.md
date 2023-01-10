@@ -34,7 +34,7 @@ This application is built with React, TypeScript, and tested with Cypress and Je
   <tr>
     <td align="center"><a href="https://www.linkedin.com/in/daniel-moon1"><img src="./photos/daniel-moon.jpeg" width="75px;" alt="Daniel Moon"/><br /><b>Daniel Moon</b></a><br /><sub>Technical Lead</sub></td>
     <td align="center"><a href=""><img src="./photos/archna-sobti.png" width="75px;" alt="Archna Sobti"/><br /><b>Archna Sobti</b></a><br /><sub>Product Manager</sub></td>
-    <td align="center"><a href=""><img src="./photos/nikhil-gargeya.png" width="75px;" alt="Nikhil Gargeya"/><br /><b>Nikhil Gargeya</b></a><br /><sub>Product Designer/sub></td>
+    <td align="center"><a href=""><img src="./photos/nikhil-gargeya.png" width="75px;" alt="Nikhil Gargeya"/><br /><b>Nikhil Gargeya</b></a><br /><sub>Product Designer</sub></td>
   </tr>
   <tr>
     <td align="center"><a href=""><img src="./photos/aaron-alexander.png" width="75px;" alt="Aaron Alexander"/><br /><b>Aaron Alexander</b></a><br /><sub>Software Developer</sub></td>
