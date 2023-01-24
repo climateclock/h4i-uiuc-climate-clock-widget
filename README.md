@@ -86,6 +86,24 @@ _SSH will only work if your SSH keys are properly [setup](https://docs.github.co
 
 <hr />
 
+## Quick Start
+Steps to run the project on a local webserver:
+1. Install [Node.js](https://nodejs.org/en/download/)
+2. Clone the repository
+3. Install Yarn and download all dependencies:
+> ```bash
+> cd h4i-uiuc-climate-clock-widget
+> npm install --global yarn
+> yarn
+> cd client
+> yarn install
+> ```
+4. Start the development webserver:
+> ```bash
+> yarn start
+> ```
+Your web browser will now be displaying the Climate Clock widget from `localhost:3000`
+
 ## License
 
 [MIT](https://github.com/hack4impact-uiuc/ymca/blob/master/LICENSE) licensed. Copyright © 2021 [Hack4Impact UIUC](https://github.com/hack4impact-uiuc).
